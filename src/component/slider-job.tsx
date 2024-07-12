@@ -51,8 +51,6 @@ export const SliderJob = () => {
 
   const arrMap = converArray(arrIndex, 9);
 
-  console.log(arrMap);
-
   return (
     <div id="slider" className="relative">
       <Swiper

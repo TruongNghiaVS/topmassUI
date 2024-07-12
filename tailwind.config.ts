@@ -27,6 +27,9 @@ const config: Config = {
         type: "rgba(128,130,241,0.1)",
         hoverJob: "rgb(255 249 249 / 70%)",
       },
+      boxShadow: {
+        hoverShadow: "0 10px 30px rgba(241, 182, 182, 0.2)",
+      },
     },
   },
   plugins: [],
