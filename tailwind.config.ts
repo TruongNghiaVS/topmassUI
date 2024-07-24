@@ -19,6 +19,7 @@ const config: Config = {
       },
       backgroundColor: {
         default: "#981B1E",
+        swiperPagin: "#F37A20",
       },
       transitionProperty: {
         height: "height",
@@ -29,6 +30,7 @@ const config: Config = {
         company: "rgba(152, 27, 30, 0.1)",
         type: "rgba(128,130,241,0.1)",
         hoverJob: "rgb(255 249 249 / 70%)",
+        swiperPagin: "#F37A20",
       },
       boxShadow: {
         hoverShadow: "0 10px 30px rgba(241, 182, 182, 0.2)",

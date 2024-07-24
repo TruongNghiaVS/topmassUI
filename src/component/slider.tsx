@@ -14,11 +14,9 @@ import {
   FormControl,
   InputAdornment,
   InputLabel,
-  MenuItem,
   Select,
   TextField,
 } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
 
 // import required modules
 
@@ -40,11 +38,11 @@ export const Slider = () => {
             pagination={{
               clickable: true,
               renderBullet: (index, className) => {
-                return `<span class=" ${className}  rounded-full" ></span>`;
+                return `<span class=" ${className}  !rounded-full !bg-white" ></span>`;
               },
             }}
             modules={[Pagination, Autoplay]}
-            className="mySwiper pt-5 pb-6"
+            className="mySwiper !pt-5 !pb-6"
           >
             <SwiperSlide className="bg-primary">
               <div className="w-full object-cover">

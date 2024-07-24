@@ -48,7 +48,6 @@ export const SliderJob = () => {
   ];
 
   const arrMap = converArray(arrIndex, 9);
-
   return (
     <div id="slider" className="relative">
       <Swiper
@@ -62,9 +61,11 @@ export const SliderJob = () => {
         }}
         pagination={{
           clickable: true,
+          bulletClass:
+            "text-swiperPagin bg-white cursor-pointer mx-1 text-swiperPagin",
           bulletActiveClass: "!text-white !bg-[#FF6633]",
           renderBullet: (index, className) => {
-            return `<span class="!p-[2.5px] !inline-block !text-xs !opacity-100 !w-6 !h-6 !border !border-1 !border-solid !border-[#F3F5F7] !rounded-full ${className} !text-[#F37A20] !bg-white" >${
+            return `<span class="!p-[2.5px] !inline-block !text-xs !opacity-100 !w-6 !h-6 !border !border-1 !border-solid !border-[#F3F5F7] !rounded-full  ${className} " >${
               index + 1
             }</span>`;
           },

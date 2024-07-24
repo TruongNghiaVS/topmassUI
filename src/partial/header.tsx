@@ -39,7 +39,6 @@ export const Header = () => {
         >
           <div className="logo-header">
             <img src="img/logo-new.svg" alt="/" className="w-auto h-[50px]" />
-            <div className="text-sx">Khởi đầu mọi bức phá</div>
           </div>
           <div id="menu">
             <Menu />

@@ -1,201 +1,118 @@
 import Image from "next/image";
 import Link from "next/link";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import PhoneIcon from "@mui/icons-material/Phone";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import {
+  DocumentTextIcon,
+  MapPinIcon,
+  PhoneIcon,
+} from "@heroicons/react/16/solid";
 
 export const Footer = () => {
-  const candidate = [
-    "Việc Làm Mới Nhất",
-    "Giới Thiệu Ứng Viên",
-    "Tin Tức Tuyển Dụng",
+  const topMass = [
+    "Giới thiệu",
+    "Tuyển dụng",
+    "Liên hệ",
+    "Chính sách bảo mật",
+    "Điều khoản dịch vụ",
   ];
 
-  const aboutUs = ["Về Chúng Tôi", "Liên Hệ"];
-  const help = [
-    "Điều Khoản Sử Dụng Cho UV",
-    "Điều Khoản Sử Dụng Cho NTD",
-    "Quy Định Bảo Mật",
+  const cv = [
+    "Quản lý hồ sơ",
+    "Hướng dẫn viết CV",
+    "Thư viện CV mẫu",
+    "CV theo ngành nghề",
   ];
 
-  const icon = [
-    <FacebookIcon />,
-    <TwitterIcon />,
-    <InstagramIcon />,
-    <LinkedInIcon />,
-    <YouTubeIcon />,
-  ];
-
-  const jobProvince = [
-    ["Việc Làm Bình Dương", "Việc Làm Đồng Nai", "Việc Làm Vũng Tàu"],
-    ["Việc Làm Đà Nẵng", "Việc Làm Hải Phòng", "Việc Làm Đà Lạt"],
-    ["Việc Làm IT", "Việc Làm Marketing", "Việc Làm Chăm Sóc Khách Hàng"],
-    ["Thiết Kế CV", "Bí Quyết Tìm Việc", "Kỹ Năng Phỏng Vấn"],
+  const blog = [
+    "Việc làm tốt nhất",
+    "Việc làm cho sinh viên",
+    "Việc làm online",
+    "Việc làm lương cao",
+    "Việc làm tài chính",
   ];
 
   return (
     <>
       <div className=" bg-white">
-        <div className="container mx-auto pt-[60px] pb-[30px] ">
-          <div className="grid grid-cols-4 lg:px-0 px-6">
-            <div className="lg:col-span-1 col-span-4">
+        <div className="container mx-auto pt-[60px] pb-[30px] gap-x-28	">
+          <div className="grid grid-cols-12 lg:px-0 px-6 items-center">
+            <div className="lg:col-span-5 col-span-4 bg-[url(/img/bg-logo-footer.png)] py-4">
               <Link href="#">
                 <Image
                   src="img/logo-new.svg"
                   width={100}
                   height={100}
                   alt=""
-                  className="w-[180px] mb-6"
+                  className="w-[180px] "
                 ></Image>
               </Link>
             </div>
-            <div className="lg:col-span-3 col-span-4">
-              <div className="grid grid-cols-12">
-                <div className="xl:col-span-3 md:col-span-6 col-span-12 xl:mb-0 mb-1">
-                  <div className="font-bold text-xl text-[#170f49] mb-5">
-                    Dành Cho Ứng Viên
-                  </div>
-                  {candidate.map((item: string) => {
-                    return (
-                      <div key={item}>
-                        <Link
-                          href="#"
-                          className="font-normal text-[15px] leading-10	not-italic hover:text-default	"
-                        >
-                          {item}
-                        </Link>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="xl:col-span-2 md:col-span-6 col-span-12 xl:mb-0 mb-1">
-                  <div className="font-bold text-xl text-[#170f49] mb-5">
-                    Về chúng tôi
-                  </div>
-                  {aboutUs.map((item: string) => {
-                    return (
-                      <div key={item}>
-                        <Link
-                          href="#"
-                          className="font-normal text-[15px] leading-10	not-italic hover:text-default	"
-                        >
-                          {item}
-                        </Link>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="xl:col-span-3 md:col-span-6 col-span-12 xl:mb-0 mb-1">
-                  <div className="font-bold text-xl text-[#170f49] mb-5">
-                    Trung Tâm Trợ Giúp
-                  </div>
-                  {help.map((item: string) => {
-                    return (
-                      <div key={item}>
-                        <Link
-                          href="#"
-                          className="font-normal text-[15px] leading-10	not-italic hover:text-default	"
-                        >
-                          {item}
-                        </Link>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="xl:col-span-4 md:col-span-6 col-span-12 xl:mb-0 mb-1 ">
-                  <div className="font-bold text-xl text-[#170f49] mb-5">
-                    Kết Nối Với Jobvieclam
-                  </div>
-                  <div>
-                    {icon.map((item: any, idx: number) => {
-                      return (
-                        <Link
-                          key={idx}
-                          href="#"
-                          className="font-normal text-[15px] leading-10	not-italic hover:text-default	mr-4"
-                        >
-                          {item}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
+            <div className="col-span-7">
+              <div className="text-[28px] font-bold">
+                Thuộc sở hữu công ty Cổ phần tập đoàn{" "}
+                <span className="text-[#F89E1B]">Vietstar</span>
               </div>
+              <div className="flex mt-2">
+                <DocumentTextIcon className="w-6 mr-2 text-[#F37A20]" />
+                Giấy phép đăng ký kinh doanh số:{" "}
+                <span className="font-bold">0315196162</span>
+              </div>
+              <div className="flex mt-2">
+                <MapPinIcon className="w-6 mr-2 text-[#F37A20]" />
+                Trụ sở làm việc: 54/31 Phổ Quang, Phường 02, Tân Bình, Hồ Chí
+                Minh
+              </div>
+              <div className="w-[90%] h-2.5 bg-gradient-to-r from-[#d14b00] to-[#f89e1b] mt-6"></div>
             </div>
           </div>
         </div>
       </div>
-      <div className="bg-[#961b1e] p-4 lg:px-0 px-6">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-4">
-            {jobProvince.map((items: string[], idx: number) => {
-              return (
-                <div
-                  key={`${idx} + ${items[0]}`}
-                  className="lg:col-span-1 md:col-span-2 col-span-4"
-                >
-                  {items.map((item: string) => {
+      <div className="bg-gradient-to-r from-[#F55D00] to-[#3F2300] pt-3.5 pb-10">
+        <div className="container mx-auto text-white">
+          <div className="grid grid-cols-3">
+            <div className="col-span-1">
+              <div className="text-4xl	font-bold">Liên hệ</div>
+              <div className="text-[13px] flex items-center">
+                <PhoneIcon className="w-4 mr-1" />
+                Hotline hỗ trợ cho người tìm việc
+              </div>
+              <div className="text-lg	">0938797478</div>
+              <div className="text-[13px] flex items-center">
+                <PhoneIcon className="w-4 mr-1" />
+                Hotline hỗ trợ cho nhà tuyển dụng
+              </div>
+              <div className="text-lg	">0938797478</div>
+            </div>
+            <div className="col-span-2">
+              <div className="grid grid-cols-3">
+                <div className="col-span-1">
+                  <div className="text-lg font-bold">Về Topmass</div>
+                  {topMass.map((value: string) => {
                     return (
-                      <div className=" py-2" key={item}>
-                        <Link
-                          href="#"
-                          key={item}
-                          className="text-lg text-white leading-[22px] font-normal"
-                        >
-                          {item}
-                        </Link>
+                      <div className="font-normal" key={value}>
+                        {value}
                       </div>
                     );
                   })}
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-      <div className="bg-white">
-        <div className="container mx-auto my-5 lg:px-0 px-6 ">
-          <div className="text-xl font-bold leading-6 mb-2">
-            CÔNG TY CỔ PHẦN TẬP ĐOÀN VIETSTAR
-          </div>
-          <div className="font-normal text-sm mb-3 ">
-            54/31 Đ. Phổ Quang, Phường 2, Tân Bình, Thành phố Hồ Chí Minh, Việt
-            Nam
-          </div>
-          <div className="flex items-center mb-3">
-            <PhoneIcon className="text-default mr-2" />
-            <Link href="#" className="text-sm font-normal hover:underline">
-              0938797478
-            </Link>
-          </div>
-          <div className="flex items-center mb-3">
-            <EmailOutlinedIcon className="text-default mr-2" />
-            <Link href="#" className="text-sm font-normal hover:underline">
-              info@jobvieclam.com
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div className="bg-white  lg:px-0 px-6 ">
-        <div className="container mx-auto">
-          <div className="border-t border-[#d9dbe9]">
-            <div className="flex md:justify-between justify-center md:flex-row flex-col items-center">
-              <div className="text-normal text-base text-[#6f6c90] leading-[30px] py-5">
-                Copyright © Jobvieclam
-              </div>
-              <div className="text-center">
-                <div className="inline-block px-2 text-normal text-base leading-[30px]">
-                  All Rights Reserved
+                <div className="col-span-1">
+                  <div className="text-lg font-bold">Tạo CV Chuyên Nghiệp</div>
+                  {cv.map((value: string) => {
+                    return (
+                      <div className="font-normal" key={value}>
+                        {value}
+                      </div>
+                    );
+                  })}
                 </div>
-                <div className="inline-block px-2 text-normal text-base underline text-[#2F80ED] leading-[30px] hover:text-default">
-                  <Link href="#">Điều khoản sử dụng</Link>
-                </div>
-                <div className="inline-block px-2 text-normal text-base underline text-[#2F80ED] leading-[30px] hover:text-default">
-                  <Link href="#">Chính sách</Link>
+                <div className="col-span-1">
+                  <div className="text-lg font-bold">Blog tuyển dụng</div>
+                  {blog.map((value: string) => {
+                    return (
+                      <div className="font-normal" key={value}>
+                        {value}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
