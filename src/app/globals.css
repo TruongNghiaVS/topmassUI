@@ -6,7 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  --default-color-body-rgb: 38, 58, 77
+  --default-color-body-rgb: 56, 54, 54
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,8 +22,12 @@ body {
   background: #ffffff;
 }
 
-.swiper-pagination-bullet-active {
-  background-color: #9c1b1e !important;
+/* .swiper-pagination-bullet-active {
+  background-color: #ffffff !important;
+} */
+
+.swiper-pagination {
+  bottom: 0 !important;
 }
 
 .swiper-wrapper {

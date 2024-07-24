@@ -140,7 +140,7 @@ export const Footer = () => {
                 >
                   {items.map((item: string) => {
                     return (
-                      <div className=" py-2">
+                      <div className=" py-2" key={item}>
                         <Link
                           href="#"
                           key={item}

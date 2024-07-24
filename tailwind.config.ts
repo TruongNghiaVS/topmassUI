@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ["var(--font-roboto)"],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -21,8 +24,8 @@ const config: Config = {
         height: "height",
       },
       colors: {
-        default: "#981B1E",
-        defaultText: "#3B4358",
+        default: "#D14B00",
+        defaultText: "#D14B00",
         company: "rgba(152, 27, 30, 0.1)",
         type: "rgba(128,130,241,0.1)",
         hoverJob: "rgb(255 249 249 / 70%)",

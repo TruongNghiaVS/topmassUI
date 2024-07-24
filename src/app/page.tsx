@@ -1,17 +1,23 @@
-import { Candidate } from "@/component/candidate";
-import { Employee } from "@/component/employee";
+import { Career } from "@/component/career";
+import { CreateCv } from "@/component/create-cv";
+import { Description } from "@/component/description";
+import { HotCompany } from "@/component/hot-company";
 import { HotJob } from "@/component/hot-job";
-import { JobIndustry } from "@/component/job-industry";
+import { JobType } from "@/component/job-type";
 import { Slider } from "@/component/slider";
+import { Ultil } from "@/component/ultil";
 
 export default function Home() {
   return (
     <>
       <Slider />
       <HotJob />
-      <Candidate />
-      <Employee />
-      <JobIndustry />
+      <HotCompany />
+      <CreateCv />
+      <JobType />
+      <Career />
+      <Ultil />
+      <Description />
     </>
   );
 }
