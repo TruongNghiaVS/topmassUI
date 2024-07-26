@@ -54,7 +54,7 @@ export const JobType = () => {
     },
   ];
   return (
-    <div className="px-2 sm:px-0">
+    <div className=" max-1280:px-2">
       <div className="container mx-auto mt-4">
         <div className="text-2xl text-[#D14B00] font-bold">
           Ngành nghề nổi bật

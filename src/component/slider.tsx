@@ -16,7 +16,7 @@ export const Slider = () => {
   return (
     <div
       id="slider"
-      className="relative bg-[url('/imgs/bg-slider.png')] bg-no-repeat	bg-cover pb-6"
+      className="relative bg-[url('/imgs/bg-slider.png')] bg-no-repeat	bg-cover pb-6 max-xl:px-2"
     >
       <div className="container mx-auto">
         <div className="lg:px-52 md:px-20">
@@ -152,6 +152,7 @@ export const SliderForm = () => {
             className="py-2 "
             register={register}
             name="work"
+            error={errors.work}
             icon={<MagnifyingGlassIcon className="mr-2 w-6" />}
             placeholder="Tìm kiếm việc làm"
           />
@@ -161,6 +162,7 @@ export const SliderForm = () => {
             className="py-2"
             icon={<MapPinIcon className="w-6 mr-2" />}
             register={register}
+            error={errors.location}
             name="location"
             placeholder="Địa điểm làm việc"
             children={optionsLocation.map((value, idx) => {
@@ -173,6 +175,7 @@ export const SliderForm = () => {
           <TmSelect
             className="py-2"
             register={register}
+            error={errors.type}
             name="type"
             placeholder="Ngành nghề"
             children={optionsType.map((value, idx) => {

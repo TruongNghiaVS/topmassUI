@@ -12,7 +12,7 @@ export const HotJob = () => {
   };
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-white max-1280:px-2">
         <div className="container mx-auto">
           <Box sx={{ width: "100%", typography: "body1" }}>
             <TabContext value={value}>

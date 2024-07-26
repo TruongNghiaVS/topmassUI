@@ -32,7 +32,7 @@ export const Footer = () => {
 
   return (
     <>
-      <div className=" bg-white px-2 sm:px-0">
+      <div className=" bg-white px-2 sm:px-0 max-1280:px-2">
         <div className="container mx-auto pt-[60px] pb-[30px] gap-x-28	">
           <div className="lg:grid grid-cols-12 lg:px-0 px-6 items-center">
             <div className="lg:col-span-5 col-span-4 bg-[url(/imgs/bg-logo-footer.png)] bg-no-repeat bg-[lenght:100% 100%] py-4 mb-2">
@@ -66,7 +66,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="bg-gradient-to-r from-[#F55D00] to-[#3F2300] pt-3.5 pb-10 px-2 sm:px-0">
+      <div className="bg-gradient-to-r from-[#F55D00] to-[#3F2300] pt-3.5 pb-10 px-2 max-1280:px-2">
         <div className="container mx-auto text-white">
           <div className="md:grid grid-cols-3">
             <div className="col-span-1">

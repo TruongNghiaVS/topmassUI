@@ -2,7 +2,7 @@ import { ArrowLongRightIcon } from "@heroicons/react/16/solid";
 
 export const Ultil = () => {
   return (
-    <div className="bg-[#DBDBDB] pt-8 pb-7 mt-6">
+    <div className="bg-[#DBDBDB] pt-8 pb-7 mt-6 max-1280:px-2">
       <div className="container mx-auto">
         <div className="text-center text-default font-bold text-4xl mb-8">
           Công cụ tiện ích

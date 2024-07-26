@@ -3,7 +3,7 @@ import { ArrowRightIcon } from "@heroicons/react/16/solid";
 export const CreateCv = () => {
   return (
     <>
-      <div className="sm:mt-4 sm:mx-5 px-2 bg-[url(/imgs/bg-create-cv.png)] bg-no-repeat bg-[length:100%_100%]">
+      <div className="sm:mt-4 px-2 bg-[url(/imgs/bg-create-cv.png)] bg-no-repeat bg-[length:100%_100%]">
         <div className="container mx-auto">
           <div className="sm:py-[90px] py-10">
             <div className="text-white sm:text-[32px] text-lg font-bold mb-4">

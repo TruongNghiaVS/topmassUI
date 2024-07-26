@@ -49,7 +49,7 @@ export const SliderJob = () => {
 
   const arrMap = converArray(arrIndex, 9);
   return (
-    <div id="slider" className="relative">
+    <div id="slider" className="relative max-xl:px-2">
       <Swiper
         modules={[Pagination, Navigation]}
         cssMode={true}

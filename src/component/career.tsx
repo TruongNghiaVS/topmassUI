@@ -31,7 +31,7 @@ export const Career = () => {
   ];
 
   return (
-    <div className="mt-12">
+    <div className="mt-12 px-2 max-1280:px-2">
       <div className="container mx-auto">
         <div className="mb-9 text-center text-2xl font-bold text-default ">
           Cẩm Nang Nghề Nghiệp
