@@ -1,13 +1,11 @@
 "use client";
-import { Box, Tab, useTheme } from "@mui/material";
+import { Box, Tab } from "@mui/material";
 import { useState } from "react";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { SliderJob } from "./slider-job";
-import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import { ScrollFilter } from "./scrol-filter";
 
 export const HotJob = () => {
-  let theme = useTheme();
   const [value, setValue] = useState("1");
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -50,8 +48,9 @@ export const HotJob = () => {
                   <ScrollFilter />
                 </div>
               </Box>
-              <div className="pl-2.5 py-1.5 rounded-md border-[1px] border-solid border-[#8BCAFC] my-5 text-sm">
-                <LightbulbIcon className="text-[#FFCB00]" /> Gợi ý:{" "}
+              <div className="pl-2.5 py-1.5 rounded-md border-[1px] border-solid border-[#8BCAFC] my-5 text-sm flex items-center bg-[#f0f6ff]">
+                <img src="/imgs/light-note.png" alt="" className="w-4 mr-2" />
+                Gợi ý:{" "}
                 <span>
                   Di chuột vào tiêu đề làm việc để xem thêm thông tin chi tiết
                 </span>

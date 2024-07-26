@@ -1,22 +1,14 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import SearchIcon from "@mui/icons-material/Search";
-import FmdGoodIcon from "@mui/icons-material/FmdGood";
-import WorkIcon from "@mui/icons-material/Work";
-
+import { useForm, SubmitHandler } from "react-hook-form";
+import { MagnifyingGlassIcon, MapPinIcon } from "@heroicons/react/16/solid";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import {
-  Box,
-  Button,
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  Select,
-  TextField,
-} from "@mui/material";
+import { IFormSlider } from "@/interface/form-slider";
+import TmInput from "./hook-form/input";
+import TmSelect from "./hook-form/select";
 
 // import required modules
 
@@ -136,94 +128,64 @@ export const Slider = () => {
 };
 
 export const SliderForm = () => {
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-  };
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormSlider>();
+  const onSubmit: SubmitHandler<IFormSlider> = (data) => console.log(data);
+  const optionsLocation = [
+    "Địa điểm làm việc",
+    "Bình Định",
+    "TP.HCM",
+    "Hà Nội",
+  ];
+  const optionsType = ["Ngành nghề", "IT", "Marketing"];
   return (
     <div className="w-full mt-4 relative ">
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        className="flex bg-white whitespace-nowrap shadow-[0px_-8px_0_rgb(248,158,27)]"
-        sx={{
-          borderRadius: "10px",
-        }}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex items-stretch bg-white rounded-xl shadow-[0px_-8px_0_rgb(248,158,27)] flex-wrap	"
       >
-        <FormControl fullWidth className="col-span mt-2" size="small">
-          <TextField
-            label="Tìm kiếm việc làm"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  border: "none",
-                },
-              },
-              "& .MuiInputBase-input": {
-                padding: "8px",
-              },
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            variant="outlined"
+        <div className="flex-1 ">
+          <TmInput
+            className="py-2 "
+            register={register}
+            name="work"
+            icon={<MagnifyingGlassIcon className="mr-2 w-6" />}
+            placeholder="Tìm kiếm việc làm"
           />
-        </FormControl>
-        <FormControl fullWidth className="col-span my-2" size="small">
-          <InputLabel id="demo-small-select-label">
-            Địa điểm làm việc
-          </InputLabel>
-          <Select
-            sx={{
-              "& .MuiOutlinedInput-notchedOutline": {
-                border: "none",
-                borderRadius: 0,
-                padding: "8px",
-              },
-            }}
-            labelId="demo-small-select-label"
-            name="province2"
-            variant="outlined"
-            startAdornment={
-              <InputAdornment position="start">
-                <FmdGoodIcon />
-              </InputAdornment>
-            }
-          ></Select>
-        </FormControl>
-        <FormControl fullWidth className="col-span my-2" size="small">
-          <InputLabel id="demo-small-select-label">Ngành nghề</InputLabel>
-          <Select
-            sx={{
-              "& .MuiOutlinedInput-notchedOutline": {
-                border: "none",
-                borderRadius: 0,
-                padding: "8px",
-              },
-            }}
-            labelId="demo-small-select-label"
-            name="province1"
-            variant="outlined"
-            startAdornment={
-              <InputAdornment position="start">
-                <WorkIcon />
-              </InputAdornment>
-            }
-          ></Select>
-        </FormControl>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className="px-4 min-w-20 shadow-none text-black text-normal capitalize bg-[#F37A20] text-white border border-[2px] "
-        >
-          Tìm kiếm
-        </Button>
-      </Box>
+        </div>
+        <div className="flex-1">
+          <TmSelect
+            className="py-2"
+            icon={<MapPinIcon className="w-6 mr-2" />}
+            register={register}
+            name="location"
+            placeholder="Địa điểm làm việc"
+            children={optionsLocation.map((value, idx) => {
+              return <option key={value}>{value}</option>;
+            })}
+          />
+        </div>
+
+        <div className="flex-1">
+          <TmSelect
+            className="py-2"
+            register={register}
+            name="type"
+            placeholder="Ngành nghề"
+            children={optionsType.map((value, idx) => {
+              return <option key={value}>{value}</option>;
+            })}
+          />
+        </div>
+        <div className="bg-[#F37A20] text-white grid text-center rounded-tr-lg rounded-br-lg">
+          <button type="submit" className="px-2 ">
+            Tìm kiếm
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

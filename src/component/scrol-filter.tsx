@@ -1,7 +1,6 @@
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { Button } from "@mui/material";
 import { useRef } from "react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 
 export const ScrollFilter = () => {
   const listFilter = [
@@ -44,14 +43,14 @@ export const ScrollFilter = () => {
 
   return (
     <>
-      <div className="flex overflow-hidden lg:w-[60%] px-2 lg:px-0 mt-2 lg:mt-0">
+      <div className="flex overflow-hidden lg:w-[60%] px-2 lg:px-0 mt-2 lg:mt-0 items-center">
         <div className="mr-2">
           <Button
             size="small"
             className="border border-[#F37A20] rounded-full border-[2px] p-1 border-solid min-w-[auto]"
             onClick={() => scrollLeftHorizontally(300)}
           >
-            <KeyboardArrowLeftIcon className="text-[#F37A20]" />
+            <ChevronLeftIcon className="text-[#F37A20] w-4" />
           </Button>
         </div>
 
@@ -79,7 +78,7 @@ export const ScrollFilter = () => {
             className="border border-[#F37A20] rounded-full border-[2px] p-1 border-solid min-w-[auto]"
             onClick={() => scrollHorizontally(300)}
           >
-            <KeyboardArrowRightIcon className="text-[#F37A20]" />
+            <ChevronRightIcon className="text-[#F37A20] w-4" />
           </Button>
         </div>
       </div>

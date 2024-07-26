@@ -3,14 +3,7 @@ import "./globals.css";
 import { Header } from "@/partial/header";
 import { Footer } from "@/partial/footer";
 // import ThemeProvider from "@/theme";
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import localFont from "next/font/local";
-
-const theme = createTheme({
-  palette: {
-    mode: "light",
-  },
-});
 
 const roboto = localFont({
   src: [
