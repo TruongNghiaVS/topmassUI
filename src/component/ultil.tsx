@@ -7,9 +7,9 @@ export const Ultil = () => {
         <div className="text-center text-default font-bold text-4xl mb-8">
           Công cụ tiện ích
         </div>
-        <div className="grid grid-cols-3 gap-4 items-center px-14">
-          <div>
-            <div className="inline-flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-4 items-center lg:px-14 px-2">
+          <div className=" sm:row-auto col-start-1 row-start-2 row-end-2 ">
+            <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
               <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
               <div>
                 <div>Tính bảo hiểm thất nghiệp</div>
@@ -18,7 +18,7 @@ export const Ultil = () => {
                 </div>
               </div>
             </div>
-            <div className="inline-flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
+            <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
               <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
               <div>
                 <div>Tính lãi suất kép</div>
@@ -27,7 +27,7 @@ export const Ultil = () => {
                 </div>
               </div>
             </div>
-            <div className="inline-flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
+            <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
               <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
               <div>
                 <div>Tính thuế thu nhập cá nhân</div>
@@ -37,11 +37,15 @@ export const Ultil = () => {
               </div>
             </div>
           </div>
-          <div>
-            <img src="/img/ultil.png" alt="" className="w-full h-full" />
+          <div className="lg:row-auto row-start-1 row-end-2 lg:col-auto col-span-2">
+            <img
+              src="/imgs/ultil.png"
+              alt=""
+              className="lg:w-full h-full md:w-auto mx-auto mb-2 sm:mb-0"
+            />
           </div>
-          <div className="text-end">
-            <div className="inline-flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
+          <div className="text-end col-span-1 sm:row-auto row-start-3">
+            <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
               <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
               <div className="text-start">
                 <div>Tính bảo hiểm thất nghiệp</div>
@@ -50,7 +54,7 @@ export const Ultil = () => {
                 </div>
               </div>
             </div>
-            <div className="inline-flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
+            <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
               <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
               <div className="text-start">
                 <div>Lập kế hoạch tiết kiệm</div>
@@ -59,7 +63,7 @@ export const Ultil = () => {
                 </div>
               </div>
             </div>
-            <div className="inline-flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
+            <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
               <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
               <div className="text-start">
                 <div>Tính bảo hiểm thất nghiệp 1 lần</div>

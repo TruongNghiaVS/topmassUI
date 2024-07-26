@@ -1,8 +1,9 @@
+"use client";
+
 import { Menu } from "./menu";
 import Link from "next/link";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import PersonIcon from "@mui/icons-material/Person";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { BellIcon, UserIcon, ChevronDownIcon } from "@heroicons/react/16/solid";
+
 import { useEffect, useRef, useState } from "react";
 
 export const Header = () => {
@@ -31,14 +32,14 @@ export const Header = () => {
 
   return (
     <>
-      <section id="header" ref={headerRef}>
+      <section id="header" ref={headerRef} className="md:block hidden">
         <div
           className={`${
             isFixed ? "fixed" : ""
           }  flex justify-between items-center bg-white left-0 top-0 right-0 pt-3 px-[22px] z-[3]`}
         >
           <div className="logo-header">
-            <img src="img/logo-new.svg" alt="/" className="w-auto h-[50px]" />
+            <img src="imgs/logo-new.svg" alt="/" className="w-auto h-[50px]" />
           </div>
           <div id="menu">
             <Menu />
@@ -60,12 +61,21 @@ export const Header = () => {
               </Link>
             </div>
             <div className=" flex items-center">
-              <NotificationsIcon className="text-[#F37A20] mr-3" />
-              <img src="img/messenger.svg" alt="" className="w-6 h-auto mr-3" />
-              <div className="inline-block px-[2px] py-[1px] rounded-full bg-[#F37A20] mr-1">
-                <PersonIcon className="text-white" />
+              <div className="relative">
+                <BellIcon className="text-[#F37A20] mr-3 w-6" />
+                <div className="absolute content-[''] text-xs text-center w-4 h-4 top-[-4px] right-2 rounded-full bg-[#C40202] text-white">
+                  1
+                </div>
               </div>
-              <ExpandMoreIcon className="text-[#F37A20]" />
+              <img
+                src="imgs/messenger.svg"
+                alt=""
+                className="w-6 h-auto mr-3"
+              />
+              <div className="inline-block p-[2] rounded-full bg-[#F37A20] mr-1">
+                <UserIcon className="text-white w-6" />
+              </div>
+              <ChevronDownIcon className="text-[#F37A20] mr-3 w-6" />
             </div>
           </div>
         </div>

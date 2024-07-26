@@ -24,10 +24,10 @@ export const Slider = () => {
   return (
     <div
       id="slider"
-      className="relative bg-[url('/img/bg-slider.png')] bg-no-repeat	bg-cover pb-6"
+      className="relative bg-[url('/imgs/bg-slider.png')] bg-no-repeat	bg-cover pb-6"
     >
       <div className="container mx-auto">
-        <div className="px-52">
+        <div className="lg:px-52 md:px-20">
           <Swiper
             cssMode={true}
             spaceBetween={50}
@@ -47,7 +47,7 @@ export const Slider = () => {
             <SwiperSlide className="bg-primary">
               <div className="w-full object-cover">
                 <img
-                  src="/img/slider.png"
+                  src="/imgs/slider.png"
                   alt=""
                   className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
                 />
@@ -56,7 +56,7 @@ export const Slider = () => {
             <SwiperSlide className="bg-primary">
               <div className="w-full object-cover">
                 <img
-                  src="/img/slider.png"
+                  src="/imgs/slider.png"
                   alt=""
                   className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
                 />
@@ -65,7 +65,7 @@ export const Slider = () => {
             <SwiperSlide className="bg-primary">
               <div className="w-full object-cover">
                 <img
-                  src="/img/slider.png"
+                  src="/imgs/slider.png"
                   alt=""
                   className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
                 />
@@ -74,7 +74,7 @@ export const Slider = () => {
             <SwiperSlide className="bg-primary">
               <div className="w-full object-cover">
                 <img
-                  src="/img/slider.png"
+                  src="/imgs/slider.png"
                   alt=""
                   className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
                 />
@@ -83,7 +83,7 @@ export const Slider = () => {
             <SwiperSlide className="bg-primary">
               <div className="w-full object-cover">
                 <img
-                  src="/img/slider.png"
+                  src="/imgs/slider.png"
                   alt=""
                   className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
                 />
@@ -92,7 +92,7 @@ export const Slider = () => {
             <SwiperSlide className="bg-primary">
               <div className="w-full object-cover">
                 <img
-                  src="/img/slider.png"
+                  src="/imgs/slider.png"
                   alt=""
                   className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
                 />
@@ -101,7 +101,7 @@ export const Slider = () => {
             <SwiperSlide className="bg-primary">
               <div className="w-full object-cover">
                 <img
-                  src="/img/slider.png"
+                  src="/imgs/slider.png"
                   alt=""
                   className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
                 />
@@ -110,7 +110,7 @@ export const Slider = () => {
             <SwiperSlide className="bg-primary">
               <div className="w-full object-cover">
                 <img
-                  src="/img/slider.png"
+                  src="/imgs/slider.png"
                   alt=""
                   className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
                 />
@@ -119,7 +119,7 @@ export const Slider = () => {
             <SwiperSlide className="bg-primary">
               <div className="w-full object-cover">
                 <img
-                  src="/img/slider.png"
+                  src="/imgs/slider.png"
                   alt=""
                   className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
                 />

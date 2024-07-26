@@ -87,7 +87,7 @@ export const SliderJob = () => {
                         <div className="flex items-center mt-4">
                           <div className="w-20 mr-8">
                             <img
-                              src="/img/logo-work.png"
+                              src="/imgs/logo-work.png"
                               alt=""
                               className="w-full"
                             />

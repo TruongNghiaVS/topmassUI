@@ -3,10 +3,10 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 export const CreateCv = () => {
   return (
     <>
-      <div className="mt-4 mx-5 bg-[url(/img/bg-create-cv.png)] bg-no-repeat bg-[length:100%_100%]">
+      <div className="sm:mt-4 sm:mx-5 px-2 bg-[url(/imgs/bg-create-cv.png)] bg-no-repeat bg-[length:100%_100%]">
         <div className="container mx-auto">
-          <div className="py-[90px] ">
-            <div className="text-white text-[32px] font-bold mb-4">
+          <div className="sm:py-[90px] py-10">
+            <div className="text-white sm:text-[32px] text-lg font-bold mb-4">
               Hồ sơ thật ấn tượng với nhà tuyển dụng <br /> bằng công cụ
               <div className="ml-2 inline-block px-4 bg-white rounded-3xl py-2 text-[#FF8206]">
                 Tạo CV

@@ -44,7 +44,7 @@ export const ScrollFilter = () => {
 
   return (
     <>
-      <div className="flex overflow-hidden w-[60%]">
+      <div className="flex overflow-hidden lg:w-[60%] px-2 lg:px-0 mt-2 lg:mt-0">
         <div className="mr-2">
           <Button
             size="small"

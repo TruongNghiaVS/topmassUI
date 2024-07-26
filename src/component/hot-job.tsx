@@ -26,7 +26,7 @@ export const HotJob = () => {
                   },
                 }}
               >
-                <div className="flex items-center justify-between">
+                <div className="lg:flex items-center justify-between">
                   <TabList
                     onChange={handleChange}
                     TabIndicatorProps={{
@@ -34,7 +34,7 @@ export const HotJob = () => {
                         background: "#D14B00 !important",
                       },
                     }}
-                    className="pl-[50px]"
+                    className="lg:pl-[50px] pl-2"
                   >
                     <Tab
                       className="text-[22px] px-0 overflow-visible mx-4 text-defaultText font-bold capitalize leading-[44px]  relative after:absolute after:content-[''] after:right-[-16px] after:top-[10px] after:bottom-0 after:h-4/6 after:w-0.5 after:bg-black z-[2]"

@@ -54,7 +54,7 @@ export const JobType = () => {
     },
   ];
   return (
-    <div>
+    <div className="px-2 sm:px-0">
       <div className="container mx-auto mt-4">
         <div className="text-2xl text-[#D14B00] font-bold">
           Ngành nghề nổi bật
@@ -72,7 +72,7 @@ export const JobType = () => {
               >
                 <div className=" flex justify-center">
                   <img
-                    src={`/img/${value.img}`}
+                    src={`/imgs/${value.img}`}
                     alt=""
                     className="w-40 bg-[#f3f5f7] rounded-xl"
                   />

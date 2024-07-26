@@ -36,7 +36,7 @@ export const Career = () => {
         <div className="mb-9 text-center text-2xl font-bold text-default ">
           Cẩm Nang Nghề Nghiệp
         </div>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 px-2 lg:px-0">
           {career.map((value: any, index: number) => {
             return (
               <div
@@ -44,7 +44,7 @@ export const Career = () => {
                 className="rounded-md border-[1px] border-solid boder-[#DBDBDB]"
               >
                 <div className="">
-                  <img src={`/img/${value.img}`} alt="" className="w-full" />
+                  <img src={`/imgs/${value.img}`} alt="" className="w-full" />
                 </div>
                 <div className="px-4 py-5">
                   <div className="text-xl font-bold line-clamp-3 ">
