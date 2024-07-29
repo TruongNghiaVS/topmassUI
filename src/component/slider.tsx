@@ -119,7 +119,7 @@ export const Slider = () => {
             </SwiperSlide>
           </Swiper>
         </div>
-        <div className="px-48">
+        <div className="xl:px-48 lg:px-40 px-2">
           <SliderForm />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { ITmInput } from "./interface/interface";
 
-const TmInput: React.FC<ITmInput> = ({
+const TmCheckBox: React.FC<ITmInput> = ({
   register,
   name,
   type = "text",
@@ -14,27 +14,25 @@ const TmInput: React.FC<ITmInput> = ({
   icon,
   ...rest
 }) => {
-  if (type === "checkbox") {
-  }
-
+  console.log(label !== null && label == "");
   return (
     <div>
-      {label !== null && label !== "" && (
-        <label className={classNameLabel != undefined ? classNameLabel : ""}>
-          {label}
-        </label>
-      )}
       <div className={`py-2 px-4  ${icon !== undefined ? "flex" : ""}`}>
         {icon}
         <input
           type={type}
           {...register(name)}
           {...rest}
-          className={` focus-visible:outline-none w-full ${
+          className={` focus-visible:outline-none mr-2 ${
             className != null && className
           }`}
           value={value}
         />
+        {label !== null && label !== "" && (
+          <label className={classNameLabel != undefined ? classNameLabel : ""}>
+            {label}
+          </label>
+        )}
       </div>
 
       {error && (
@@ -46,4 +44,4 @@ const TmInput: React.FC<ITmInput> = ({
   );
 };
 
-export default TmInput;
+export default TmCheckBox;
