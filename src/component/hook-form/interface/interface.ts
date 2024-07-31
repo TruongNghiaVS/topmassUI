@@ -2,12 +2,9 @@ import { InputHTMLAttributes } from "react";
 import { FieldError, UseFormRegister } from "react-hook-form";
 
 export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
   type?: string;
   name: string;
-  required?: boolean;
   className?: string;
-  classNameLabel?: string;
   classNameError?: string;
   register: UseFormRegister<any>;
   icon?: any;
@@ -16,13 +13,10 @@ export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export interface ITmSelect extends InputHTMLAttributes<HTMLSelectElement> {
-  label?: string;
-  required?: boolean;
   placeholder?: string;
   type?: string;
   name: string;
   className?: string;
-  classNameLabel?: string;
   classNameError?: string;
   register: UseFormRegister<any>;
   icon?: any;

@@ -36,7 +36,7 @@ export const Footer = () => {
         <div className="container mx-auto pt-[60px] pb-[30px] gap-x-28	">
           <div className="lg:grid grid-cols-12 items-center">
             <div className="lg:col-span-5 col-span-4 bg-[url(/imgs/bg-logo-footer.png)] bg-no-repeat bg-[lenght:100% 100%] py-4 mb-2">
-              <Link href="#">
+              <Link href="/">
                 <Image
                   src="/imgs/logo-new.svg"
                   width={100}
