@@ -2,11 +2,9 @@ import { InputHTMLAttributes } from "react";
 import { FieldError, UseFormRegister } from "react-hook-form";
 
 export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
   type?: string;
   name: string;
   className?: string;
-  classNameLabel?: string;
   classNameError?: string;
   register: UseFormRegister<any>;
   icon?: any;
@@ -15,17 +13,16 @@ export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export interface ITmSelect extends InputHTMLAttributes<HTMLSelectElement> {
-  label?: string;
   placeholder?: string;
   type?: string;
   name: string;
   className?: string;
-  classNameLabel?: string;
   classNameError?: string;
   register: UseFormRegister<any>;
   icon?: any;
   children: any;
   error?: FieldError;
+  [key: string]: any; // Để hỗ trợ các props khác như className, id, v.v.
 }
 
 export interface ITmRadio {

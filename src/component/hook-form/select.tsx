@@ -15,21 +15,14 @@ const TmSelect: React.FC<ITmSelect> = ({
 }) => {
   return (
     <div>
-      {label !== null && label == "" && (
-        <label className={classNameLabel != undefined ? classNameLabel : ""}>
-          {label}
-        </label>
-      )}
-      <div
-        className={`py-2 px-4  ${className !== undefined && className} ${
-          icon !== undefined ? "flex" : ""
-        }`}
-      >
-        {icon}
+      <div className="relative flex items-center">
+        {icon && <div className="absolute left-3">{icon}</div>}
         <select
-          className={`w-full focus-visible:outline-none ${className}`}
           {...register(name)}
           {...rest}
+          className={`pl-10 py-2 border border-gray-300 rounded-md focus-visible:outline-none w-full ${className} ${
+            icon ? "pl-10" : "pl-4"
+          }`}
         >
           {children}
         </select>

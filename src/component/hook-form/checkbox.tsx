@@ -14,11 +14,9 @@ const TmCheckBox: React.FC<ITmInput> = ({
   icon,
   ...rest
 }) => {
-  console.log(label !== null && label == "");
   return (
     <div>
-      <div className={`py-2 px-4  ${icon !== undefined ? "flex" : ""}`}>
-        {icon}
+      <div className=" flex">
         <input
           type={type}
           {...register(name)}

@@ -4,6 +4,7 @@ import { Header } from "@/partial/header";
 import { Footer } from "@/partial/footer";
 // import ThemeProvider from "@/theme";
 import localFont from "next/font/local";
+import { usePathname } from "next/navigation";
 
 const roboto = localFont({
   src: [
@@ -36,15 +37,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const path = usePathname();
+  const pathValidated = ["/dang-ky"];
   return (
     <html lang="en">
       <body className={`${roboto.variable} font-roboto`}>
-        {/* <ThemeProvider theme={theme}> */}
-        {/* <CssBaseline /> */}
-        <Header />
+        {!pathValidated.includes(path) && <Header />}
         <main className="min-h-screen m-auto">{children}</main>
         <Footer />
-        {/* </ThemeProvider> */}
       </body>
     </html>
   );

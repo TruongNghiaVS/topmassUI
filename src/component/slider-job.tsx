@@ -4,16 +4,10 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { InfomationJob } from "./job-infomation";
+import { jobSlider } from "@/mockup-data/data";
 
 export const SliderJob = () => {
-  const jobSlider = {
-    title: "Nhân viên tư vấn Telesale",
-    company: "Công ty cổ phần tập đoàn VietStar",
-    price: "10 - 15 triệu",
-    city: "Hồ Chí Minh",
-    type: "Toàn thời gian",
-  };
-
   const arrIndex = [
     1,
     2,
@@ -80,39 +74,10 @@ export const SliderJob = () => {
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2 ">
                   {values.map((value, index) => {
                     return (
-                      <div
-                        key={`${index + value}`}
-                        className="border-[1px] border-[#d9dbe9] p-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]"
-                      >
-                        <div className="sm:flex items-center mt-4">
-                          <div className="w-20 sm:mr-8 mx-auto sm:mb-0 mb-2">
-                            <img
-                              src="/imgs/logo-work.png"
-                              alt=""
-                              className="w-full"
-                            />
-                          </div>
-                          <div className="text-center sm:text-start">
-                            <div className="text-[16px]	leading-[18px] font-bold ">
-                              <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
-                                hot
-                              </span>
-                              {jobSlider.title}
-                            </div>
-                            <div className="text-sm font-normal mt-2.5 ">
-                              {jobSlider.company}
-                            </div>
-                            <div className="flex mt-4 justify-center sm:justify-start	">
-                              <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2">
-                                {jobSlider.price}
-                              </div>
-                              <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em]">
-                                {jobSlider.city}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <InfomationJob
+                        key={value.toString() + jobSlider.title}
+                        item={jobSlider}
+                      />
                     );
                   })}
                 </div>
