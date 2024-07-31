@@ -5,6 +5,7 @@ export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   type?: string;
   name: string;
+  required?: boolean;
   className?: string;
   classNameLabel?: string;
   classNameError?: string;
@@ -16,6 +17,7 @@ export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
 
 export interface ITmSelect extends InputHTMLAttributes<HTMLSelectElement> {
   label?: string;
+  required?: boolean;
   placeholder?: string;
   type?: string;
   name: string;
@@ -26,6 +28,7 @@ export interface ITmSelect extends InputHTMLAttributes<HTMLSelectElement> {
   icon?: any;
   children: any;
   error?: FieldError;
+  [key: string]: any; // Để hỗ trợ các props khác như className, id, v.v.
 }
 
 export interface ITmRadio {

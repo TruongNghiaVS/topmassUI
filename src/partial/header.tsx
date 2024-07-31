@@ -39,7 +39,7 @@ export const Header = () => {
           }  flex justify-between items-center bg-white left-0 top-0 right-0 pt-3 px-[22px] z-[3]`}
         >
           <div className="logo-header">
-            <img src="imgs/logo-new.svg" alt="/" className="w-auto h-[50px]" />
+            <img src="/imgs/logo-new.svg" alt="/" className="w-auto h-[50px]" />
           </div>
           <div id="menu">
             <Menu />
@@ -68,7 +68,7 @@ export const Header = () => {
                 </div>
               </div>
               <img
-                src="imgs/messenger.svg"
+                src="/imgs/messenger.svg"
                 alt=""
                 className="w-6 h-auto mr-3"
               />

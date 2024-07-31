@@ -3,9 +3,9 @@ import Link from "next/link";
 
 export const Menu = () => {
   const navItems = [
-    { title: "Tạo CV", subMenu: [], active: true },
-    { title: "Việc làm", subMenu: [], active: false },
-    { title: "Công ty", subMenu: [], active: false },
+    { title: "Tạo CV", subMenu: [], link: "/viec-lam", active: true },
+    { title: "Việc làm", subMenu: [], link: "/viec-lam", active: false },
+    { title: "Công ty", subMenu: [], link: "/viec-lam", active: false },
     {
       title: "Tin Tức",
       subMenu: [
@@ -15,6 +15,7 @@ export const Menu = () => {
         "Tiện Ích",
         "Góc Báo Chí",
       ],
+      link: "viec-lam",
       active: false,
     },
   ];
@@ -29,7 +30,7 @@ export const Menu = () => {
               className="group/title mx-4 normal-case whitespace-nowrap after:transition-all after:transition-height after:ease-in-out after:duration-300 justify-center h-[76px] relative after:absolute after:content-[''] after:top-[calc(100%-3px)] hover:after:top-[calc(100%-3px)] after:left-0 after:w-full after:h-0 hover:after:h-[3px] after:bg-default flex items-center"
             >
               <Link
-                href="#"
+                href={item.link}
                 className={`"text-[#3B4358] no-underline font-medium ${
                   item.active ? "text-default" : ""
                 } "`}

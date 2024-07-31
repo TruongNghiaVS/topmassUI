@@ -38,9 +38,10 @@ export const Footer = () => {
             <div className="lg:col-span-5 col-span-4 bg-[url(/imgs/bg-logo-footer.png)] bg-no-repeat bg-[lenght:100% 100%] py-4 mb-2">
               <Link href="#">
                 <Image
-                  src="imgs/logo-new.svg"
+                  src="/imgs/logo-new.svg"
                   width={100}
                   height={100}
+                  priority
                   alt=""
                   className="w-[180px] "
                 ></Image>

@@ -1,4 +1,3 @@
-"use client";
 import "./globals.css";
 import { Header } from "@/partial/header";
 import { Footer } from "@/partial/footer";
@@ -39,12 +38,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable} font-roboto`}>
-        {/* <ThemeProvider theme={theme}> */}
-        {/* <CssBaseline /> */}
         <Header />
         <main className="min-h-screen m-auto">{children}</main>
         <Footer />
-        {/* </ThemeProvider> */}
       </body>
     </html>
   );
