@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const Career = () => {
   const career = [
     {
@@ -44,13 +46,17 @@ export const Career = () => {
                 className="rounded-md border-[1px] border-solid boder-[#DBDBDB]"
               >
                 <div className="">
-                  <img src={`/imgs/${value.img}`} alt="" className="w-full" />
+                  <Link href="/tin-tuc/test/1">
+                    <img src={`/imgs/${value.img}`} alt="" className="w-full" />
+                  </Link>
                 </div>
                 <div className="px-4 py-5">
                   <div className="text-xl font-bold line-clamp-3 ">
-                    {value.title}
+                    <Link href="/tin-tuc/test/1">{value.title}</Link>
                   </div>
-                  <div className="line-clamp-4 mt-2">{value.description}</div>
+                  <div className="line-clamp-4 mt-2">
+                    <Link href="/tin-tuc/test/1">{value.description}</Link>
+                  </div>
                 </div>
               </div>
             );
@@ -59,7 +65,7 @@ export const Career = () => {
         <div className="text-center mt-6">
           <a href="">
             <div className="inline-block py-2 px-6  rounded-lg border-[1px] border-solid border-[#F9BA06] text-default bg-[#F3F5F7]">
-              Xem thêm cẩm nang nghề nghiệp
+              <Link href="/tin-tuc/abc">Xem thêm cẩm nang nghề nghiệp</Link>
             </div>
           </a>
         </div>

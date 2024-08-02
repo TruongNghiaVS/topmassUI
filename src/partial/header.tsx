@@ -87,14 +87,21 @@ export const Header = () => {
             <Menu />
           </div>
           <div className="flex">
-            <div className="flex items-center mr-[50px]">
-              <button onClick={openModal} className="text-xs mr-[30px]">
-                Dành cho ứng viên <br />
+            <div className="flex items-center mr-[50px] ">
+              <button
+                onClick={openModal}
+                className="text-xs mr-[30px] text-default"
+              >
+                Người tìm việc <br />
                 <div className="text-sm leading-[14px] pt-2 inline block font-medium">
-                  Tìm việc làm
+                  Đăng nhập/Đăng ký
                 </div>
               </button>
-              <Link href="#" className="text-xs ">
+              <Link
+                href="http://192.168.1.2:3003"
+                target="_blank"
+                className="text-xs "
+              >
                 Nhà tuyển dụng
                 <br />
                 <div className="text-sm leading-[14px] pt-2 inline block font-medium">
@@ -102,7 +109,7 @@ export const Header = () => {
                 </div>
               </Link>
             </div>
-            <div className=" flex items-center">
+            <div className="hidden flex items-center">
               <div className="relative">
                 <BellIcon className="text-[#F37A20] mr-3 w-6" />
                 <div className="absolute content-[''] text-xs text-center w-4 h-4 top-[-4px] right-2 rounded-full bg-[#C40202] text-white">

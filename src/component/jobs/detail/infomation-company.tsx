@@ -1,6 +1,7 @@
 import { BuildingFillUpBootstrapIcon } from "@/theme/icons/buildingFillUpBootstrapIcon";
 import { PeopleFillBootstrapIcon } from "@/theme/icons/peopleFillBootstrapIcon";
 import { MapPinIcon } from "@heroicons/react/16/solid";
+import Link from "next/link";
 
 export const ImfomationCompany = () => {
   return (
@@ -25,7 +26,9 @@ export const ImfomationCompany = () => {
       </div>
       <div className="flex justify-center items-center text-[#F37A20]">
         <BuildingFillUpBootstrapIcon className="w-6 mr-2" />
-        <div className="text-xs font-medium">Xem trang công ty</div>
+        <Link href="/cong-ty">
+          <div className="text-xs font-medium">Xem trang công ty</div>
+        </Link>
       </div>
     </div>
   );

@@ -9,6 +9,9 @@ export const Image = () => {
           <div className="">
             <img src="/imgs/img-no.png" alt="" className="w-full rounded-lg" />
           </div>
+          <div className="">
+            <img src="/imgs/img-no.png" alt="" className="w-full rounded-lg" />
+          </div>
         </div>
       </div>
     </div>

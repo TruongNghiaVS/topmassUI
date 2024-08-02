@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
+import Link from "next/link";
 
 export const JobTypePage = () => {
   const lst = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -54,19 +55,29 @@ export const JobTypePage = () => {
                   <SwiperSlide key={value.toString() + "test"}>
                     <div className="">
                       <div className="flex justify-center">
-                        <img
-                          src="/imgs/logo-work.png"
-                          alt=""
-                          className="w-auto"
-                        />
+                        <Link href="/cong-ty">
+                          <img
+                            src="/imgs/logo-work.png"
+                            alt=""
+                            className="w-auto"
+                          />
+                        </Link>
                       </div>
                       <div className=" uppercase text-center my-5">
-                        Công ty cổ phần tập đoàn VietStar
+                        <Link href="/cong-ty">
+                          Công ty cổ phần tập đoàn VietStar
+                        </Link>
                       </div>
-                      <div className="flex items-center justify-center">
-                        <img src="/imgs/bag.png" alt="" className="w-4 mr-2" />5
-                        vị trí đang tuyển
-                      </div>
+                      <Link href="/viec-lam">
+                        <div className="flex items-center justify-center">
+                          <img
+                            src="/imgs/bag.png"
+                            alt=""
+                            className="w-4 mr-2"
+                          />
+                          5 vị trí đang tuyển
+                        </div>
+                      </Link>
                     </div>
                   </SwiperSlide>
                 );

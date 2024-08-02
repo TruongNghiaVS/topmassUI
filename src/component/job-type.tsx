@@ -1,3 +1,4 @@
+import Link from "next/link";
 import numeral from "numeral";
 
 export const JobType = () => {
@@ -70,19 +71,21 @@ export const JobType = () => {
                 key={value.title}
                 className="rounded-xl transition duration-300 p-5 col-span-1 border border-[1px] border-solid hover:!border-[#F89E1B] border-transparent bg-[#f0f8ff]	 hover:bg-white hover:shadow-[0_3px_10px_rgba(248,158,27,1)]"
               >
-                <div className=" flex justify-center">
-                  <img
-                    src={`/imgs/${value.img}`}
-                    alt=""
-                    className="w-40 bg-[#f3f5f7] rounded-xl"
-                  />
-                </div>
-                <div className="text-center text-[#596D54] mt-2">
-                  {value.title}
-                </div>
-                <div className="text-center text-[#C89836] text-sm">
-                  {numeral(value.count).format("0,0")} việc làm
-                </div>
+                <Link href="/viec-lam">
+                  <div className=" flex justify-center">
+                    <img
+                      src={`/imgs/${value.img}`}
+                      alt=""
+                      className="w-40 bg-[#f3f5f7] rounded-xl"
+                    />
+                  </div>
+                  <div className="text-center text-[#596D54] mt-2">
+                    {value.title}
+                  </div>
+                  <div className="text-center text-[#C89836] text-sm">
+                    {numeral(value.count).format("0,0")} việc làm
+                  </div>
+                </Link>
               </div>
             );
           })}
