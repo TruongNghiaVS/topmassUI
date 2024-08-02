@@ -70,7 +70,7 @@ export const Menu = () => {
     {
       title: "Công ty",
       subMenu: [],
-      link: "cong-ty",
+      link: "/cong-ty",
       isShow: true,
     },
     {

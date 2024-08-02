@@ -8,11 +8,8 @@ export const JobLike = ({ item }: IInfomationJobProps) => {
       <div className="font-bold text-lg mb-2">Có thể bạn sẽ thích</div>
       {list.map((value) => {
         return (
-          <div className="mt-2">
-            <InfomationJobDetail
-              key={value.toString() + item.title}
-              item={item}
-            />
+          <div className="mt-2" key={value.toString() + item.title}>
+            <InfomationJobDetail item={item} />
           </div>
         );
       })}
