@@ -74,6 +74,7 @@ export const experiences = [
 
 export const jobSlider = {
   title: "Nhân viên tư vấn Telesale",
+  slug: "nhan-vien-tu-van-telesale",
   company: "Công ty cổ phần tập đoàn VietStar",
   price: "10 - 15 triệu",
   city: "Hồ Chí Minh",
@@ -81,6 +82,7 @@ export const jobSlider = {
 
 export const jobSame = {
   title: "Nhân viên tư vấn Telesale",
+  slug: "nhan-vien-tu-van-telesale",
   company: "Công ty cổ phần tập đoàn VietStar",
   price: "10 - 15 triệu",
   city: "Hồ Chí Minh",
@@ -91,6 +93,38 @@ export const jobSame = {
     "Quản trị kinh doanh",
     "Công việc khác",
     "Công việc khác",
+  ],
+};
+
+export const jobCV = {
+  title: "Nhân viên tư vấn Telesale",
+  slug: "nhan-vien-tu-van-telesale",
+  company: "Công ty cổ phần tập đoàn VietStar",
+  price: "10 - 15 triệu",
+  city: "Hồ Chí Minh",
+  date: 10,
+  time: 50,
+};
+
+export const companys = {
+  img: "img-company.png",
+  img_small: "logo-work.png",
+  slug: "cong-ty-co-phan-tap-doan-vietstar",
+  title: "Công ty cổ phần tập đoàn VietStar Group",
+  follow: 1000,
+  data: [
+    {
+      title: "Performance Marketing",
+      slug: "nhan-vien-tu-van-telesale",
+      price: "10 - 20 triệu",
+      city: "Hồ Chí Minh",
+    },
+    {
+      title: "Performance Marketing",
+      slug: "nhan-vien-tu-van-telesale",
+      price: "10 - 20 triệu",
+      city: "Hồ Chí Minh",
+    },
   ],
 };
 
@@ -118,5 +152,72 @@ export const areaCode = [
   {
     label: "+89",
     value: 5,
+  },
+];
+
+export const optionsLocation = [
+  "Địa điểm làm việc",
+  "Bình Định",
+  "TP.HCM",
+  "Hà Nội",
+];
+export const optionsType = ["Ngành nghề", "IT", "Marketing"];
+export const fields = ["Tất cả lĩnh vực", "test"];
+export const ranks = ["Tất cả cấp bậc", "Cấp bậc 1", "Cấp bậc 2"];
+export const news = [
+  {
+    img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",
+    title: "Những công việc làm tại nhà kiếm tiền nhanh trong 2023",
+    slug: "nhung-cong-viec",
+  },
+  {
+    img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",
+    title: "Những công việc làm tại nhà kiếm tiền nhanh trong 2023",
+    slug: "nhung-cong-viec",
+  },
+  {
+    img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",
+    title: "Những công việc làm tại nhà kiếm tiền nhanh trong 2023",
+    slug: "nhung-cong-viec",
+  },
+  {
+    img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",
+    title: "Những công việc làm tại nhà kiếm tiền nhanh trong 2023",
+    slug: "nhung-cong-viec",
+  },
+  {
+    img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",
+    title: "Những công việc làm tại nhà kiếm tiền nhanh trong 2023",
+    slug: "nhung-cong-viec",
+  },
+  {
+    img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",
+    title: "Những công việc làm tại nhà kiếm tiền nhanh trong 2023",
+    slug: "nhung-cong-viec",
+  },
+  {
+    img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",
+    title: "Những công việc làm tại nhà kiếm tiền nhanh trong 2023",
+    slug: "nhung-cong-viec",
+  },
+  {
+    img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",
+    title: "Những công việc làm tại nhà kiếm tiền nhanh trong 2023",
+    slug: "nhung-cong-viec",
+  },
+  {
+    img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",
+    title: "Những công việc làm tại nhà kiếm tiền nhanh trong 2023",
+    slug: "nhung-cong-viec",
+  },
+  {
+    img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",
+    title: "Những công việc làm tại nhà kiếm tiền nhanh trong 2023",
+    slug: "nhung-cong-viec",
+  },
+  {
+    img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",
+    title: "Những công việc làm tại nhà kiếm tiền nhanh trong 2023",
+    slug: "nhung-cong-viec",
   },
 ];

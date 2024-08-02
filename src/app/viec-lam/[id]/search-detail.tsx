@@ -3,7 +3,7 @@ import TmInput from "@/component/hook-form/input";
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-interface IFormSearchDetail {
+export interface IFormSearchDetail {
   key: string;
 }
 

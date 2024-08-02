@@ -1,64 +1,78 @@
-export default function News() {
-    return (
-      <div>
-        <div className="container mx-auto p-5 ">
-          <div>
-            <article className="text-wrap ...">
-                <h1>Khám phá 1.000+ công ty nổi bật</h1>
-                <p>Tìm hiểu văn hoá công ty và chọn cho bạn nơi làm việc phù hợp nhất.</p>
-            </article> 
-            <div className="flex flex-nowrap">
-                <div>01</div>
-                <div>02</div>
-                <div>03</div>
+"use client";
+
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IFormSearchDetail } from "../viec-lam/[id]/search-detail";
+import TmInput from "@/component/hook-form/input";
+import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
+import { companys } from "@/mockup-data/data";
+import { InfomationCompany } from "./infomation-company";
+import { Description } from "@/component/description";
+
+export default function CompanyPage() {
+  const list = [1, 2, 3, 4, 5, 6, 7, 8];
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormSearchDetail>();
+  const onSubmit: SubmitHandler<IFormSearchDetail> = (data) =>
+    console.log(data);
+
+  return (
+    <div className="bg-[#EAE9E8]">
+      <div className="bg-bgHeaderJobCustom max-1280:px-2">
+        <div className="container mx-auto">
+          <div className="lg:pt-14 pt-8 inline-grid">
+            <div className="lg:text-4xl md:text-2xl text-xl font-bold">
+              Tìm hiểu văn hoá công ty
             </div>
-         </div>
-        </div>
-          <div className="grid grid-cols-4 gap-4">
-            <div>
-              <div>
-              <img src="/img/nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png" alt="" className="w-full h-40" />
-              </div>
-              <div className="p-5 text-lg font-bold leading-normal text-sky-700 overflow-hidden	">Những công việc làm tại nhà kiếm tiền nhanh trong 2024</div>
+            <div className="font-normal mt-2">
+              Tìm hiểu văn hóa công ty và chọn nơi làm việc phù hợp nhất
             </div>
-            <div>
-              <div>
-              <img src="/img/cac-cong-viec-lam-tai-nha-cho-sinh-vien-anh-dai-dien_860.png" alt="" className="w-full h-40" />
-              </div>
-              <div className="p-5 text-lg font-bold leading-normal text-sky-700 overflow-hidden	">Các công việc làm tại nhà cho sinh viên bạn nên thử ngay</div>
-            </div>
-            <div>
-              <div><img src="/img/cac-cong-viec-lam-tai-nha-cho-me-bim-sua-anh-dai-dien_275.png" alt="" className="w-full h-40" />
-              </div>
-              <div className="p-5 text-lg font-bold leading-normal text-sky-700 overflow-hidden	">Các công việc làm tại nhà cho mẹ bỉm sữa kiếm thêm thu nhập</div>
-            </div>
-            <div>
-              <div><img src="/img/viec-lam-hanh-chinh-anh-dai-dien_96.png" alt="" className="w-full h-40" />
-              </div>
-              <div className="p-5 text-lg font-bold leading-normal text-sky-700 overflow-hidden	">Việc làm hành chính đòi hỏi phẩm chất và kinh nghiệm gì?</div>
-            </div>
-            <div>
-              <div><img src="/img/app-tuyen-dung-viec-lam-anh-dai-dien_40.png" alt="" className="w-full h-40" />
-              </div>
-              <div className="p-5 text-lg font-bold leading-normal text-sky-700 overflow-hidden	">App tuyển dụng việc làm - Công cụ hỗ trợ tìm việc hiệu quả</div>
-            </div>
-            <div>
-              <div><img src="/img/tuyen-dung-viec-lam-24h-anh-dai-dien_165.jpeg" alt="" className="w-full h-40" />
-              </div>
-              <div className="p-5 text-lg font-bold leading-normal text-sky-700 overflow-hidden	">Tuyển dụng việc làm 24h có còn là trang web hiệu quả?</div>
-            </div>
-            <div>
-              <div><img src="/img/trang-tuyen-dung-viec-lam-uy-tin-anh-dai-dien_101.png" alt="" className="w-full h-40" />
-              </div>
-              <div className="p-5 text-lg font-bold leading-normal text-sky-700 overflow-hidden	">Trang tuyển dụng việc làm uy tín giúp bạn có công việc ưng ý</div>
-            </div>
-            <div>
-              <div><img src="/img/tuyen-dung-viec-lam-ke-toan-anh-dai-dien_876.png" alt="" className="w-full h-40" />
-              </div>
-              <div className="p-5 text-lg font-bold leading-normal text-sky-700 overflow-hidden	">Tuyển dụng việc làm kế toán và một số lưu ý bạn cần biết</div>
+            <div className="pt-5 pb-12 relative z-[2]">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex items-stretch bg-white rounded-3xl py-2 px-4 border border-[#F89E1B] flex-wrap	"
+              >
+                <div className="flex-1">
+                  <TmInput
+                    register={register}
+                    name="key"
+                    icon={<MagnifyingGlassIcon className="w-6" />}
+                    error={errors.key}
+                    className="border-0"
+                    placeholder="Nhập tên công ty"
+                  />
+                </div>
+                <div className="bg-[#F37A20] text-white grid text-center rounded-3xl ">
+                  <button type="submit" className="px-4 py-2">
+                    Tìm kiếm
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-      
-    );
-  }
+      </div>
+      <div className="">
+        <div className="mx-auto container">
+          <div className="lg:text-4xl md:text-2xl text-xl mb-8 font-bold text-center">
+            Danh sách công ty nổi bật
+          </div>
+          <div className="mt-4 grid xl:grid-cols-3 md:grid-cols-2 gap-4">
+            {list.map((value) => {
+              return (
+                <div key={value.toString() + companys.slug}>
+                  <InfomationCompany item={companys} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <div>
+        <Description />
+      </div>
+    </div>
+  );
+}

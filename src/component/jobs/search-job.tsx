@@ -24,7 +24,7 @@ export const SearchJobs = () => {
   ];
 
   return (
-    <div className="pt-12 bg-[#EAE9E8]">
+    <div className="pt-12 bg-[#EAE9E8] max-1280:px-2">
       <div className="container mx-auto">
         <div className="text-[22px] leading-[30px] font-bold flex">
           <img src="/imgs/img-job-hot.png" alt="" className="w-8 mr-2" />

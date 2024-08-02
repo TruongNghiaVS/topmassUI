@@ -14,13 +14,13 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
       </div>
       <div className="sm:flex mt-4 ">
         <div className="w-20 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
-          <Link href={`/viec-lam/${item.title}`}>
+          <Link href={`/viec-lam/${item.slug}`}>
             <img src="/imgs/logo-work.png" alt="" className="w-full" />
           </Link>
         </div>
         <div className="text-center sm:text-start">
           <div className="text-[16px]	leading-[18px] font-bold ">
-            <Link href={`/viec-lam/${item.title}`}>
+            <Link href={`/viec-lam/${item.slug}`}>
               <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
                 hot
               </span>
@@ -30,35 +30,33 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
           <div className="text-sm font-normal mt-2.5 ">{item.company}</div>
           <div className="flex mt-2	justify-center sm:justify-start">
             <div className="text-sm text-[#F46800] pr-[0.65em] mr-2 relative after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]">
-              <Link href={`/viec-lam/${item.title}`}>{item.price}</Link>
+              <Link href={`/viec-lam/${item.slug}`}>{item.price}</Link>
             </div>
             <div className="text-sm px-[0.65em]">
-              <Link href={`/viec-lam/${item.title}`}>{item.city}</Link>
+              <Link href={`/viec-lam/${item.slug}`}>{item.city}</Link>
             </div>
           </div>
           <div className="lg:flex mt-2	items-center">
             <div className="text-sm pr-[0.65em] mr-2 relative lg:after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]">
-              <Link href={`/viec-lam/${item.title}`}>{item.status}</Link>
+              <Link href={`/viec-lam/${item.slug}`}>{item.status}</Link>
             </div>
-            <Link href={`/viec-lam/${item.title}`}>
-              <div className="text-sm px-[0.65em] flex items-center flex-wrap">
-                {listShow.map((item) => {
-                  return (
-                    <div
-                      key={item}
-                      className="inline-block px-2 py-1 mr-2 font-normal text-sx bg-[#EFEFEF] rounded mt-2"
-                    >
-                      {item}
-                    </div>
-                  );
-                })}
-                {count > 0 && (
-                  <div className="inline-block px-2 py-1 mr-2 font-normal text-sx bg-[#EFEFEF] rounded mt-2">
-                    + {count}
+            <div className="text-sm px-[0.65em] flex items-center flex-wrap">
+              {listShow.map((item) => {
+                return (
+                  <div
+                    key={item}
+                    className="inline-block px-2 py-1 mr-2 font-normal text-sx bg-[#EFEFEF] rounded sm:mt-0 mt-2"
+                  >
+                    {item}
                   </div>
-                )}
-              </div>
-            </Link>
+                );
+              })}
+              {count > 0 && (
+                <div className="inline-block px-2 py-1 mr-2 font-normal text-sx bg-[#EFEFEF] rounded mt-2 sm:mt-0">
+                  + {count}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

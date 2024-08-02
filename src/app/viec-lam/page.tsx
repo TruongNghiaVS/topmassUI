@@ -6,13 +6,13 @@ import SliderJobs from "@/component/jobs/slider-job";
 
 const JobsPage = () => {
   return (
-    <>
+    <div>
       <SliderJobs />
       <SearchJobs />
       <Image />
       <JobType />
       <JobTypePage />
-    </>
+    </div>
   );
 };
 

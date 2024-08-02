@@ -3,3 +3,8 @@ export interface IFormSlider {
   location: string;
   type: string;
 }
+
+export interface IFormSearchJob {
+  work: string;
+  location: string;
+}

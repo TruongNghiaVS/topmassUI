@@ -12,9 +12,6 @@ const TmInput: React.FC<ITmInput> = ({
   icon,
   ...rest
 }) => {
-  if (type === "checkbox") {
-  }
-
   return (
     <div>
       <div className="relative flex items-center">
@@ -23,6 +20,7 @@ const TmInput: React.FC<ITmInput> = ({
           type={type}
           {...register(name)}
           {...rest}
+          value={value}
           className={`pl-10 py-2 border border-gray-300 rounded-md focus-visible:outline-none  w-full ${className} ${
             icon ? "pl-10" : "pl-4"
           }`}

@@ -10,6 +10,8 @@ import { IFormSlider } from "@/interface/form-slider";
 import TmInput from "./hook-form/input";
 import TmSelect from "./hook-form/select";
 import { BagBootstrapIcon } from "@/theme/icons/bagBootstrapIcon";
+import { optionsLocation, optionsType } from "@/mockup-data/data";
+import { useRouter } from "next/navigation";
 
 // import required modules
 
@@ -132,14 +134,14 @@ export const SliderForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormSlider>();
-  const onSubmit: SubmitHandler<IFormSlider> = (data) => console.log(data);
-  const optionsLocation = [
-    "Địa điểm làm việc",
-    "Bình Định",
-    "TP.HCM",
-    "Hà Nội",
-  ];
-  const optionsType = ["Ngành nghề", "IT", "Marketing"];
+
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<IFormSlider> = (data: any) => {
+    const queryString = new URLSearchParams(data).toString();
+    router.push(`/tim-kiem-viec-lam?${queryString}`);
+  };
+
   return (
     <div className="xl:px-48 lg:px-40 px-2">
       <div className="w-full mt-4 relative ">
