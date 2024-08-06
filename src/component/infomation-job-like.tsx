@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const InfomationJobLike = ({ item }: IInfomationJobProps) => {
   return (
-    <div className="border-[1px] border-[#d9dbe9]  bg-white p-2 mt-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
+    <div className="border-[1px] border-[#d9dbe9]  bg-white p-2 sm:mt-0 mt-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
       <div className="xl:flex grid sm:justify-start justify-center items-center my-2">
         <div className="w-20 lg:mx-0 lg:mr-8 mx-auto lg:mb-0 mb-2">
           <Link href={`/viec-lam/${item.title}`}>

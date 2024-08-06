@@ -67,9 +67,8 @@ export const SliderJob = () => {
         className="mySwiper !pb-10"
       >
         {arrMap.map((values, index) => {
-          const count = 0;
           return (
-            <div key={index}>
+            <div key={index.toString() + values[0].toString()}>
               <SwiperSlide className="bg-primary w-full border-r">
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2 ">
                   {values.map((value, index) => {

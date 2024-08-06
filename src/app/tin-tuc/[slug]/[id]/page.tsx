@@ -40,10 +40,12 @@ const NewDetail = () => {
                 <div className="mt-2">
                   {data.map((item) => {
                     return (
-                      <InfomationJobSame
+                      <div
+                        className="mt-4"
                         key={item.toString() + jobSame.title}
-                        item={jobSame}
-                      />
+                      >
+                        <InfomationJobSame item={jobSame} />
+                      </div>
                     );
                   })}
                 </div>
@@ -66,10 +68,9 @@ const NewDetail = () => {
             <div>
               {data.map((item) => {
                 return (
-                  <InfomationJobLike
-                    item={jobSlider}
-                    key={item.toString() + jobSlider.title}
-                  />
+                  <div className="mt-4" key={item.toString() + jobSlider.title}>
+                    <InfomationJobLike item={jobSlider} />
+                  </div>
                 );
               })}
             </div>

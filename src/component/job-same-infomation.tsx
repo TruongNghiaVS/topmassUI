@@ -8,7 +8,7 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
   let count = groupType.length > 3 ? groupType.length - 3 : 0;
 
   return (
-    <div className="border-[1px] bg-white p-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px] mt-4 relative border-solid border-[#FC7E00]">
+    <div className="border-[1px] bg-white p-4 rounded-md hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px] relative border-solid border-[#FC7E00]">
       <div className="absolute right-4 top-4">
         <HeartIcon className="w-6 text-[#FC7E00]" />
       </div>
@@ -45,14 +45,14 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
                 return (
                   <div
                     key={item}
-                    className="inline-block px-2 py-1 mr-2 font-normal text-sx bg-[#EFEFEF] rounded sm:mt-0 mt-2"
+                    className="inline-block px-2 py-1 mr-2 font-normal text-sx bg-[#EFEFEF] rounded lg:mt-0 mt-2"
                   >
                     {item}
                   </div>
                 );
               })}
               {count > 0 && (
-                <div className="inline-block px-2 py-1 mr-2 font-normal text-sx bg-[#EFEFEF] rounded mt-2 sm:mt-0">
+                <div className="inline-block px-2 py-1 mr-2 font-normal text-sx bg-[#EFEFEF] rounded mt-2 lg:mt-0">
                   + {count}
                 </div>
               )}

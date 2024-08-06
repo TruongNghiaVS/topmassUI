@@ -161,6 +161,13 @@ export const optionsLocation = [
   "TP.HCM",
   "Hà Nội",
 ];
+
+export const loations = [
+  "Tất cả tỉnh/thành phố",
+  "Bình Định",
+  "TP.HCM",
+  "Hà Nội",
+];
 export const optionsType = ["Ngành nghề", "IT", "Marketing"];
 export const fields = ["Tất cả lĩnh vực", "test"];
 export const ranks = ["Tất cả cấp bậc", "Cấp bậc 1", "Cấp bậc 2"];

@@ -31,9 +31,6 @@ export const ScrollFilter = () => {
 
   const scrollLeftHorizontally = (distance: number) => {
     if (scrollContainerRef.current) {
-      console.log(scrollContainerRef.current.clientWidth);
-      console.log(scrollContainerRef.current.offsetWidth);
-      console.log(scrollContainerRef.current.scrollWidth);
       scrollContainerRef.current.scrollBy({
         left: -distance,
         behavior: "smooth",
@@ -43,7 +40,7 @@ export const ScrollFilter = () => {
 
   return (
     <>
-      <div className="flex overflow-hidden lg:w-[60%] px-2 lg:px-0 mt-2 lg:mt-0 items-center">
+      <div className="flex overflow-hidden px-2 lg:px-0 mt-2 lg:mt-0 items-center">
         <div className="mr-2">
           <Button
             size="small"

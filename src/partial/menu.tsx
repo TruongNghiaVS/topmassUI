@@ -1,12 +1,19 @@
+import { BagBootstrapIcon } from "@/theme/icons/bagBootstrapIcon";
 import { CloudUploadBootstrapIcon } from "@/theme/icons/cloudUploadBootstrapIcon";
+import { EnvelopePaperHeartFillBootstrapIcon } from "@/theme/icons/envelopePaperHeartFillBootstrapIcon";
 import { PersonBargeBootstrapIcon } from "@/theme/icons/personBargeBootstrapIcon";
 import {
   DocumentCheckIcon,
   DocumentTextIcon,
+  MagnifyingGlassIcon,
   PencilSquareIcon,
 } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+const IconAfter = () => {
+  return <img src="/imgs/fire.png" alt="" className="w-3 ml-2" />;
+};
 
 export const Menu = () => {
   const path = usePathname();
@@ -17,42 +24,42 @@ export const Menu = () => {
       subMenu: [
         {
           title: "Quản lý CV",
-          slug: "quan-ly-cv",
+          slug: "/quan-ly-cv",
           icon: (
             <PersonBargeBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
         {
           title: "Tải CV lên",
-          slug: "tai-cv-len",
+          slug: "/tai-cv-len",
           icon: (
             <CloudUploadBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
         {
           title: "Mẫu CV",
-          slug: "mau-cv",
+          slug: "/mau-cv",
           icon: (
             <PersonBargeBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
         {
           title: "Kiểm tra chất lượng cv",
-          slug: "kiem-tra-chat-luong-cv",
+          slug: "/kiem-tra-chat-luong-cv",
           icon: (
             <DocumentCheckIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
         {
           title: "Hướng dẫn viết CV theo ngành nghề",
-          slug: "huong-dan-viet-cv-theo-nganh-nghe",
+          slug: "/huong-dan-viet-cv-theo-nganh-nghe",
           icon: (
             <PencilSquareIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
         {
           title: "Thư viện CV mẫu",
-          slug: "thu-vien-cv-mau",
+          slug: "/thu-vien-cv-mau",
           icon: (
             <PersonBargeBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
@@ -63,7 +70,32 @@ export const Menu = () => {
     },
     {
       title: "Việc làm",
-      subMenu: [],
+      subMenu: [
+        {
+          title: "Tìm việc làm",
+          slug: "/viec-lam",
+          icon: (
+            <MagnifyingGlassIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+          ),
+          border: true,
+        },
+        {
+          title: `Việc làm đã ứng tuyển`,
+          slug: "/viec-lam-da-ung-tuyen",
+          icon: (
+            <BagBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+          ),
+          after: <IconAfter />,
+        },
+        {
+          title: "Việc làm đã lưu",
+          slug: "/viec-lam-da-luu",
+          icon: (
+            <EnvelopePaperHeartFillBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+          ),
+          border: true,
+        },
+      ],
       link: "/viec-lam",
       isShow: true,
     },
@@ -78,41 +110,41 @@ export const Menu = () => {
       subMenu: [
         {
           title: "Bí Quyết Tìm Việc",
-          slug: "bi-quyet-tim-viec",
+          slug: "/tin-tuc/bi-quyet-tim-viec",
           icon: (
             <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
         {
           title: "Thị Trường - Xu Hướng",
-          slug: "thi-truong-xu-huong",
+          slug: "/tin-tuc/thi-truong-xu-huong",
           icon: (
             <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
         {
           title: "Góc Thư Giản",
-          slug: "goc-thu-gian",
+          slug: "/tin-tuc/goc-thu-gian",
           icon: (
             <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
         {
           title: "Tiện Ích",
-          slug: "tien-ich",
+          slug: "/tin-tuc/tien-ich",
           icon: (
             <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
         {
           title: "Góc Báo Chí",
-          slug: "goc-bao-chi",
+          slug: "/tin-tuc/goc-bao-chi",
           icon: (
             <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
       ],
-      link: "tin-tuc",
+      link: "/tin-tuc",
       isShow: false,
     },
   ];
@@ -154,33 +186,34 @@ type prop = {
     title: string;
     slug: string;
     icon: any;
+    border?: boolean;
+    after?: any;
   }[];
   parentPath: string;
   pathCheck: string;
 };
 
 export const SubMenu = ({ subMenu, parentPath, pathCheck }: prop) => {
-  const createPath = (parentPath: string, path: string) => {
-    return ("/" + parentPath + "/" + path).replace("#", "").replace("//", "/");
-  };
   return (
     <>
-      <ul className="group/subMenu overflow-hidden border-[#d9dbe9] h-0 transition-all ease-in-out duration-300 text-sm leading-[19px] absolute top-[calc(100%+20px)] left-0 bg-white min-w-[250px] py-[5px] z-[-1] group-hover/title:z-[11] group-hover/title:h-auto shadow-md opacity-0 group-hover/title:opacity-100 group-hover/title:top-full">
+      <ul className="p-2 rounded-lg group/subMenu overflow-hidden border-[#d9dbe9] h-0 transition-all ease-in-out duration-300 text-sm leading-[19px] absolute top-[calc(100%+20px)] left-0 bg-white min-w-[250px] py-[5px] z-[-1] group-hover/title:z-[11] group-hover/title:h-auto shadow-md opacity-0 group-hover/title:opacity-100 group-hover/title:top-full">
         {subMenu.map((item) => (
           <li
             key={item.title}
-            className={`group/item normal-case whitespace-nowrap hover:bg-[#e4e4e4] p-0 ${
-              pathCheck.includes(item.slug) && "bg-[#e4e4e4]"
-            }`}
+            className={`group/item normal-case whitespace-nowrap my-2 bg-[#e4e4e4] p-0 `}
           >
             <Link
-              href={createPath(parentPath, item.slug)}
-              className={`group/submenu font-medium text-[#3B4358] no-underline group-hover/item:text-default px-[15px] py-3 flex ${
+              href={item.slug}
+              className={`group/submenu font-medium text-[#3B4358] no-underline group-hover/item:text-default px-[15px] py-3 flex items-center relative ${
                 pathCheck.includes(item.slug) && "text-default"
+              }  ${
+                item.border &&
+                "mb-4 after:absolute after:content-[''] after:left-0 after:bottom-[-8px] after:right-0 after:w-full after:h-[1px] after:bg-[#e4e4e4]"
               }`}
             >
               {item.icon}
               {item.title}
+              {item?.after}
             </Link>
           </li>
         ))}

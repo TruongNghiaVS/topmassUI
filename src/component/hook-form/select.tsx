@@ -20,7 +20,7 @@ const TmSelect: React.FC<ITmSelect> = ({
         <select
           {...register(name)}
           {...rest}
-          className={`pl-10 py-2 border border-gray-300 rounded-md focus-visible:outline-none w-full ${className} ${
+          className={`pl-10 py-2.5 border border-gray-300 rounded-md focus-visible:outline-none w-full ${className} ${
             icon ? "pl-10" : "pl-4"
           }`}
         >

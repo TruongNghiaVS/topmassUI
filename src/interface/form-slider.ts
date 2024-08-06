@@ -8,3 +8,8 @@ export interface IFormSearchJob {
   work: string;
   location: string;
 }
+
+export interface IFormCompany {
+  work: string;
+  location: string;
+}

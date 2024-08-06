@@ -9,12 +9,16 @@ export const InfomationCompany = ({ item }: any) => {
       <div className="p-2 bg-white">
         <div className="flex items-center">
           <div className="p-2 bg-[#EAE9E8] rounded mr-4">
-            <img src={`/imgs/${item.img_small}`} alt="" className="" />
+            <Link href="/cong-ty/test">
+              <img src={`/imgs/${item.img_small}`} alt="" className="" />
+            </Link>
           </div>
           <div>
-            <div className="text-lg font-medium line-clamp-2">
-              Công ty cổ phần VietStar
-            </div>
+            <Link href="/cong-ty/test">
+              <div className="text-lg font-medium line-clamp-2">
+                Công ty cổ phần VietStar
+              </div>
+            </Link>
             <div className="flex justify-between">
               <div className="font-normal text-[10px]">
                 {item.follow} lượt theo dõi

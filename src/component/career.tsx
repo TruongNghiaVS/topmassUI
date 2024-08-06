@@ -63,11 +63,9 @@ export const Career = () => {
           })}
         </div>
         <div className="text-center mt-6">
-          <a href="">
-            <div className="inline-block py-2 px-6  rounded-lg border-[1px] border-solid border-[#F9BA06] text-default bg-[#F3F5F7]">
-              <Link href="/tin-tuc/abc">Xem thêm cẩm nang nghề nghiệp</Link>
-            </div>
-          </a>
+          <div className="inline-block py-2 px-6  rounded-lg border-[1px] border-solid border-[#F9BA06] text-default bg-[#F3F5F7]">
+            <Link href="/tin-tuc/abc">Xem thêm cẩm nang nghề nghiệp</Link>
+          </div>
         </div>
       </div>
     </div>
