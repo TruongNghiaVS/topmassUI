@@ -6,10 +6,10 @@ export const JobSuggest = () => {
   return (
     <div className="max-1280:px-2">
       <div className="container mx-auto">
-        <div className="text-[22px] px-0 overflow-visible mx-4 text-defaultText font-bold capitalize leading-[44px] relative mr-14 flex">
-          <img src="/imgs/img-job-hot.png" alt="" className="auto mr-2" />
+        <div className="text-[22px] px-0 overflow-visible mx-4 text-defaultText font-bold capitalize leading-[44px] relative mr-14 flex my-4">
+          <img src="/imgs/img-job-hot.png" alt="" className="w-auto mr-2" />
           <div className="relative pb-2 after:absolute after:left-0 after:bottom-0 after:right-0 after:h-[3px] after:bg-gradient-to-r after:from-[#D14B00] after:to-[#F89E1B]">
-            Việc làm tương tự
+            Công việc gợi ý
           </div>
         </div>
         <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">

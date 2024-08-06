@@ -6,7 +6,7 @@ interface JobsLayoutProps {
 
 const JobsLayout: React.FC<JobsLayoutProps> = ({ children }) => {
   return (
-    <main>
+    <main className="relative">
       <div className="relative">
         <img
           src="/imgs/ab-left-header-job.png"

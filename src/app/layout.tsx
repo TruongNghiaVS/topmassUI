@@ -5,6 +5,8 @@ import { Footer } from "@/partial/footer";
 // import ThemeProvider from "@/theme";
 import localFont from "next/font/local";
 import { usePathname } from "next/navigation";
+import { Suspense } from "react";
+import LoadingScreen from "@/component/loading-screen";
 
 const roboto = localFont({
   src: [
@@ -43,7 +45,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.variable} font-roboto`}>
         {!pathValidated.includes(path) && <Header />}
-        <main className="min-h-screen m-auto">{children}</main>
+        <main className="min-h-screen m-auto relative">{children}</main>
         <Footer />
       </body>
     </html>

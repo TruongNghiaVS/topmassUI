@@ -6,7 +6,7 @@ interface JobSearchLayoutProps {
 
 const JobSearchLayout: React.FC<JobSearchLayoutProps> = ({ children }) => {
   return (
-    <main>
+    <main className="relative">
       <div className="relative bg-[#EFEFEF]">
         <img
           src="/imgs/ab-left-header-job.png"

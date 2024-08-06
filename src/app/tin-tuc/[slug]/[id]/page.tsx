@@ -9,9 +9,9 @@ import { NewInfomation } from "../../new-infomation";
 const NewDetail = () => {
   const data = [1, 2, 3, 4];
   return (
-    <div className="max-1280:px-2">
+    <div className="">
       <div className="mx-auto container">
-        <div className="sm:grid grid-cols-12 gap-4 mt-4">
+        <div className="sm:grid grid-cols-12 gap-4 mt-4 max-1280:px-2">
           <div className="xl:col-span-8 md:col-span-7">
             <div className="text-xs font-normal">Cẩm nang nghề nghiệp</div>
             <div className="text-2xl font-bold">
@@ -77,7 +77,7 @@ const NewDetail = () => {
           </div>
         </div>
       </div>
-      <div className="mt-4 py-4 bg-[#E0E0E0]">
+      <div className="mt-4 py-4 bg-[#E0E0E0] max-1280:px-2">
         <div className="container mx-auto">
           <div className="font-medium text-2xl">Cùng chuyên mục</div>
           <div className="grid xl:grid-cols-4 gap-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-4">

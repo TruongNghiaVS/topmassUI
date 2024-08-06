@@ -3,7 +3,7 @@ import { New } from "./new";
 
 export default function NewCategory() {
   return (
-    <div className="bg-[#f0f0f0] pb-10">
+    <div className="bg-[#f0f0f0] pb-10 max-1280:px-2">
       <div className="mx-auto container">
         <div className="py-8 font-bold text-3xl">Bi quyet tim viec</div>
         <div className="grid grid-cols-4 gap-6">

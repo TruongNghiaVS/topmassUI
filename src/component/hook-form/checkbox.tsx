@@ -4,7 +4,6 @@ import { ITmInput } from "./interface/interface";
 const TmCheckBox: React.FC<ITmInput> = ({
   register,
   name,
-  type = "text",
   label,
   error,
   className,
@@ -18,7 +17,7 @@ const TmCheckBox: React.FC<ITmInput> = ({
     <div>
       <div className=" flex">
         <input
-          type={type}
+          type="checkbox"
           {...register(name)}
           {...rest}
           className={` focus-visible:outline-none mr-2 ${

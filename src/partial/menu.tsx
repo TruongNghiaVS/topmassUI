@@ -167,11 +167,7 @@ export const Menu = () => {
                 {item.title}
               </Link>
               {item.subMenu.length > 0 && (
-                <SubMenu
-                  parentPath={item.link}
-                  subMenu={item.subMenu}
-                  pathCheck={path}
-                />
+                <SubMenu subMenu={item.subMenu} pathCheck={path} />
               )}
             </li>
           ))}
@@ -189,22 +185,21 @@ type prop = {
     border?: boolean;
     after?: any;
   }[];
-  parentPath: string;
   pathCheck: string;
 };
 
-export const SubMenu = ({ subMenu, parentPath, pathCheck }: prop) => {
+export const SubMenu = ({ subMenu, pathCheck }: prop) => {
   return (
     <>
       <ul className="p-2 rounded-lg group/subMenu overflow-hidden border-[#d9dbe9] h-0 transition-all ease-in-out duration-300 text-sm leading-[19px] absolute top-[calc(100%+20px)] left-0 bg-white min-w-[250px] py-[5px] z-[-1] group-hover/title:z-[11] group-hover/title:h-auto shadow-md opacity-0 group-hover/title:opacity-100 group-hover/title:top-full">
         {subMenu.map((item) => (
           <li
             key={item.title}
-            className={`group/item normal-case whitespace-nowrap my-2 bg-[#e4e4e4] p-0 `}
+            className={`group/item normal-case whitespace-nowrap my-2 bg-[#e4e4e4] p-0 rounded `}
           >
             <Link
               href={item.slug}
-              className={`group/submenu font-medium text-[#3B4358] no-underline group-hover/item:text-default px-[15px] py-3 flex items-center relative ${
+              className={`group/submenu font-medium text-[#3B4358] no-underline group-hover/item:text-default px-[15px] py-3 flex items-center relative  ${
                 pathCheck.includes(item.slug) && "text-default"
               }  ${
                 item.border &&

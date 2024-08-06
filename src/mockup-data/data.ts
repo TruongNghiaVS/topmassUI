@@ -96,6 +96,24 @@ export const jobSame = {
   ],
 };
 
+export const jobSave = {
+  title: "Nhân viên tư vấn Telesale",
+  slug: "nhan-vien-tu-van-telesale",
+  company: "Công ty cổ phần tập đoàn VietStar",
+  price: "10 - 15 triệu",
+  city: "Hồ Chí Minh",
+  status: "Cập nhật 3 ngày trước",
+  groupType: [
+    "IT",
+    "Maketing",
+    "Quản trị kinh doanh",
+    "Công việc khác",
+    "Công việc khác",
+  ],
+  date: "27/7/2024",
+  time: "13:22",
+};
+
 export const jobCV = {
   title: "Nhân viên tư vấn Telesale",
   slug: "nhan-vien-tu-van-telesale",

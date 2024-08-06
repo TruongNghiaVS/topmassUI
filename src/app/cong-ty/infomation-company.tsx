@@ -4,7 +4,9 @@ export const InfomationCompany = ({ item }: any) => {
   return (
     <div className="overflow-hidden rounded-lg md:mb-10 mb-4 border border-[#F37A20]">
       <div>
-        <img src={`imgs/${item.img}`} alt="" className="w-full" />
+        <Link href="/cong-ty/test">
+          <img src={`imgs/${item.img}`} alt="" className="w-full" />
+        </Link>
       </div>
       <div className="p-2 bg-white">
         <div className="flex items-center">

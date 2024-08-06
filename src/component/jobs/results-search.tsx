@@ -8,7 +8,9 @@ export const ResutlSearchJob = ({ item }: IInfomationJobSameProps) => {
     <div className=" mb-8">
       {list.map((value) => {
         return (
-          <InfomationJobSame key={value.toString() + item.title} item={item} />
+          <div className="mt-4" key={value.toString() + item.title}>
+            <InfomationJobSame item={item} />
+          </div>
         );
       })}
       <div className="text-center mx-auto flex justify-center mt-4">

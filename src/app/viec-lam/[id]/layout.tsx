@@ -7,7 +7,7 @@ interface JobsDetailtLayoutProps {
 
 const JobsDetailtLayout: React.FC<JobsDetailtLayoutProps> = ({ children }) => {
   return (
-    <main>
+    <main className="relative">
       <div className="bg-[#EFEFEF]">
         <SearchDetail />
         {children}

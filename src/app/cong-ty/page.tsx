@@ -54,7 +54,7 @@ export default function CompanyPage() {
           </div>
         </div>
       </div>
-      <div className="">
+      <div className="max-1280:px-2">
         <div className="mx-auto container">
           <div className="lg:text-4xl md:text-2xl text-xl mb-8 font-bold text-center">
             Danh sách công ty nổi bật

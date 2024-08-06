@@ -77,7 +77,7 @@ export default function CompanyDetail() {
             </div>
           </div>
         </div>
-        <div className="py-6 sm:grid grid-cols-12 gap-4">
+        <div className="py-6 sm:grid grid-cols-12 gap-4 max-1280:px-2">
           <div className="xl:col-span-8 md:col-span-7">
             <div className="bg-white rounded overflow-hidden">
               <div className="bg-gradient-to-r from-[#603813] to-[#F6921E] text-white font-medium text-lg py-2 pl-10">
