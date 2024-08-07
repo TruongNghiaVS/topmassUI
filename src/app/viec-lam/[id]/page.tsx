@@ -126,3 +126,5 @@ export default function DetailJob({ params }: { params: { id: any } }) {
     </div>
   );
 }
+
+export const revalidate = 100;

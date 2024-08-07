@@ -12,7 +12,7 @@ export const HotCompany = () => {
   const lst = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
     <>
-      <div className=" mt-[60px] max-1280:px-2">
+      <div className=" mt-[60px] max-1280:px-2 bg-white">
         <div className="container mx-auto">
           <div className="text-2xl font-bold text-center text-[#D14B00] py-5">
             Đối tác tiềm năng của Topmass

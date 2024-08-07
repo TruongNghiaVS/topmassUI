@@ -12,3 +12,9 @@ export interface ILogin {
   email: string;
   password: string;
 }
+
+export interface IEditUser {
+  username: string;
+  phone_number?: string;
+  email?: string;
+}

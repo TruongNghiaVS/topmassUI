@@ -1,4 +1,4 @@
-import { InfomationJobSame } from "@/component/job-same-infomation";
+import { InfomationJobSame } from "@/component/infomation-job/infomation-job-same";
 import { jobSame } from "@/mockup-data/data";
 
 export const JobSame = () => {

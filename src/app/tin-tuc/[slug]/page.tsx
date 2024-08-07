@@ -19,3 +19,5 @@ export default function NewCategory() {
     </div>
   );
 }
+
+export const revalidate = 100;

@@ -4,9 +4,9 @@ import { JobSame } from "@/component/jobs/detail/job-same";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import CustomRadio from "@/component/hook-form/customRadio";
-import { InfomationJobSave } from "@/component/infomation-job-save";
 import { companys, jobSave } from "@/mockup-data/data";
 import { InfomationCompany } from "../cong-ty/infomation-company";
+import { InfomationJobSave } from "@/component/infomation-job/infomation-job-save";
 
 export default function JobSave() {
   const [selectedRadio, setSelectedRadio] = useState("");

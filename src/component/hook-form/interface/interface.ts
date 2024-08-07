@@ -20,7 +20,7 @@ export interface ITmSelect extends InputHTMLAttributes<HTMLSelectElement> {
   classNameError?: string;
   register: UseFormRegister<any>;
   icon?: any;
-  children: any;
+  data: any;
   error?: FieldError;
   [key: string]: any; // Để hỗ trợ các props khác như className, id, v.v.
 }

@@ -17,3 +17,5 @@ const JobsPage = () => {
 };
 
 export default JobsPage;
+
+export const revalidate = 100;

@@ -19,6 +19,7 @@
 
 body {
   color: rgb(var(--default-color-body-rgb));
+  font-size: 14px;
   background: #ffffff;
 }
 

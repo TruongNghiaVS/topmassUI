@@ -1,4 +1,4 @@
-import { InfomationJobDetail } from "@/component/infomation-job-detail";
+import { InfomationJobDetail } from "@/component/infomation-job/infomation-job-detail";
 import { IInfomationJobProps } from "@/interface/infomation-job";
 
 export const JobLike = ({ item }: IInfomationJobProps) => {

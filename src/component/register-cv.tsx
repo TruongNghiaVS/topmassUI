@@ -1,6 +1,6 @@
 import { CloudArrowUpFillBootstrapIcon } from "@/theme/icons/cloudArrowUpFillBootstrapIcon";
 import { ClipboardDocumentListIcon } from "@heroicons/react/16/solid";
-import { InfomationJobCV } from "./job-cv-infomation";
+import { InfomationJobCV } from "./infomation-job/infomation-job-cv";
 import { jobCV } from "@/mockup-data/data";
 import { InfomationUser } from "./infomation-user-right";
 
@@ -52,7 +52,8 @@ export const RegisterCV = () => {
                 Việc làm phù hợp với bạn
               </div>
               <div className="text-lg font-normal">
-                Để nhận được nhiều gợi ý phù hợp hơn, hãy bật "tìm việc" bạn nhé
+                Để nhận được nhiều gợi ý phù hợp hơn, hãy bật &quot;tìm
+                việc&quot; bạn nhé
               </div>
             </div>
             <div className="mt-4">

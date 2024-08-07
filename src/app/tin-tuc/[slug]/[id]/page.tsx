@@ -1,10 +1,10 @@
 import { CreateCv } from "@/component/create-cv";
-import { InfomationJobLike } from "@/component/infomation-job-like";
-import { InfomationJobSame } from "@/component/job-same-infomation";
+import { InfomationJobLike } from "@/component/infomation-job/infomation-job-like";
 import { jobSame, jobSlider } from "@/mockup-data/data";
 import { ChevronDoubleRightIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { NewInfomation } from "../../new-infomation";
+import { InfomationJobSame } from "@/component/infomation-job/infomation-job-same";
 
 const NewDetail = () => {
   const data = [1, 2, 3, 4];
@@ -92,3 +92,5 @@ const NewDetail = () => {
 };
 
 export default NewDetail;
+
+export const revalidate = 100;

@@ -45,7 +45,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.variable} font-roboto`}>
         {!pathValidated.includes(path) && <Header />}
-        <main className="min-h-screen m-auto relative">{children}</main>
+        <main className="min-h-screen m-auto relative bg-[#EAE9E8]">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

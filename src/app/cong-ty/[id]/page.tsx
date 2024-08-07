@@ -1,7 +1,7 @@
 "use client";
 import TmInput from "@/component/hook-form/input";
 import TmSelect from "@/component/hook-form/select";
-import { InfomationJobCompany } from "@/component/job-company-infomation";
+import { InfomationJobCompany } from "@/component/infomation-job/infomation-job-company";
 import { IFormCompany } from "@/interface/form-slider";
 import { jobCV, loations, optionsLocation } from "@/mockup-data/data";
 import { SendCheckFillBootstrapIcon } from "@/theme/icons/sendCheckFillBootstrapIcon";
@@ -113,7 +113,7 @@ export default function CompanyDetail() {
                       name="location"
                       className="border"
                       placeholder="Địa điểm làm việc"
-                      children={loations.map((value) => {
+                      data={loations.map((value) => {
                         return <option key={value}>{value}</option>;
                       })}
                     />

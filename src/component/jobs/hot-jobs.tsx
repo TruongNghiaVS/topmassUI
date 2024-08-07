@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
-import { InfomationJob } from "../job-infomation";
+import { InfomationJob } from "../infomation-job/infomation-job";
 import { jobSlider } from "@/mockup-data/data";
 
 export const HotJobs = () => {

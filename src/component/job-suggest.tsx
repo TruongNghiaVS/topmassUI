@@ -1,5 +1,5 @@
 import { jobSlider } from "@/mockup-data/data";
-import { InfomationJobLike } from "./infomation-job-like";
+import { InfomationJobLike } from "./infomation-job/infomation-job-like";
 
 export const JobSuggest = () => {
   const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];

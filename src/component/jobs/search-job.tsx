@@ -41,7 +41,7 @@ export const SearchJobs = () => {
                 name="searchType"
                 onChange={(evt) => setSelectedValue(+evt.target.value)}
                 className="min-w-[250px]"
-                children={childrenSelect.map((item) => {
+                data={childrenSelect.map((item) => {
                   return (
                     <option key={item.label} value={item.value}>
                       {item.label}

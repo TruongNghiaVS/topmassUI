@@ -44,3 +44,5 @@ const SearchJob = () => {
 };
 
 export default SearchJob;
+
+export const revalidate = 100;

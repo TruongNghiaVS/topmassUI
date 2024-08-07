@@ -4,7 +4,7 @@ import { ITmSelect } from "./interface/interface";
 const TmSelect: React.FC<ITmSelect> = ({
   register,
   name,
-  children,
+  data,
   label,
   error,
   className,
@@ -24,7 +24,7 @@ const TmSelect: React.FC<ITmSelect> = ({
             icon ? "pl-10" : "pl-4"
           }`}
         >
-          {children}
+          {data}
         </select>
       </div>
 

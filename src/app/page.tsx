@@ -10,7 +10,7 @@ import { Ultil } from "@/component/ultil";
 
 export default function Home() {
   return (
-    <>
+    <div className="bg-white">
       <Slider />
       <HotJob />
       <HotCompany />
@@ -20,6 +20,8 @@ export default function Home() {
       <Career />
       <Ultil />
       <Description />
-    </>
+    </div>
   );
 }
+
+export const revalidate = 100;

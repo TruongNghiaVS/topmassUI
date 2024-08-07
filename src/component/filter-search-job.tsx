@@ -15,7 +15,7 @@ export const FilterSearchForm = () => {
             name="type"
             className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
             placeholder="Ngành nghề"
-            children={optionsType.map((value) => {
+            data={optionsType.map((value) => {
               return <option key={value}>{value}</option>;
             })}
           />
@@ -24,7 +24,7 @@ export const FilterSearchForm = () => {
             name="filed"
             className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
             placeholder="Tất cả lĩnh vực"
-            children={fields.map((value) => {
+            data={fields.map((value) => {
               return <option key={value}>{value}</option>;
             })}
           />
@@ -33,7 +33,7 @@ export const FilterSearchForm = () => {
             name="rank"
             className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
             placeholder="Tất cả cấp bậc"
-            children={ranks.map((value) => {
+            data={ranks.map((value) => {
               return <option key={value}>{value}</option>;
             })}
           />

@@ -166,7 +166,7 @@ export const SliderForm = () => {
               name="location"
               className="border-0"
               placeholder="Địa điểm làm việc"
-              children={optionsLocation.map((value) => {
+              data={optionsLocation.map((value) => {
                 return <option key={value}>{value}</option>;
               })}
             />
@@ -180,7 +180,7 @@ export const SliderForm = () => {
               className="border-0"
               name="type"
               placeholder="Ngành nghề"
-              children={optionsType.map((value) => {
+              data={optionsType.map((value) => {
                 return <option key={value}>{value}</option>;
               })}
             />

@@ -48,6 +48,7 @@ export interface IInfomationJobSave {
   groupType: string[];
   date: string;
   time: string;
+  day: string;
 }
 
 export interface IInfomationJobSaveProps {

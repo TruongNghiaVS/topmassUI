@@ -103,6 +103,7 @@ export const jobSave = {
   price: "10 - 15 triệu",
   city: "Hồ Chí Minh",
   status: "Cập nhật 3 ngày trước",
+  day: "24",
   groupType: [
     "IT",
     "Maketing",

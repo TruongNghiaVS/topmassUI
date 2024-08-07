@@ -103,7 +103,7 @@ export const FormRegister = () => {
                     name="first_phone"
                     icon={<FlagStarVN />}
                     className="py-2.5 pr-2 mr-2"
-                    children={areaCode.map((item) => {
+                    data={areaCode.map((item) => {
                       return (
                         <option key={item.label} value={item.value}>
                           {item.label}

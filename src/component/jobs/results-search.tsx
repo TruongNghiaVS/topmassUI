@@ -1,5 +1,5 @@
 import { IInfomationJobSameProps } from "@/interface/infomation-job";
-import { InfomationJobSame } from "../job-same-infomation";
+import { InfomationJobSame } from "../infomation-job/infomation-job-same";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 
 export const ResutlSearchJob = ({ item }: IInfomationJobSameProps) => {

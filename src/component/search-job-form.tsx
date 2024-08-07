@@ -45,7 +45,7 @@ export const SearchJobForm = () => {
               name="location"
               className="border-0 !rounded-3xl bg-[#DDDDDD] mr-2"
               placeholder="Địa điểm làm việc"
-              children={optionsLocation.map((value) => {
+              data={optionsLocation.map((value) => {
                 return <option key={value}>{value}</option>;
               })}
             />
