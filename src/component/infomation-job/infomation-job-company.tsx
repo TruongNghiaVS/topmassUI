@@ -1,9 +1,20 @@
+import { PopupApplyJob } from "@/app/viec-lam/[id]/popup-apply-job";
 import { IInfomationJobCVProps } from "@/interface/infomation-job";
 import { TrashIcon } from "@heroicons/react/16/solid";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useState } from "react";
 
 export const InfomationJobCompany = ({ item }: IInfomationJobCVProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div className="border-[1px] border-[#d9dbe9] bg-white p-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
       <div className="sm:flex items-center my-2">
@@ -33,7 +44,10 @@ export const InfomationJobCompany = ({ item }: IInfomationJobCVProps) => {
               </div>
             </div>
             <div className="flex justify-center mt-4 sm:mt-0">
-              <button className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2">
+              <button
+                className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2"
+                onClick={openModal}
+              >
                 Ứng tuyển
               </button>
               <button>
@@ -46,6 +60,7 @@ export const InfomationJobCompany = ({ item }: IInfomationJobCVProps) => {
           </div>
         </div>
       </div>
+      <PopupApplyJob isModalOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };

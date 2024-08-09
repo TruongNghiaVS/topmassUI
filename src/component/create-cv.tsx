@@ -1,4 +1,5 @@
 import { ArrowRightIcon } from "@heroicons/react/16/solid";
+import Link from "next/link";
 
 export const CreateCv = () => {
   return (
@@ -16,9 +17,12 @@ export const CreateCv = () => {
               Tạo CV đơn giản với công cụ có sẳn, những cv mẫu đã được <br />
               NTD đánh giá cao trước khi cho ra mắt trên hệ thống.
             </div>
-            <div className="ml-4 mt-4 inline-flex px-4 py-2 text-white bg-gradient-to-r from-[#f7931e] to-[#ce4500] rounded-3xl font-bold text-xl">
+            <Link
+              href="/quan-ly-cv"
+              className="ml-4 mt-4 inline-flex px-4 py-2 text-white bg-gradient-to-r from-[#f7931e] to-[#ce4500] rounded-3xl font-bold text-xl"
+            >
               Tạo CV ngay <ArrowRightIcon className="w-4 ml-2" />
-            </div>
+            </Link>
           </div>
         </div>
       </div>

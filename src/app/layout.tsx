@@ -53,7 +53,7 @@ export default function RootLayout({
           )}
           <main className="min-h-screen m-auto relative bg-[#EAE9E8]">
             {children}
-            <ToastContainer autoClose={3000} />
+            <ToastContainer autoClose={2000} />
           </main>
           {!pathValidated.includes(path) && <Footer />}
         </GlobalProvider>

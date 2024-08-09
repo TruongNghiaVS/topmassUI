@@ -22,3 +22,17 @@ export interface IEditUser {
 export interface IResetpassword {
   email: string;
 }
+
+export interface IChangePassword {
+  old_password: string;
+  password: string;
+}
+
+export interface ISettingSuggestJob {
+  position: string;
+  job_type: string;
+  skill?: string;
+  experience: string;
+  salary: string;
+  location: string;
+}

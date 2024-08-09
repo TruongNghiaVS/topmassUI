@@ -33,6 +33,7 @@ export interface ITmRadio {
 export interface ITmRadioProps {
   register: UseFormRegister<any>;
   name: string;
+  classNameCustom?: string;
   options: ITmRadio[];
   error?: FieldError;
   [key: string]: any; // Để hỗ trợ các props khác như className, id, v.v.

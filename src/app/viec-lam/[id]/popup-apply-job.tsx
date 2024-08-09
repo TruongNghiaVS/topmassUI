@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import * as yup from "yup";
 
 interface IApplyModal {
@@ -73,6 +74,8 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
   });
 
   const onSubmit = handleSubmit((data) => {
+    toast.success("Nộp CV thành công");
+    onClose();
     console.log(data);
   });
 

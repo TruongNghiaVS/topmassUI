@@ -1,9 +1,19 @@
+import { PopupApplyJob } from "@/app/viec-lam/[id]/popup-apply-job";
 import { IInfomationJobSaveProps } from "@/interface/infomation-job";
 import { TrashIcon } from "@heroicons/react/16/solid";
-import { HeartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useState } from "react";
 
 export const InfomationJobSave = ({ item }: IInfomationJobSaveProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const groupType = item.groupType;
   let listShow = groupType.length > 3 ? groupType.slice(0, 3) : groupType;
   let count = groupType.length > 3 ? groupType.length - 3 : 0;
@@ -55,10 +65,12 @@ export const InfomationJobSave = ({ item }: IInfomationJobSaveProps) => {
               </div>
             </div>
             <div className="flex justify-center mt-4 sm:mt-0">
-              <button className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2">
+              <button
+                className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2"
+                onClick={openModal}
+              >
                 Ứng tuyển
               </button>
-
               <button className=" px-2 py-1 bg-[#EFEFEF] flex items-center">
                 <TrashIcon className="w-4 mr-2" /> Bỏ lưu
               </button>
@@ -66,6 +78,7 @@ export const InfomationJobSave = ({ item }: IInfomationJobSaveProps) => {
           </div>
         </div>
       </div>
+      <PopupApplyJob isModalOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };

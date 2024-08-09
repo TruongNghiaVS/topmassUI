@@ -73,7 +73,7 @@ export const Menu = () => {
       subMenu: [
         {
           title: "Tìm việc làm",
-          slug: "/viec-lam",
+          slug: "/tim-kiem-viec-lam",
           icon: (
             <MagnifyingGlassIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
@@ -177,7 +177,7 @@ export const Menu = () => {
   );
 };
 
-type prop = {
+export type ISubmenuProps = {
   subMenu: {
     title: string;
     slug: string;
@@ -188,7 +188,7 @@ type prop = {
   pathCheck: string;
 };
 
-export const SubMenu = ({ subMenu, pathCheck }: prop) => {
+export const SubMenu = ({ subMenu, pathCheck }: ISubmenuProps) => {
   return (
     <>
       <ul className="p-2 rounded-lg group/subMenu overflow-hidden border-[#d9dbe9] h-0 transition-all ease-in-out duration-300 text-sm leading-[19px] absolute top-[calc(100%+20px)] left-0 bg-white min-w-[250px] py-[5px] z-[-1] group-hover/title:z-[11] group-hover/title:h-auto shadow-md opacity-0 group-hover/title:opacity-100 group-hover/title:top-full">
