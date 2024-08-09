@@ -18,3 +18,7 @@ export interface IEditUser {
   phone_number?: string;
   email?: string;
 }
+
+export interface IResetpassword {
+  email: string;
+}

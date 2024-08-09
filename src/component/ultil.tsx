@@ -1,12 +1,11 @@
 import { ArrowLongRightIcon } from "@heroicons/react/16/solid";
+import { TitleCustom } from "./custom-title";
 
 export const Ultil = () => {
   return (
     <div className="bg-[#DBDBDB] pt-8 pb-7 mt-6 max-1280:px-2">
       <div className="container mx-auto">
-        <div className="text-center text-default font-bold text-4xl mb-8">
-          Công cụ tiện ích
-        </div>
+        <TitleCustom title="Công cụ tiện ích" className="mb-4" />
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-4 items-center lg:px-14 px-2">
           <div className=" sm:row-auto col-start-1 row-start-2 row-end-2 ">
             <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">

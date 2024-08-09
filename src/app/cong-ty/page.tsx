@@ -7,6 +7,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { companys } from "@/mockup-data/data";
 import { InfomationCompany } from "./infomation-company";
 import { Description } from "@/component/description";
+import { TitleCustom } from "@/component/custom-title";
 
 export default function CompanyPage() {
   const list = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -56,9 +57,7 @@ export default function CompanyPage() {
       </div>
       <div className="max-1280:px-2">
         <div className="mx-auto container">
-          <div className="lg:text-4xl md:text-2xl text-xl mb-8 font-bold text-center">
-            Danh sách công ty nổi bật
-          </div>
+          <TitleCustom title="Danh Sách công ty" className="mb-8" />
           <div className="mt-4 grid xl:grid-cols-3 md:grid-cols-2 gap-4">
             {list.map((value) => {
               return (

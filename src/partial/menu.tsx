@@ -160,7 +160,7 @@ export const Menu = () => {
             >
               <Link
                 href={item.isShow ? item.link : "#"}
-                className={`"text-[#3B4358] no-underline font-medium ${
+                className={`"text-[#3B4358] text-base no-underline font-medium ${
                   path.includes(item.link) ? "text-default" : ""
                 } "`}
               >

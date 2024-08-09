@@ -5,8 +5,9 @@ import { Footer } from "@/partial/footer";
 // import ThemeProvider from "@/theme";
 import localFont from "next/font/local";
 import { usePathname } from "next/navigation";
-import { Suspense } from "react";
-import LoadingScreen from "@/component/loading-screen";
+import { GlobalProvider } from "./global-context";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const roboto = localFont({
   src: [
@@ -40,15 +41,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const path = usePathname();
-  const pathValidated = ["/dang-ky"];
+  const pathValidated = ["/dang-ky", "/dang-nhap", "/quen-mat-khau"];
   return (
     <html lang="en">
       <body className={`${roboto.variable} font-roboto`}>
-        {!pathValidated.includes(path) && <Header />}
-        <main className="min-h-screen m-auto relative bg-[#EAE9E8]">
-          {children}
-        </main>
-        <Footer />
+        <GlobalProvider>
+          {!pathValidated.includes(path) && (
+            <div className="relative z-[10]">
+              <Header />
+            </div>
+          )}
+          <main className="min-h-screen m-auto relative bg-[#EAE9E8]">
+            {children}
+            <ToastContainer autoClose={3000} />
+          </main>
+          {!pathValidated.includes(path) && <Footer />}
+        </GlobalProvider>
       </body>
     </html>
   );

@@ -1,11 +1,12 @@
 import { news } from "@/mockup-data/data";
 import { New } from "./new";
+import { TitleCustom } from "@/component/custom-title";
 
 export default function NewCategory() {
   return (
     <div className="bg-[#f0f0f0] pb-10 max-1280:px-2">
       <div className="mx-auto container">
-        <div className="py-8 font-bold text-3xl">Bi quyet tim viec</div>
+        <TitleCustom title="Bí quyết tìm việc" className="py-8 text-3xl" />
         <div className="grid grid-cols-4 gap-6">
           {news.map((item, index) => {
             return (

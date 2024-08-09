@@ -5,6 +5,7 @@ import { ChevronDoubleRightIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { NewInfomation } from "../../new-infomation";
 import { InfomationJobSame } from "@/component/infomation-job/infomation-job-same";
+import { TitleCustom } from "@/component/custom-title";
 
 const NewDetail = () => {
   const data = [1, 2, 3, 4];
@@ -34,9 +35,7 @@ const NewDetail = () => {
             <div>content</div>
             <div className="mt-6 m-3 p-3 bg-[#FFF9F3] rounded-xl">
               <div className="text-center">
-                <div className="inline-block px-4 py-2 bg-gradient-to-r text-white from-[#D14B00] to-[#F89E1B] rounded">
-                  Việc làm liên quan
-                </div>
+                <TitleCustom title="Việc làm liên quan" />
                 <div className="mt-2">
                   {data.map((item) => {
                     return (
@@ -62,9 +61,11 @@ const NewDetail = () => {
             </div>
           </div>
           <div className="xl:col-span-4 md:col-span-5 ">
-            <div className="font-normal text-xl	mt-8">
-              Top Công việc mới nhất
-            </div>
+            <TitleCustom
+              title="Top Công việc mới nhất"
+              className="font-normal text-xl	mt-8"
+            />
+
             <div>
               {data.map((item) => {
                 return (
@@ -79,7 +80,7 @@ const NewDetail = () => {
       </div>
       <div className="mt-4 py-4 bg-[#E0E0E0] max-1280:px-2">
         <div className="container mx-auto">
-          <div className="font-medium text-2xl">Cùng chuyên mục</div>
+          <TitleCustom title="Cùng chuyên mục" />
           <div className="grid xl:grid-cols-4 gap-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-4">
             {data.map((value, idx) => {
               return <NewInfomation key={value.toString() + idx.toString()} />;

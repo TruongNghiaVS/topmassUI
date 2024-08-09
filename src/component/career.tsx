@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TitleCustom } from "./custom-title";
 
 export const Career = () => {
   const career = [
@@ -35,9 +36,7 @@ export const Career = () => {
   return (
     <div className="mt-12 px-2 max-1280:px-2">
       <div className="container mx-auto">
-        <div className="mb-9 text-center text-2xl font-bold text-default ">
-          Cẩm Nang Nghề Nghiệp
-        </div>
+        <TitleCustom title="Cẩm nang nghề nghiệp" className="mb-9" />
         <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 px-2 lg:px-0">
           {career.map((value: any, index: number) => {
             return (

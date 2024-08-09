@@ -39,6 +39,7 @@ const config: Config = {
       },
       boxShadow: {
         hoverShadow: "0 10px 30px rgba(241, 182, 182, 0.2)",
+        popup: "0 4px 8px rgba(0, 0, 0, 0.2)",
       },
     },
   },

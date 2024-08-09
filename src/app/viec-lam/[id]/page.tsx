@@ -1,3 +1,4 @@
+"use client";
 import { ImfomationBasic } from "@/component/jobs/detail/imfomation-basic";
 import { ImfomationCompany } from "@/component/jobs/detail/infomation-company";
 import { JobSame } from "@/component/jobs/detail/job-same";
@@ -14,9 +15,20 @@ import {
   ClockIcon,
 } from "@heroicons/react/16/solid";
 import { HeartIcon } from "@heroicons/react/24/outline";
+import { PopupApplyJob } from "./popup-apply-job";
+import { useState } from "react";
 
 export default function DetailJob({ params }: { params: { id: any } }) {
   const { id } = params;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="relative z-[2] py-6 max-1280:px-2">
@@ -63,7 +75,10 @@ export default function DetailJob({ params }: { params: { id: any } }) {
               </div>
               <div className="flex items-center justify-between px-4 ">
                 <div className="w-[67%] mr-8">
-                  <button className="flex justify-center items-center w-full py-2 bg-[#F37A20] rounded">
+                  <button
+                    className="flex justify-center items-center w-full py-2 bg-[#F37A20] rounded"
+                    onClick={openModal}
+                  >
                     <SendFillBootstrapIcon className="w-6 mr-2 text-white" />
                     <div className="text-xs font-bold text-white">
                       Ứng tuyển ngay
@@ -91,7 +106,10 @@ export default function DetailJob({ params }: { params: { id: any } }) {
               <div className="mt-6">Content</div>
               <div className="flex items-center mt-6 ">
                 <div className="mr-2">
-                  <button className="flex justify-center items-center w-full py-2 bg-[#F37A20] rounded px-4 py-2">
+                  <button
+                    className="flex justify-center items-center w-full py-2 bg-[#F37A20] rounded px-4 py-2"
+                    onClick={openModal}
+                  >
                     <SendFillBootstrapIcon className="w-4 mr-2 text-white" />
                     <div className="text-xs font-bold text-white">
                       Ứng tuyển ngay
@@ -123,8 +141,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
           </div>
         </div>
       </div>
+      <PopupApplyJob isModalOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 }
-
-export const revalidate = 100;

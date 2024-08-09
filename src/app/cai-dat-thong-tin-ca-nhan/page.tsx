@@ -1,9 +1,8 @@
 "use client";
 import TmInput from "@/component/hook-form/input";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { IEditUser, ILogin } from "../interface/interface";
 import { useMemo } from "react";
 import { InfomationUser } from "@/component/infomation-user-right";
 
@@ -21,7 +20,7 @@ export default function InfomationEditUser() {
     () => ({
       username: "",
       phone_number: null,
-      email: "thai.nn@vietstargroup.com",
+      email: "thai.nn@vietstargroup.vn",
     }),
     []
   );
@@ -79,7 +78,7 @@ export default function InfomationEditUser() {
                     name="email"
                     disabled
                     type="email"
-                    value={"thai.nn@vietstargroup.com"}
+                    value={"thai.nn@vietstargroup.vn"}
                     error={errors.email}
                   />
                 </div>

@@ -5,24 +5,27 @@ import Link from "next/link";
 import { BellIcon, UserIcon, ChevronDownIcon } from "@heroicons/react/16/solid";
 
 import { useEffect, useRef, useState } from "react";
-import Modal from "@/component/Modal";
 import { FacebookBootstrapIcon } from "@/theme/icons/facebookBootstrapIcon";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ILogin } from "@/app/interface/interface";
 import * as yup from "yup";
 import TmInput from "@/component/hook-form/input";
+import Modal from "@/component/modal";
+import { useGlobalContext } from "@/app/global-context";
+import { toast } from "react-toastify";
 
 export const Header = () => {
   const headerRef = useRef<HTMLDivElement | null>(null);
   const [isFixed, setIsFixed] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { globalParam, setGlobalParam } = useGlobalContext();
 
   const schema = yup.object().shape({
     email: yup
       .string()
-      .email("Sai format email ")
-      .required("Bắt buộc nhập email"),
+      .required("Bắt buộc nhập email")
+      .email("Sai format email "),
     password: yup.string().required("Bắt buộc nhập password"),
   });
 
@@ -35,6 +38,9 @@ export const Header = () => {
   });
 
   const onSubmit: SubmitHandler<ILogin> = (data) => {
+    setGlobalParam(true);
+    setIsModalOpen(false);
+    toast.success("Đăng nhập thành công");
     console.log(data);
   };
 
@@ -72,7 +78,7 @@ export const Header = () => {
         <div
           className={`${
             isFixed ? "fixed" : ""
-          }  flex justify-between items-center bg-white left-0 top-0 right-0 pt-3 px-[22px] z-[3]`}
+          }  flex justify-between items-center bg-white left-0 top-0 right-0 pt-3 px-[22px] z-[10]`}
         >
           <div className="logo-header">
             <Link href="/">
@@ -87,10 +93,12 @@ export const Header = () => {
             <Menu />
           </div>
           <div className="flex">
-            <div className="flex items-center mr-[50px] ">
+            <div className="flex items-center mr-[50px]">
               <button
                 onClick={openModal}
-                className="text-xs mr-[30px] text-default"
+                className={`text-xs mr-[30px] text-default ${
+                  globalParam && "hidden"
+                }`}
               >
                 Người tìm việc <br />
                 <div className="text-sm leading-[14px] pt-2 inline block font-medium">
@@ -109,7 +117,8 @@ export const Header = () => {
                 </div>
               </Link>
             </div>
-            <div className="hidden flex items-center">
+
+            <div className={`hidden  items-center ${globalParam && "!flex"}`}>
               <div className="relative">
                 <BellIcon className="text-[#F37A20] mr-3 w-6" />
                 <div className="absolute content-[''] text-xs text-center w-4 h-4 top-[-4px] right-2 rounded-full bg-[#C40202] text-white">
@@ -131,7 +140,9 @@ export const Header = () => {
       </section>
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <div className="">
-          <div className="text-xl font-bold">Đăng nhập để tiếp tục</div>
+          <div className="text-xl font-bold text-default">
+            Đăng nhập để tiếp tục
+          </div>
           <div className="sm:flex grid gap-y-2 justify-center sm:justify-start mt-5 sm:mx-10 flex-row">
             <button className="flex px-4 py-2 bg-[#F1F2F4] sm:mr-20 rounded">
               <img src="/imgs/google.png" alt="" className="w-6 mr-2" /> với tài
@@ -142,7 +153,7 @@ export const Header = () => {
               tài khoản Facebook
             </button>
           </div>
-          <div className="text-center text-base font-bold mt-4">
+          <div className="text-center text-base font-bold mt-4 text-default">
             Hoặc đăng nhập bằng Email
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -165,19 +176,19 @@ export const Header = () => {
               />
             </div>
             <div className="mt-2 text-right">
-              <Link href="#" className="text-[#317AFF]">
+              <Link href="/quen-mat-khau" className="text-[#F37A20]">
                 Quên mật khẩu?
               </Link>
             </div>
             <div className="flex border-t mt-4 pt-4 justify-between items-center">
               <div className="mr-2">
                 Chưa có tài khoản{" "}
-                <Link href="/dang-ky" className="text-[#317AFF]">
+                <Link href="/dang-ky" className="text-[#F37A20]">
                   Đăng ký
                 </Link>
               </div>
               <div>
-                <button className="flex">
+                <div className="flex">
                   <button
                     className="px-4 py-2 bg-[#F1F2F4] rounded mr-2"
                     onClick={closeModal}
@@ -190,7 +201,7 @@ export const Header = () => {
                   >
                     Đăng nhập
                   </button>
-                </button>
+                </div>
               </div>
             </div>
           </form>

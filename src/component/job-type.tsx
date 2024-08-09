@@ -1,5 +1,6 @@
 import Link from "next/link";
 import numeral from "numeral";
+import { TitleCustom } from "./custom-title";
 
 export const JobType = () => {
   const company = [
@@ -57,9 +58,7 @@ export const JobType = () => {
   return (
     <div className=" max-1280:px-2">
       <div className="container mx-auto mt-4">
-        <div className="text-2xl text-[#D14B00] font-bold">
-          Ngành nghề nổi bật
-        </div>
+        <TitleCustom title="Ngành nghề nổi bật" className="mb-4" />
         <div>
           Xem danh sách việc làm theo ngành nghề{" "}
           <span className="text-[#F2821D]">tại đây</span>.

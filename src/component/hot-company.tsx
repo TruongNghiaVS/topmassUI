@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
+import { TitleCustom } from "./custom-title";
 
 export const HotCompany = () => {
   const lst = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -14,9 +15,7 @@ export const HotCompany = () => {
     <>
       <div className=" mt-[60px] max-1280:px-2 bg-white">
         <div className="container mx-auto">
-          <div className="text-2xl font-bold text-center text-[#D14B00] py-5">
-            Đối tác tiềm năng của Topmass
-          </div>
+          <TitleCustom title="Đối tác tiềm năng của Topmass" className="" />
           <div>
             <Swiper
               cssMode={true}
@@ -52,8 +51,8 @@ export const HotCompany = () => {
             >
               {lst.map((value) => {
                 return (
-                  <SwiperSlide key={value.toString() + "test"}>
-                    <div className="">
+                  <SwiperSlide key={value.toString() + "test"} className="p-2">
+                    <div className="hover:outline outline-[#F37A20] p-4 rounded-lg">
                       <div className="flex justify-center">
                         <Link href="/cong-ty">
                           <img
