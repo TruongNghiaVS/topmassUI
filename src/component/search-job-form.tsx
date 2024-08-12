@@ -9,15 +9,13 @@ import { optionsLocation } from "@/mockup-data/data";
 import { useSearchParams } from "next/navigation";
 
 export const SearchJobForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormSearchJob>();
   const onSubmit: SubmitHandler<IFormSearchJob> = (data) => console.log(data);
 
   const searchParams = useSearchParams();
   const params = Object.fromEntries(searchParams.entries());
+  const { handleSubmit, control } = useForm<IFormSearchJob>({
+    defaultValues: params,
+  });
 
   return (
     <div className="xl:px-48 lg:px-40 px-2">
@@ -28,10 +26,8 @@ export const SearchJobForm = () => {
         >
           <div className="flex-1 ">
             <TmInput
-              register={register}
+              control={control}
               name="work"
-              error={errors.work}
-              value={params.work}
               className="border-0"
               placeholder="Tìm kiếm việc làm"
             />
@@ -39,15 +35,11 @@ export const SearchJobForm = () => {
           <div className="">
             <TmSelect
               icon={<MapPinIcon className="w-6 mr-2" />}
-              register={register}
-              value={params.location}
-              error={errors.location}
               name="location"
               className="border-0 !rounded-3xl bg-[#DDDDDD] mr-2"
               placeholder="Địa điểm làm việc"
-              data={optionsLocation.map((value) => {
-                return <option key={value}>{value}</option>;
-              })}
+              control={control}
+              options={optionsLocation}
             />
           </div>
 

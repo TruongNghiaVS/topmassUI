@@ -5,37 +5,31 @@ import { fields, optionsType, ranks } from "@/mockup-data/data";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/16/solid";
 
 export const FilterSearchForm = () => {
-  const { register } = useForm();
+  const { control } = useForm();
   return (
     <div className="xl:px-48 lg:px-40 px-2">
       <div className="w-full mt-8 relative ">
         <div className="p-1 border rounded-lg shadow-md flex items-center bg-white sm:justify-between flex-wrap">
           <TmSelect
-            register={register}
             name="type"
+            control={control}
             className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
             placeholder="Ngành nghề"
-            data={optionsType.map((value) => {
-              return <option key={value}>{value}</option>;
-            })}
+            options={optionsType}
           />
           <TmSelect
-            register={register}
             name="filed"
             className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
             placeholder="Tất cả lĩnh vực"
-            data={fields.map((value) => {
-              return <option key={value}>{value}</option>;
-            })}
+            control={control}
+            options={fields}
           />
           <TmSelect
-            register={register}
             name="rank"
+            control={control}
             className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
             placeholder="Tất cả cấp bậc"
-            data={ranks.map((value) => {
-              return <option key={value}>{value}</option>;
-            })}
+            options={ranks}
           />
           <button className="px-3 py-2 border rounded border-[#DDDDDD] sm:mt-0 mt-2 mr-2">
             Tuyển gấp

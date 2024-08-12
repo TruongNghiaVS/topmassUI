@@ -4,15 +4,11 @@ import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 export interface IFormSearchDetail {
-  key: string;
+  key?: string;
 }
 
 export const SearchDetail = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormSearchDetail>();
+  const { handleSubmit, control } = useForm<IFormSearchDetail>();
   const onSubmit: SubmitHandler<IFormSearchDetail> = (data) =>
     console.log(data);
   return (
@@ -25,9 +21,8 @@ export const SearchDetail = () => {
           >
             <div className="flex-1">
               <TmInput
-                register={register}
+                control={control}
                 name="key"
-                error={errors.key}
                 className="border-0"
                 placeholder="Tìm kiếm việc làm, công ty, ngành nghề"
               />

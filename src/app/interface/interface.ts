@@ -29,10 +29,11 @@ export interface IChangePassword {
 }
 
 export interface ISettingSuggestJob {
+  gender?: string;
   position: string;
-  job_type: string;
-  skill?: string;
+  job_type: string[];
+  skill?: string[];
   experience: string;
   salary: string;
-  location: string;
+  location: string[];
 }

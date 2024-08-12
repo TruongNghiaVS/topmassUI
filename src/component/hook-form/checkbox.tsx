@@ -1,44 +1,35 @@
+// components/CustomCheckbox.tsx
 import React from "react";
-import { ITmInput } from "./interface/interface";
+import { useController } from "react-hook-form";
+import { ITmCheckBox } from "./interface/interface";
 
-const TmCheckBox: React.FC<ITmInput> = ({
-  register,
-  name,
-  label,
-  error,
-  className,
-  classNameLabel,
-  classNameError,
-  value,
-  icon,
-  ...rest
-}) => {
+type NewType = React.FC<ITmCheckBox>;
+
+const TmCheckbox: NewType = ({ name, control, label }) => {
+  const {
+    field: { value, onChange },
+    fieldState: { error },
+  } = useController({
+    name,
+    control,
+  });
+
   return (
-    <div>
-      <div className=" flex">
+    <div className="mb-4">
+      <label className="inline-flex items-center">
         <input
           type="checkbox"
-          {...register(name)}
-          {...rest}
-          className={` focus-visible:outline-none mr-2 ${
-            className != null && className
+          checked={value}
+          onChange={(e) => onChange(e.target.checked)}
+          className={`form-checkbox h-5 w-5 text-blue-600 ${
+            error ? "border-red-500" : "border-gray-300"
           }`}
-          value={value}
         />
-        {label !== null && label !== "" && (
-          <label className={classNameLabel != undefined ? classNameLabel : ""}>
-            {label}
-          </label>
-        )}
-      </div>
-
-      {error && (
-        <p style={{ color: "red" }} className={classNameError}>
-          {error.message}
-        </p>
-      )}
+        <span className="ml-2 text-gray-700">{label}</span>
+      </label>
+      {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
     </div>
   );
 };
 
-export default TmCheckBox;
+export default TmCheckbox;

@@ -150,35 +150,34 @@ export const companys = {
 export const areaCode = [
   {
     label: "+84",
-    value: 0,
+    value: "0",
   },
   {
     label: "+85",
-    value: 1,
+    value: "1",
   },
   {
     label: "+86",
-    value: 2,
+    value: "2",
   },
   {
     label: "+87",
-    value: 3,
+    value: "3",
   },
   {
     label: "+88",
-    value: 4,
+    value: "4",
   },
   {
     label: "+89",
-    value: 5,
+    value: "5",
   },
 ];
 
 export const optionsLocation = [
-  "Địa điểm làm việc",
-  "Bình Định",
-  "TP.HCM",
-  "Hà Nội",
+  { value: "binh-dinh", label: "Bình Định" },
+  { value: "hcm", label: "TP.HCM" },
+  { value: "ha-noi", label: "Hà Nội" },
 ];
 
 export const loations = [
@@ -187,9 +186,16 @@ export const loations = [
   "TP.HCM",
   "Hà Nội",
 ];
-export const optionsType = ["Ngành nghề", "IT", "Marketing"];
-export const fields = ["Tất cả lĩnh vực", "test"];
-export const ranks = ["Tất cả cấp bậc", "Cấp bậc 1", "Cấp bậc 2"];
+export const optionsType = [
+  { value: "it", label: "IT" },
+  { value: "marketing", label: "Marketing" },
+];
+export const fields = [{ value: "test", label: "test" }];
+
+export const ranks = [
+  { value: "1", label: "Cấp bậc 1" },
+  { value: "2", label: "Cấp bậc 2" },
+];
 export const news = [
   {
     img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",

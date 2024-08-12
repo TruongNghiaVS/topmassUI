@@ -43,12 +43,17 @@ const schema = yup.object().shape({
 });
 
 export const FormRegister = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IRegister>({
+  const { handleSubmit, control } = useForm<IRegister>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      last_name: "",
+      first_name: "",
+      first_phone: "0",
+      phone_number: "",
+      email: "",
+      password: "",
+      is_used: false,
+    },
   });
 
   const onSubmit: SubmitHandler<IRegister> = (data) => {
@@ -82,12 +87,12 @@ export const FormRegister = () => {
         <div className="sm:grid grid-cols-2 gap-x-8 mb-8">
           <div className="col-span-1">
             <div className="">Tên</div>
-            <TmInput register={register} name="last_name" />
+            <TmInput name="last_name" control={control} />
           </div>
           <div className="col-span-1">
             <div className="col-span-1">
               <div className="">Họ</div>
-              <TmInput register={register} name="first_name" />
+              <TmInput control={control} name="first_name" />
             </div>
           </div>
         </div>
@@ -97,24 +102,14 @@ export const FormRegister = () => {
           </div>
           <div className="flex">
             <TmSelect
-              register={register}
+              control={control}
               name="first_phone"
               icon={<FlagStarVN />}
               className="py-2.5 pr-2 mr-2"
-              data={areaCode.map((item) => {
-                return (
-                  <option key={item.label} value={item.value}>
-                    {item.label}
-                  </option>
-                );
-              })}
+              options={areaCode}
             />
             <div className="flex-grow">
-              <TmInput
-                register={register}
-                name="phone_number"
-                error={errors.phone_number}
-              />
+              <TmInput control={control} name="phone_number" />
             </div>
           </div>
         </div>
@@ -123,11 +118,10 @@ export const FormRegister = () => {
             Email <span className="text-[#dc2f2f]">*</span>
           </div>
           <TmInput
-            register={register}
+            control={control}
             placeholder="Sử dụng email có thật để xác thực"
             name="email"
             type="email"
-            error={errors.email}
           />
         </div>
         <div className="mb-8">
@@ -135,11 +129,10 @@ export const FormRegister = () => {
             Password <span className="text-[#dc2f2f]">*</span>
           </div>
           <TmInput
-            register={register}
+            control={control}
             name="password"
             placeholder="Từ 6 tới 50 ký tự,1 chữ hoa, 1 chữ số"
             type="password"
-            error={errors.password}
           />
         </div>
 

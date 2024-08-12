@@ -1,28 +1,28 @@
 import { InputHTMLAttributes } from "react";
-import { FieldError, UseFormRegister } from "react-hook-form";
+import { Control, FieldError, UseFormRegister } from "react-hook-form";
 
 export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
-  type?: string;
   name: string;
-  className?: string;
-  classNameError?: string;
-  register: UseFormRegister<any>;
+  control: Control<any>;
+  label?: string;
   icon?: any;
-  error?: FieldError;
-  [key: string]: any; // Để hỗ trợ các props khác như className, id, v.v.
+  placeholder?: string;
+  type?: string;
+}
+
+export interface ITmCheckBox extends InputHTMLAttributes<HTMLInputElement> {
+  name: string;
+  control: Control<any>;
+  label: string;
 }
 
 export interface ITmSelect extends InputHTMLAttributes<HTMLSelectElement> {
-  placeholder?: string;
-  type?: string;
   name: string;
-  className?: string;
-  classNameError?: string;
-  register: UseFormRegister<any>;
+  control: Control<any>;
+  label?: string;
   icon?: any;
-  data: any;
-  error?: FieldError;
-  [key: string]: any; // Để hỗ trợ các props khác như className, id, v.v.
+  options: Option[];
+  placeholder?: string;
 }
 
 export interface ITmRadio {
@@ -31,18 +31,28 @@ export interface ITmRadio {
 }
 
 export interface ITmRadioProps {
-  register: UseFormRegister<any>;
   name: string;
+  control: Control<any>;
+  options: Option[];
   classNameCustom?: string;
-  options: ITmRadio[];
-  error?: FieldError;
-  [key: string]: any; // Để hỗ trợ các props khác như className, id, v.v.
 }
 
 export interface ITmTextareaProps {
-  register: UseFormRegister<any>;
   name: string;
+  control: Control<any>;
   label: string;
-  error?: FieldError;
-  [key: string]: any; // Để hỗ trợ các props khác như className, id, v.v.
+  placeholder?: string;
+  rows?: number;
+}
+
+export type Option = {
+  label: string;
+  value: string;
+};
+
+export interface SearchSelectProps {
+  name: string;
+  control: Control<any>;
+  options: Option[];
+  placeholder?: string;
 }

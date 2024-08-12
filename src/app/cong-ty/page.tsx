@@ -8,14 +8,20 @@ import { companys } from "@/mockup-data/data";
 import { InfomationCompany } from "./infomation-company";
 import { Description } from "@/component/description";
 import { TitleCustom } from "@/component/custom-title";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function CompanyPage() {
   const list = [1, 2, 3, 4, 5, 6, 7, 8];
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormSearchDetail>();
+  const schema = yup.object().shape({
+    key: yup.string(),
+  });
+  const { handleSubmit, control } = useForm<IFormSearchDetail>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      key: "",
+    },
+  });
   const onSubmit: SubmitHandler<IFormSearchDetail> = (data) =>
     console.log(data);
 
@@ -37,10 +43,9 @@ export default function CompanyPage() {
               >
                 <div className="flex-1">
                   <TmInput
-                    register={register}
                     name="key"
+                    control={control}
                     icon={<MagnifyingGlassIcon className="w-6" />}
-                    error={errors.key}
                     className="border-0"
                     placeholder="Nhập tên công ty"
                   />

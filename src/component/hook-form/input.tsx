@@ -1,37 +1,37 @@
 import React from "react";
+import { useController, Control } from "react-hook-form";
 import { ITmInput } from "./interface/interface";
 
 const TmInput: React.FC<ITmInput> = ({
-  register,
   name,
-  type = "text",
-  error,
-  className,
-  classNameError,
-  value,
+  control,
   icon,
-  ...rest
+  placeholder = "",
+  type = "text",
+  className,
 }) => {
-  return (
-    <div>
-      <div className="relative flex items-center">
-        {icon && <div className="absolute left-3">{icon}</div>}
-        <input
-          type={type}
-          {...register(name)}
-          {...rest}
-          value={value}
-          className={`pl-10 py-2 border border-gray-300 rounded-md focus-visible:outline-none  w-full ${className} ${
-            icon ? "pl-10" : "pl-4"
-          }`}
-        />
-      </div>
+  const {
+    field: { value, onChange, onBlur },
+    fieldState: { error },
+  } = useController({
+    name,
+    control,
+  });
 
-      {error && (
-        <p style={{ color: "red" }} className={classNameError}>
-          {error.message}
-        </p>
-      )}
+  return (
+    <div className="relative flex items-center">
+      {icon && <div className="absolute left-3">{icon}</div>}
+      <input
+        type={type}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        placeholder={placeholder}
+        className={`p-2 border rounded-md w-full focus-visible:outline-none ${className} ${
+          icon && "pl-10"
+        } ${error ? "border-red-500" : "border-gray-300"}`}
+      />
+      {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
     </div>
   );
 };

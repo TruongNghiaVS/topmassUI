@@ -25,11 +25,7 @@ export default function InfomationEditUser() {
     []
   );
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
     defaultValues,
   });
@@ -57,29 +53,27 @@ export default function InfomationEditUser() {
                     Họ và tên <span className="text-[#dc2f2f]">*</span>
                   </label>
                   <TmInput
-                    register={register}
                     name="username"
-                    type="username"
-                    error={errors.username}
+                    control={control}
+                    placeholder="Họ và tên"
                   />
                 </div>
                 <div className="mt-4">
                   <div className="font-normal">Số điện thoại</div>
                   <TmInput
-                    register={register}
                     name="phone_number"
-                    error={errors.phone_number}
+                    control={control}
+                    placeholder="Số điện thoại"
                   />
                 </div>
                 <div className="mt-4">
                   <div className="font-normal">Email</div>
                   <TmInput
-                    register={register}
                     name="email"
-                    disabled
+                    control={control}
+                    placeholder="Email"
                     type="email"
-                    value={"thai.nn@vietstargroup.vn"}
-                    error={errors.email}
+                    disabled
                   />
                 </div>
                 <button

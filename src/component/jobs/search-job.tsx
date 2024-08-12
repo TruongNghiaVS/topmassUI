@@ -9,18 +9,15 @@ import { experiences, locations, prices } from "@/mockup-data/data";
 import { HotJobs } from "./hot-jobs";
 
 export const SearchJobs = () => {
-  const {
-    register,
-    formState: { errors },
-  } = useForm();
+  const { control } = useForm();
 
   const [selectedValue, setSelectedValue] = useState<number>(0);
 
   const childrenSelect = [
-    { value: 0, label: "Địa điểm" },
-    { value: 1, label: "Mức lương" },
-    { value: 2, label: "Kinh nghiệm" },
-    { value: 3, label: "Ngành nghề" },
+    { value: "0", label: "Địa điểm" },
+    { value: "1", label: "Mức lương" },
+    { value: "2", label: "Kinh nghiệm" },
+    { value: "3", label: "Ngành nghề" },
   ];
 
   return (
@@ -36,18 +33,12 @@ export const SearchJobs = () => {
           <div className="flex items-center justify-between">
             <div className="mr-4">
               <TmSelect
-                register={register}
                 icon={<FilterIcon className="w-4 mr-2" />}
                 name="searchType"
                 onChange={(evt) => setSelectedValue(+evt.target.value)}
                 className="min-w-[250px]"
-                data={childrenSelect.map((item) => {
-                  return (
-                    <option key={item.label} value={item.value}>
-                      {item.label}
-                    </option>
-                  );
-                })}
+                control={control}
+                options={childrenSelect}
               />
             </div>
             {selectedValue == 0 && <ScrollFilterJob data={locations} />}

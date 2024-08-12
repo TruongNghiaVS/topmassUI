@@ -41,7 +41,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const path = usePathname();
-  const pathValidated = ["/dang-ky", "/dang-nhap", "/quen-mat-khau"];
+  const pathValidated = [
+    "/dang-ky",
+    "/dang-nhap",
+    "/quen-mat-khau",
+    "/nhan-tin",
+  ];
   return (
     <html lang="en">
       <body className={`${roboto.variable} font-roboto`}>
@@ -53,7 +58,7 @@ export default function RootLayout({
           )}
           <main className="min-h-screen m-auto relative bg-[#EAE9E8]">
             {children}
-            <ToastContainer autoClose={2000} />
+            <ToastContainer autoClose={1000} />
           </main>
           {!pathValidated.includes(path) && <Footer />}
         </GlobalProvider>

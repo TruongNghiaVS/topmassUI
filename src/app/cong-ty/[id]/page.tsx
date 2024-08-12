@@ -15,14 +15,20 @@ import {
   MapPinIcon,
   UsersIcon,
 } from "@heroicons/react/16/solid";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
 
 export default function CompanyDetail() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormCompany>();
+  const schema = yup.object().shape({
+    work: yup.string(),
+    location: yup.string(),
+  });
+
+  const { control, handleSubmit } = useForm<IFormCompany>({
+    resolver: yupResolver(schema),
+    defaultValues: { location: "", work: "" },
+  });
 
   const list = [1, 2, 3, 4, 5, 6];
 
@@ -93,14 +99,13 @@ export default function CompanyDetail() {
               <div className="lg:px-8 px-2 py-2">
                 <form
                   onSubmit={handleSubmit(onSubmit)}
-                  className="flex items-stretch bg-white rounded-3xl py-2 px-4 flex-wrap space-x-4	"
+                  className="flex items-center bg-white rounded-3xl py-2 px-4 flex-wrap space-x-4	"
                 >
                   <div className="flex-1 ">
                     <TmInput
-                      register={register}
                       icon={<MagnifyingGlassIcon className="mr-2 w-6" />}
+                      control={control}
                       name="work"
-                      error={errors.work}
                       className=""
                       placeholder="Tìm kiếm việc làm"
                     />
@@ -108,18 +113,15 @@ export default function CompanyDetail() {
                   <div className="flex-1">
                     <TmSelect
                       icon={<MapPinIcon className="w-6 mr-2" />}
-                      register={register}
-                      error={errors.location}
                       name="location"
                       className="border"
                       placeholder="Địa điểm làm việc"
-                      data={loations.map((value) => {
-                        return <option key={value}>{value}</option>;
-                      })}
+                      control={control}
+                      options={optionsLocation}
                     />
                   </div>
                   <div className=" grid text-center rounded-lg border">
-                    <button type="submit" className="px-4 py-2 flex">
+                    <button type="submit" className="px-4 py-1.5 flex">
                       <MagnifyingGlassIcon className="mr-2 w-6 p-1 rounded-full bg-[#555555] text-white" />
                       Tìm kiếm
                     </button>

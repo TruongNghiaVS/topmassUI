@@ -12,6 +12,8 @@ import TmSelect from "./hook-form/select";
 import { BagBootstrapIcon } from "@/theme/icons/bagBootstrapIcon";
 import { optionsLocation, optionsType } from "@/mockup-data/data";
 import { useRouter } from "next/navigation";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 // import required modules
 
@@ -129,11 +131,19 @@ export const Slider = () => {
 };
 
 export const SliderForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormSlider>();
+  const schema = yup.object().shape({
+    work: yup.string(),
+    location: yup.string(),
+    type: yup.string(),
+  });
+  const { handleSubmit, control } = useForm<IFormSlider>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      location: "",
+      work: "",
+      type: "",
+    },
+  });
 
   const router = useRouter();
 
@@ -151,38 +161,31 @@ export const SliderForm = () => {
         >
           <div className="flex-1 relative after:absolute after:right-0 after:top-0 after:bottom-0 after:w-[1px] after:h-[70%] after:bg-black after:my-auto">
             <TmInput
-              register={register}
               name="work"
-              error={errors.work}
               className="border-0"
               placeholder="Tìm kiếm việc làm"
+              control={control}
             />
           </div>
           <div className="flex-1">
             <TmSelect
               icon={<MapPinIcon className="w-6 mr-2" />}
-              register={register}
-              error={errors.location}
               name="location"
               className="border-0"
               placeholder="Địa điểm làm việc"
-              data={optionsLocation.map((value) => {
-                return <option key={value}>{value}</option>;
-              })}
+              control={control}
+              options={optionsLocation}
             />
           </div>
 
           <div className="flex-1 mr-2">
             <TmSelect
-              register={register}
-              error={errors.type}
               icon={<BagBootstrapIcon className="w-4 mr-2" />}
               className="border-0"
               name="type"
               placeholder="Ngành nghề"
-              data={optionsType.map((value) => {
-                return <option key={value}>{value}</option>;
-              })}
+              control={control}
+              options={optionsType}
             />
           </div>
           <div className="bg-[#F37A20] text-white grid text-center rounded-3xl ">

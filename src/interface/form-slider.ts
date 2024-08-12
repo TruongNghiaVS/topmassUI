@@ -1,7 +1,7 @@
 export interface IFormSlider {
-  work: string;
-  location: string;
-  type: string;
+  work?: string;
+  location?: string;
+  type?: string;
 }
 
 export interface IFormSearchJob {
@@ -10,6 +10,6 @@ export interface IFormSearchJob {
 }
 
 export interface IFormCompany {
-  work: string;
-  location: string;
+  work?: string;
+  location?: string;
 }

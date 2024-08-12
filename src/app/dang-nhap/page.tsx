@@ -20,12 +20,12 @@ export default function Login() {
     password: yup.string().required("Bắt buộc nhập password"),
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ILogin>({
+  const { handleSubmit, control } = useForm<ILogin>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
   const router = useRouter();
 
@@ -57,11 +57,10 @@ export default function Login() {
                 Email <span className="text-[#dc2f2f]">*</span>
               </div>
               <TmInput
-                register={register}
+                control={control}
                 placeholder="Email"
                 name="email"
                 type="email"
-                error={errors.email}
               />
             </div>
             <div className="mb-4">
@@ -69,11 +68,10 @@ export default function Login() {
                 Password <span className="text-[#dc2f2f]">*</span>
               </div>
               <TmInput
-                register={register}
+                control={control}
                 name="password"
                 placeholder="Password"
                 type="password"
-                error={errors.password}
               />
             </div>
             <div className="font-normal text-base text-right mb-4 text-[#F37A20]">

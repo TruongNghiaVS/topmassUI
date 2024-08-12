@@ -14,12 +14,12 @@ export default function ChangePassword() {
     password: yup.string().required("Vui lòng nhập mật khẩu củ"),
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IChangePassword>({
+  const { handleSubmit, control } = useForm<IChangePassword>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      old_password: "",
+      password: "",
+    },
   });
 
   const onSubmit: SubmitHandler<IChangePassword> = (data) => {
@@ -43,11 +43,10 @@ export default function ChangePassword() {
                     Mật khẩu hiện tại <span className="text-[#dc2f2f]">*</span>
                   </div>
                   <TmInput
-                    register={register}
+                    control={control}
                     placeholder="Password"
                     name="old_password"
                     type="password"
-                    error={errors.old_password}
                   />
                 </div>
                 <div className="mb-4">
@@ -55,11 +54,10 @@ export default function ChangePassword() {
                     Mật khẩu mới <span className="text-[#dc2f2f]">*</span>
                   </div>
                   <TmInput
-                    register={register}
+                    control={control}
                     name="password"
                     placeholder="Password"
                     type="password"
-                    error={errors.password}
                   />
                 </div>
                 <button

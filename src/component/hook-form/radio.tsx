@@ -1,29 +1,38 @@
 import React from "react";
+import { useController } from "react-hook-form";
 import { ITmRadioProps } from "./interface/interface";
 
 const TmRadio: React.FC<ITmRadioProps> = ({
-  register,
   name,
-  classNameCustom,
+  control,
   options,
-  error,
-  ...rest
+  classNameCustom,
 }) => {
+  const {
+    field: { value, onChange },
+    fieldState: { error },
+  } = useController({
+    name,
+    control,
+  });
+
   return (
-    <div className={classNameCustom && classNameCustom}>
-      {options.map((option) => (
-        <label key={option.value} className="flex">
-          <input
-            type="radio"
-            value={option.value}
-            {...register(name)}
-            {...rest}
-            className="mr-2"
-          />
-          {option.label}
-        </label>
-      ))}
-      {error && <p style={{ color: "red" }}>{error.message}</p>}
+    <div>
+      <div className={classNameCustom && classNameCustom}>
+        {options.map((option) => (
+          <label key={option.value} className="inline-flex items-center ">
+            <input
+              type="radio"
+              value={option.value}
+              checked={value === option.value}
+              onChange={() => onChange(option.value)}
+              className="form-radio text-blue-600 h-4 w-4"
+            />
+            <span className="ml-2 text-gray-700">{option.label}</span>
+          </label>
+        ))}
+      </div>
+      {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import UploadFile from "@/component/hook-form/custom-upload";
 import TmInput from "@/component/hook-form/input";
+import TmTextArea from "@/component/hook-form/textarea";
 import Modal from "@/component/modal";
 import { CupHotFillBootstrapIcon } from "@/theme/icons/cupHotFillBootstrapIcon";
 import { VectorPenBootstrapIcon } from "@/theme/icons/vectorPenBootstrapIcon";
@@ -63,12 +64,7 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
     []
   );
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm({
+  const { handleSubmit, control } = useForm({
     resolver: yupResolver(schema),
     defaultValues,
   });
@@ -131,11 +127,10 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
                   Họ và tên <span className="text-[#dc2f2f]">*</span>
                 </label>
                 <TmInput
-                  register={register}
+                  control={control}
                   name="username"
                   type="username"
                   value={defaultValues.username}
-                  error={errors.username}
                 />
               </div>
               <div className="flex space-x-2">
@@ -144,11 +139,10 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
                     Email <span className="text-[#dc2f2f]">*</span>
                   </div>
                   <TmInput
-                    register={register}
+                    control={control}
                     name="email"
                     type="email"
                     value={defaultValues.email}
-                    error={errors.email}
                   />
                 </div>
                 <div className="mt-4 flex-1">
@@ -156,10 +150,9 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
                     Số điện thoại <span className="text-[#dc2f2f]">*</span>
                   </div>
                   <TmInput
-                    register={register}
+                    control={control}
                     name="phone_number"
                     value={defaultValues.phone_number}
-                    error={errors.phone_number}
                   />
                 </div>
               </div>
@@ -175,11 +168,12 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
             </div>
             <div className="relative">
               <VectorPenBootstrapIcon className="w-4 text-default absolute top-6 right-2.5" />
-              <textarea
-                {...register("description")}
-                rows={3}
-                value={defaultValues.description}
-                className="w-full border border-[#F37A20] rounded p-2 mt-4 focus-visible:outline-none"
+              <TmTextArea
+                name="description"
+                control={control}
+                label="Description"
+                placeholder="Enter your description"
+                rows={5}
               />
             </div>
             <div className="grid grid-cols-3 gap-4  mt-4 ">

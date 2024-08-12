@@ -16,12 +16,11 @@ export default function Login() {
       .email("Sai format email "),
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IResetpassword>({
+  const { handleSubmit, control } = useForm<IResetpassword>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      email: "",
+    },
   });
 
   const onSubmit: SubmitHandler<IResetpassword> = (data) => {
@@ -45,11 +44,10 @@ export default function Login() {
                 Email <span className="text-[#dc2f2f]">*</span>
               </div>
               <TmInput
-                register={register}
+                control={control}
                 placeholder="Email"
                 name="email"
                 type="email"
-                error={errors.email}
               />
             </div>
             <button

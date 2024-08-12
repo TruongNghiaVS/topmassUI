@@ -38,12 +38,12 @@ export const Header = () => {
     password: yup.string().required("Bắt buộc nhập password"),
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ILogin>({
+  const { handleSubmit, control } = useForm<ILogin>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   const onSubmit: SubmitHandler<ILogin> = (data) => {
@@ -170,11 +170,13 @@ export const Header = () => {
                   1
                 </div>
               </div>
-              <img
-                src="/imgs/messenger.svg"
-                alt=""
-                className="w-6 h-auto mr-3"
-              />
+              <Link href="/nhan-tin">
+                <img
+                  src="/imgs/messenger.svg"
+                  alt=""
+                  className="w-6 h-auto mr-3"
+                />
+              </Link>
               <div className="flex items-center relative group/title ">
                 <div className="inline-block p-[2] rounded-full bg-[#F37A20] mr-1">
                   <UserIcon className="text-white w-6" />
@@ -207,21 +209,11 @@ export const Header = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mt-4 px-4">
               <div className="font-normal">Email</div>
-              <TmInput
-                register={register}
-                name="email"
-                type="email"
-                error={errors.email}
-              />
+              <TmInput control={control} name="email" type="email" />
             </div>
             <div className="mt-4 px-4">
               <div className="font-normal">Password</div>
-              <TmInput
-                register={register}
-                name="password"
-                type="password"
-                error={errors.password}
-              />
+              <TmInput control={control} name="password" type="password" />
             </div>
             <div className="mt-2 text-right">
               <Link href="/quen-mat-khau" className="text-[#F37A20]">
