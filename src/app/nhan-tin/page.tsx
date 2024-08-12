@@ -2,6 +2,7 @@
 
 import TmInput from "@/component/hook-form/input";
 import { Cog6ToothIcon, MagnifyingGlassIcon } from "@heroicons/react/16/solid";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -37,7 +38,9 @@ export default function Messenger() {
         <div className="col-span-3 px-2 py-2">
           <div className="flex items-center justify-between">
             <div className="flex space-x-2">
-              <img src="/imgs/logo-new.svg" alt="" />
+              <Link href="/">
+                <img src="/imgs/logo-new.svg" alt="" />
+              </Link>
               <div className="uppercase text-xl !font-normal">Message</div>
             </div>
             <div className="p-1 rounded-full bg-[#EAEAEA]">
