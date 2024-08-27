@@ -73,7 +73,7 @@ export default function CompanyDetail() {
                     + Theo dõi công ty
                   </button>
                 </div>
-                <div className="items-center">
+                <div className="flex justify-center items-center">
                   <button className="flex items-center py-2 px-4 bg-white text-default rounded-lg mt-3">
                     <SendCheckFillBootstrapIcon className="w-4 mr-2" /> Đang
                     theo dõi

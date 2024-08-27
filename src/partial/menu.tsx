@@ -1,12 +1,9 @@
 import { BagBootstrapIcon } from "@/theme/icons/bagBootstrapIcon";
-import { CloudUploadBootstrapIcon } from "@/theme/icons/cloudUploadBootstrapIcon";
 import { EnvelopePaperHeartFillBootstrapIcon } from "@/theme/icons/envelopePaperHeartFillBootstrapIcon";
 import { PersonBargeBootstrapIcon } from "@/theme/icons/personBargeBootstrapIcon";
 import {
-  DocumentCheckIcon,
   DocumentTextIcon,
   MagnifyingGlassIcon,
-  PencilSquareIcon,
 } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -23,6 +20,13 @@ export const Menu = () => {
       title: "Tạo CV",
       subMenu: [
         {
+          title: "Profile CV",
+          slug: "/profile-cv",
+          icon: (
+            <PersonBargeBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+          ),
+        },
+        {
           title: "Quản lý CV",
           slug: "/quan-ly-cv",
           icon: (
@@ -30,36 +34,8 @@ export const Menu = () => {
           ),
         },
         {
-          title: "Tải CV lên",
-          slug: "/tai-cv-len",
-          icon: (
-            <CloudUploadBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
-          ),
-        },
-        {
           title: "Mẫu CV",
           slug: "/mau-cv",
-          icon: (
-            <PersonBargeBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
-          ),
-        },
-        {
-          title: "Kiểm tra chất lượng cv",
-          slug: "/kiem-tra-chat-luong-cv",
-          icon: (
-            <DocumentCheckIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
-          ),
-        },
-        {
-          title: "Hướng dẫn viết CV theo ngành nghề",
-          slug: "/huong-dan-viet-cv-theo-nganh-nghe",
-          icon: (
-            <PencilSquareIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
-          ),
-        },
-        {
-          title: "Thư viện CV mẫu",
-          slug: "/thu-vien-cv-mau",
           icon: (
             <PersonBargeBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),

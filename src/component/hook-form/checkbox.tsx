@@ -15,7 +15,7 @@ const TmCheckbox: NewType = ({ name, control, label }) => {
   });
 
   return (
-    <div className="mb-4">
+    <div className="">
       <label className="inline-flex items-center">
         <input
           type="checkbox"

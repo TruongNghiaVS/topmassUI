@@ -10,10 +10,21 @@ export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
   type?: string;
 }
 
+export interface ITmInputProgress extends ITmInput {
+  length?: number;
+}
+
 export interface ITmCheckBox extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   control: Control<any>;
   label: string;
+}
+
+export interface IUpload extends InputHTMLAttributes<HTMLInputElement> {
+  name: string;
+  control: Control<any>;
+  classNameImg?: string;
+  title?: string;
 }
 
 export interface ITmSelect extends InputHTMLAttributes<HTMLSelectElement> {
@@ -26,7 +37,7 @@ export interface ITmSelect extends InputHTMLAttributes<HTMLSelectElement> {
 }
 
 export interface ITmRadio {
-  value: string;
+  value: any;
   label: string;
 }
 
@@ -40,14 +51,14 @@ export interface ITmRadioProps {
 export interface ITmTextareaProps {
   name: string;
   control: Control<any>;
-  label: string;
+  label?: string;
   placeholder?: string;
   rows?: number;
 }
 
 export type Option = {
   label: string;
-  value: string;
+  value: any;
 };
 
 export interface SearchSelectProps {

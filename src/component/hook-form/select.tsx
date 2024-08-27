@@ -41,8 +41,8 @@ const TmSelect: React.FC<ITmSelect> = ({
             </option>
           ))}
         </select>
-        {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
       </div>
+      {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
     </div>
   );
 };

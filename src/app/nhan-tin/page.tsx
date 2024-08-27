@@ -33,14 +33,14 @@ export default function Messenger() {
   }, []);
 
   return (
-    <div className=" bg-white overflow-hidden">
+    <div className=" bg-white overflow-hidden border-t">
       <div className="grid grid-cols-12 min-h-screen">
         <div className="col-span-3 px-2 py-2">
           <div className="flex items-center justify-between">
             <div className="flex space-x-2">
-              <Link href="/">
-                <img src="/imgs/logo-new.svg" alt="" />
-              </Link>
+              {/* <Link href="/">
+                <img src="/imgs/logo-new.svg" alt="" className="w-full" />
+              </Link> */}
               <div className="uppercase text-xl !font-normal">Message</div>
             </div>
             <div className="p-1 rounded-full bg-[#EAEAEA]">
