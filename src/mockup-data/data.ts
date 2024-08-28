@@ -304,3 +304,106 @@ export const months = [
     value: 12,
   },
 ];
+
+export const educations = [
+  {
+    school: "Trường đại học sư phạm kỹ thuật",
+    specialized: "Công nghệ thông tin",
+    rank: "Đại học",
+    date_from: "20-08-2020",
+    date_to: "20-08-2024",
+    isStudied: false,
+    rating: "Khá",
+    description: "Dự kiến tốt nghiệp tháng 12 năm nay! ",
+  },
+  {
+    school: "Trường đại học sư phạm",
+    specialized: "Công nghệ thông tin",
+    rank: "Đại học",
+    date_from: "20-08-2020",
+    date_to: "20-08-2024",
+    isStudied: true,
+    rating: "Khá",
+    description: "Dự kiến tốt nghiệp tháng 12 năm nay! ",
+  },
+];
+
+export const experienceViews = [
+  {
+    company: "Công ty Cổ Phần Tập Đoàn Việt Star",
+    position: "Quản lý team chăm sóc khách hàng",
+    date_from: "01/09/2022",
+    date_to: "01/09/2024",
+    isStudied: true,
+    description: "test",
+  },
+];
+
+export const projects = [
+  {
+    project_name:
+      "Tối ưu Website: Topmass (SEO/Performance Optimization Specialist)",
+    customer: "Nhà tuyển dụng Topmass",
+    count_member: 5,
+    position: "Quản lý team và đánh giá tối ưu từ khoá",
+    technology: "Google",
+    date_from: "01-08-2023",
+    date_to: "01-08-2024",
+    isStudied: false,
+    description: "test test",
+  },
+];
+
+export const softSkills = [
+  {
+    skill_name: "Kỹ năng giao tiếp",
+    proficiency: 3,
+    description: "test",
+  },
+  {
+    skill_name: "Làm việc nhóm",
+    proficiency: 2,
+    description: "test",
+  },
+];
+
+export const supportTools = [
+  {
+    tool_name: "Photoshop",
+    proficiency: 3,
+    description: "test",
+  },
+  {
+    tool_name: "Word",
+    proficiency: 2,
+    description: "test",
+  },
+];
+
+export const prizeViews = [
+  {
+    prize_name: "Quản lý xuất sắc năm 2024",
+    organization: "Công ty Cổ Phần Tập Đoàn Việt Star",
+    date: "01/09/2024",
+    description: "",
+  },
+];
+
+export const certificateViews = [
+  {
+    certificate_name: "Tin học văn phòng MOS",
+    organization: "Tin học Trường đại học Nguyễn Tất Thành",
+    date_from: "01-09-2023",
+    date_to: "01-09-2024",
+    isStudied: false,
+    description: "",
+  },
+  {
+    certificate_name: "Tin học văn phòng MOS 1",
+    organization: "Tin học Trường đại học Nguyễn Tất Thành",
+    date_from: "01-09-2023",
+    date_to: "01-09-2024",
+    isStudied: false,
+    description: "",
+  },
+];

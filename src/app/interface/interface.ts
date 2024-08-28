@@ -37,3 +37,11 @@ export interface ISettingSuggestJob {
   salary: string;
   location: string[];
 }
+
+export interface IContact {
+  name: string;
+  email: string;
+  phone: string;
+  title: string;
+  content: string;
+}

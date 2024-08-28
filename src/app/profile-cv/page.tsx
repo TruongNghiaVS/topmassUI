@@ -13,6 +13,30 @@ import { SoftSkillInfomationCv } from "./setting/soft-skill-form";
 import { SupportToolInfomationCv } from "./setting/support-tool-form";
 import { PrizeInfomationCv } from "./setting/prize-form";
 import { CertificateInfomationCv } from "./setting/certificate-form";
+import { InfomationViewEdit } from "./infomation-edit/infomation-view-edit";
+import { EducationView } from "./infomation-edit/education-view";
+import {
+  certificateViews,
+  educations,
+  experienceViews,
+  prizeViews,
+  projects,
+  softSkills,
+  supportTools,
+} from "@/mockup-data/data";
+import { ExperienceView } from "./infomation-edit/experience-view";
+import { ProjectView } from "./infomation-edit/project-view";
+import { SoftSkillView } from "./infomation-edit/soft-skill";
+import { SupportToolView } from "./infomation-edit/support-tool-view";
+import { PrizeView } from "./infomation-edit/prize-view";
+import { CertificateView } from "./infomation-edit/certificate-view";
+
+type IProps = {
+  title: string;
+  numberSelect: number;
+  isShow: boolean;
+  component?: JSX.Element;
+};
 
 export default function ProfileCV() {
   const [selected, setSelected] = useState<number>(0);
@@ -27,34 +51,48 @@ export default function ProfileCV() {
     setIsOpen(true);
   };
 
-  const lists = [
+  const lists: IProps[] = [
     {
       title: "Học vấn",
       numberSelect: 1,
+      isShow: true,
+      component: <EducationView data={educations} />,
     },
     {
       title: "Kinh nghiệm",
       numberSelect: 2,
+      isShow: true,
+      component: <ExperienceView data={experienceViews} />,
     },
     {
       title: "Dự án",
       numberSelect: 3,
+      isShow: true,
+      component: <ProjectView data={projects} />,
     },
     {
       title: "Kỹ năng mềm",
       numberSelect: 4,
+      isShow: true,
+      component: <SoftSkillView data={softSkills} />,
     },
     {
       title: "Công cụ hỗ trợ",
       numberSelect: 5,
+      isShow: true,
+      component: <SupportToolView data={supportTools} />,
     },
     {
       title: "Giải thưởng",
       numberSelect: 6,
+      isShow: true,
+      component: <PrizeView data={prizeViews} />,
     },
     {
       title: "Chứng chỉ",
       numberSelect: 7,
+      isShow: true,
+      component: <CertificateView data={certificateViews} />,
     },
   ];
 
@@ -74,10 +112,11 @@ export default function ProfileCV() {
                   <div className="w-[150px] h-[150px] rounded-full bg-[#F37A20] grid items-center justify-center mr-6  overflow-hidden">
                     <img src="/imgs/avatar-no.png" alt="" className="w-auto" />
                   </div>
-                  <div>
-                    <div className="text-white uppercase text-base font-bold mb-4">
+                  <div className="relative top-[12px]">
+                    <div className="text-white uppercase text-base font-bold">
                       Phạm Nhật Minh
                     </div>
+                    <div className="">Chăm sóc khách hàng</div>
                     <div className="flex space-x-3 ">
                       <div
                         className="flex space-x-2 items-center bg-[#F37A20] py-1 px-3 rounded-lg text-white cursor-pointer"
@@ -101,16 +140,32 @@ export default function ProfileCV() {
                 </div>
               </div>
               <div className="mt-20">
+                <div className="px-6 py-2">
+                  Tôi là một người tận tâm và kiên nhẫn với kinh nghiệm trong
+                  lĩnh vực chăm sóc khách hàng. Tôi có khả năng giao tiếp hiệu
+                  quả, lắng nghe và giải quyết vấn đề của khách hàng một cách
+                  nhanh chóng và chuyên nghiệp. Mục tiêu của tôi là mang lại sự
+                  hài lòng tối đa cho khách hàng, đồng thời xây dựng mối quan hệ
+                  lâu dài dựa trên sự tin tưởng và tôn trọng.
+                </div>
                 {lists.map((item) => {
                   return (
-                    <ProfileCvNoInfomation
-                      key={item.title}
-                      title={item.title}
-                      setSelected={setSelected}
-                      numberSelect={item.numberSelect}
-                      onOpen={onOpen}
-                      setTitle={setTitle}
-                    />
+                    <div key={item.title}>
+                      {!item.isShow ? (
+                        <ProfileCvNoInfomation
+                          title={item.title}
+                          setSelected={setSelected}
+                          numberSelect={item.numberSelect}
+                          onOpen={onOpen}
+                          setTitle={setTitle}
+                        />
+                      ) : (
+                        <InfomationViewEdit title={item.title}>
+                          {item.component}
+                          <div></div>
+                        </InfomationViewEdit>
+                      )}
+                    </div>
                   );
                 })}
               </div>

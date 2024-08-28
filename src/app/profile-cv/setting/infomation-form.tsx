@@ -1,9 +1,15 @@
 import TmInput from "@/component/hook-form/input";
 import TmRadio from "@/component/hook-form/radio";
-import TmTextArea from "@/component/hook-form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
+import dynamic from "next/dynamic";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
+const CustomCKEditor = dynamic(
+  () => {
+    return import("../../../component/hook-form/ck-editor");
+  },
+  { ssr: false }
+);
 
 interface InfomationUserCv {
   username: string;
@@ -139,7 +145,7 @@ export const InfomationUserCv = () => {
           <div className="mt-4">
             <div className="font-medium">Giới thiệu bản thân</div>
             <div>
-              <TmTextArea control={control} name="description" rows={3} />
+              <CustomCKEditor control={control} name="description" />
             </div>
           </div>
           <div className="flex justify-center mt-4">

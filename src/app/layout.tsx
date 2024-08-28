@@ -8,6 +8,9 @@ import { usePathname } from "next/navigation";
 import { GlobalProvider } from "./global-context";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 
 const roboto = localFont({
   src: [

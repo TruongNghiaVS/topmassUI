@@ -1,6 +1,5 @@
 import TmInput from "@/component/hook-form/input";
 import TmInputProgress from "@/component/hook-form/input-progress";
-import TmTextArea from "@/component/hook-form/textarea";
 import {
   BeakerIcon,
   CogIcon,
@@ -8,9 +7,16 @@ import {
   TrashIcon,
 } from "@heroicons/react/16/solid";
 import { yupResolver } from "@hookform/resolvers/yup";
+import dynamic from "next/dynamic";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
+const CustomCKEditor = dynamic(
+  () => {
+    return import("../../../component/hook-form/ck-editor");
+  },
+  { ssr: false }
+);
 
 interface ISupportToolInfomationCv {
   support_tools: {
@@ -110,10 +116,9 @@ export const SupportToolInfomationCv = () => {
               <div className="mt-4">
                 <div className="font-medium">Mô tả chi tiết</div>
                 <div>
-                  <TmTextArea
+                  <CustomCKEditor
                     control={control}
                     name={`support_tools.${index}.description`}
-                    rows={3}
                   />
                 </div>
               </div>

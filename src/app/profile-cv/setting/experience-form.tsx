@@ -1,21 +1,24 @@
 import TmCheckbox from "@/component/hook-form/checkbox";
 import TmInput from "@/component/hook-form/input";
-import TmInputProgress from "@/component/hook-form/input-progress";
-import TmRadio from "@/component/hook-form/radio";
 import TmSelect from "@/component/hook-form/select";
-import TmTextArea from "@/component/hook-form/textarea";
 import CustomUploadMulti from "@/component/hook-form/upload-multiple-file";
 import { months } from "@/mockup-data/data";
 import {
-  AcademicCapIcon,
   BuildingOfficeIcon,
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/16/solid";
 import { yupResolver } from "@hookform/resolvers/yup";
+import dynamic from "next/dynamic";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
+const CustomCKEditor = dynamic(
+  () => {
+    return import("../../../component/hook-form/ck-editor");
+  },
+  { ssr: false }
+);
 
 interface IExperienceCv {
   experiences: {
@@ -239,10 +242,9 @@ export const ExperienceUserCv = () => {
               <div className="mt-4">
                 <div className="font-medium">Mô tả chi tiết</div>
                 <div>
-                  <TmTextArea
+                  <CustomCKEditor
                     control={control}
                     name={`experiences.${index}.description`}
-                    rows={3}
                   />
                 </div>
               </div>
