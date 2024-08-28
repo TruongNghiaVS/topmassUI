@@ -20,9 +20,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ILogin } from "@/app/interface/interface";
 import * as yup from "yup";
 import TmInput from "@/component/hook-form/input";
-import Modal from "@/component/modal";
 import { useGlobalContext } from "@/app/global-context";
 import { toast } from "react-toastify";
+import Modal from "@/component/modal";
 
 export const Header = () => {
   const headerRef = useRef<HTMLDivElement | null>(null);
