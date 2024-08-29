@@ -160,9 +160,11 @@ export default function ProfileCV() {
                           setTitle={setTitle}
                         />
                       ) : (
-                        <InfomationViewEdit title={item.title}>
+                        <InfomationViewEdit
+                          title={item.title}
+                          isOpenModal={onOpen}
+                        >
                           {item.component}
-                          <div></div>
                         </InfomationViewEdit>
                       )}
                     </div>
