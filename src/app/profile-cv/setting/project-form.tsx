@@ -67,7 +67,6 @@ export const ProjectUserCv = () => {
           year_from: yup.string().required("Vui lòng chọn năm bắt đầu"),
           isStudied: yup.boolean(),
           month_to: yup.string().when("isStudied", ([isStudied], schema) => {
-            console.log(isStudied);
             return isStudied === false
               ? schema.required("Vui lòng chọn tháng kết thúc")
               : schema;
@@ -206,7 +205,6 @@ export const ProjectUserCv = () => {
                 <div>
                   <TmInput
                     control={control}
-                    type="number"
                     name={`experiences.${index}.position`}
                     placeholder="Vị trí"
                   />
@@ -219,7 +217,6 @@ export const ProjectUserCv = () => {
                 <div>
                   <TmInput
                     control={control}
-                    type="number"
                     name={`experiences.${index}.technology`}
                     placeholder="Công nghệ sử dụng"
                   />
@@ -294,7 +291,7 @@ export const ProjectUserCv = () => {
               </div>
               <div>
                 <CustomUploadMulti
-                  name="files"
+                  name={`experiences.${index}.files`}
                   title="Tải tệp hoặc File từ máy tính"
                   control={control}
                 />

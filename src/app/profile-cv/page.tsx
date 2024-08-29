@@ -1,7 +1,6 @@
 "use client";
 
 import { InfomationUser } from "@/component/infomation-user-right";
-import Modal from "@/component/modal";
 import { ProfileCvNoInfomation } from "@/component/profile-cv-no-infomation";
 import { EyeIcon, LinkIcon, PencilSquareIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
@@ -30,6 +29,7 @@ import { SoftSkillView } from "./infomation-edit/soft-skill";
 import { SupportToolView } from "./infomation-edit/support-tool-view";
 import { PrizeView } from "./infomation-edit/prize-view";
 import { CertificateView } from "./infomation-edit/certificate-view";
+import Modal from "@/component/modal";
 
 type IProps = {
   title: string;
@@ -61,13 +61,13 @@ export default function ProfileCV() {
     {
       title: "Kinh nghiệm",
       numberSelect: 2,
-      isShow: true,
+      isShow: false,
       component: <ExperienceView data={experienceViews} />,
     },
     {
       title: "Dự án",
       numberSelect: 3,
-      isShow: true,
+      isShow: false,
       component: <ProjectView data={projects} />,
     },
     {
