@@ -162,7 +162,11 @@ export default function ProfileCV() {
                       ) : (
                         <InfomationViewEdit
                           title={item.title}
-                          isOpenModal={onOpen}
+                          isOpenModal={() => (
+                            onOpen(),
+                            setSelected(item.numberSelect),
+                            setTitle(item.title)
+                          )}
                         >
                           {item.component}
                         </InfomationViewEdit>
