@@ -27,7 +27,7 @@ interface IProjectCv {
     year_from: string;
     month_to?: string;
     year_to?: string;
-    isStudied?: boolean;
+    is_project?: boolean;
     description?: string;
     files?: FileList;
   }[];
@@ -65,14 +65,14 @@ export const ProjectUserCv = () => {
           technology: yup.string().required("Vui lòng nhập công nghệ sử dụng"),
           month_from: yup.string().required("Vui lòng chọn tháng bắt đầu"),
           year_from: yup.string().required("Vui lòng chọn năm bắt đầu"),
-          isStudied: yup.boolean(),
-          month_to: yup.string().when("isStudied", ([isStudied], schema) => {
-            return isStudied === false
+          is_project: yup.boolean(),
+          month_to: yup.string().when("is_project", ([is_project], schema) => {
+            return is_project === false
               ? schema.required("Vui lòng chọn tháng kết thúc")
               : schema;
           }),
-          year_to: yup.string().when("isStudied", ([isStudied], schema) => {
-            return isStudied === false
+          year_to: yup.string().when("is_project", ([is_project], schema) => {
+            return is_project === false
               ? schema.required("Vui lòng chọn năm kết thúc")
               : schema;
           }),
@@ -126,7 +126,7 @@ export const ProjectUserCv = () => {
           year_from: "",
           month_to: "",
           year_to: "",
-          isStudied: false,
+          is_project: false,
           description: "",
         },
       ],
@@ -254,8 +254,8 @@ export const ProjectUserCv = () => {
                       <div>
                         <TmCheckbox
                           control={control}
-                          name={`experiences.${index}.isStudied`}
-                          label="Còn học"
+                          name={`experiences.${index}.is_project`}
+                          label="Dự án vẫn đang hoàn thành"
                         />
                       </div>
                     </div>
@@ -315,7 +315,7 @@ export const ProjectUserCv = () => {
                 year_from: "",
                 month_to: "",
                 year_to: "",
-                isStudied: false,
+                is_project: false,
                 description: "",
               });
             }}

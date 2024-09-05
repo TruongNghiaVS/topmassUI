@@ -29,7 +29,7 @@ interface ICertificateCv {
     year_from: string;
     month_to?: string;
     year_to?: string;
-    isStudied?: boolean;
+    is_duration?: boolean;
     description?: string;
     files?: FileList;
   }[];
@@ -66,15 +66,17 @@ export const CertificateInfomationCv = () => {
           organization: yup.string().required("Vui lòng nhập tổ chức"),
           month_from: yup.string().required("Vui lòng chọn tháng bắt đầu"),
           year_from: yup.string().required("Vui lòng chọn năm bắt đầu"),
-          isStudied: yup.boolean(),
-          month_to: yup.string().when("isStudied", ([isStudied], schema) => {
-            console.log(isStudied);
-            return isStudied === false
-              ? schema.required("Vui lòng chọn tháng kết thúc")
-              : schema;
-          }),
-          year_to: yup.string().when("isStudied", ([isStudied], schema) => {
-            return isStudied === false
+          is_duration: yup.boolean(),
+          month_to: yup
+            .string()
+            .when("is_duration", ([is_duration], schema) => {
+              console.log(is_duration);
+              return is_duration === false
+                ? schema.required("Vui lòng chọn tháng kết thúc")
+                : schema;
+            }),
+          year_to: yup.string().when("is_duration", ([is_duration], schema) => {
+            return is_duration === false
               ? schema.required("Vui lòng chọn năm kết thúc")
               : schema;
           }),
@@ -125,7 +127,7 @@ export const CertificateInfomationCv = () => {
           year_from: "",
           month_to: "",
           year_to: "",
-          isStudied: false,
+          is_duration: false,
           description: "",
         },
       ],
@@ -190,7 +192,7 @@ export const CertificateInfomationCv = () => {
                 </div>
                 <div className="flex space-x-3">
                   <div className="flex-1">
-                    <div>Bắt đầu</div>
+                    <div>Ngày cấp</div>
                     <div className="mt-[14px] flex space-x-2">
                       <div className="flex-1">
                         <TmSelect
@@ -212,11 +214,11 @@ export const CertificateInfomationCv = () => {
                   </div>
                   <div className="flex-1">
                     <div className="flex space-x-5">
-                      <div>Kết thúc</div>
+                      <div>Hết hạn</div>
                       <div>
                         <TmCheckbox
                           control={control}
-                          name={`certificates.${index}.isStudied`}
+                          name={`certificates.${index}.is_duration`}
                           label="Còn học"
                         />
                       </div>
@@ -274,7 +276,7 @@ export const CertificateInfomationCv = () => {
                 year_from: "",
                 month_to: "",
                 year_to: "",
-                isStudied: false,
+                is_duration: false,
                 description: "",
               });
             }}

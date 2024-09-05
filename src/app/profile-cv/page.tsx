@@ -61,40 +61,68 @@ export default function ProfileCV() {
     {
       title: "Kinh nghiệm",
       numberSelect: 2,
-      isShow: false,
+      isShow: true,
       component: <ExperienceView data={experienceViews} />,
     },
     {
       title: "Dự án",
       numberSelect: 3,
-      isShow: false,
+      isShow: true,
       component: <ProjectView data={projects} />,
     },
     {
-      title: "Kỹ năng mềm",
+      title: "Kỹ năng",
       numberSelect: 4,
       isShow: true,
       component: <SoftSkillView data={softSkills} />,
     },
     {
-      title: "Công cụ hỗ trợ",
+      title: "Kỹ năng mềm",
       numberSelect: 5,
+      isShow: true,
+      component: <SoftSkillView data={softSkills} />,
+    },
+    {
+      title: "Công cụ hỗ trợ",
+      numberSelect: 6,
       isShow: true,
       component: <SupportToolView data={supportTools} />,
     },
     {
       title: "Giải thưởng",
-      numberSelect: 6,
+      numberSelect: 7,
       isShow: true,
       component: <PrizeView data={prizeViews} />,
     },
     {
       title: "Chứng chỉ",
-      numberSelect: 7,
+      numberSelect: 8,
       isShow: true,
       component: <CertificateView data={certificateViews} />,
     },
   ];
+
+  const downloadPDF = async () => {
+    const response = await fetch("/api/generate-pdf", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.target = "_blank";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      console.error("Failed to generate PDF");
+    }
+  };
 
   return (
     <div className="bg-[#EAE9E8]">
@@ -121,7 +149,9 @@ export default function ProfileCV() {
                       <div
                         className="flex space-x-2 items-center bg-[#F37A20] py-1 px-3 rounded-lg text-white cursor-pointer"
                         onClick={() => (
-                          onOpen(), setTitle("Thông tin cá nhân")
+                          onOpen(),
+                          setTitle("Thông tin cá nhân"),
+                          setSelected(0)
                         )}
                       >
                         <div>Thông tin giới thiệu</div>
@@ -131,7 +161,10 @@ export default function ProfileCV() {
                         <div className=" ">Chia sẽ trang cá nhân</div>
                         <LinkIcon className="w-4" />
                       </div>
-                      <div className="flex space-x-2 items-center bg-[#F37A20] py-1 px-3 rounded-lg text-white">
+                      <div
+                        className="flex space-x-2 items-center bg-[#F37A20] cursor-pointer py-1 px-3 rounded-lg text-white"
+                        onClick={downloadPDF}
+                      >
                         <div className=" ">Xem</div>
                         <EyeIcon className="w-4" />
                       </div>
@@ -197,9 +230,10 @@ export default function ProfileCV() {
           {selected === 2 && <ExperienceUserCv />}
           {selected === 3 && <ProjectUserCv />}
           {selected === 4 && <SoftSkillInfomationCv />}
-          {selected === 5 && <SupportToolInfomationCv />}
-          {selected === 6 && <PrizeInfomationCv />}
-          {selected === 7 && <CertificateInfomationCv />}
+          {selected === 5 && <SoftSkillInfomationCv />}
+          {selected === 6 && <SupportToolInfomationCv />}
+          {selected === 7 && <PrizeInfomationCv />}
+          {selected === 8 && <CertificateInfomationCv />}
         </Modal>
       </div>
     </div>

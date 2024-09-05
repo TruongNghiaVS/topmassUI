@@ -1,17 +1,17 @@
 import { AcademicCapIcon, StarIcon } from "@heroicons/react/16/solid";
 import dayjs from "dayjs";
 
-interface ISoftSkill {
+interface ISkill {
   skill_name: string;
   proficiency: number;
   description?: string;
 }
 
 interface IProps {
-  data: ISoftSkill[];
+  data: ISkill[];
 }
 
-export const SoftSkillView = ({ data }: IProps) => {
+export const SkillView = ({ data }: IProps) => {
   const counts = Array.from({ length: 5 }, (_, i) => {
     return i + 1;
   });

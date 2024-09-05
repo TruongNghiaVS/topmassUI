@@ -44,7 +44,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const path = usePathname();
-  const pathValidated = ["/dang-ky", "/dang-nhap", "/quen-mat-khau"];
+  const pathValidated = [
+    "/dang-ky",
+    "/dang-nhap",
+    "/quen-mat-khau",
+    "/khoi-tao-mat-khau",
+  ];
   return (
     <html lang="en">
       <body className={`${roboto.variable} font-roboto`}>

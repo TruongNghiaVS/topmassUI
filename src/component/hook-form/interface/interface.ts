@@ -8,6 +8,8 @@ export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
   icon?: any;
   placeholder?: string;
   type?: string;
+  min?: number;
+  max?: number;
 }
 
 export interface ITmInputProgress extends ITmInput {
@@ -46,6 +48,7 @@ export interface ITmRadioProps {
   control: Control<any>;
   options: Option[];
   classNameCustom?: string;
+  className?: string;
 }
 
 export interface ITmTextareaProps {

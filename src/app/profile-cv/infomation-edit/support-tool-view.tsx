@@ -32,7 +32,7 @@ export const SupportToolView = ({ data }: IProps) => {
                           className={`w-6 ${
                             value <= item.proficiency
                               ? "text-default"
-                              : "#CCCCCC"
+                              : "text-gray-400"
                           }`}
                         />
                       );

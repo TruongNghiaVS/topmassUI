@@ -28,7 +28,7 @@ interface IExperienceCv {
     year_from: string;
     month_to?: string;
     year_to?: string;
-    isStudied?: boolean;
+    isWorking?: boolean;
     description?: string;
     files?: FileList;
   }[];
@@ -63,15 +63,15 @@ export const ExperienceUserCv = () => {
           position: yup.string().required("Vui lòng nhập chức vụ - vị trí"),
           month_from: yup.string().required("Vui lòng chọn tháng bắt đầu"),
           year_from: yup.string().required("Vui lòng chọn năm bắt đầu"),
-          isStudied: yup.boolean(),
-          month_to: yup.string().when("isStudied", ([isStudied], schema) => {
-            console.log(isStudied);
-            return isStudied === false
+          isWorking: yup.boolean(),
+          month_to: yup.string().when("isWorking", ([isWorking], schema) => {
+            console.log(isWorking);
+            return isWorking === false
               ? schema.required("Vui lòng chọn tháng kết thúc")
               : schema;
           }),
-          year_to: yup.string().when("isStudied", ([isStudied], schema) => {
-            return isStudied === false
+          year_to: yup.string().when("isWorking", ([isWorking], schema) => {
+            return isWorking === false
               ? schema.required("Vui lòng chọn năm kết thúc")
               : schema;
           }),
@@ -122,7 +122,7 @@ export const ExperienceUserCv = () => {
           year_from: "",
           month_to: "",
           year_to: "",
-          isStudied: false,
+          isWorking: false,
           description: "",
         },
       ],
@@ -213,8 +213,8 @@ export const ExperienceUserCv = () => {
                       <div>
                         <TmCheckbox
                           control={control}
-                          name={`experiences.${index}.isStudied`}
-                          label="Còn học"
+                          name={`experiences.${index}.isWorking`}
+                          label="Còn làm"
                         />
                       </div>
                     </div>
@@ -271,7 +271,7 @@ export const ExperienceUserCv = () => {
                 year_from: "",
                 month_to: "",
                 year_to: "",
-                isStudied: false,
+                isWorking: false,
                 description: "",
               });
             }}

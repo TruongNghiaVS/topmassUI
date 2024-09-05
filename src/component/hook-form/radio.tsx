@@ -7,6 +7,7 @@ const TmRadio: React.FC<ITmRadioProps> = ({
   control,
   options,
   classNameCustom,
+  className,
 }) => {
   const {
     field: { value, onChange },
@@ -26,7 +27,9 @@ const TmRadio: React.FC<ITmRadioProps> = ({
               value={option.value}
               checked={value === option.value}
               onChange={() => onChange(option.value)}
-              className="form-radio text-blue-600 h-4 w-4"
+              className={`form-radio text-blue-600 h-4 w-4 ${
+                className && className
+              }`}
             />
             <span className="ml-2 text-gray-700">{option.label}</span>
           </label>
