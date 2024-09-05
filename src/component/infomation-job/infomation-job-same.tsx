@@ -1,6 +1,9 @@
+"use client";
+
 import { IInfomationJobSameProps } from "@/interface/infomation-job";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
   const groupType = item.groupType;
@@ -9,7 +12,10 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
 
   return (
     <div className="border-[1px] bg-white p-4 rounded-md hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px] relative border-solid border-[#FC7E00]">
-      <div className="absolute right-4 top-4">
+      <div
+        className="absolute right-4 top-4 cursor-pointer"
+        onClick={() => toast.success("Thích tin thành công")}
+      >
         <HeartIcon className="w-6 text-[#FC7E00]" />
       </div>
       <div className="sm:flex mt-4 ">
@@ -27,7 +33,9 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
               {item.title}
             </Link>
           </div>
-          <div className="text-sm font-normal mt-2.5 ">{item.company}</div>
+          <div className="text-sm font-normal mt-2.5 ">
+            <Link href={`/viec-lam/${item.slug}`}>{item.company}</Link>
+          </div>
           <div className="flex mt-2	justify-center sm:justify-start">
             <div className="text-sm text-[#F46800] pr-[0.65em] mr-2 relative after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]">
               <Link href={`/viec-lam/${item.slug}`}>{item.price}</Link>

@@ -8,9 +8,11 @@ import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 interface IUploadFile {
   file: File | null;
   setFile: Dispatch<SetStateAction<File | null>>;
+  setCvValue: Dispatch<SetStateAction<string>>;
+  cvValue: string;
 }
 
-const UploadFile = ({ file, setFile }: IUploadFile) => {
+const UploadFile = ({ file, setFile, setCvValue, cvValue }: IUploadFile) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [dragActive, setDragActive] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -31,6 +33,7 @@ const UploadFile = ({ file, setFile }: IUploadFile) => {
         ].includes(selectedFile.type)
       ) {
         setFile(selectedFile);
+        setCvValue("");
         setError(null);
         console.log("Selected file:", selectedFile);
       } else {
@@ -41,6 +44,7 @@ const UploadFile = ({ file, setFile }: IUploadFile) => {
 
   const handleRemoveFile = () => {
     setFile(null);
+    setCvValue(cvValue);
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -66,6 +70,7 @@ const UploadFile = ({ file, setFile }: IUploadFile) => {
         ].includes(droppedFile.type)
       ) {
         setFile(droppedFile);
+        setCvValue("");
         setError(null);
         console.log("Dropped file:", droppedFile);
       } else {

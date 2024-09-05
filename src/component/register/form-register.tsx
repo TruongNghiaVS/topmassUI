@@ -9,6 +9,7 @@ import { StarIcon } from "@heroicons/react/16/solid";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 const FlagStarVN = () => {
   return (
@@ -36,10 +37,10 @@ const schema = yup.object().shape({
     .min(6, "Tối thiểu 6 ký tự")
     .max(50, "Tối đa 50 ký tự")
     .matches(/^(?=.*[A-Z])(?=.*\d)/, "Phải có 1 ký tự in hoa và 1 chữ số"),
-  is_used: yup
-    .boolean()
-    .required("Please check")
-    .oneOf([true], "Vui lòng chọn xác nhận với thoả thuận"),
+  // is_used: yup
+  //   .boolean()
+  //   .required("Please check")
+  //   .oneOf([true], "Vui lòng chọn xác nhận với thoả thuận"),
 });
 
 export const FormRegister = () => {
@@ -52,11 +53,12 @@ export const FormRegister = () => {
       phone_number: "",
       email: "",
       password: "",
-      is_used: false,
+      // is_used: false,
     },
   });
 
   const onSubmit: SubmitHandler<IRegister> = (data) => {
+    toast.success("Đăng ký thành công");
     console.log(data);
   };
 
@@ -68,20 +70,6 @@ export const FormRegister = () => {
       <div className="mb-4 font-normal">
         Cùng xây dựng một hệ sinh thái tuyển dụng nhân sự cùng với nguồn ứng
         viên khổng lồ từ Topmass
-      </div>
-      <div className="grid grid-cols-2 gap-x-8 mb-8">
-        <div className="col-span-1">
-          <button className="flex items-center justify-center border border-solid border-[#8E8D8D] w-full py-2 bg-[#F9F9F9] rounded">
-            <img src="/imgs/facebook.png" alt="" className="w-6 mr-2" />
-            <div className="text-xs font-normal">Với tài khoản Facebook</div>
-          </button>
-        </div>
-        <div className="col-span-1">
-          <button className="flex items-center justify-center border border-solid border-[#8E8D8D] w-full py-2 bg-[#F9F9F9] rounded">
-            <img src="/imgs/google.png" alt="" className="w-6 mr-2" />
-            <div className="text-xs font-normal">Với tài khoản Google</div>
-          </button>
-        </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="sm:grid grid-cols-2 gap-x-8 mb-8">

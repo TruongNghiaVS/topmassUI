@@ -5,7 +5,7 @@ export interface IRegister {
   phone_number: string;
   email: string;
   password: string;
-  is_used: boolean;
+  // is_used: boolean;
 }
 
 export interface ILogin {

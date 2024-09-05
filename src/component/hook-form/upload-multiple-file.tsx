@@ -35,8 +35,6 @@ const CustomUploadMulti: React.FC<IUpload> = ({
     filesArray.forEach((file) => {
       dataTransfer.items.add(file);
     });
-    console.log(filesArray);
-    console.log(dataTransfer);
     return dataTransfer.files;
   };
 

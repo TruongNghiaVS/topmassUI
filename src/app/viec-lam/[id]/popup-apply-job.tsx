@@ -103,7 +103,7 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
                     value={cv.value}
                     name="cv"
                     checked={cv.value === cvValue}
-                    onChange={() => setCvValue(cv.value)}
+                    onChange={() => (setCvValue(cv.value), setFile(null))}
                   />
                   <div className="mx-2">{cv.label}</div>
                 </div>
@@ -118,7 +118,12 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
             ))}
           </div>
           <div className="p-4 mt-4 border border-[#F37A20] rounded">
-            <UploadFile file={file} setFile={setFile} />
+            <UploadFile
+              file={file}
+              setFile={setFile}
+              setCvValue={setCvValue}
+              cvValue="cv1.pdf"
+            />
           </div>
           <form onSubmit={onSubmit}>
             <div className="p-4 mt-4 border border-[#F37A20] rounded">

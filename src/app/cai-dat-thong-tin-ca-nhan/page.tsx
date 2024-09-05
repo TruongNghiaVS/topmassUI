@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useMemo } from "react";
 import { InfomationUser } from "@/component/infomation-user-right";
+import { toast } from "react-toastify";
 
 export default function InfomationEditUser() {
   const schema = yup.object().shape({
@@ -19,7 +20,7 @@ export default function InfomationEditUser() {
   const defaultValues = useMemo(
     () => ({
       username: "",
-      phone_number: null,
+      phone_number: undefined,
       email: "thai.nn@vietstargroup.vn",
     }),
     []
@@ -31,6 +32,7 @@ export default function InfomationEditUser() {
   });
 
   const onSubmit = handleSubmit((data) => {
+    toast.success("Cập nhật thông tin thành công");
     console.log(data);
   });
 
@@ -80,7 +82,7 @@ export default function InfomationEditUser() {
                   type="submit"
                   className=" mt-4 px-4 py-2 bg-[#F37A20] rounded text-white"
                 >
-                  Đăng nhập
+                  Cập nhật
                 </button>
               </form>
             </div>

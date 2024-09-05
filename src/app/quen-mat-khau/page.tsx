@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { IResetpassword } from "../interface/interface";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const schema = yup.object().shape({
@@ -24,6 +25,7 @@ export default function Login() {
   });
 
   const onSubmit: SubmitHandler<IResetpassword> = (data) => {
+    toast.success("Gửi thông tin thành công");
     console.log(data);
   };
   return (

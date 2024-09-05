@@ -11,16 +11,7 @@ export const Ultil = () => {
             <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
               <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
               <div>
-                <div>Tính bảo hiểm thất nghiệp</div>
-                <div className="text-[#D14B00] text-[10px] flex items-center">
-                  Sử dụng ngay <ArrowLongRightIcon className="w-4" />
-                </div>
-              </div>
-            </div>
-            <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
-              <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
-              <div>
-                <div>Tính lãi suất kép</div>
+                <div>Tính lương NET và GROSS</div>
                 <div className="text-[#D14B00] text-[10px] flex items-center">
                   Sử dụng ngay <ArrowLongRightIcon className="w-4" />
                 </div>
@@ -48,15 +39,6 @@ export const Ultil = () => {
               <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
               <div className="text-start">
                 <div>Tính bảo hiểm thất nghiệp</div>
-                <div className="text-[#D14B00] text-[10px] flex items-center">
-                  Sử dụng ngay <ArrowLongRightIcon className="w-4" />
-                </div>
-              </div>
-            </div>
-            <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
-              <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
-              <div className="text-start">
-                <div>Lập kế hoạch tiết kiệm</div>
                 <div className="text-[#D14B00] text-[10px] flex items-center">
                   Sử dụng ngay <ArrowLongRightIcon className="w-4" />
                 </div>
