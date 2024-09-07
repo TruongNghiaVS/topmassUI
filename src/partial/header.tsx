@@ -169,13 +169,6 @@ export const Header = () => {
 };
 
 const DropdownUser = ({ subMenu, pathCheck, setIsLogin }: IDropdownMenu) => {
-  const invalidPath = [
-    "/cai-dat-thong-tin-ca-nhan",
-    "/xem-ho-so",
-    "/cai-dat-goi-y-viec-lam",
-    "/doi-mat-khau",
-  ];
-
   const path = usePathname();
   const router = useRouter();
   return (
@@ -204,9 +197,7 @@ const DropdownUser = ({ subMenu, pathCheck, setIsLogin }: IDropdownMenu) => {
           removeToken();
           setIsLogin(false);
           toast.success("Đăng xuất thành công");
-          if (invalidPath.includes(path)) {
-            router.push("/dang-nhap");
-          }
+          router.push("/");
         }}
       >
         <Link
