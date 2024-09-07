@@ -1,15 +1,16 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface IRegister {
-  last_name?: string;
-  first_name?: string;
-  first_phone?: string;
-  phone_number: string;
+  lastName: string;
+  firstName: string;
+  phone: string;
   email: string;
   password: string;
   // is_used: boolean;
 }
 
 export interface ILogin {
-  email: string;
+  userName: string;
   password: string;
 }
 
@@ -25,6 +26,10 @@ export interface IResetpassword {
 
 export interface IChangePassword {
   old_password: string;
+  password: string;
+}
+
+export interface IConfirmResetPassword {
   password: string;
 }
 
@@ -45,3 +50,30 @@ export interface IContact {
   title: string;
   content: string;
 }
+
+export interface ILoginForm {
+  onClose?: () => void;
+}
+
+export type ISubmenuProps = {
+  subMenu: {
+    title: string;
+    slug: string;
+    icon: any;
+    border?: boolean;
+    after?: any;
+  }[];
+  pathCheck: string;
+};
+
+export type IDropdownMenu = {
+  subMenu: {
+    title: string;
+    slug: string;
+    icon: any;
+    border?: boolean;
+    after?: any;
+  }[];
+  pathCheck: string;
+  setIsLogin: Dispatch<SetStateAction<boolean>>;
+};

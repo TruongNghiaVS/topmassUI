@@ -3,27 +3,19 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import TmInput from "../hook-form/input";
 import { IRegister } from "@/app/interface/interface";
-import TmSelect from "../hook-form/select";
-import { areaCode } from "@/mockup-data/data";
-import { StarIcon } from "@heroicons/react/16/solid";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { toast } from "react-toastify";
-
-const FlagStarVN = () => {
-  return (
-    <div className="py-1 px-2 bg-[#D32F2F] border">
-      <StarIcon className="text-[#EBA432] w-3" />
-    </div>
-  );
-};
+import { AxiosError } from "axios";
+import { REGISTER } from "@/utils/api-url";
+import { axiosInstanceNotToken } from "@/utils/axios";
+import { useLoading } from "@/app/context/loading";
 
 const schema = yup.object().shape({
-  last_name: yup.string(),
-  first_name: yup.string(),
-  first_phone: yup.string(),
-  phone_number: yup
+  lastName: yup.string().required("Vui lòng nhập tên"),
+  firstName: yup.string().required("Vui lòng nhập họ"),
+  phone: yup
     .string()
     .required("Bắt buộc nhập số điện thoại")
     .matches(/^[0-9]{10}$/, "Số điện thoại phải là 10 ký tự"),
@@ -44,22 +36,50 @@ const schema = yup.object().shape({
 });
 
 export const FormRegister = () => {
+  const { setLoading } = useLoading();
+
   const { handleSubmit, control } = useForm<IRegister>({
     resolver: yupResolver(schema),
     defaultValues: {
-      last_name: "",
-      first_name: "",
-      first_phone: "0",
-      phone_number: "",
+      lastName: "",
+      firstName: "",
+      phone: "",
       email: "",
       password: "",
       // is_used: false,
     },
   });
 
-  const onSubmit: SubmitHandler<IRegister> = (data) => {
-    toast.success("Đăng ký thành công");
-    console.log(data);
+  const onSubmit: SubmitHandler<IRegister> = async (data) => {
+    setLoading(true);
+    try {
+      const response = await axiosInstanceNotToken.post(REGISTER, data);
+
+      if (response.data.success) {
+        toast.success("Đăng ký thành công");
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(
+          (props: any) => {
+            return props.data.dataError.map((itemError: any) => {
+              return (
+                <div key={itemError.errorCode}>
+                  {itemError.errorCode} : {itemError.errorMesage}
+                </div>
+              );
+            });
+          },
+          {
+            data: {
+              dataError: error.response?.data.dataEror,
+            },
+          }
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -74,13 +94,17 @@ export const FormRegister = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="sm:grid grid-cols-2 gap-x-8 mb-8">
           <div className="col-span-1">
-            <div className="">Tên</div>
-            <TmInput name="last_name" control={control} />
+            <div className="">
+              Tên <span className="text-[#dc2f2f]">*</span>
+            </div>
+            <TmInput name="lastName" control={control} />
           </div>
           <div className="col-span-1">
             <div className="col-span-1">
-              <div className="">Họ</div>
-              <TmInput control={control} name="first_name" />
+              <div className="">
+                Họ <span className="text-[#dc2f2f]">*</span>
+              </div>
+              <TmInput control={control} name="firstName" />
             </div>
           </div>
         </div>
@@ -89,15 +113,8 @@ export const FormRegister = () => {
             Số điện thoại <span className="text-[#dc2f2f]">*</span>
           </div>
           <div className="flex">
-            <TmSelect
-              control={control}
-              name="first_phone"
-              icon={<FlagStarVN />}
-              className="py-2.5 pr-2 mr-2"
-              options={areaCode}
-            />
             <div className="flex-grow">
-              <TmInput control={control} name="phone_number" />
+              <TmInput control={control} name="phone" />
             </div>
           </div>
         </div>

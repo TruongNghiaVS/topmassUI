@@ -1,3 +1,4 @@
+import { ISubmenuProps } from "@/app/interface/interface";
 import { BagBootstrapIcon } from "@/theme/icons/bagBootstrapIcon";
 import { EnvelopePaperHeartFillBootstrapIcon } from "@/theme/icons/envelopePaperHeartFillBootstrapIcon";
 import { PersonBargeBootstrapIcon } from "@/theme/icons/personBargeBootstrapIcon";
@@ -151,17 +152,6 @@ export const Menu = () => {
       </div>
     </>
   );
-};
-
-export type ISubmenuProps = {
-  subMenu: {
-    title: string;
-    slug: string;
-    icon: any;
-    border?: boolean;
-    after?: any;
-  }[];
-  pathCheck: string;
 };
 
 export const SubMenu = ({ subMenu, pathCheck }: ISubmenuProps) => {

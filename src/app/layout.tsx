@@ -10,6 +10,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { LoadingProvider } from "./context/loading";
+import GlobalLoadingIndicator from "@/component/loading-componet";
 dayjs.extend(customParseFormat);
 
 const roboto = localFont({
@@ -53,7 +55,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable} font-roboto`}>
-        <GlobalProvider>
+        <LoadingProvider>
+          <GlobalLoadingIndicator />
           {!pathValidated.includes(path) && (
             <div className="relative z-[10]">
               <Header />
@@ -64,7 +67,7 @@ export default function RootLayout({
             <ToastContainer autoClose={1000} />
           </main>
           {!pathValidated.includes(path) && <Footer />}
-        </GlobalProvider>
+        </LoadingProvider>
       </body>
     </html>
   );

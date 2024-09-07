@@ -8,8 +8,14 @@ import { IResetpassword } from "../interface/interface";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { HOST_API } from "@/config-global";
+import { FORGOT_PASSWORD } from "@/utils/api-url";
+import { useLoading } from "../context/loading";
 
 export default function Login() {
+  const { setLoading } = useLoading();
+
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -24,9 +30,22 @@ export default function Login() {
     },
   });
 
-  const onSubmit: SubmitHandler<IResetpassword> = (data) => {
-    toast.success("Gửi thông tin thành công");
-    console.log(data);
+  const onSubmit: SubmitHandler<IResetpassword> = async (data) => {
+    try {
+      setLoading(true);
+      const axiosInstance = axios.create({
+        baseURL: HOST_API,
+        headers: { "Content-Type": "application/json" },
+      });
+      axiosInstance.interceptors.response.use((response) => response.data);
+      await axiosInstance.post(FORGOT_PASSWORD, data);
+      toast.success("Gửi thông tin thành công");
+      console.log(data);
+    } catch (error) {
+      toast.error("Gửi thông tin thất bại");
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div>
