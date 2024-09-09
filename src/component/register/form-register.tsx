@@ -11,6 +11,7 @@ import { AxiosError } from "axios";
 import { REGISTER } from "@/utils/api-url";
 import { axiosInstanceNotToken } from "@/utils/axios";
 import { useLoading } from "@/app/context/loading";
+import { useRouter } from "next/navigation";
 
 const schema = yup.object().shape({
   lastName: yup.string().required("Vui lòng nhập tên"),
@@ -37,7 +38,7 @@ const schema = yup.object().shape({
 
 export const FormRegister = () => {
   const { setLoading } = useLoading();
-
+  const router = useRouter();
   const { handleSubmit, control } = useForm<IRegister>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -54,9 +55,9 @@ export const FormRegister = () => {
     setLoading(true);
     try {
       const response = await axiosInstanceNotToken.post(REGISTER, data);
-
-      if (response.data.success) {
+      if (response) {
         toast.success("Đăng ký thành công");
+        router.push("/dang-nhap");
       }
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -85,7 +86,7 @@ export const FormRegister = () => {
   return (
     <div>
       <div className="text-2xl font-normal mb-4 text-[#F37A20]">
-        Đăng ký tài khoản nhà tuyển dụng
+        Đăng ký tài khoản ứng viên
       </div>
       <div className="mb-4 font-normal">
         Cùng xây dựng một hệ sinh thái tuyển dụng nhân sự cùng với nguồn ứng

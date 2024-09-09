@@ -7,25 +7,43 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { IChangePassword } from "../interface/interface";
 import { InfomationUser } from "@/component/infomation-user-right";
+import axiosInstance from "@/utils/axios";
+import { FORGOT_CHANGE_PASSWORD } from "@/utils/api-url";
+import { useLoading } from "../context/loading";
 
 export default function ChangePassword() {
+  const { setLoading } = useLoading();
   const schema = yup.object().shape({
-    old_password: yup.string().required("Vui lòng nhập mật khẩu củ"),
-    password: yup.string().required("Vui lòng nhập mật khẩu củ"),
+    password: yup
+      .string()
+      .required("Bắt buộc nhập password")
+      .min(6, "Tối thiểu 6 ký tự")
+      .max(50, "Tối đa 50 ký tự")
+      .matches(/^(?=.*[A-Z])(?=.*\d)/, "Phải có 1 ký tự in hoa và 1 chữ số"),
   });
 
-  const { handleSubmit, control } = useForm<IChangePassword>({
+  const { handleSubmit, control, reset } = useForm<IChangePassword>({
     resolver: yupResolver(schema),
     defaultValues: {
-      old_password: "",
       password: "",
     },
   });
 
-  const onSubmit: SubmitHandler<IChangePassword> = (data) => {
-    toast.success("Đổi mật khẩu thành công!");
-
-    console.log(data);
+  const onSubmit: SubmitHandler<IChangePassword> = async (data) => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.post(FORGOT_CHANGE_PASSWORD, data);
+      if (response) {
+        toast.success("Đổi mật khẩu thành công!");
+        reset({
+          password: "",
+        });
+      }
+    } catch (error) {
+      toast.error("Đổi mật khẩu không thành công");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -40,23 +58,12 @@ export default function ChangePassword() {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
                   <div>
-                    Mật khẩu hiện tại <span className="text-[#dc2f2f]">*</span>
-                  </div>
-                  <TmInput
-                    control={control}
-                    placeholder="Password"
-                    name="old_password"
-                    type="password"
-                  />
-                </div>
-                <div className="mb-4">
-                  <div>
-                    Mật khẩu mới <span className="text-[#dc2f2f]">*</span>
+                    Mật khẩu <span className="text-[#dc2f2f]">*</span>
                   </div>
                   <TmInput
                     control={control}
                     name="password"
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     type="password"
                   />
                 </div>

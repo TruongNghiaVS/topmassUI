@@ -1,40 +1,83 @@
 "use client";
 import TmInput from "@/component/hook-form/input";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { useMemo } from "react";
 import { InfomationUser } from "@/component/infomation-user-right";
 import { toast } from "react-toastify";
+import { IProfileInfomation } from "../interface/interface";
+import { useLoading } from "../context/loading";
+import axiosInstance, { fetcher } from "@/utils/axios";
+import { CURRENT_USER, UPDATE_BASIC_INFO } from "@/utils/api-url";
+import { AxiosError } from "axios";
+import useSWR from "swr";
+import { useEffect, useState } from "react";
 
 export default function InfomationEditUser() {
-  const schema = yup.object().shape({
-    username: yup.string().required("Bắt buộc nhập họ và tên"),
-    phone_number: yup
-      .string()
-      .notRequired()
-      .matches(/^[0-9]{10}$/, "Số điện thoại phải là 10 ký tự"),
-    email: yup.string(),
-  });
-
-  const defaultValues = useMemo(
-    () => ({
-      username: "",
-      phone_number: undefined,
-      email: "thai.nn@vietstargroup.vn",
-    }),
-    []
+  const { mutate, data: currentUser, error } = useSWR<IProfileInfomation>(
+    CURRENT_USER,
+    fetcher
   );
 
-  const { control, handleSubmit } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues,
+  const { setLoading } = useLoading();
+  const schema = yup.object().shape({
+    firstName: yup.string().required("Bắt buộc nhập họ"),
+    lastName: yup.string().required("Bắt buộc nhập tên"),
+    phone: yup
+      .string()
+      .matches(/^[0-9]{10}$/, "Số điện thoại phải là 10 ký tự"),
+    email: yup.string(),
+    avatarLink: yup.string(),
   });
 
-  const onSubmit = handleSubmit((data) => {
-    toast.success("Cập nhật thông tin thành công");
-    console.log(data);
+  const { control, handleSubmit, setValue } = useForm<IProfileInfomation>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+    },
   });
+
+  useEffect(() => {
+    if (currentUser) {
+      setValue("firstName", currentUser.firstName);
+      setValue("lastName", currentUser.lastName);
+      setValue("phone", currentUser.phone);
+      setValue("email", currentUser.email);
+    }
+  }, [currentUser, setValue]);
+
+  const onSubmit: SubmitHandler<IProfileInfomation> = async (data) => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.post(UPDATE_BASIC_INFO, data);
+      if (response) {
+        toast.success("Cập nhật thông tin thành công");
+        mutate();
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(
+          (props: any) => {
+            return props.data.dataError.map((itemError: any) => {
+              return (
+                <div key={itemError.errorCode}>{itemError.errorMesage}</div>
+              );
+            });
+          },
+          {
+            data: {
+              dataError: error.response?.data.dataEror,
+            },
+          }
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="bg-[#F4F5F5] max-1280:px-2">
@@ -49,21 +92,31 @@ export default function InfomationEditUser() {
                 <span className="text-[#dc2f2f]">(*)</span> Các thông tin bắt
                 buộc
               </div>
-              <form onSubmit={onSubmit}>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mt-4">
                   <label className="font-normal">
-                    Họ và tên <span className="text-[#dc2f2f]">*</span>
+                    Họ <span className="text-[#dc2f2f]">*</span>
                   </label>
                   <TmInput
-                    name="username"
+                    name="firstName"
                     control={control}
-                    placeholder="Họ và tên"
+                    placeholder="Họ"
+                  />
+                </div>
+                <div className="mt-4">
+                  <label className="font-normal">
+                    Tên <span className="text-[#dc2f2f]">*</span>
+                  </label>
+                  <TmInput
+                    name="lastName"
+                    control={control}
+                    placeholder="Tên"
                   />
                 </div>
                 <div className="mt-4">
                   <div className="font-normal">Số điện thoại</div>
                   <TmInput
-                    name="phone_number"
+                    name="phone"
                     control={control}
                     placeholder="Số điện thoại"
                   />

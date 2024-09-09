@@ -11,6 +11,7 @@ const TmInput: React.FC<ITmInput> = ({
   className,
   min,
   max,
+  disabled = false,
 }) => {
   const {
     field: { value, onChange, onBlur },
@@ -30,6 +31,7 @@ const TmInput: React.FC<ITmInput> = ({
           onChange={onChange}
           onBlur={onBlur}
           placeholder={placeholder}
+          disabled={disabled}
           min={type === "number" ? min : undefined}
           max={type === "number" ? max : undefined}
           className={`p-2 border rounded-md w-full focus-visible:outline-none ${className} ${

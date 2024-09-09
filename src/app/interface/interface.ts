@@ -25,7 +25,6 @@ export interface IResetpassword {
 }
 
 export interface IChangePassword {
-  old_password: string;
   password: string;
 }
 
@@ -77,3 +76,16 @@ export type IDropdownMenu = {
   pathCheck: string;
   setIsLogin: Dispatch<SetStateAction<boolean>>;
 };
+
+export interface IProfileInfomation {
+  firstName: string;
+  lastName: string;
+  phone?: string;
+  email?: string;
+  avatarLink?: string;
+}
+
+export interface IAvatarProps {
+  avatarLink: string;
+  setAvatarLink: Dispatch<SetStateAction<string>>;
+}

@@ -1,17 +1,59 @@
-import { CameraIcon, UserCircleIcon } from "@heroicons/react/16/solid";
+"use client";
+import { useLoading } from "@/app/context/loading";
+import { CURRENT_USER, UPDATE_MODE } from "@/utils/api-url";
+import axiosInstance, { fetcher } from "@/utils/axios";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import useSWR from "swr";
+import { Avatar } from "./avatar";
 
 export const InfomationUser = () => {
+  const { setLoading } = useLoading();
+  const [mode, setMode] = useState({ workMode: false, searchMode: false });
+  const [avatarLink, setAvatarLink] = useState("");
+  const { mutate, data: currentUser, error } = useSWR(CURRENT_USER, fetcher, {
+    revalidateOnFocus: false,
+  });
+
+  useEffect(() => {
+    if (currentUser) {
+      setMode({
+        workMode: currentUser.workMode,
+        searchMode: currentUser.searchMode,
+      });
+      setAvatarLink(currentUser.avatarLink);
+    }
+  }, [currentUser]);
+
+  const updateMode = async (value: number, checked: boolean) => {
+    const newValue = { workMode: false, searchMode: false };
+    if (value === 1) {
+      newValue.workMode = checked;
+      newValue.searchMode = mode.searchMode;
+    }
+    if (value === 2) {
+      newValue.workMode = mode.workMode;
+      newValue.searchMode = checked;
+    }
+    setLoading(true);
+    try {
+      const response = await axiosInstance.post(UPDATE_MODE, newValue);
+      if (response) {
+        toast.success("Chuyển trạng thái thành công");
+        mutate();
+      }
+    } catch (error) {
+      toast.success("Chuyển trạng thái không thành công");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="rounded-2xl bg-white p-4 pb-10">
+      <div></div>
       <div className="flex items-center">
-        <div className="mr-6 relative">
-          <img src="/imgs/no-img.png" alt="" className="" />
-          <div className="absolute right-0 bottom-0 ">
-            <button className=" p-1 rounded-full bg-gradient-to-r from-[#F89E1B] to-[#F37A20]">
-              <CameraIcon className="w-4 text-white" />
-            </button>
-          </div>
-        </div>
+        <Avatar avatarLink={avatarLink} setAvatarLink={setAvatarLink} />
         <div>
           <div>Chào bạn</div>
           <div>MKT VietStar</div>
@@ -23,7 +65,14 @@ export const InfomationUser = () => {
       <div className="mt-5">
         <div>
           <label className="inline-flex items-center cursor-pointer">
-            <input type="checkbox" value="" className="sr-only peer " />
+            <input
+              type="checkbox"
+              checked={mode.workMode}
+              onChange={(e) => {
+                updateMode(1, e.target.checked);
+              }}
+              className="sr-only peer "
+            />
             <div className="relative w-11 h-6 bg-[#9A9A9B] peer-focus:outline-none min-w-11 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all after:duration-500 peer-checked:bg-gradient-to-r peer-checked:from-[#F89E1B] peer-checked:to-[#F37A20]"></div>
             <span className="ms-3 text-sm font-medium text-[#555555]">
               Đang tắt tìm việc
@@ -38,7 +87,14 @@ export const InfomationUser = () => {
       <div className="mt-5">
         <div>
           <label className="inline-flex items-center cursor-pointer">
-            <input type="checkbox" value="" className="sr-only peer " />
+            <input
+              type="checkbox"
+              checked={mode.searchMode}
+              onChange={(e) => {
+                updateMode(2, e.target.checked);
+              }}
+              className="sr-only peer "
+            />
             <div className="relative w-11 h-6 bg-[#9A9A9B] peer-focus:outline-none min-w-11 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all after:duration-500 peer-checked:bg-gradient-to-r peer-checked:from-[#F89E1B] peer-checked:to-[#F37A20]"></div>
             <span className="ms-3 text-sm font-medium text-[#555555]">
               Cho phép nhà tuyển dụng tìm kiếm hồ sơ
