@@ -120,7 +120,7 @@ export const Header = () => {
                 </div>
               </button>
               <Link
-                href="http://192.168.1.2:3003"
+                href="http://42.115.94.180:8586/"
                 target="_blank"
                 className="text-xs "
               >
