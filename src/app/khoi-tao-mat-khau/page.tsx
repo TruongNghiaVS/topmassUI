@@ -15,7 +15,7 @@ import {
   CONFIRM_FORGOT_PASSWORD,
   FORGOT_CHANGE_PASSWORD,
 } from "@/utils/api-url";
-import { setToken } from "@/utils/token";
+import { removeToken, setToken } from "@/utils/token";
 import { useLoading } from "../context/loading";
 
 export default function ResetPassword() {
@@ -64,7 +64,8 @@ export default function ResetPassword() {
     try {
       await axiosInstance.post(FORGOT_CHANGE_PASSWORD, data);
       toast.success("Đổi mật khẩu thành công!");
-      router.push("/dang-nhap");
+      removeToken();
+      setStatus(3);
     } catch (error) {
       toast.error("Đổi mật khẩu không thành công!");
     } finally {
@@ -116,6 +117,16 @@ export default function ResetPassword() {
           {status === 2 && (
             <div className="mb-4 font-medium text-red-700">
               Xác thực không thành công. Vui lòng kiểm tra lại email
+            </div>
+          )}
+
+          {status === 3 && (
+            <div className="font medium">
+              Đổi mật khẩu thành công. Vui lòng bấm vào{" "}
+              <Link href="/dang-nhap" className="text-[#F37A20] ">
+                đây
+              </Link>{" "}
+              để đăng nhập{" "}
             </div>
           )}
 

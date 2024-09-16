@@ -93,7 +93,7 @@ export const FormRegister = () => {
         viên khổng lồ từ Topmass
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="sm:grid grid-cols-2 gap-x-8 mb-8">
+        <div className="sm:grid grid-cols-2 gap-x-8 mb-2">
           <div className="col-span-1">
             <div className="">
               Tên <span className="text-[#dc2f2f]">*</span>
@@ -109,7 +109,7 @@ export const FormRegister = () => {
             </div>
           </div>
         </div>
-        <div className="mb-8">
+        <div className="mb-2">
           <div className="">
             Số điện thoại <span className="text-[#dc2f2f]">*</span>
           </div>
@@ -119,7 +119,7 @@ export const FormRegister = () => {
             </div>
           </div>
         </div>
-        <div className="mb-8">
+        <div className="mb-2">
           <div>
             Email <span className="text-[#dc2f2f]">*</span>
           </div>
@@ -130,7 +130,7 @@ export const FormRegister = () => {
             type="email"
           />
         </div>
-        <div className="mb-8">
+        <div className="mb-2">
           <div>
             Password <span className="text-[#dc2f2f]">*</span>
           </div>
