@@ -12,6 +12,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { LoadingProvider } from "./context/loading";
 import GlobalLoadingIndicator from "@/component/loading-componet";
+import useAuth from "@/component/hook/useAuthToken";
 dayjs.extend(customParseFormat);
 
 const roboto = localFont({
@@ -52,6 +53,8 @@ export default function RootLayout({
     "/quen-mat-khau",
     "/khoi-tao-mat-khau",
   ];
+
+  useAuth();
   return (
     <html lang="en">
       <body className={`${roboto.variable} font-roboto`}>
