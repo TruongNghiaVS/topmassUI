@@ -12,6 +12,7 @@ import { REGISTER } from "@/utils/api-url";
 import { axiosInstanceNotToken } from "@/utils/axios";
 import { useLoading } from "@/app/context/loading";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const schema = yup.object().shape({
   lastName: yup.string().required("Vui lòng nhập tên"),
@@ -37,6 +38,8 @@ const schema = yup.object().shape({
 });
 
 export const FormRegister = () => {
+  const [isRegister, setIsRegister] = useState(false);
+
   const { setLoading } = useLoading();
   const router = useRouter();
   const { handleSubmit, control } = useForm<IRegister>({
@@ -57,7 +60,7 @@ export const FormRegister = () => {
       const response = await axiosInstanceNotToken.post(REGISTER, data);
       if (response) {
         toast.success("Đăng ký thành công");
-        router.push("/dang-nhap");
+        setIsRegister(true);
       }
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -92,70 +95,82 @@ export const FormRegister = () => {
         Cùng xây dựng một hệ sinh thái tuyển dụng nhân sự cùng với nguồn ứng
         viên khổng lồ từ Topmass
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="sm:grid grid-cols-2 gap-x-8 mb-2">
-          <div className="col-span-1">
-            <div className="">
-              Tên <span className="text-[#dc2f2f]">*</span>
-            </div>
-            <TmInput name="lastName" control={control} />
-          </div>
-          <div className="col-span-1">
-            <div className="col-span-1">
-              <div className="">
-                Họ <span className="text-[#dc2f2f]">*</span>
+      {!isRegister ? (
+        <div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="sm:grid grid-cols-2 gap-x-8 mb-2">
+              <div className="col-span-1">
+                <div className="">
+                  Tên <span className="text-[#dc2f2f]">*</span>
+                </div>
+                <TmInput name="lastName" control={control} />
               </div>
-              <TmInput control={control} name="firstName" />
+              <div className="col-span-1">
+                <div className="col-span-1">
+                  <div className="">
+                    Họ <span className="text-[#dc2f2f]">*</span>
+                  </div>
+                  <TmInput control={control} name="firstName" />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="mb-2">
-          <div className="">
-            Số điện thoại <span className="text-[#dc2f2f]">*</span>
-          </div>
-          <div className="flex">
-            <div className="flex-grow">
-              <TmInput control={control} name="phone" />
+            <div className="mb-2">
+              <div className="">
+                Số điện thoại <span className="text-[#dc2f2f]">*</span>
+              </div>
+              <div className="flex">
+                <div className="flex-grow">
+                  <TmInput control={control} name="phone" />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="mb-2">
-          <div>
-            Email <span className="text-[#dc2f2f]">*</span>
-          </div>
-          <TmInput
-            control={control}
-            placeholder="Sử dụng email có thật để xác thực"
-            name="email"
-            type="email"
-          />
-        </div>
-        <div className="mb-2">
-          <div>
-            Password <span className="text-[#dc2f2f]">*</span>
-          </div>
-          <TmInput
-            control={control}
-            name="password"
-            placeholder="Từ 6 tới 50 ký tự,1 chữ hoa, 1 chữ số"
-            type="password"
-          />
-        </div>
+            <div className="mb-2">
+              <div>
+                Email <span className="text-[#dc2f2f]">*</span>
+              </div>
+              <TmInput
+                control={control}
+                placeholder="Sử dụng email có thật để xác thực"
+                name="email"
+                type="email"
+              />
+            </div>
+            <div className="mb-2">
+              <div>
+                Password <span className="text-[#dc2f2f]">*</span>
+              </div>
+              <TmInput
+                control={control}
+                name="password"
+                placeholder="Từ 6 tới 50 ký tự,1 chữ hoa, 1 chữ số"
+                type="password"
+              />
+            </div>
 
-        <button
-          type="submit"
-          className="w-full py-3 text-white bg-[#FF7D55] rounded-lg text-base font-bold"
-        >
-          Hoàn tất
-        </button>
-      </form>
-      <div className="text-[#8E8D8D] font-normal text-base mt-8 text-center pb-4 ">
-        Bạn đã có tài khoản?{" "}
-        <Link href="/dang-nhap" className="text-[#F37A20]">
-          Đăng nhập
-        </Link>{" "}
-        ngay
-      </div>
+            <button
+              type="submit"
+              className="w-full py-3 text-white bg-[#FF7D55] rounded-lg text-base font-bold"
+            >
+              Hoàn tất
+            </button>
+          </form>
+          <div className="text-[#8E8D8D] font-normal text-base mt-8 text-center pb-4 ">
+            Bạn đã có tài khoản?{" "}
+            <Link href="/dang-nhap" className="text-[#F37A20]">
+              Đăng nhập
+            </Link>{" "}
+            ngay
+          </div>
+        </div>
+      ) : (
+        <div className="font-medium">
+          Đăng ký thành công. Vui lòng bấm vào{" "}
+          <Link href="/dang-nhap" className="text-[#37A20]">
+            đây
+          </Link>{" "}
+          để đăng nhập
+        </div>
+      )}
     </div>
   );
 };
