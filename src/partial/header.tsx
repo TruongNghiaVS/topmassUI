@@ -106,19 +106,19 @@ export const Header = () => {
           <div id="menu">
             <Menu />
           </div>
-          <div className="flex">
+          <div className="flex ">
             <div className="flex items-center mr-[50px]">
-              <button
-                onClick={openModal}
+              <div
                 className={`text-xs mr-[30px] text-default ${
                   isLogin && "hidden"
                 }`}
               >
                 Người tìm việc <br />
                 <div className="text-sm leading-[14px] pt-2 inline block font-medium">
-                  Đăng nhập/Đăng ký
+                  <button onClick={openModal}>Đăng nhập</button>/
+                  <Link href="/dang-ky"> Đăng ký</Link>
                 </div>
-              </button>
+              </div>
               <Link
                 href="http://42.115.94.180:8586/"
                 target="_blank"
@@ -161,7 +161,11 @@ export const Header = () => {
           </div>
         </div>
       </section>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        className="md:min-w-[700px] max-h-[60vh] overflow-auto relative"
+      >
         <LoginForm onClose={closeModal} />
       </Modal>
     </>

@@ -3,7 +3,7 @@
 import { InfomationUser } from "@/component/infomation-user-right";
 import { ProfileCvNoInfomation } from "@/component/profile-cv-no-infomation";
 import { EyeIcon, LinkIcon, PencilSquareIcon } from "@heroicons/react/16/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InfomationUserCv } from "./setting/infomation-form";
 import { EducationUserCv } from "./setting/education-form";
 import { ExperienceUserCv } from "./setting/experience-form";
@@ -30,6 +30,7 @@ import { SupportToolView } from "./infomation-edit/support-tool-view";
 import { PrizeView } from "./infomation-edit/prize-view";
 import { CertificateView } from "./infomation-edit/certificate-view";
 import Modal from "@/component/modal";
+import { useSearchParams } from "next/navigation";
 
 type IProps = {
   title: string;
@@ -42,6 +43,8 @@ export default function ProfileCV() {
   const [selected, setSelected] = useState<number>(0);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const searchParams = useSearchParams();
 
   const onClose = () => {
     setIsOpen(false);
@@ -50,6 +53,13 @@ export default function ProfileCV() {
   const onOpen = () => {
     setIsOpen(true);
   };
+
+  useEffect(() => {
+    const statusCode = searchParams.get("status");
+    if (statusCode) {
+      setIsOpenModal(true);
+    }
+  }, [setIsOpenModal]);
 
   const lists: IProps[] = [
     {
@@ -236,6 +246,24 @@ export default function ProfileCV() {
           {selected === 8 && <CertificateInfomationCv />}
         </Modal>
       </div>
+
+      <Modal
+        isOpen={isOpenModal}
+        onClose={() => setIsOpenModal(false)}
+        className="text-center"
+      >
+        <div className="text-base font-medium text-[#F37A20]">
+          Vui lòng điền thông tin để chúng tôi khởi tạo cv cho bạn
+        </div>
+        <div className="flex justify-center mt-3">
+          <button
+            className="px-3 py-2 bg-[#F37A20] text-white rounded-lg "
+            onClick={() => setIsOpenModal(false)}
+          >
+            Đã hiểu
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }

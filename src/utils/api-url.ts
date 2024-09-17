@@ -8,3 +8,10 @@ export const UPDATE_BASIC_INFO = "/api/Profile/UpdateBasicInfo";
 export const CURRENT_USER = "/api/Authen/GetUserCurrent";
 export const UPDATE_MODE = "/api/Profile/UpdateMode";
 export const UPLOAD_IMG = "/Media/UploadAvatar";
+
+//----------------- Job -------------------//
+export const APPLY_CV_WITH_FILE = "/api/Job/ApplyJobWithCreateCV";
+export const APPLY_CV_WITH_CV = "/api/Job/ApplyJob";
+
+//------------ cv -----------//
+export const GET_ALL_CV = "/api/CV/GetAllCV";

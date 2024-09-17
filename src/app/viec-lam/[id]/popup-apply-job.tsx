@@ -1,47 +1,54 @@
+import { useLoading } from "@/app/context/loading";
+import { IApplyCv, IApplyModal, ICv, ILogin } from "@/app/interface/interface";
 import UploadFile from "@/component/hook-form/custom-upload";
 import TmInput from "@/component/hook-form/input";
 import TmTextArea from "@/component/hook-form/textarea";
 import Modal from "@/component/modal";
 import { CupHotFillBootstrapIcon } from "@/theme/icons/cupHotFillBootstrapIcon";
 import { VectorPenBootstrapIcon } from "@/theme/icons/vectorPenBootstrapIcon";
-import { FolderIcon } from "@heroicons/react/16/solid";
+import {
+  APPLY_CV_WITH_CV,
+  APPLY_CV_WITH_FILE,
+  GET_ALL_CV,
+  UPLOAD_IMG,
+} from "@/utils/api-url";
+import axiosInstance, { axiosInstanceImg, fetcher } from "@/utils/axios";
+import { FolderIcon, PhoneArrowDownLeftIcon } from "@heroicons/react/16/solid";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import useSWR from "swr";
 import * as yup from "yup";
 
-interface IApplyModal {
-  isModalOpen: boolean;
-  onClose: () => void;
-}
-
 export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
-  const [cvValue, setCvValue] = useState("cv1.pdf");
+  const { setLoading } = useLoading();
+  const [cvValue, setCvValue] = useState(0);
   const [file, setFile] = useState<File | null>(null);
-  const listCv = [
-    {
-      label: "Cv.pdf",
-      link: "/files/cv.pdf",
-      value: "cv1.pdf",
-    },
-    {
-      label: "Cv.pdf",
-      link: "/files/cv.pdf",
-      value: "cv2.pdf",
-    },
-    {
-      label: "Cv.pdf",
-      link: "/files/cv.pdf",
-      value: "cv3.pdf",
-    },
-    {
-      label: "Cv.pdf",
-      link: "/files/cv.pdf",
-      value: "cv4.pdf",
-    },
-  ];
+  const [listCv, setListCv] = useState<ICv[]>([]);
+
+  const { data: resCv, error } = useSWR(GET_ALL_CV, fetcher);
+
+  const getNameCv = (link: string) => {
+    const arr = link.split("/");
+    return arr[arr.length - 1];
+  };
+
+  useEffect(() => {
+    if (resCv) {
+      const data = resCv.map((item: any) => ({
+        id: item.id,
+        link: item.linkFile,
+        label: getNameCv(item.linkFile),
+      }));
+      if (data.length > 0) {
+        setListCv(data);
+        setCvValue(data[0].id);
+      }
+      setListCv([]);
+    }
+  }, [resCv, setListCv, setCvValue]);
 
   const schema = yup.object().shape({
     username: yup.string().required("Bắt buộc nhập họ và tên"),
@@ -53,27 +60,51 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
     description: yup.string(),
   });
 
-  const defaultValues = useMemo(
-    () => ({
-      username: "Nguyễn Ngọc Thái",
-      phone_number: "0348364276",
+  const { handleSubmit, control } = useForm<IApplyCv>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      username: "Nguyễn Trường Nghĩa",
+      phone_number: "0123456789",
       email: "thai.nn@vietstargroup.vn",
       description:
         "Với 4 năm trong lĩnh vực marketing. phát triển thị trường trên nền tảng online. Mong muốn làm việc ở môi trường chuyên nghiệp và mang lại hiệu quả cao trong việc cũng như góp phần vào sự phát triển của công ty. Hi vọng sẽ được đồng hành với công ty trong thời gian tới. Xin Cảm Ơn.",
-    }),
-    []
-  );
-
-  const { handleSubmit, control } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues,
+    },
   });
+  const onSubmit: SubmitHandler<IApplyCv> = async (data) => {
+    setLoading(true);
+    try {
+      const dataApply: any = {
+        fullName: data.username,
+        phone: data.phone_number,
+        email: data.email,
+        jobId: 12,
+      };
 
-  const onSubmit = handleSubmit((data) => {
-    toast.success("Nộp CV thành công");
-    onClose();
-    console.log(data);
-  });
+      if (file) {
+        const response = await axiosInstanceImg.post(UPLOAD_IMG, {
+          file: file,
+        });
+        dataApply.typeData = 2;
+        dataApply.templateID = 0;
+        dataApply.linkFile = response.data.fullLink;
+      }
+
+      if (cvValue > 0) {
+        dataApply.cvId = cvValue;
+      }
+
+      const url = cvValue > 0 ? APPLY_CV_WITH_CV : APPLY_CV_WITH_FILE;
+
+      const res = axiosInstance.post(url, dataApply);
+      setCvValue(listCv[0].id);
+      setFile(null);
+      toast.success("Nộp CV thành công");
+      onClose();
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="relative rounded-lg">
@@ -94,71 +125,70 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
               CV trong thư viện của tôi
             </div>
           </div>
-          <div className="p-4 border border-[#F37A20] rounded">
-            {listCv.map((cv, idx) => (
-              <div key={idx} className="flex justify-between my-2">
-                <div className="flex">
-                  <input
-                    type="radio"
-                    value={cv.value}
-                    name="cv"
-                    checked={cv.value === cvValue}
-                    onChange={() => (setCvValue(cv.value), setFile(null))}
-                  />
-                  <div className="mx-2">{cv.label}</div>
+          {listCv.length > 0 && (
+            <div className="p-4 border border-[#F37A20] rounded">
+              {listCv.map((cv, idx) => (
+                <div key={idx} className="flex justify-between my-2">
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      value={cv.id}
+                      name="cv"
+                      checked={cv.id === cvValue}
+                      onChange={() => (setCvValue(cv.id), setFile(null))}
+                    />
+                    <div className="mx-2">{cv.label}</div>
+                  </div>
+                  <Link
+                    href={cv.link}
+                    target="_blank"
+                    className="font-medium text-default"
+                  >
+                    Xem
+                  </Link>
                 </div>
-                <Link
-                  href={cv.link}
-                  target="_blank"
-                  className="font-medium text-default"
-                >
-                  Xem
-                </Link>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
+
+          {listCv.length === 0 && (
+            <div className=" mb-6">
+              <Link
+                className="px-4 py-2 rounded-lg text-white bg-[#F37A20]"
+                href="/profile-cv?status=true"
+              >
+                Vui lòng tạo CV
+              </Link>
+            </div>
+          )}
           <div className="p-4 mt-4 border border-[#F37A20] rounded">
             <UploadFile
               file={file}
               setFile={setFile}
               setCvValue={setCvValue}
-              cvValue="cv1.pdf"
+              cvValue={cvValue}
             />
           </div>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="p-4 mt-4 border border-[#F37A20] rounded">
               <div className="mt-4">
                 <label className="font-normal">
                   Họ và tên <span className="text-[#dc2f2f]">*</span>
                 </label>
-                <TmInput
-                  control={control}
-                  name="username"
-                  type="username"
-                  value={defaultValues.username}
-                />
+                <TmInput control={control} name="username" type="username" />
               </div>
               <div className="flex space-x-2">
                 <div className="mt-4 flex-1">
                   <div className="font-normal">
                     Email <span className="text-[#dc2f2f]">*</span>
                   </div>
-                  <TmInput
-                    control={control}
-                    name="email"
-                    type="email"
-                    value={defaultValues.email}
-                  />
+                  <TmInput control={control} name="email" type="email" />
                 </div>
                 <div className="mt-4 flex-1">
                   <div className="font-normal">
                     Số điện thoại <span className="text-[#dc2f2f]">*</span>
                   </div>
-                  <TmInput
-                    control={control}
-                    name="phone_number"
-                    value={defaultValues.phone_number}
-                  />
+                  <TmInput control={control} name="phone_number" />
                 </div>
               </div>
             </div>
@@ -172,7 +202,7 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
               thôi nhé!
             </div>
             <div className="relative">
-              <VectorPenBootstrapIcon className="w-4 text-default absolute top-6 right-2.5" />
+              <VectorPenBootstrapIcon className="w-4 text-default absolute top-9 right-2.5" />
               <TmTextArea
                 name="description"
                 control={control}

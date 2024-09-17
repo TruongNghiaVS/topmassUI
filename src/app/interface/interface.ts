@@ -89,3 +89,25 @@ export interface IAvatarProps {
   avatarLink: string;
   setAvatarLink: Dispatch<SetStateAction<string>>;
 }
+
+export interface IApplyModal {
+  isModalOpen: boolean;
+  onClose: () => void;
+}
+
+export interface IModalLoginProps extends IApplyModal {
+  onOpen: () => void;
+}
+
+export interface ICv {
+  label: string;
+  link: string;
+  id: number;
+}
+
+export interface IApplyCv {
+  username: string;
+  email: string;
+  phone_number: string;
+  description?: string;
+}

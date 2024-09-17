@@ -34,7 +34,11 @@ const Modal = ({ isOpen, onClose, children, className, title }: ModalProps) => {
               <XMarkIcon className="w-4" />
             </button>
           </div>
-          <div className={`modal-content ${className && className}`}>
+          <div
+            className={`modal-content md:min-w-[700px] max-h-[60vh] overflow-auto relative ${
+              className && className
+            }`}
+          >
             {children}
           </div>
         </div>

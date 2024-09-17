@@ -8,8 +8,8 @@ import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 interface IUploadFile {
   file: File | null;
   setFile: Dispatch<SetStateAction<File | null>>;
-  setCvValue: Dispatch<SetStateAction<string>>;
-  cvValue: string;
+  setCvValue: Dispatch<SetStateAction<number>>;
+  cvValue: number;
 }
 
 const UploadFile = ({ file, setFile, setCvValue, cvValue }: IUploadFile) => {
@@ -33,7 +33,7 @@ const UploadFile = ({ file, setFile, setCvValue, cvValue }: IUploadFile) => {
         ].includes(selectedFile.type)
       ) {
         setFile(selectedFile);
-        setCvValue("");
+        setCvValue(0);
         setError(null);
         console.log("Selected file:", selectedFile);
       } else {
@@ -70,7 +70,7 @@ const UploadFile = ({ file, setFile, setCvValue, cvValue }: IUploadFile) => {
         ].includes(droppedFile.type)
       ) {
         setFile(droppedFile);
-        setCvValue("");
+        setCvValue(0);
         setError(null);
         console.log("Dropped file:", droppedFile);
       } else {

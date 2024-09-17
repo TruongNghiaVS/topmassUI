@@ -18,10 +18,14 @@ import { HeartIcon } from "@heroicons/react/24/outline";
 import { PopupApplyJob } from "./popup-apply-job";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { getToken } from "@/utils/token";
+import { PopupLoginDetailJob } from "./popup-login-detail-job";
 
 export default function DetailJob({ params }: { params: { id: any } }) {
   const { id } = params;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOpenModalLogin, setIsOpenModalLogin] = useState(false);
+  const [defaultCvs, setDefaultCvs] = useState<string[]>([]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -29,6 +33,15 @@ export default function DetailJob({ params }: { params: { id: any } }) {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    const token = getToken();
+    if (token) {
+      openModal();
+    } else {
+      setIsOpenModalLogin(true);
+    }
   };
 
   return (
@@ -79,7 +92,9 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                   <div className="w-[67%] mr-8">
                     <button
                       className="flex justify-center items-center w-full py-2 bg-[#F37A20] rounded"
-                      onClick={openModal}
+                      onClick={() => {
+                        handleOpenModal();
+                      }}
                     >
                       <SendFillBootstrapIcon className="w-6 mr-2 text-white" />
                       <div className="text-xs font-bold text-white">
@@ -113,7 +128,9 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                   <div className="mr-2">
                     <button
                       className="flex justify-center items-center w-full py-2 bg-[#F37A20] rounded px-4 py-2"
-                      onClick={openModal}
+                      onClick={() => {
+                        handleOpenModal();
+                      }}
                     >
                       <SendFillBootstrapIcon className="w-4 mr-2 text-white" />
                       <div className="text-xs font-bold text-white">
@@ -148,6 +165,11 @@ export default function DetailJob({ params }: { params: { id: any } }) {
         </div>
       </div>
       <PopupApplyJob isModalOpen={isModalOpen} onClose={closeModal} />
+      <PopupLoginDetailJob
+        isModalOpen={isOpenModalLogin}
+        onClose={() => setIsOpenModalLogin(false)}
+        onOpen={openModal}
+      />
     </div>
   );
 }
