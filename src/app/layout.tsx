@@ -13,6 +13,8 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { LoadingProvider } from "./context/loading";
 import GlobalLoadingIndicator from "@/component/loading-componet";
 import useAuth from "@/component/hook/useAuthToken";
+import { Suspense } from "react";
+
 dayjs.extend(customParseFormat);
 
 const roboto = localFont({
@@ -59,17 +61,19 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.variable} font-roboto`}>
         <LoadingProvider>
-          <GlobalLoadingIndicator />
-          {!pathValidated.includes(path) && (
-            <div className="relative z-[10]">
-              <Header />
-            </div>
-          )}
-          <main className="min-h-screen m-auto relative bg-[#EAE9E8]">
-            {children}
-            <ToastContainer autoClose={2000} />
-          </main>
-          {!pathValidated.includes(path) && <Footer />}
+          <Suspense>
+            <GlobalLoadingIndicator />
+            {!pathValidated.includes(path) && (
+              <div className="relative z-[10]">
+                <Header />
+              </div>
+            )}
+            <main className="min-h-screen m-auto relative bg-[#EAE9E8]">
+              {children}
+              <ToastContainer autoClose={2000} />
+            </main>
+            {!pathValidated.includes(path) && <Footer />}
+          </Suspense>
         </LoadingProvider>
       </body>
     </html>
