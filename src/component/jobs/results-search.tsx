@@ -9,7 +9,7 @@ import { IJobSame, IJobSameProps } from "@/app/interface/interface";
 export const ResutlSearchJob = ({ jobs }: IJobSameProps) => {
   return (
     <div className=" mb-8">
-      {jobs.map((value: IJobSame, idx: number) => {
+      {jobs?.map((value: IJobSame, idx: number) => {
         return (
           <div className="mt-4" key={idx}>
             <InfomationJobSame item={value} />
