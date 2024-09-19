@@ -103,14 +103,18 @@ export const FormRegister = () => {
                 <div className="">
                   Tên <span className="text-[#dc2f2f]">*</span>
                 </div>
-                <TmInput name="lastName" control={control} />
+                <TmInput name="lastName" control={control} placeholder="Tên" />
               </div>
               <div className="col-span-1">
                 <div className="col-span-1">
                   <div className="">
                     Họ <span className="text-[#dc2f2f]">*</span>
                   </div>
-                  <TmInput control={control} name="firstName" />
+                  <TmInput
+                    control={control}
+                    name="firstName"
+                    placeholder="Họ"
+                  />
                 </div>
               </div>
             </div>
@@ -120,7 +124,11 @@ export const FormRegister = () => {
               </div>
               <div className="flex">
                 <div className="flex-grow">
-                  <TmInput control={control} name="phone" />
+                  <TmInput
+                    control={control}
+                    name="phone"
+                    placeholder="Số điện thoại"
+                  />
                 </div>
               </div>
             </div>

@@ -1,3 +1,4 @@
+import { IInfomationBasicJobProps } from "@/app/interface/interface";
 import { BarChartStepBootstrapIcon } from "@/theme/icons/barChartStepBootstrapIcon";
 import { CalendaPlusBootstrapIcon } from "@/theme/icons/calendaPlusBootstrapIcon";
 import { HourClockSpitBootstrapICon } from "@/theme/icons/hourClockSpitBootstrapICon";
@@ -7,47 +8,48 @@ import {
   BriefcaseIcon,
   RectangleGroupIcon,
 } from "@heroicons/react/16/solid";
+import dayjs from "dayjs";
 
-export const ImfomationBasic = () => {
+export const ImfomationBasic = ({ infomation }: IInfomationBasicJobProps) => {
   const data = [
     {
-      label: "Ngày Đăng",
-      title: "30/07/2024",
+      label: "Ngày đăng",
+      title: dayjs(infomation?.publishDate).format("DD-MM-YYYY"),
       icon: <CalendaPlusBootstrapIcon className="w-6 mr-4 text-[#F37A20]" />,
     },
     {
       label: "Kinh nghiệm",
-      title: "2 năm",
+      title: infomation?.experienceText,
       icon: <HourClockSpitBootstrapICon className="w-6 mr-4 text-[#F37A20]" />,
     },
     {
       label: "Cấp bậc",
-      title: "Trưởng phòng",
+      title: infomation?.levelText,
       icon: <BarChartStepBootstrapIcon className="w-6 mr-4 text-[#F37A20]" />,
     },
     {
       label: "Số lượng",
-      title: "20",
+      title: infomation?.numOfRecruits,
       icon: <PersonArmUpBootstrapIcon className="w-6 mr-4 text-[#F37A20]" />,
     },
     {
       label: "Ngành nghề",
-      title: "Marketing",
+      title: infomation?.professionText,
       icon: <PuzzlePieceIcon className="w-6 mr-4 text-[#F37A20]" />,
     },
     {
       label: "Hình thức làm việc",
-      title: "Full time",
+      title: infomation?.formOfWork,
       icon: <BriefcaseIcon className="w-6 mr-4 text-[#F37A20]" />,
     },
     {
       label: "Lĩnh vực",
-      title: "Tài chính",
+      title: infomation?.fieldText,
       icon: <RectangleGroupIcon className="w-6 mr-4 text-[#F37A20]" />,
     },
     {
       label: "Giới tính",
-      title: "Không",
+      title: infomation?.genderText,
       icon: <PersonArmUpBootstrapIcon className="w-6 mr-4 text-[#F37A20]" />,
     },
   ];
@@ -56,9 +58,9 @@ export const ImfomationBasic = () => {
     <div className="bg-white rounded-lg p-8 mb-8">
       <div className="text-base font-bold mb-2">Thông tin chung</div>
       <div className="xl:grid grid-cols-2 gap-4 sm:block grid">
-        {data.map((item) => {
+        {data.map((item, idx) => {
           return (
-            <div key={item.title} className="col-span-1 mt-2 xl:mt-0">
+            <div key={idx} className="col-span-1 mt-2 xl:mt-0">
               <div className="flex items-center">
                 {item.icon}
                 <div>

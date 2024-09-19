@@ -1,8 +1,7 @@
+import { IJobSameProps } from "@/app/interface/interface";
 import { InfomationJobSame } from "@/component/infomation-job/infomation-job-same";
-import { jobSame } from "@/mockup-data/data";
 
-export const JobSame = () => {
-  const list = [1, 2, 3, 4, 5, 6];
+export const JobSame = ({ jobs = [] }: IJobSameProps) => {
   return (
     <div>
       <div className="text-[22px] leading-[30px] font-bold flex my-8">
@@ -12,10 +11,10 @@ export const JobSame = () => {
         </div>
       </div>
       <div>
-        {list.map((value) => {
+        {jobs?.map((data, idx) => {
           return (
-            <div className="mt-4" key={value.toString() + jobSame.title}>
-              <InfomationJobSame item={jobSame} />
+            <div className="mt-4" key={idx}>
+              <InfomationJobSame item={data} />
             </div>
           );
         })}

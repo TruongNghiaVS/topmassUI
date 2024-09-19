@@ -1,19 +1,18 @@
+import { IJobSameProps } from "@/app/interface/interface";
 import { TitleCustom } from "@/component/custom-title";
 import { InfomationJobDetail } from "@/component/infomation-job/infomation-job-detail";
-import { IInfomationJobProps } from "@/interface/infomation-job";
 
-export const JobLike = ({ item }: IInfomationJobProps) => {
-  const list = [1, 2, 3, 4, 5, 6, 7];
+export const JobLike = ({ jobs = [] }: IJobSameProps) => {
   return (
     <div className="bg-white rounded-lg p-8 mb-8">
       <TitleCustom
         title="Có thể bạn sẽ thích"
         className="font-bold text-lg mb-4"
       />
-      {list.map((value) => {
+      {jobs.map((value, index) => {
         return (
-          <div className="mt-2" key={value.toString() + item.title}>
-            <InfomationJobDetail item={item} />
+          <div className="mt-2" key={index}>
+            <InfomationJobDetail item={value} />
           </div>
         );
       })}

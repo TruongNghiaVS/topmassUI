@@ -13,13 +13,13 @@ import {
   UPLOAD_IMG,
 } from "@/utils/api-url";
 import axiosInstance, { axiosInstanceImg, fetcher } from "@/utils/axios";
+import { getToken } from "@/utils/token";
 import { FolderIcon, PhoneArrowDownLeftIcon } from "@heroicons/react/16/solid";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import useSWR from "swr";
 import * as yup from "yup";
 
 export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
@@ -28,27 +28,30 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
   const [file, setFile] = useState<File | null>(null);
   const [listCv, setListCv] = useState<ICv[]>([]);
 
-  const { data: resCv, error } = useSWR(GET_ALL_CV, fetcher);
+  const getAllCv = useCallback(async () => {
+    const res = await axiosInstance.get(GET_ALL_CV);
+    const data = res.data.map((item: any) => ({
+      id: item.id,
+      link: item.linkFile,
+      label: getNameCv(item.linkFile),
+    }));
+    if (data.length > 0) {
+      setListCv(data);
+      setCvValue(data[0].id);
+    }
+  }, []);
 
   const getNameCv = (link: string) => {
     const arr = link.split("/");
     return arr[arr.length - 1];
   };
+  const token = getToken();
 
   useEffect(() => {
-    if (resCv) {
-      const data = resCv.map((item: any) => ({
-        id: item.id,
-        link: item.linkFile,
-        label: getNameCv(item.linkFile),
-      }));
-      if (data.length > 0) {
-        setListCv(data);
-        setCvValue(data[0].id);
-      }
-      setListCv([]);
+    if (token) {
+      getAllCv();
     }
-  }, [resCv, setListCv, setCvValue]);
+  }, [getAllCv, token]);
 
   const schema = yup.object().shape({
     username: yup.string().required("Bắt buộc nhập họ và tên"),
@@ -127,8 +130,8 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
           </div>
           {listCv.length > 0 && (
             <div className="p-4 border border-[#F37A20] rounded">
-              {listCv.map((cv, idx) => (
-                <div key={idx} className="flex justify-between my-2">
+              {listCv.map((cv) => (
+                <div key={cv.id} className="flex justify-between my-2">
                   <div className="flex">
                     <input
                       type="radio"

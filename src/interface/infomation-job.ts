@@ -10,20 +10,6 @@ export interface IInfomationJobProps {
   item: IInfomationJob;
 }
 
-export interface IInfomationJobSame {
-  title: string;
-  slug: string;
-  company: string;
-  price: string;
-  city: string;
-  status: string;
-  groupType: string[];
-}
-
-export interface IInfomationJobSameProps {
-  item: IInfomationJobSame;
-}
-
 export interface IInfomationJobCV {
   title: string;
   slug: string;
@@ -36,21 +22,4 @@ export interface IInfomationJobCV {
 
 export interface IInfomationJobCVProps {
   item: IInfomationJobCV;
-}
-
-export interface IInfomationJobSave {
-  title: string;
-  slug: string;
-  company: string;
-  price: string;
-  city: string;
-  status: string;
-  groupType: string[];
-  date: string;
-  time: string;
-  day: string;
-}
-
-export interface IInfomationJobSaveProps {
-  item: IInfomationJobSave;
 }

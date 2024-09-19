@@ -111,3 +111,53 @@ export interface IApplyCv {
   phone_number: string;
   description?: string;
 }
+
+export interface ICompanyDetailJob {
+  companyName: string;
+  capacity: string;
+  addressInfo: string;
+  companyId: number;
+  slug: string;
+  avatarLink: string;
+}
+
+export interface ICompanyDetailJobProps {
+  company: ICompanyDetailJob;
+}
+
+export interface IInfomationBasicJob {
+  publishDate: string;
+  experienceText: string;
+  levelText: string;
+  numOfRecruits: number;
+  professionText: string;
+  formOfWork: string;
+  fieldText: string;
+  genderText: string;
+}
+
+export interface IInfomationBasicJobProps {
+  infomation: IInfomationBasicJob;
+}
+
+export interface IJobSame {
+  isLike: boolean;
+  positionText: string;
+  companyName: string;
+  logoImage: string;
+  salaryFrom: number;
+  salaryTo: number;
+  fieldArray: string;
+  jobId: number;
+  jobSlug: string;
+  lastUpdate: string;
+  locationtext: string;
+}
+
+export interface IJobSameProps {
+  jobs: IJobSame[];
+}
+
+export interface IInfomationJobSameProps {
+  item: IJobSame;
+}

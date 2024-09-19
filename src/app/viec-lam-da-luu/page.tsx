@@ -1,7 +1,4 @@
 "use client";
-import { InfomationUser } from "@/component/infomation-user-right";
-import { JobSame } from "@/component/jobs/detail/job-same";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
 import CustomRadio from "@/component/hook-form/customRadio";
 import { companys, jobSave } from "@/mockup-data/data";

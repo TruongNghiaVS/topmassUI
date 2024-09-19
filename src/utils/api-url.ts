@@ -12,6 +12,12 @@ export const UPLOAD_IMG = "/Media/UploadAvatar";
 //----------------- Job -------------------//
 export const APPLY_CV_WITH_FILE = "/api/Job/ApplyJobWithCreateCV";
 export const APPLY_CV_WITH_CV = "/api/Job/ApplyJob";
+export const ADD_SAVE_JOB = "/api/JobUtilities/AddJobSave";
+export const REMOVE_SAVE_JOB = "/api/JobUtilities/RemoveJobSave";
+export const ADD_VIEW_JOB = "/api/Job/AddViewForJob";
+export const DETAIL_JOB = "/api/JobWeb/GetDetailInfo";
+export const RELATION_JOB = "/api/JobWeb/GetRelationJob";
+export const JOB_LIKE = "/api/JobWeb/GetRecommended";
 
 //------------ cv -----------//
 export const GET_ALL_CV = "/api/CV/GetAllCV";

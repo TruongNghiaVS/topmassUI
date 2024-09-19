@@ -5,7 +5,6 @@ import { JobSame } from "@/component/jobs/detail/job-same";
 import { JobLike } from "@/component/jobs/detail/joblike";
 import { KeyWord } from "@/component/jobs/detail/keyword";
 import { SliderDetail } from "@/component/jobs/detail/slider-detail";
-import { jobSlider } from "@/mockup-data/data";
 import { HourClockSpitBootstrapICon } from "@/theme/icons/hourClockSpitBootstrapICon";
 import { SendFillBootstrapIcon } from "@/theme/icons/sendFillBootstrapIcon";
 import {
@@ -16,23 +15,61 @@ import {
 } from "@heroicons/react/16/solid";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { PopupApplyJob } from "./popup-apply-job";
-import { useState } from "react";
-import { toast } from "react-toastify";
+import { useCallback, useEffect, useState } from "react";
 import { getToken } from "@/utils/token";
 import { PopupLoginDetailJob } from "./popup-login-detail-job";
+import { useLoading } from "@/app/context/loading";
+import axiosInstance, { axiosInstanceNotToken, fetcher } from "@/utils/axios";
+import {
+  ADD_SAVE_JOB,
+  ADD_VIEW_JOB,
+  DETAIL_JOB,
+  JOB_LIKE,
+  RELATION_JOB,
+  REMOVE_SAVE_JOB,
+} from "@/utils/api-url";
+import useSWR from "swr";
 
 export default function DetailJob({ params }: { params: { id: any } }) {
   const { id } = params;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOpenModalLogin, setIsOpenModalLogin] = useState(false);
-  const [defaultCvs, setDefaultCvs] = useState<string[]>([]);
+  const [saveJob, setSaveJob] = useState(false);
+  const [isView, setIsView] = useState(false);
+  const { setLoading } = useLoading();
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  const { data: detail, error } = useSWR(`${DETAIL_JOB}?JobId=12`, fetcher);
+  const { data: jobSame, error: errorJobSame } = useSWR(
+    `${RELATION_JOB}?JobId=12`,
+    fetcher
+  );
+
+  const { data: jobLike, error: errorJobLike } = useSWR(
+    `${JOB_LIKE}?JobId=12`,
+    fetcher
+  );
+
+  const viewJobs = useCallback(async () => {
+    try {
+      if (!isView) {
+        await axiosInstance.post(ADD_VIEW_JOB, {
+          jobId: 12,
+        });
+        setIsView(true);
+      }
+    } catch (error) {}
+  }, []);
+
+  useEffect(() => {
+    viewJobs();
+  }, [viewJobs]);
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
   };
 
   const handleOpenModal = () => {
@@ -44,6 +81,19 @@ export default function DetailJob({ params }: { params: { id: any } }) {
     }
   };
 
+  const handleSaveJob = async () => {
+    setLoading(true);
+    try {
+      const url = saveJob ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
+      await axiosInstance.post(url, {
+        jobId: 12,
+      });
+      setSaveJob(!saveJob);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div>
       <div className="relative z-[2] py-6 max-1280:px-2">
@@ -52,7 +102,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
             <div className="xl:col-span-8 md:col-span-7">
               <div className="bg-white rounded-lg p-8 mb-8">
                 <div className="text-xl font-bold mb-6">
-                  Performance Marketing
+                  {detail?.dataJob.jobName}
                 </div>
                 <div className="flex justify-between  mb-6 px-4 whitespace-nowrap flex-wrap">
                   <div className="flex items-center mb-2">
@@ -63,7 +113,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                     <div>
                       <div className="text-xs font-medium">Mức lương</div>
                       <div className="text-xs font-medium text-default">
-                        15 - 20 triệu/tháng
+                        {detail?.dataJob.rangeSalary}
                       </div>
                     </div>
                   </div>
@@ -71,14 +121,18 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                     <MapPinIcon className="w-6 mr-2" />
                     <div>
                       <div className="text-xs font-medium">Địa điểm</div>
-                      <div className="text-xs font-medium">TP.Hồ Chí Minh</div>
+                      <div className="text-xs font-medium">
+                        {detail?.dataJob.locationText}
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center mb-2">
                     <HourClockSpitBootstrapICon className="w-6 mr-2" />
                     <div className="">
                       <div className="text-xs font-medium">Kinh nghiệm</div>
-                      <div className="text-xs font-medium">2 năm</div>
+                      <div className="text-xs font-medium">
+                        {detail?.dataJob.experienceText}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -104,26 +158,42 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                   </div>
                   <div>
                     <button
-                      className="flex whitespace-nowrap justify-center py-2 border-[#F37A20] border-solid border-[1px] rounded px-6 cursor-pointer"
-                      onClick={() => toast.success("Lưu tin thành công")}
+                      className={`flex whitespace-nowrap justify-center py-2 border-[#F37A20] border-solid border-[1px] rounded px-6 ${
+                        saveJob && "bg-[#F37A20]"
+                      }`}
+                      onClick={() => handleSaveJob()}
                     >
-                      <HeartIcon className="w-4 mr-2 text-[#F37A20]" />
-                      <div className="text-xs font-bold text-[#F37A20] ">
-                        Lưu tin
+                      <HeartIcon
+                        className={`w-4 mr-2 ${
+                          saveJob ? "text-white" : "text-[#F37A20]"
+                        }`}
+                      />
+                      <div
+                        className={`text-xs font-bold ${
+                          saveJob ? "text-white" : "text-[#F37A20]"
+                        }`}
+                      >
+                        {saveJob ? "Đã lưu tin" : "Lưu tin"}
                       </div>
                     </button>
                   </div>
                 </div>
               </div>
               <div className="block sm:hidden">
-                <ImfomationCompany />
-                <ImfomationBasic />
+                <ImfomationCompany company={detail?.companyData} />
+                <ImfomationBasic infomation={detail?.dataJob.commonData} />
               </div>
               <div className="bg-white p-8 rounded-lg mb-8">
                 <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20]">
                   Thông tin công việc
                 </div>
-                <div className="mt-6">Content</div>
+                <div className="mt-6">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: detail?.dataJob.content,
+                    }}
+                  ></div>
+                </div>
                 <div className="flex items-center mt-6 ">
                   <div className="mr-2">
                     <button
@@ -139,27 +209,40 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                     </button>
                   </div>
                   <div>
-                    <button className="flex whitespace-nowrap justify-center py-2 border-[#F37A20] border-solid border-[1px] rounded px-6">
-                      <HeartIcon className="w-4 mr-2 text-[#F37A20]" />
-                      <div className="text-xs font-bold text-[#F37A20]">
-                        Lưu tin
+                    <button
+                      className={`flex whitespace-nowrap justify-center py-2 border-[#F37A20] border-solid border-[1px] rounded px-6 ${
+                        saveJob && "bg-[#F37A20]"
+                      }`}
+                      onClick={() => handleSaveJob()}
+                    >
+                      <HeartIcon
+                        className={`w-4 mr-2 ${
+                          saveJob ? "text-white" : "text-[#F37A20]"
+                        }`}
+                      />
+                      <div
+                        className={`text-xs font-bold ${
+                          saveJob ? "text-white" : "text-[#F37A20]"
+                        }`}
+                      >
+                        {saveJob ? "Đã lưu tin" : "Lưu tin"}
                       </div>
                     </button>
                   </div>
                 </div>
               </div>
-              <KeyWord />
-              <JobSame />
+              <KeyWord hagtags={detail?.dataJob.hashtags} />
+              <JobSame jobs={jobSame?.data} />
               <div className="block sm:hidden">
                 <SliderDetail />
-                <JobLike item={jobSlider} />
+                <JobLike jobs={jobLike?.data} />
               </div>
             </div>
             <div className="xl:col-span-4 md:col-span-5 sm:block hidden">
-              <ImfomationCompany />
-              <ImfomationBasic />
+              <ImfomationCompany company={detail?.companyData} />
+              <ImfomationBasic infomation={detail?.dataJob.commonData} />
               <SliderDetail />
-              <JobLike item={jobSlider} />
+              <JobLike jobs={jobLike?.data} />
             </div>
           </div>
         </div>

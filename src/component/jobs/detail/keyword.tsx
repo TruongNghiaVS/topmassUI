@@ -1,23 +1,7 @@
 import { BellIcon } from "@heroicons/react/16/solid";
 
-export const KeyWord = () => {
-  const listData = [
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-    "Hành chính văn phòng",
-  ];
+export const KeyWord = ({ hagtags = "" }: { hagtags: string }) => {
+  const data = hagtags.split(",");
   return (
     <div className="bg-white rounded-lg p-8 mb-8">
       <div className="mx-auto container">
@@ -26,7 +10,7 @@ export const KeyWord = () => {
           Từ khoá
         </div>
         <div className="text-sm px-[0.65em] flex items-center whitespace-nowrap flex-wrap">
-          {listData.map((item, index) => {
+          {data.map((item, index) => {
             return (
               <button
                 key={item + index.toString()}
