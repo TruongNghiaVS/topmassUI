@@ -21,3 +21,8 @@ export const JOB_LIKE = "/api/JobWeb/GetRecommended";
 
 //------------ cv -----------//
 export const GET_ALL_CV = "/api/CV/GetAllCV";
+export const ADD_CV = "/api/CV/CreateCV";
+
+//------------ User ------------//
+export const GET_JOB_APPLY = "/api/User/GetAllCVApply";
+export const GET_JOB_SAVE = "/api/User/GetAllJobSave";

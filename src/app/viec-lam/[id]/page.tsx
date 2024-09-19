@@ -51,18 +51,15 @@ export default function DetailJob({ params }: { params: { id: any } }) {
 
   const viewJobs = useCallback(async () => {
     try {
-      if (!isView) {
-        await axiosInstance.post(ADD_VIEW_JOB, {
-          jobId: 12,
-        });
-        setIsView(true);
-      }
+      await axiosInstance.post(ADD_VIEW_JOB, {
+        jobId: 12,
+      });
     } catch (error) {}
   }, []);
 
   useEffect(() => {
     viewJobs();
-  }, [viewJobs]);
+  }, []);
 
   const closeModal = () => {
     setIsModalOpen(false);

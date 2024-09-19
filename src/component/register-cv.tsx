@@ -1,10 +1,37 @@
+"use client";
+
 import { CloudArrowUpFillBootstrapIcon } from "@/theme/icons/cloudArrowUpFillBootstrapIcon";
-import { ClipboardDocumentListIcon } from "@heroicons/react/16/solid";
+import { ClipboardDocumentListIcon, EyeIcon } from "@heroicons/react/16/solid";
 import { InfomationJobCV } from "./infomation-job/infomation-job-cv";
 import { jobCV } from "@/mockup-data/data";
 import { InfomationUser } from "./infomation-user-right";
+import Link from "next/link";
+import useSWR from "swr";
+import { GET_ALL_CV } from "@/utils/api-url";
+import { fetcher } from "@/utils/axios";
+import { ICvCreate } from "@/app/interface/interface";
+import { useEffect, useState } from "react";
+import { PopupUploadCv } from "./popup-upload-cv";
 
 export const RegisterCV = () => {
+  const [cvCreate, setCvCreate] = useState<ICvCreate[]>([]);
+  const [cvUpdate, setCvUpdate] = useState<ICvCreate[]>([]);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const { data: listCv, error, mutate } = useSWR(GET_ALL_CV, fetcher);
+
+  useEffect(() => {
+    if (listCv) {
+      setCvCreate(listCv.filter((item: ICvCreate) => item.typeData === 1));
+      setCvUpdate(listCv.filter((item: ICvCreate) => item.typeData === 2));
+    }
+  }, [listCv]);
+
+  const getNameCv = (link: string) => {
+    const arr = link.split("/");
+    return arr[arr.length - 1];
+  };
+
   const list = [1, 2, 3];
   return (
     <div className="py-2 bg-[#EAE9E8] pb-10">
@@ -19,33 +46,77 @@ export const RegisterCV = () => {
               />
             </div>
             <div className="bg-white rounded-2xl p-6 pb-10 mt-4">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mb-2">
                 <div className="font-medium text-lg">
                   CV đã tạo trên Topmass
                 </div>
-                <button className="py-2 px-4 text-white bg-gradient-to-r from-[#F89D1B] to-[#F37B20] font-medium rounded-3xl">
+                <Link
+                  href="/profile-cv"
+                  className="py-2 px-4 text-white bg-gradient-to-r from-[#F89D1B] to-[#F37B20] font-medium rounded-3xl"
+                >
                   + Tạo mới
-                </button>
+                </Link>
               </div>
-              <div className="flex justify-center mt-6">
-                <ClipboardDocumentListIcon className="w-20 text-default" />
-              </div>
-              <div className="text-center mt-3">Chưa tạo CV</div>
+              {cvCreate?.length > 0 ? (
+                <div className="p-2 border rounded">
+                  {cvCreate?.map((item: ICvCreate, index: number) => {
+                    return (
+                      <div className="flex justify-between mt-2" key={index}>
+                        <div>{getNameCv(item.linkFile)}</div>
+                        <Link href={item.linkFile} target="_blank">
+                          <div className="flex hover:text-[#F37A20]">
+                            Xem <EyeIcon className="w-4 ml-2" />
+                          </div>
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div>
+                  <div className="flex justify-center mt-6">
+                    <ClipboardDocumentListIcon className="w-20 text-default" />
+                  </div>
+                  <div className="text-center mt-3">Chưa tạo CV</div>
+                </div>
+              )}
             </div>
             <div className="bg-white rounded-2xl p-6 pb-10 mt-8">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mb-2">
                 <div className="font-medium text-lg">
                   CV đã tải trên Topmass
                 </div>
-                <button className="py-2 px-4 text-white bg-gradient-to-r from-[#F89D1B] to-[#F37B20] font-medium rounded-3xl flex items-center">
+                <button
+                  className="py-2 px-4 text-white bg-gradient-to-r from-[#F89D1B] to-[#F37B20] font-medium rounded-3xl flex items-center "
+                  onClick={() => setIsOpenModal(true)}
+                >
                   <CloudArrowUpFillBootstrapIcon className="w-6 mr-2" />
                   Tải lên
                 </button>
               </div>
-              <div className="flex justify-center mt-6">
-                <ClipboardDocumentListIcon className="w-20 text-default" />
-              </div>
-              <div className="text-center mt-3">Chưa tải CV</div>
+              {cvUpdate?.length > 0 ? (
+                <div className="p-2 border rounded">
+                  {cvUpdate?.map((item: ICvCreate, index: number) => {
+                    return (
+                      <div className="flex justify-between mt-2" key={index}>
+                        <div>{getNameCv(item.linkFile)}</div>
+                        <Link href={item.linkFile} target="_blank">
+                          <div className="flex hover:text-[#F37A20]">
+                            Xem <EyeIcon className="w-4 ml-2" />
+                          </div>
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div>
+                  <div className="flex justify-center mt-6">
+                    <ClipboardDocumentListIcon className="w-20 text-default" />
+                  </div>
+                  <div className="text-center mt-3">Chưa tải CV</div>
+                </div>
+              )}
             </div>
             <div className="mt-4">
               <div className="font-medium text-lg">
@@ -71,6 +142,11 @@ export const RegisterCV = () => {
           </div>
         </div>
       </div>
+      <PopupUploadCv
+        isOpenModal={isOpenModal}
+        onClose={() => setIsOpenModal(false)}
+        mutate={mutate}
+      />
     </div>
   );
 };

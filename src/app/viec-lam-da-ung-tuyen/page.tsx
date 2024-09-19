@@ -2,11 +2,13 @@
 import CustomSelect from "@/component/hook-form/customSelect";
 import { InfomationUser } from "@/component/infomation-user-right";
 import { JobSame } from "@/component/jobs/detail/job-same";
-import { RELATION_JOB } from "@/utils/api-url";
+import { GET_JOB_APPLY, RELATION_JOB } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
 import Link from "next/link";
 import { useState } from "react";
 import useSWR from "swr";
+import { IJobAplly } from "../interface/interface";
+import { InfomationJobApply } from "@/component/infomation-job/infomation-job-apply";
 
 export default function JobApply() {
   const [selectedValue, setSelectedValue] = useState("");
@@ -14,6 +16,9 @@ export default function JobApply() {
     `${RELATION_JOB}?JobId=12`,
     fetcher
   );
+
+  const { data: JobApply, error: errJobApply } = useSWR(GET_JOB_APPLY, fetcher);
+
   const options = [
     { value: 1, label: "Đã ứng tuyển" },
     { value: 2, label: "NTD đã xem hồ sơ" },
@@ -42,24 +47,40 @@ export default function JobApply() {
                   />
                 </div>
               </div>
-              <div className="my-10 text-center">
-                <div className="flex justify-center">
-                  <img src="/imgs/img-no-apply.png" alt="" className="w-auto" />
+              {JobApply?.data.length > 0 ? (
+                <div>
+                  {JobApply?.data.map((item: IJobAplly, index: number) => {
+                    return (
+                      <div className="mt-4" key={index}>
+                        <InfomationJobApply item={item} />
+                      </div>
+                    );
+                  })}
                 </div>
-                <div className="font-bold text-lg mt-4">
-                  Bạn chưa ứng tuyển công việc nào
+              ) : (
+                <div className="my-10 text-center">
+                  <div className="flex justify-center">
+                    <img
+                      src="/imgs/img-no-apply.png"
+                      alt=""
+                      className="w-auto"
+                    />
+                  </div>
+                  <div className="font-bold text-lg mt-4">
+                    Bạn chưa ứng tuyển công việc nào
+                  </div>
+                  <div className="font-normal text-base my-4">
+                    Hãy bắt đầu hành trình thành công của bạn với hàng nghìn
+                    việc làm chất lượng tại Topmass
+                  </div>
+                  <Link
+                    href="/tim-kiem-viec-lam"
+                    className="px-4 py-2 text-white bg-[#F37A20] rounded text-lg font-bold"
+                  >
+                    Tìm việc ngay
+                  </Link>
                 </div>
-                <div className="font-normal text-base my-4">
-                  Hãy bắt đầu hành trình thành công của bạn với hàng nghìn việc
-                  làm chất lượng tại Topmass
-                </div>
-                <Link
-                  href="#"
-                  className="px-4 py-2 text-white bg-[#F37A20] rounded text-lg font-bold"
-                >
-                  Tìm việc ngay
-                </Link>
-              </div>
+              )}
             </div>
             <div className="sm:hidden block">
               <InfomationUser />

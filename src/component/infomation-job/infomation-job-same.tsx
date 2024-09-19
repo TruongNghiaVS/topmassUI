@@ -28,7 +28,15 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
       <div className="sm:flex mt-4 ">
         <div className="w-20 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
           <Link href={`/viec-lam/${item.jobSlug}`}>
-            <img src="/imgs/logo-work.png" alt="" className="w-full" />
+            <img
+              src={
+                item.logoImage.length > 0
+                  ? item.logoImage
+                  : `/imgs/logo-work.png`
+              }
+              alt=""
+              className="w-full"
+            />
           </Link>
         </div>
         <div className="text-center sm:text-start">
@@ -46,7 +54,9 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
           <div className="flex mt-2	justify-center sm:justify-start">
             <div className="text-sm text-[#F46800] pr-[0.65em] mr-2 relative after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]">
               <Link href={`/viec-lam/${item.jobSlug}`}>
-                {item.salaryFrom} - {item.salaryTo} triệu
+                {item.salaryFrom > 0 && item.salaryTo > 0
+                  ? `${item.salaryFrom} - ${item.salaryTo} triệu`
+                  : "Thoả thuận"}
               </Link>
             </div>
             <div className="text-sm px-[0.65em]">

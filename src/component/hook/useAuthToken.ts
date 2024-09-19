@@ -10,19 +10,21 @@ const useAuth = () => {
     "/xem-ho-so",
     "/cai-dat-goi-y-viec-lam",
     "/doi-mat-khau",
+    "/profile-cv",
+    "/viec-lam-da-ung-tuyen",
+    "/viec-lam-da-luu",
+    "/quan-ly-cv",
   ];
 
   useEffect(() => {
     // Check for token in cookies
     const token = Cookies.get("token");
-
     const isPath = listPath.some((pathName) => path.startsWith(pathName));
-
     if (!token && isPath) {
       // Redirect to login page if no token is found
       router.push("/dang-nhap");
     }
-  }, [router]);
+  }, [path]);
 };
 
 export default useAuth;

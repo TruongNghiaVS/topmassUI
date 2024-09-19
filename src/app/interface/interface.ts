@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { Key, KeyedMutator } from "swr";
 
 export interface IRegister {
   lastName: string;
@@ -160,4 +161,48 @@ export interface IJobSameProps {
 
 export interface IInfomationJobSameProps {
   item: IJobSame;
+}
+
+export interface IJobAplly {
+  positionText: string;
+  companyName: string;
+  businessDate: string;
+  logoImage: string;
+  salaryFrom: number;
+  salaryTo: number;
+  fieldArray: string;
+  id: number;
+  jobId: number;
+  jobSlug: string;
+  lastUpdate: string;
+  reasonText: string;
+  reasonId: number;
+  note: string;
+  linkFile: string;
+  locationText: string;
+}
+
+export interface IJobApplyProps {
+  item: IJobAplly;
+}
+
+export interface IJobSaveProps extends IJobApplyProps {
+  mutate: KeyedMutator<any>;
+}
+
+export interface ICvCreate {
+  create_At: string;
+  id: number;
+  linkFile: string;
+  typeData: number;
+}
+
+export interface IPopupUploadCv {
+  isOpenModal: boolean;
+  onClose: () => void;
+  mutate: KeyedMutator<any>;
+}
+
+export interface ILoadCv {
+  file: File;
 }

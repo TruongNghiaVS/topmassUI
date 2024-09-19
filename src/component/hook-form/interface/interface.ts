@@ -27,6 +27,7 @@ export interface IUpload extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<any>;
   classNameImg?: string;
   title?: string;
+  acceptFile?: string;
 }
 
 export interface ITmSelect extends InputHTMLAttributes<HTMLSelectElement> {

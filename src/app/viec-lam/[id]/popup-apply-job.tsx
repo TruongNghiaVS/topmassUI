@@ -12,9 +12,9 @@ import {
   GET_ALL_CV,
   UPLOAD_IMG,
 } from "@/utils/api-url";
-import axiosInstance, { axiosInstanceImg, fetcher } from "@/utils/axios";
+import axiosInstance, { axiosInstanceImg } from "@/utils/axios";
 import { getToken } from "@/utils/token";
-import { FolderIcon, PhoneArrowDownLeftIcon } from "@heroicons/react/16/solid";
+import { FolderIcon } from "@heroicons/react/16/solid";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -51,7 +51,7 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
     if (token) {
       getAllCv();
     }
-  }, [getAllCv, token]);
+  }, [token]);
 
   const schema = yup.object().shape({
     username: yup.string().required("Bắt buộc nhập họ và tên"),

@@ -1,13 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomRadio from "@/component/hook-form/customRadio";
-import { companys, jobSave } from "@/mockup-data/data";
+import { companys } from "@/mockup-data/data";
 import { InfomationCompany } from "../cong-ty/infomation-company";
 import { InfomationJobSave } from "@/component/infomation-job/infomation-job-save";
+import useSWR from "swr";
+import { GET_JOB_SAVE } from "@/utils/api-url";
+import { fetcher } from "@/utils/axios";
+import { IJobAplly } from "../interface/interface";
 
 export default function JobSave() {
   const [selectedRadio, setSelectedRadio] = useState("");
-
+  const { data: jobSave, error: errJobSave, mutate } = useSWR(
+    GET_JOB_SAVE,
+    fetcher
+  );
   const options = ["Cập nhật gần nhất", "Cần tuyển gấp", "Lương cao nhất"];
 
   const handleRadioChange = (value: string) => {
@@ -29,7 +36,8 @@ export default function JobSave() {
             </div>
             <div className="bg-white rounded overflow-hidden">
               <div className="text-xs font-normal p-4 border-b">
-                Danh sách <span className="font-bold">1</span> việc làm đã lưu
+                Danh sách <span className="font-bold">{jobSave?.length}</span>{" "}
+                việc làm đã lưu
               </div>
               <div className="text-xs font-normal p-4 border-b flex justify-between">
                 <div>Ưu tiên hiển thị:</div>
@@ -45,21 +53,34 @@ export default function JobSave() {
                 ))}
               </div>
               <div className="my-10 text-center p-4">
-                <div>
-                  <InfomationJobSave item={jobSave} />
-                </div>
-                <div className="flex justify-center">
-                  <img src="/imgs/img-no-save.png" alt="" className="w-auto" />
-                </div>
-                <div className="font-bold text-xs mt-4">
-                  Bạn chưa lưu công việc nào
-                </div>
-                <div className="font-normal text-xs mt-4">
-                  Tìm kiếm ngay những công việc phù hợp với bản thân, hãy lưu
-                  lại chúng để
-                  <br />
-                  chắc chắn rằng bạn không bỏ lỡ điều gì hết nhé!
-                </div>
+                {jobSave?.length > 0 ? (
+                  jobSave?.map((item: IJobAplly, index: number) => {
+                    return (
+                      <div key={index} className="mt-4">
+                        <InfomationJobSave item={item} mutate={mutate} />
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div>
+                    <div className="font-bold text-xs mt-4">
+                      Bạn chưa lưu công việc nào
+                    </div>
+                    <div className="font-normal text-xs mt-4">
+                      Tìm kiếm ngay những công việc phù hợp với bản thân, hãy
+                      lưu lại chúng để
+                      <br />
+                      chắc chắn rằng bạn không bỏ lỡ điều gì hết nhé!
+                    </div>
+                    <div className="flex justify-center">
+                      <img
+                        src="/imgs/img-no-save.png"
+                        alt=""
+                        className="w-auto"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
