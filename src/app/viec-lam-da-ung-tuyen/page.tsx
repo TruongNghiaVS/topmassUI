@@ -2,12 +2,18 @@
 import CustomSelect from "@/component/hook-form/customSelect";
 import { InfomationUser } from "@/component/infomation-user-right";
 import { JobSame } from "@/component/jobs/detail/job-same";
+import { RELATION_JOB } from "@/utils/api-url";
+import { fetcher } from "@/utils/axios";
 import Link from "next/link";
 import { useState } from "react";
+import useSWR from "swr";
 
 export default function JobApply() {
   const [selectedValue, setSelectedValue] = useState("");
-
+  const { data: jobSame, error: errorJobSame } = useSWR(
+    `${RELATION_JOB}?JobId=12`,
+    fetcher
+  );
   const options = [
     { value: 1, label: "Đã ứng tuyển" },
     { value: 2, label: "NTD đã xem hồ sơ" },
@@ -59,7 +65,7 @@ export default function JobApply() {
               <InfomationUser />
             </div>
             <div className="bg-white p-4 rounded mt-8">
-              <JobSame />
+              <JobSame jobs={jobSame?.data} />
             </div>
           </div>
           <div className="xl:col-span-4 md:col-span-5">

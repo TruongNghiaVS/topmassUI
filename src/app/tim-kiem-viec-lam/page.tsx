@@ -1,10 +1,19 @@
+"use client";
+
 import { FilterSearchForm } from "@/component/filter-search-job";
 import { ResutlSearchJob } from "@/component/jobs/results-search";
 import { SearchJobForm } from "@/component/search-job-form";
-import { jobSame } from "@/mockup-data/data";
+import { RELATION_JOB } from "@/utils/api-url";
+import { fetcher } from "@/utils/axios";
+import useSWR from "swr";
 
-const SearchJob = () => {
-  const data = [1, 2, 3, 4, 5];
+export default function SearchJob() {
+  const { data: jobSame, error: errorJobSame } = useSWR(
+    `${RELATION_JOB}?JobId=12`,
+    fetcher
+  );
+
+  const list = [1, 2, 3, 4, 5];
   return (
     <div>
       <div className="bg-bgHeaderJobCustom pb-4">
@@ -20,11 +29,11 @@ const SearchJob = () => {
         <div className="mx-auto container">
           <div className="sm:grid grid-cols-12 gap-4 ">
             <div className="xl:col-span-8 md:col-span-7">
-              <ResutlSearchJob item={jobSame} />
+              <ResutlSearchJob jobs={jobSame?.data} />
             </div>
             <div className="xl:col-span-4 md:col-span-5 pb-4 ">
               <div>
-                {data.map((value) => {
+                {list.map((value) => {
                   return (
                     <img
                       key={value}
@@ -41,8 +50,4 @@ const SearchJob = () => {
       </div>
     </div>
   );
-};
-
-export default SearchJob;
-
-export const revalidate = 100;
+}

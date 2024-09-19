@@ -1,15 +1,18 @@
 import { IInfomationJobSameProps } from "@/interface/infomation-job";
 import { InfomationJobSame } from "../infomation-job/infomation-job-same";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
+import useSWR from "swr";
+import { RELATION_JOB } from "@/utils/api-url";
+import { fetcher } from "@/utils/axios";
+import { IJobSame, IJobSameProps } from "@/app/interface/interface";
 
-export const ResutlSearchJob = ({ item }: IInfomationJobSameProps) => {
-  const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+export const ResutlSearchJob = ({ jobs }: IJobSameProps) => {
   return (
     <div className=" mb-8">
-      {list.map((value) => {
+      {jobs.map((value: IJobSame, idx: number) => {
         return (
-          <div className="mt-4" key={value.toString() + item.title}>
-            <InfomationJobSame item={item} />
+          <div className="mt-4" key={idx}>
+            <InfomationJobSame item={value} />
           </div>
         );
       })}

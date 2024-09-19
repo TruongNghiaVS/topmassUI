@@ -23,3 +23,32 @@ export interface IInfomationJobCV {
 export interface IInfomationJobCVProps {
   item: IInfomationJobCV;
 }
+export interface IInfomationJobSave {
+  title: string;
+  slug: string;
+  company: string;
+  price: string;
+  city: string;
+  status: string;
+  groupType: string[];
+  date: string;
+  time: string;
+  day: string;
+}
+
+export interface IInfomationJobSaveProps {
+  item: IInfomationJobSave;
+}
+export interface IInfomationJobSame {
+  title: string;
+  slug: string;
+  company: string;
+  price: string;
+  city: string;
+  status: string;
+  groupType: string[];
+}
+
+export interface IInfomationJobSameProps {
+  item: IInfomationJobSame;
+}

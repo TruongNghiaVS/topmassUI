@@ -1,14 +1,23 @@
+"use client";
 import { CreateCv } from "@/component/create-cv";
 import { InfomationJobLike } from "@/component/infomation-job/infomation-job-like";
-import { jobSame, jobSlider } from "@/mockup-data/data";
+import { jobSlider } from "@/mockup-data/data";
 import { ChevronDoubleRightIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { NewInfomation } from "../../new-infomation";
 import { InfomationJobSame } from "@/component/infomation-job/infomation-job-same";
 import { TitleCustom } from "@/component/custom-title";
+import useSWR from "swr";
+import { RELATION_JOB } from "@/utils/api-url";
+import { fetcher } from "@/utils/axios";
+import { IJobSame } from "@/app/interface/interface";
 
 const NewDetail = () => {
-  const data = [1, 2, 3, 4];
+  const { data: jobSame, error: errorJobSame } = useSWR(
+    `${RELATION_JOB}?JobId=12`,
+    fetcher
+  );
+  const list = [1, 2, 3, 4];
   return (
     <div className="">
       <div className="mx-auto container">
@@ -37,12 +46,9 @@ const NewDetail = () => {
               <div className="text-center">
                 <TitleCustom title="Việc làm liên quan" />
                 <div className="mt-2">
-                  {data.map((item) => {
+                  {jobSame?.data.map((item: IJobSame, index: number) => {
                     return (
-                      <div
-                        className="mt-4"
-                        key={item.toString() + jobSame.title}
-                      >
+                      <div className="mt-4" key={index}>
                         <InfomationJobSame item={jobSame} />
                       </div>
                     );
@@ -67,7 +73,7 @@ const NewDetail = () => {
             />
 
             <div>
-              {data.map((item) => {
+              {list.map((item) => {
                 return (
                   <div className="mt-4" key={item.toString() + jobSlider.title}>
                     <InfomationJobLike item={jobSlider} />
@@ -82,7 +88,7 @@ const NewDetail = () => {
         <div className="container mx-auto">
           <TitleCustom title="Cùng chuyên mục" />
           <div className="grid xl:grid-cols-4 gap-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-4">
-            {data.map((value, idx) => {
+            {list.map((value, idx) => {
               return <NewInfomation key={value.toString() + idx.toString()} />;
             })}
           </div>
