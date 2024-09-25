@@ -1,13 +1,11 @@
-import { IInfomationCertificateProps } from "@/app/interface/interface";
+import { IInfomationRewardProps } from "@/app/interface/interface";
 import { AcademicCapIcon } from "@heroicons/react/16/solid";
 import dayjs from "dayjs";
 
-export const CertificateView = ({
-  certificates,
-}: IInfomationCertificateProps) => {
+export const PrizeView = ({ rewards }: IInfomationRewardProps) => {
   return (
     <div className="mt-4">
-      {certificates?.map((item, index) => {
+      {rewards.map((item, index) => {
         return (
           <div key={index} className="mt-4">
             <div className="flex justify-between">
@@ -19,16 +17,6 @@ export const CertificateView = ({
                 <div>
                   {dayjs(new Date(+item.yearGet, +item.monthGet, 1)).format(
                     "MM-YYYY"
-                  )}
-                </div>
-                <div>-</div>
-                <div>
-                  {item.isExpired ? (
-                    <div>Còn hạn</div>
-                  ) : (
-                    dayjs(
-                      new Date(+item.yearExpired, +item.monthExpired, 1)
-                    ).format("MM-YYYY")
                   )}
                 </div>
               </div>

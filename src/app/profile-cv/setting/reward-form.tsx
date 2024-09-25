@@ -1,7 +1,12 @@
+import { useLoading } from "@/app/context/loading";
+import { IInfomationRewardProps, IReWardCv } from "@/app/interface/interface";
 import TmInput from "@/component/hook-form/input";
 import TmSelect from "@/component/hook-form/select";
 import CustomUploadMulti from "@/component/hook-form/upload-multiple-file";
 import { months } from "@/mockup-data/data";
+import { ADD_OR_UPDATE_REWARD } from "@/utils/api-url";
+import axiosInstance from "@/utils/axios";
+import { getFileUpload } from "@/utils/business/upload-mutiple-file";
 import { BeakerIcon, PlusIcon, TrashIcon } from "@heroicons/react/16/solid";
 import { yupResolver } from "@hookform/resolvers/yup";
 import dynamic from "next/dynamic";
@@ -15,28 +20,6 @@ const CustomCKEditor = dynamic(
   { ssr: false }
 );
 
-interface IPrizeCv {
-  prizes: {
-    prize_name: string;
-    organization: string;
-    month: string;
-    year: string;
-    description?: string;
-    files?: FileList;
-  }[];
-}
-
-const gender = [
-  {
-    label: "Nam",
-    value: "0",
-  },
-  {
-    label: "Nữ",
-    value: "1",
-  },
-];
-
 const years = Array.from({ length: 100 }, (_, i) => {
   const item = {
     label: `${new Date().getFullYear() - i}`,
@@ -45,27 +28,27 @@ const years = Array.from({ length: 100 }, (_, i) => {
   return item;
 });
 
-export const PrizeInfomationCv = () => {
+export const PrizeInfomationCv = ({
+  rewards,
+  mutate,
+  onClose,
+}: IInfomationRewardProps) => {
   const schema = yup.object().shape({
-    prizes: yup
+    rewards: yup
       .array()
       .of(
         yup.object().shape({
-          prize_name: yup.string().required("Vui lòng nhập tên giải thưởng"),
-          organization: yup.string().required("Vui lòng nhập tổ chức"),
-          month: yup.string().required("Vui lòng chọn tháng bắt đầu"),
-          year: yup.string().required("Vui lòng chọn năm bắt đầu"),
-          description: yup.string(),
+          id: yup.number(),
+          fullName: yup.string().required("Vui lòng nhập tên giải thưởng"),
+          companyName: yup.string().required("Vui lòng nhập tổ chức"),
+          monthGet: yup.string().required("Vui lòng chọn tháng bắt đầu"),
+          yearGet: yup.string().required("Vui lòng chọn năm bắt đầu"),
+          introduction: yup.string(),
           files: yup
             .mixed<FileList>()
-            .test("fileType", "Chỉ upload file JPEG,JPG,PNG,PDF ", (value) => {
+            .test("fileType", "Chỉ upload file JPEG,JPG,PNG ", (value) => {
               if (value && value.length > 0) {
-                const allowedFormats = [
-                  "image/jpeg",
-                  "image/jpg",
-                  "image/png",
-                  "application/pdf",
-                ];
+                const allowedFormats = ["image/jpeg", "image/jpg", "image/png"];
                 return Array.from(value).every((file: File) =>
                   allowedFormats.includes(file.type)
                 );
@@ -87,33 +70,71 @@ export const PrizeInfomationCv = () => {
       .required("Vui lòng chọn giải thưởng"),
   });
 
+  const { setLoading } = useLoading();
+
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IReWardCv>({
     resolver: yupResolver(schema),
     defaultValues: {
-      prizes: [
-        {
-          prize_name: "",
-          organization: "",
-          month: "",
-          year: "",
-          description: "",
-        },
-      ],
+      rewards:
+        rewards?.length > 0
+          ? rewards
+          : [
+              {
+                id: -1,
+                fullName: "",
+                companyName: "",
+                monthGet: "",
+                yearGet: "",
+                introduction: "",
+              },
+            ],
     },
   });
 
-  const onSubmit: SubmitHandler<IPrizeCv> = (data: any) => {
-    console.log(data);
-    toast.success("Update thông tin thành công");
+  const onSubmit: SubmitHandler<IReWardCv> = async (data) => {
+    setLoading(true);
+    try {
+      const listFiles = data.rewards.map((item) => {
+        return item.files;
+      });
+      const linkUploads = await Promise.all(
+        listFiles.map(async (item: FileList | undefined, index) => {
+          const link = await getFileUpload(item, rewards[index]?.linkFile);
+          return link;
+        })
+      );
+
+      const dataUpload = data.rewards.map((item, index) => {
+        const dataTemp: any = { ...item };
+        if (linkUploads[index] && linkUploads[index]?.length > 0) {
+          dataTemp.linkFile = linkUploads[index];
+        }
+        return dataTemp;
+      });
+
+      const res = await axiosInstance.post(ADD_OR_UPDATE_REWARD, dataUpload);
+      toast.success("Cập nhật thông tin thành công");
+      if (mutate) {
+        mutate();
+      }
+      if (onClose) {
+        onClose();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Cập nhật thông tin thất bại");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "prizes",
+    name: "rewards",
   });
 
   return (
@@ -141,7 +162,7 @@ export const PrizeInfomationCv = () => {
                   <TmInput
                     control={control}
                     icon={<BeakerIcon className="w-4" />}
-                    name={`prizes.${index}.prize_name`}
+                    name={`rewards.${index}.fullName`}
                     placeholder="Giải thưởng"
                   />
                 </div>
@@ -153,7 +174,7 @@ export const PrizeInfomationCv = () => {
                 <div>
                   <TmInput
                     control={control}
-                    name={`prizes.${index}.organization`}
+                    name={`rewards.${index}.companyName`}
                     placeholder="Tổ chức"
                   />
                 </div>
@@ -168,7 +189,7 @@ export const PrizeInfomationCv = () => {
                     <div className="flex-1">
                       <TmSelect
                         control={control}
-                        name={`prizes.${index}.month`}
+                        name={`rewards.${index}.monthGet`}
                         options={months}
                         placeholder="Chọn tháng"
                       />
@@ -176,7 +197,7 @@ export const PrizeInfomationCv = () => {
                     <div className="flex-1">
                       <TmSelect
                         control={control}
-                        name={`prizes.${index}.year`}
+                        name={`rewards.${index}.yearGet`}
                         options={years}
                         placeholder="Chọn năm"
                       />
@@ -189,32 +210,35 @@ export const PrizeInfomationCv = () => {
                 <div>
                   <CustomCKEditor
                     control={control}
-                    name={`prizes.${index}.description`}
+                    name={`rewards.${index}.introduction`}
                   />
                 </div>
               </div>
               <div>
                 <CustomUploadMulti
-                  name="files"
+                  name={`rewards.${index}.files`}
                   title="Tải tệp hoặc File từ máy tính"
                   control={control}
+                  link={rewards[index] && rewards[index].linkFile}
+                  acceptFile=".jpeg, .jpg, .png"
                 />
               </div>
             </div>
           ))}
-          {errors && errors.prizes && (
-            <p className="text-red-500">{errors.prizes.root?.message}</p>
+          {errors && errors.rewards && (
+            <p className="text-red-500">{errors.rewards.root?.message}</p>
           )}
           <button
             type="button"
             className="mt-4 text-default flex space-x-1"
             onClick={() => {
               append({
-                prize_name: "",
-                organization: "",
-                month: "",
-                year: "",
-                description: "",
+                id: -1,
+                fullName: "",
+                companyName: "",
+                monthGet: "",
+                yearGet: "",
+                introduction: "",
               });
             }}
           >

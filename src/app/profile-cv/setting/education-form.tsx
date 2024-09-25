@@ -1,8 +1,16 @@
+import { useLoading } from "@/app/context/loading";
+import {
+  IInfoEducationProps,
+  IInfomationSchoolCv,
+} from "@/app/interface/interface";
 import TmCheckbox from "@/component/hook-form/checkbox";
 import TmInput from "@/component/hook-form/input";
 import TmSelect from "@/component/hook-form/select";
 import CustomUploadMulti from "@/component/hook-form/upload-multiple-file";
 import { months } from "@/mockup-data/data";
+import { ADD_OR_UPDATE_EDUCATION } from "@/utils/api-url";
+import axiosInstance from "@/utils/axios";
+import { getFileUpload } from "@/utils/business/upload-mutiple-file";
 import {
   AcademicCapIcon,
   PlusIcon,
@@ -20,33 +28,6 @@ const CustomCKEditor = dynamic(
   { ssr: false }
 );
 
-interface InfomationUserCv {
-  educations: {
-    school: string;
-    specialized: string;
-    rank: string;
-    month_from: string;
-    year_from: string;
-    month_to?: string;
-    year_to?: string;
-    isStudied?: boolean;
-    rating: string;
-    description?: string;
-    files?: FileList;
-  }[];
-}
-
-const gender = [
-  {
-    label: "Nam",
-    value: "0",
-  },
-  {
-    label: "Nữ",
-    value: "1",
-  },
-];
-
 const years = Array.from({ length: 100 }, (_, i) => {
   const item = {
     label: `${new Date().getFullYear() - i}`,
@@ -55,31 +36,39 @@ const years = Array.from({ length: 100 }, (_, i) => {
   return item;
 });
 
-export const EducationUserCv = () => {
+export const EducationUserCv = ({
+  educations,
+  mutate,
+  onClose,
+}: IInfoEducationProps) => {
   const schema = yup.object().shape({
     educations: yup
       .array()
       .of(
         yup.object().shape({
-          school: yup.string().required("Vui lòng nhập trường học"),
-          specialized: yup.string().required("Vui lòng nhập chuyên ngành"),
-          rank: yup.string().required("Vui lòng nhập cấp bậc"),
-          month_from: yup.string().required("Vui lòng chọn tháng bắt đầu"),
-          year_from: yup.string().required("Vui lòng chọn năm bắt đầu"),
-          isStudied: yup.boolean(),
-          month_to: yup.string().when("isStudied", ([isStudied], schema) => {
-            console.log(isStudied);
-            return isStudied === false
+          id: yup.number(),
+          schoolName: yup.string().required("Vui lòng nhập trường học"),
+          major: yup.string().required("Vui lòng nhập chuyên ngành"),
+          position: yup.string().required("Vui lòng nhập cấp bậc"),
+          fromMonth: yup.string().required("Vui lòng chọn tháng bắt đầu"),
+          fromYear: yup.string().required("Vui lòng chọn năm bắt đầu"),
+          isEnd: yup.boolean(),
+          toMonth: yup.string().when("isEnd", ([isEnd], schema) => {
+            return isEnd === false
               ? schema.required("Vui lòng chọn tháng kết thúc")
               : schema;
           }),
-          year_to: yup.string().when("isStudied", ([isStudied], schema) => {
-            return isStudied === false
+          toYear: yup.string().when("isEnd", ([isEnd], schema) => {
+            return isEnd === false
               ? schema.required("Vui lòng chọn năm kết thúc")
               : schema;
           }),
-          rating: yup.string().required("Vui lòng chọn xếp loại"),
-          description: yup.string(),
+          rank: yup.string().when("isEnd", ([isEnd], schema) => {
+            return isEnd === false
+              ? schema.required("Vui lòng chọn xếp loại")
+              : schema;
+          }),
+          introduction: yup.string(),
           files: yup
             .mixed<FileList>()
             .test("fileType", "Chỉ upload file JPEG,JPG,PNG,PDF ", (value) => {
@@ -111,33 +100,72 @@ export const EducationUserCv = () => {
       .required("Vui lòng chọn trường học"),
   });
 
+  const { setLoading } = useLoading();
+
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<IInfomationSchoolCv>({
     resolver: yupResolver(schema),
     defaultValues: {
-      educations: [
-        {
-          school: "",
-          specialized: "",
-          rank: "",
-          month_from: "",
-          year_from: "",
-          month_to: "",
-          year_to: "",
-          isStudied: false,
-          rating: "",
-          description: "",
-        },
-      ],
+      educations:
+        educations?.length > 0
+          ? educations
+          : [
+              {
+                id: -1,
+                schoolName: "",
+                major: "",
+                position: "",
+                fromMonth: "",
+                fromYear: "",
+                toMonth: "",
+                toYear: "",
+                isEnd: false,
+                rank: "",
+                introduction: "",
+              },
+            ],
     },
   });
 
-  const onSubmit: SubmitHandler<InfomationUserCv> = (data: any) => {
-    console.log(data);
-    toast.success("Update thông tin thành công");
+  const onSubmit: SubmitHandler<IInfomationSchoolCv> = async (data) => {
+    setLoading(true);
+    try {
+      const listFiles = data.educations.map((item) => {
+        return item.files;
+      });
+      const linkUploads = await Promise.all(
+        listFiles.map(async (item: FileList | undefined, index) => {
+          const link = await getFileUpload(item, educations[index]?.linkFile);
+          return link;
+        })
+      );
+
+      const dataUpload = data.educations.map((item, index) => {
+        const dataTemp: any = { ...item };
+        if (linkUploads[index] && linkUploads[index]?.length > 0) {
+          dataTemp.linkFile = linkUploads[index];
+        }
+        return dataTemp;
+      });
+
+      const res = await axiosInstance.post(ADD_OR_UPDATE_EDUCATION, dataUpload);
+      toast.success("Cập nhật thông tin học vấn thành công");
+      if (mutate) {
+        mutate();
+      }
+      if (onClose) {
+        onClose();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Cập nhật thông tin học vấn thất bại");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const { fields, append, remove } = useFieldArray({
@@ -170,7 +198,7 @@ export const EducationUserCv = () => {
                   <TmInput
                     control={control}
                     icon={<AcademicCapIcon className="w-4" />}
-                    name={`educations.${index}.school`}
+                    name={`educations.${index}.schoolName`}
                     placeholder="Trường học"
                   />
                 </div>
@@ -182,7 +210,7 @@ export const EducationUserCv = () => {
                 <div>
                   <TmInput
                     control={control}
-                    name={`educations.${index}.specialized`}
+                    name={`educations.${index}.major`}
                     placeholder="Chuyên ngành"
                   />
                 </div>
@@ -194,7 +222,7 @@ export const EducationUserCv = () => {
                 <div>
                   <TmInput
                     control={control}
-                    name={`educations.${index}.rank`}
+                    name={`educations.${index}.position`}
                     placeholder="Cấp bậc"
                   />
                 </div>
@@ -210,7 +238,7 @@ export const EducationUserCv = () => {
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`educations.${index}.month_from`}
+                          name={`educations.${index}.fromMonth`}
                           options={months}
                           placeholder="Chọn tháng"
                         />
@@ -218,7 +246,7 @@ export const EducationUserCv = () => {
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`educations.${index}.year_from`}
+                          name={`educations.${index}.fromYear`}
                           options={years}
                           placeholder="Chọn năm"
                         />
@@ -231,7 +259,7 @@ export const EducationUserCv = () => {
                       <div>
                         <TmCheckbox
                           control={control}
-                          name={`educations.${index}.isStudied`}
+                          name={`educations.${index}.isEnd`}
                           label="Còn học"
                         />
                       </div>
@@ -240,14 +268,14 @@ export const EducationUserCv = () => {
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`educations.${index}.month_to`}
+                          name={`educations.${index}.toMonth`}
                           options={months}
                           placeholder="Chọn tháng"
                         />
                       </div>
                       <div className="flex-1">
                         <TmSelect
-                          name={`educations.${index}.year_to`}
+                          name={`educations.${index}.toYear`}
                           control={control}
                           options={years}
                           placeholder="Chọn năm"
@@ -266,7 +294,7 @@ export const EducationUserCv = () => {
                   <TmInput
                     control={control}
                     placeholder="Xếp loại"
-                    name={`educations.${index}.rating`}
+                    name={`educations.${index}.rank`}
                   />
                 </div>
               </div>
@@ -275,15 +303,17 @@ export const EducationUserCv = () => {
                 <div>
                   <CustomCKEditor
                     control={control}
-                    name={`educations.${index}.description`}
+                    name={`educations.${index}.introduction`}
                   />
                 </div>
               </div>
               <div>
                 <CustomUploadMulti
-                  name="files"
+                  name={`educations.${index}.files`}
                   title="Tải tệp hoặc File từ máy tính"
                   control={control}
+                  acceptFile=".jpeg, .jpg, .png"
+                  link={educations[index] && educations[index].linkFile}
                 />
               </div>
             </div>
@@ -296,16 +326,17 @@ export const EducationUserCv = () => {
             className="mt-4 text-default flex space-x-1"
             onClick={() => {
               append({
-                school: "",
-                specialized: "",
+                id: -1,
+                schoolName: "",
+                major: "",
+                position: "",
+                fromMonth: "",
+                fromYear: "",
+                toMonth: "",
+                toYear: "",
+                isEnd: false,
                 rank: "",
-                month_from: "",
-                year_from: "",
-                month_to: "",
-                year_to: "",
-                isStudied: false,
-                rating: "",
-                description: "",
+                introduction: "",
               });
             }}
           >
@@ -314,10 +345,10 @@ export const EducationUserCv = () => {
 
           <div className="flex justify-center mt-4">
             <button
-              className="px-3 py-1 bg-[#F37A20] text-white rounded-lg"
+              className="px-3 py-2 text-base bg-[#F37A20] text-white rounded-lg"
               type="submit"
             >
-              Cập nhật
+              {educations.length > 0 ? "Cập nhật" : "Thêm mới"}
             </button>
           </div>
         </form>

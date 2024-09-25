@@ -1,8 +1,16 @@
+import { useLoading } from "@/app/context/loading";
+import {
+  IInfomationExperience,
+  IInfomationExperienceProps,
+} from "@/app/interface/interface";
 import TmCheckbox from "@/component/hook-form/checkbox";
 import TmInput from "@/component/hook-form/input";
 import TmSelect from "@/component/hook-form/select";
 import CustomUploadMulti from "@/component/hook-form/upload-multiple-file";
 import { months } from "@/mockup-data/data";
+import { ADD_OR_UPDATE_EXPERIENCE } from "@/utils/api-url";
+import axiosInstance from "@/utils/axios";
+import { getFileUpload } from "@/utils/business/upload-mutiple-file";
 import {
   BuildingOfficeIcon,
   PlusIcon,
@@ -20,31 +28,6 @@ const CustomCKEditor = dynamic(
   { ssr: false }
 );
 
-interface IExperienceCv {
-  experiences: {
-    company: string;
-    position: string;
-    month_from: string;
-    year_from: string;
-    month_to?: string;
-    year_to?: string;
-    isWorking?: boolean;
-    description?: string;
-    files?: FileList;
-  }[];
-}
-
-const gender = [
-  {
-    label: "Nam",
-    value: "0",
-  },
-  {
-    label: "Nữ",
-    value: "1",
-  },
-];
-
 const years = Array.from({ length: 100 }, (_, i) => {
   const item = {
     label: `${new Date().getFullYear() - i}`,
@@ -53,29 +36,33 @@ const years = Array.from({ length: 100 }, (_, i) => {
   return item;
 });
 
-export const ExperienceUserCv = () => {
+export const ExperienceUserCv = ({
+  experiences,
+  mutate,
+  onClose,
+}: IInfomationExperienceProps) => {
   const schema = yup.object().shape({
     experiences: yup
       .array()
       .of(
         yup.object().shape({
-          company: yup.string().required("Vui lòng nhập công ty"),
+          id: yup.number(),
+          companyName: yup.string().required("Vui lòng nhập công ty"),
           position: yup.string().required("Vui lòng nhập chức vụ - vị trí"),
-          month_from: yup.string().required("Vui lòng chọn tháng bắt đầu"),
-          year_from: yup.string().required("Vui lòng chọn năm bắt đầu"),
-          isWorking: yup.boolean(),
-          month_to: yup.string().when("isWorking", ([isWorking], schema) => {
-            console.log(isWorking);
-            return isWorking === false
+          fromMonth: yup.string().required("Vui lòng chọn tháng bắt đầu"),
+          fromYear: yup.string().required("Vui lòng chọn năm bắt đầu"),
+          isEnd: yup.boolean(),
+          toMonth: yup.string().when("isEnd", ([isEnd], schema) => {
+            return isEnd === false
               ? schema.required("Vui lòng chọn tháng kết thúc")
               : schema;
           }),
-          year_to: yup.string().when("isWorking", ([isWorking], schema) => {
-            return isWorking === false
+          toYear: yup.string().when("isEnd", ([isEnd], schema) => {
+            return isEnd === false
               ? schema.required("Vui lòng chọn năm kết thúc")
               : schema;
           }),
-          description: yup.string(),
+          introduction: yup.string(),
           files: yup
             .mixed<FileList>()
             .test("fileType", "Chỉ upload file JPEG,JPG,PNG,PDF ", (value) => {
@@ -107,31 +94,70 @@ export const ExperienceUserCv = () => {
       .required("Vui lòng chọn kinh nghiệm làm việc"),
   });
 
+  const { setLoading } = useLoading();
+
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<IInfomationExperience>({
     resolver: yupResolver(schema),
     defaultValues: {
-      experiences: [
-        {
-          company: "",
-          position: "",
-          month_from: "",
-          year_from: "",
-          month_to: "",
-          year_to: "",
-          isWorking: false,
-          description: "",
-        },
-      ],
+      experiences:
+        experiences && experiences.length > 0
+          ? experiences
+          : [
+              {
+                id: -1,
+                companyName: "",
+                position: "",
+                fromMonth: "",
+                fromYear: "",
+                toMonth: "",
+                toYear: "",
+                isEnd: false,
+                introduction: "",
+              },
+            ],
     },
   });
 
-  const onSubmit: SubmitHandler<IExperienceCv> = (data: any) => {
-    console.log(data);
-    toast.success("Update thông tin thành công");
+  const onSubmit: SubmitHandler<IInfomationExperience> = async (data) => {
+    setLoading(true);
+    try {
+      const listFiles = data.experiences.map((item) => {
+        return item.files;
+      });
+      const linkUploads = await Promise.all(
+        listFiles.map(async (item: FileList | undefined, index) => {
+          const link = await getFileUpload(item, experiences[index]?.linkFile);
+          return link;
+        })
+      );
+
+      const dataUpload = data.experiences.map((item, index) => {
+        const dataTemp: any = { ...item };
+        dataTemp.linkFile = linkUploads[index];
+        return dataTemp;
+      });
+      const res = await axiosInstance.post(
+        ADD_OR_UPDATE_EXPERIENCE,
+        dataUpload
+      );
+      toast.success("Cập nhật thông tin học vấn thành công");
+      if (mutate) {
+        mutate();
+      }
+      if (onClose) {
+        onClose();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Cập nhật kinh nghiệm thất bại");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const { fields, append, remove } = useFieldArray({
@@ -164,7 +190,7 @@ export const ExperienceUserCv = () => {
                   <TmInput
                     control={control}
                     icon={<BuildingOfficeIcon className="w-4" />}
-                    name={`experiences.${index}.company`}
+                    name={`experiences.${index}.companyName`}
                     placeholder="Công ty"
                   />
                 </div>
@@ -176,7 +202,7 @@ export const ExperienceUserCv = () => {
                 <div>
                   <TmInput
                     control={control}
-                    name={`experiences.${index}.specialized`}
+                    name={`experiences.${index}.position`}
                     placeholder="Chức vụ - vị trí"
                   />
                 </div>
@@ -192,7 +218,7 @@ export const ExperienceUserCv = () => {
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`experiences.${index}.month_from`}
+                          name={`experiences.${index}.fromMonth`}
                           options={months}
                           placeholder="Chọn tháng"
                         />
@@ -200,7 +226,7 @@ export const ExperienceUserCv = () => {
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`experiences.${index}.year_from`}
+                          name={`experiences.${index}.fromYear`}
                           options={years}
                           placeholder="Chọn năm"
                         />
@@ -213,7 +239,7 @@ export const ExperienceUserCv = () => {
                       <div>
                         <TmCheckbox
                           control={control}
-                          name={`experiences.${index}.isWorking`}
+                          name={`experiences.${index}.isEnd`}
                           label="Còn làm"
                         />
                       </div>
@@ -222,14 +248,14 @@ export const ExperienceUserCv = () => {
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`experiences.${index}.month_to`}
+                          name={`experiences.${index}.toYear`}
                           options={months}
                           placeholder="Chọn tháng"
                         />
                       </div>
                       <div className="flex-1">
                         <TmSelect
-                          name={`experiences.${index}.year_to`}
+                          name={`experiences.${index}.toYear`}
                           control={control}
                           options={years}
                           placeholder="Chọn năm"
@@ -244,15 +270,17 @@ export const ExperienceUserCv = () => {
                 <div>
                   <CustomCKEditor
                     control={control}
-                    name={`experiences.${index}.description`}
+                    name={`experiences.${index}.introduction`}
                   />
                 </div>
               </div>
               <div>
                 <CustomUploadMulti
-                  name="files"
+                  name={`experiences.${index}.files`}
+                  acceptFile=".jpeg, .jpg, .png"
                   title="Tải tệp hoặc File từ máy tính"
                   control={control}
+                  link={experiences[index] && experiences[index].linkFile}
                 />
               </div>
             </div>
@@ -265,14 +293,15 @@ export const ExperienceUserCv = () => {
             className="mt-4 text-default flex space-x-1"
             onClick={() => {
               append({
-                company: "",
+                id: -1,
+                companyName: "",
                 position: "",
-                month_from: "",
-                year_from: "",
-                month_to: "",
-                year_to: "",
-                isWorking: false,
-                description: "",
+                fromMonth: "",
+                fromYear: "",
+                toMonth: "",
+                toYear: "",
+                isEnd: false,
+                introduction: "",
               });
             }}
           >

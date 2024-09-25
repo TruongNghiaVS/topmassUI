@@ -1,37 +1,27 @@
-import { AcademicCapIcon, StarIcon } from "@heroicons/react/16/solid";
-import dayjs from "dayjs";
+import { IInfomationSkillViewProps } from "@/app/interface/interface";
+import { StarIcon } from "@heroicons/react/16/solid";
 
-interface ISkill {
-  skill_name: string;
-  proficiency: number;
-  description?: string;
-}
-
-interface IProps {
-  data: ISkill[];
-}
-
-export const SkillView = ({ data }: IProps) => {
+export const SkillView = ({ skills }: IInfomationSkillViewProps) => {
   const counts = Array.from({ length: 5 }, (_, i) => {
     return i + 1;
   });
 
   return (
     <div className="mt-4">
-      {data.map((item) => {
+      {skills?.map((item, index) => {
         return (
-          <div key={item.skill_name} className="mt-4">
+          <div key={index} className="mt-4">
             <div className="mt-4">
               <div className="grid grid-cols-3 text-xs mt-2">
-                <div className="col-span-1">{item.skill_name}</div>
+                <div className="col-span-1">{item.fullName}</div>
                 <div className="col-span-2">
                   <div className="flex space-x-2">
-                    {counts.map((value) => {
+                    {counts.map((value, idx) => {
                       return (
                         <StarIcon
-                          key={item.skill_name + value.toString()}
+                          key={idx}
                           className={`w-6 ${
-                            value <= item.proficiency
+                            value <= item.level
                               ? "text-default"
                               : "text-gray-400"
                           }`}
@@ -39,7 +29,10 @@ export const SkillView = ({ data }: IProps) => {
                       );
                     })}
                   </div>
-                  <div className="mt2">{item.description}</div>
+                  <div
+                    className="mt2"
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  ></div>
                 </div>
               </div>
             </div>

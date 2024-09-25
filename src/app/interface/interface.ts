@@ -91,6 +91,10 @@ export interface IAvatarProps {
   setAvatarLink: Dispatch<SetStateAction<string>>;
 }
 
+export interface IAvatarCvProps extends IAvatarProps {
+  user: IInfomationUserCv;
+}
+
 export interface IApplyModal {
   isModalOpen: boolean;
   onClose: () => void;
@@ -205,4 +209,245 @@ export interface IPopupUploadCv {
 
 export interface ILoadCv {
   file: File;
+}
+
+export interface IInfoEducation {
+  fromMonth: string;
+  fromYear: string;
+  id: number;
+  introduction: string;
+  isEnd: boolean;
+  linkFile?: string;
+  major: string;
+  position: string;
+  relId: number;
+  schoolName: string;
+  toMonth: string;
+  toYear: string;
+  rank: string;
+}
+
+export interface IInfoEducationProps {
+  educations: IInfoEducation[];
+  mutate?: KeyedMutator<any>;
+  onClose?: () => void;
+}
+
+export interface IInfomationSchoolCv {
+  educations: {
+    id?: number;
+    schoolName: string;
+    major: string;
+    position: string;
+    fromMonth: string;
+    fromYear: string;
+    toMonth?: string;
+    toYear?: string;
+    isEnd?: boolean;
+    rank?: string;
+    introduction?: string;
+    files?: FileList;
+    linkFile?: string;
+  }[];
+}
+
+export interface IInfomationExperience {
+  experiences: {
+    id?: number;
+    companyName: string;
+    position: string;
+    fromMonth: string;
+    fromYear: string;
+    toMonth?: string;
+    toYear?: string;
+    isEnd?: boolean;
+    introduction?: string;
+    files?: FileList;
+  }[];
+}
+
+export interface IInfomationExperiencesView {
+  id?: number;
+  companyName: string;
+  position: string;
+  fromMonth: string;
+  fromYear: string;
+  toMonth: string;
+  toYear: string;
+  isEnd?: boolean;
+  introduction: string;
+  linkFile?: string;
+  files?: FileList;
+}
+
+export interface IInfomationExperienceProps {
+  experiences: IInfomationExperiencesView[];
+  mutate?: KeyedMutator<any>;
+  onClose?: () => void;
+}
+
+export interface IProjectCv {
+  projects: {
+    id?: number;
+    projectName: string;
+    customerName: string;
+    numOfMember: number;
+    position: string;
+    technology: string;
+    fromMonth: string;
+    fromYear: string;
+    toMonth?: string;
+    toYear?: string;
+    isEnd?: boolean;
+    introduction?: string;
+    files?: FileList;
+  }[];
+}
+
+export interface IInfomationProjectView {
+  id: number;
+  projectName: string;
+  customerName: string;
+  numOfMember: number;
+  position: string;
+  technology: string;
+  fromMonth: string;
+  fromYear: string;
+  toMonth: string;
+  toYear: string;
+  isEnd?: boolean;
+  introduction: string;
+  files?: FileList;
+  linkFile?: string;
+}
+
+export interface IInfomationProjectProps {
+  projects: IInfomationProjectView[];
+  mutate?: KeyedMutator<any>;
+  onClose?: () => void;
+}
+
+export interface ISkillCv {
+  skills: {
+    id?: number;
+    fullName: string;
+    level: number;
+    description?: string;
+  }[];
+}
+
+export interface IInfoamtionSkillView {
+  id?: number;
+  fullName: string;
+  level: number;
+  description: string;
+}
+
+export interface IInfomationSkillViewProps {
+  skills: IInfoamtionSkillView[];
+  mutate?: KeyedMutator<any>;
+  onClose?: () => void;
+}
+
+export interface IToolCv {
+  tools: {
+    id?: number;
+    fullName: string;
+    level: number;
+    description?: string;
+  }[];
+}
+
+export interface IInfoamtionToolView {
+  id?: number;
+  fullName: string;
+  level: number;
+  description: string;
+}
+
+export interface IInfomationToolViewProps {
+  tools: IInfoamtionToolView[];
+  mutate?: KeyedMutator<any>;
+  onClose?: () => void;
+}
+
+export interface IReWardCv {
+  rewards: {
+    id?: number;
+    fullName: string;
+    companyName: string;
+    monthGet: string;
+    yearGet: string;
+    introduction?: string;
+    files?: FileList;
+  }[];
+}
+
+export interface IInfomationRewardView {
+  id: number;
+  fullName: string;
+  companyName: string;
+  monthGet: string;
+  yearGet: string;
+  introduction: string;
+  files?: FileList;
+  linkFile?: string;
+}
+
+export interface IInfomationRewardProps {
+  rewards: IInfomationRewardView[];
+  mutate?: KeyedMutator<any>;
+  onClose?: () => void;
+}
+
+export interface ICertificateCv {
+  certificates: {
+    id?: number;
+    fullName: string;
+    companyName: string;
+    monthGet: string;
+    yearGet: string;
+    monthExpired?: string;
+    yearExpired?: string;
+    isExpired?: boolean;
+    introduction?: string;
+    files?: FileList;
+  }[];
+}
+
+export interface IInfomationCertificateView {
+  id: number;
+  fullName: string;
+  companyName: string;
+  monthGet: string;
+  yearGet: string;
+  introduction: string;
+  monthExpired: string;
+  yearExpired: string;
+  isExpired: boolean;
+  files?: FileList;
+  linkFile?: string;
+}
+
+export interface IInfomationCertificateProps {
+  certificates: IInfomationCertificateView[];
+  mutate?: KeyedMutator<any>;
+  onClose?: () => void;
+}
+
+export interface IInfomationUserCv {
+  fullName: string;
+  position: string;
+  level: string;
+  gender: number;
+  email: string;
+  phoneNumber: string;
+  introduction?: string;
+  linkFile?: string;
+}
+
+export interface IInfoamtionFormUserCv {
+  user: IInfomationUserCv;
+  mutate: KeyedMutator<any>;
+  onClose: () => void;
 }
