@@ -2,7 +2,7 @@
 import { news } from "@/mockup-data/data";
 import { New } from "./new";
 import { TitleCustom } from "@/component/custom-title";
-import { GET_All_Company, GET_AllBlogs_ByCategory } from "@/utils/api-url";
+import { GET_AllBlogs_ByCategory } from "@/utils/api-url";
 import useSWR from "swr";
 import { fetcher } from "@/utils/axios";
 import { IBlogDataItem, ICompanyData } from "@/app/interface/interface";
@@ -69,5 +69,3 @@ export default function NewCategory({params} : {params : {slug: string}} ) {
     </div>
   );
 }
-
-

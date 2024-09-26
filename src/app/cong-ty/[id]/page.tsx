@@ -2,10 +2,8 @@
 import TmInput from "@/component/hook-form/input";
 import TmSelect from "@/component/hook-form/select";
 import { useEffect, useState } from "react";
-import {  InfomationJobCompany } from "@/component/infomation-job/infomation-job-company";
+import { InfomationJobCompany } from "@/component/infomation-job/infomation-job-company";
 import { IFormCompany } from "@/interface/form-slider";
-
-import { optionsLocations } from "@/mockup-data/data";
 import { SendCheckFillBootstrapIcon } from "@/theme/icons/sendCheckFillBootstrapIcon";
 import {
   BuildingOffice2Icon,
@@ -21,74 +19,76 @@ import * as yup from "yup";
 import { PopupLoginDetailJob } from "../../viec-lam/[id]/popup-login-detail-job";
 import { getToken } from "@/utils/token";
 import { useLoading } from "@/app/context/loading";
-import axiosInstance, {  fetcher } from "@/utils/axios";
-import {
-  GET_Company_Detail,GET_Company_GetAllJob, Post_Company_AddFolow ,GET_All_Provinces
-
-} from "@/utils/api-url";
+import axiosInstance, { fetcher } from "@/utils/axios";
 import useSWR from "swr";
 import { toast } from "react-toastify";
 import { IjobDisplayItemData, IProvinceData } from "@/app/interface/interface";
 import { Option } from "@/component/hook-form/interface/interface";
+import {
+  GET_COMPANY_DETAIL,
+  GET_COMPANY_GETALLJOB,
+  GET_PROVINCE,
+  POST_COMPANY_ADDFOLLOW,
+} from "@/utils/api-url";
 
-export default function CompanyDetail({params} : {params : {id: string}} ) {
+export default function CompanyDetail({ params }: { params: { id: string } }) {
   const schema = yup.object().shape({
     work: yup.string(),
     location: yup.string(),
   });
-  const {id } = params;
+  const { id } = params;
   const [isOpenModalLogin, setIsOpenModalLogin] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {setLoading} = useLoading();
-  const [searchObj,setSearchObj] = useState({
+  const { setLoading } = useLoading();
+  const [searchObj, setSearchObj] = useState({
     work: "",
     location: -1,
   });
-  const [provicesOptionData, setProvicesOptionData]= useState<Option[]>([]);
+  const [provicesOptionData, setProvicesOptionData] = useState<Option[]>([]);
 
   const { control, handleSubmit } = useForm<IFormCompany>({
     resolver: yupResolver(schema),
     defaultValues: { location: "", work: "" },
   });
 
-  const { data: detail, error,mutate } = useSWR(`${GET_Company_Detail}?slug=cong-ty-co-phan-vs`, fetcher);
+  const { data: detail, error, mutate } = useSWR(
+    `${GET_COMPANY_DETAIL}?slug=cong-ty-co-phan-vs`,
+    fetcher
+  );
 
-  const { data: allProvinces} =   useSWR(`${GET_All_Provinces}`, fetcher);
-  
+  const { data: allProvinces } = useSWR(`${GET_PROVINCE}`, fetcher);
 
-
-  if( allProvinces?.length >0)
-  {
-     setProvicesOptionData(allProvinces);
+  if (allProvinces?.length > 0) {
+    setProvicesOptionData(allProvinces);
   }
 
+  const { data: allJobs, mutate: mutateAllJobs } = useSWR(
+    `${GET_COMPANY_GETALLJOB}?slug=cong-ty-co-phan-vs&location=${searchObj.location}&work=${searchObj.work}`,
+    fetcher
+  );
 
-  const { data: allJobs,mutate: mutateAllJobs } = useSWR(`${GET_Company_GetAllJob}?slug=cong-ty-co-phan-vs&location=${searchObj.location}&work=${searchObj.work}`, fetcher);
-
- 
   useEffect(() => {
-    if(allProvinces) {
-      setProvicesOptionData([{label: "Địa điểm làm việc",value: ""} ,...allProvinces.data.map((item:any) => {
-        return {
-          label: item.name,
-          value: item.code
-        }
-      })])
+    if (allProvinces) {
+      setProvicesOptionData([
+        { label: "Địa điểm làm việc", value: "" },
+        ...allProvinces.data.map((item: any) => {
+          return {
+            label: item.name,
+            value: item.code,
+          };
+        }),
+      ]);
     }
-   
   }, [allProvinces]);
 
   const openModal = () => {
     setIsModalOpen(true);
   };
 
-  
-
   const handleOpenModal = () => {
     const token = getToken();
     if (token) {
       AddFollow();
-     
     } else {
       setIsOpenModalLogin(true);
     }
@@ -96,40 +96,43 @@ export default function CompanyDetail({params} : {params : {id: string}} ) {
 
   const companyDetail = detail?.data;
   const AddFollow = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const res = await axiosInstance.post(Post_Company_AddFolow,{
+      const res = await axiosInstance.post(POST_COMPANY_ADDFOLLOW, {
         slug: id,
       });
       toast.success("Đã theo dõi công ty");
       mutate();
     } catch (error) {
       toast.error("Thao tác thất bại, quay lại sau");
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   const onSubmit: SubmitHandler<IFormCompany> = (data: any) => {
     setSearchObj(data);
-    mutateAllJobs()
+    mutateAllJobs();
   };
 
-
-
-
- 
   return (
-    
     <div className="bg-[#F4F5F5]">
       <div className="container mx-auto ">
         <div className="rounded-lg overflow-hidden">
           <div>
-            <img src={`${companyDetail?.coverFullLink}`}alt="" className="w-full" />
+            <img
+              src={`${companyDetail?.coverFullLink}`}
+              alt=""
+              className="w-full"
+            />
           </div>
           <div className="relative py-4 lg:px-10 lg:pl-60 bg-[url(/imgs/bg-title-company.png)] bg-no-repeat bg-[length:100%_100%] ">
             <div className="w-[180px] h-[180px] rounded-full bg-white flex items-center justify-center lg:absolute left-10 top-[-90px] mx-auto lg:mt-0 md:mt-[-90px]">
-              <img src={`${companyDetail?.logoFullLink}`} alt="" className="w-auto" />
+              <img
+                src={`${companyDetail?.logoFullLink}`}
+                alt=""
+                className="w-auto"
+              />
             </div>
             <div className="lg:flex lg:text-left md:text-center justify-center items-center lg:justify-between lg:space-x-8">
               <div className="">
@@ -139,41 +142,52 @@ export default function CompanyDetail({params} : {params : {id: string}} ) {
                 <div className="flex justify-center mt-4">
                   <div className="text-white flex mr-10">
                     <GlobeAltIcon className="w-4 mr-2 text-white" />
-                     { companyDetail?.website !=""? ( <span>{ companyDetail?.website}</span>): ( <span>Chua cập nhật</span>)}
-                   
+                    {companyDetail?.website != "" ? (
+                      <span>{companyDetail?.website}</span>
+                    ) : (
+                      <span>Chua cập nhật</span>
+                    )}
                   </div>
                   <div className="text-white flex mr-10">
                     <BuildingOffice2Icon className="w-4 mr-2 text-white" />
-                    { companyDetail?.capacity !=""? ( <span>{ companyDetail?.capacity}</span>): ( <span>Chua cập nhật</span>)}
-                 
+                    {companyDetail?.capacity != "" ? (
+                      <span>{companyDetail?.capacity}</span>
+                    ) : (
+                      <span>Chua cập nhật</span>
+                    )}
                   </div>
                   <div className="text-white flex">
                     <UsersIcon className="w-4 mr-2 text-white" />
-                   
-                    { companyDetail?.countFollow >0 ? ( <span>{ companyDetail?.countFollow} theo dõi</span>): ( <span>Chua cập nhật</span>)}
-                    
+
+                    {companyDetail?.countFollow > 0 ? (
+                      <span>{companyDetail?.countFollow} theo dõi</span>
+                    ) : (
+                      <span>Chua cập nhật</span>
+                    )}
                   </div>
                 </div>
               </div>
 
-            
               <div className="md:mt-4 lg:mt-0 md:grid justify-centerpx-8 py-2">
-              { companyDetail?.isFollow == false ? ( <div className="">
-                  <button className="py-2 px-4 bg-white text-default rounded-lg" onClick={() => {
+                {companyDetail?.isFollow == false ? (
+                  <div className="">
+                    <button
+                      className="py-2 px-4 bg-white text-default rounded-lg"
+                      onClick={() => {
                         handleOpenModal();
-                      }}>
-                    + Theo dõi công ty
-                  </button>
-                </div>) : ( <div className="flex justify-center items-center">
-                  <button className="flex items-center py-2 px-4 bg-white text-default rounded-lg mt-3"  >
-                    <SendCheckFillBootstrapIcon className="w-4 mr-2" /> Đang
-                    theo dõi
-                  </button>
-
-                  
-                </div>)}
-               
-               
+                      }}
+                    >
+                      + Theo dõi công ty
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex justify-center items-center">
+                    <button className="flex items-center py-2 px-4 bg-white text-default rounded-lg mt-3">
+                      <SendCheckFillBootstrapIcon className="w-4 mr-2" /> Đang
+                      theo dõi
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -184,9 +198,12 @@ export default function CompanyDetail({params} : {params : {id: string}} ) {
               <div className="bg-gradient-to-r from-[#603813] to-[#F6921E] text-white font-medium text-lg py-2 pl-10">
                 Giới thiệu công ty
               </div>
-              <div className="px-8 py-4"  dangerouslySetInnerHTML={{ __html:companyDetail?.introduction  }}>
-                
-               </div>
+              <div
+                className="px-8 py-4"
+                dangerouslySetInnerHTML={{
+                  __html: companyDetail?.introduction,
+                }}
+              ></div>
             </div>
 
             <div className="bg-white rounded overflow-hidden mt-8">
@@ -224,16 +241,17 @@ export default function CompanyDetail({params} : {params : {id: string}} ) {
                   </div>
                 </form>
                 <div className="mt-4">
-                  {allJobs?.map((value: IjobDisplayItemData,index: number) => {
+                  {allJobs?.map((value: IjobDisplayItemData, index: number) => {
                     return (
-                      <div
-                        key={index.toString()}
-                        className="mt-4">
-                        <InfomationJobCompany handleOpenModal = {handleOpenModal} item={value} mutate={mutateAllJobs} />
+                      <div key={index.toString()} className="mt-4">
+                        <InfomationJobCompany
+                          handleOpenModal={handleOpenModal}
+                          item={value}
+                          mutate={mutateAllJobs}
+                        />
                       </div>
                     );
                   })}
-                  
                 </div>
               </div>
             </div>
@@ -249,28 +267,34 @@ export default function CompanyDetail({params} : {params : {id: string}} ) {
                     <MapPinIcon className="w-6 mr-2" /> Địa chỉ công ty
                   </div>
                   <div className="font-normal text-xs">
-                  
-                    { companyDetail?.addressInfo !=""? ( <span>{ companyDetail?.addressInfo}</span>): ( <span>Chua cập nhật</span>)}
+                    {companyDetail?.addressInfo != "" ? (
+                      <span>{companyDetail?.addressInfo}</span>
+                    ) : (
+                      <span>Chua cập nhật</span>
+                    )}
                   </div>
                 </div>
 
-                { companyDetail?.mapInfo !="" ? ( <div className="mt-4">
-                  <div className="flex">
-                    <MapIcon className="w-6 mr-2" /> Bản đồ
+                {companyDetail?.mapInfo != "" ? (
+                  <div className="mt-4">
+                    <div className="flex">
+                      <MapIcon className="w-6 mr-2" /> Bản đồ
+                    </div>
+                    <div className="p-4">
+                      <iframe
+                        className="w-full"
+                        src={`${companyDetail?.mapInfo}`}
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        height={300}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                      ></iframe>
+                    </div>
                   </div>
-                  <div className="p-4">
-                    <iframe
-                      className="w-full"
-                      src={`${companyDetail?.mapInfo}`}
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      height={300}
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                    ></iframe>
-                  </div>
-                </div>):(<div>  </div>)}
-               
+                ) : (
+                  <div> </div>
+                )}
               </div>
             </div>
           </div>
