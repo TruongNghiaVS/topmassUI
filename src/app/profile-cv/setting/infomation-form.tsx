@@ -1,8 +1,16 @@
+import { useLoading } from "@/app/context/loading";
+import {
+  IInfoamtionFormUserCv,
+  IInfomationUserCv,
+} from "@/app/interface/interface";
 import TmInput from "@/component/hook-form/input";
 import TmRadio from "@/component/hook-form/radio";
+import { SAVE_USER_CV } from "@/utils/api-url";
+import axiosInstance from "@/utils/axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import dynamic from "next/dynamic";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import * as yup from "yup";
 const CustomCKEditor = dynamic(
   () => {
@@ -11,62 +19,75 @@ const CustomCKEditor = dynamic(
   { ssr: false }
 );
 
-interface InfomationUserCv {
-  username: string;
-  work_location: string;
-  position: string;
-  gender: string;
-  address: string;
-  email: string;
-  phone_number: string;
-  description?: string;
-}
-
 const gender = [
   {
     label: "Nam",
-    value: "0",
+    value: 0,
   },
   {
     label: "Nữ",
-    value: "1",
+    value: 1,
   },
 ];
 
-export const InfomationUserCv = () => {
+export const InfomationUserCv = ({
+  user,
+  mutate,
+  onClose,
+}: IInfoamtionFormUserCv) => {
   const schema = yup.object().shape({
-    username: yup.string().required("Vui lòng nhập họ và tên"),
-    work_location: yup.string().required("Vui lòng nhập vị trí"),
-    position: yup.string().required("Vui lòng nhập chức vụ"),
-    gender: yup.string().required("Vui lòng chọn giới tính"),
-    address: yup.string().required("Vui lòng nhập địa chỉ hiện tại"),
+    fullName: yup.string().required("Vui lòng nhập họ và tên"),
+    position: yup.string().required("Vui lòng nhập vị trí"),
+    level: yup.string().required("Vui lòng nhập chức vụ"),
+    gender: yup
+      .number()
+      .required("Vui lòng chọn giới tính")
+      .min(0, "Vui lòng chọn giới tính"),
     email: yup
       .string()
       .email("Sai định dạng email")
       .required("Vui lòng nhập email"),
-    phone_number: yup
+    phoneNumber: yup
       .string()
       .required("Vui lòng nhập số điện thoại")
       .matches(/^[0-9]{10}$/, "Số điện thoại phải là 10 ký tự"),
-    description: yup.string(),
+    introduction: yup.string(),
   });
 
-  const { control, handleSubmit } = useForm({
+  const { setLoading } = useLoading();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IInfomationUserCv>({
     resolver: yupResolver(schema),
-    defaultValues: {
-      username: "",
-      work_location: "",
-      position: "",
-      gender: "",
-      address: "",
-      email: "",
-      phone_number: "",
-      description: "",
-    },
+    defaultValues: user
+      ? user
+      : {
+          fullName: "",
+          position: "",
+          level: "",
+          gender: 0,
+          email: "",
+          phoneNumber: "",
+          introduction: "",
+        },
   });
 
-  const onSubmit: SubmitHandler<InfomationUserCv> = (data: any) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IInfomationUserCv> = async (data) => {
+    setLoading(true);
+    try {
+      const res = await axiosInstance.post(SAVE_USER_CV, data);
+      toast.success("Cập nhật thông tin thành công");
+      mutate();
+      onClose();
+    } catch (error) {
+      console.log(error);
+      toast.error("Cập nhật thông tin thất bại");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -80,7 +101,7 @@ export const InfomationUserCv = () => {
             <div>
               <TmInput
                 control={control}
-                name="username"
+                name="fullName"
                 placeholder="Họ và tên"
               />
             </div>
@@ -90,11 +111,7 @@ export const InfomationUserCv = () => {
               Vị trí <span className="text-[#dc2f2f]">*</span>
             </div>
             <div>
-              <TmInput
-                control={control}
-                name="work_location"
-                placeholder="Vị trí"
-              />
+              <TmInput control={control} name="position" placeholder="Vị trí" />
             </div>
           </div>
           <div className="mt-4">
@@ -102,11 +119,7 @@ export const InfomationUserCv = () => {
               Chức vụ <span className="text-[#dc2f2f]">*</span>
             </div>
             <div>
-              <TmInput
-                control={control}
-                name="position"
-                placeholder="Chức vụ"
-              />
+              <TmInput control={control} name="level" placeholder="Chức vụ" />
             </div>
           </div>
           <div className="mt-4">
@@ -137,7 +150,7 @@ export const InfomationUserCv = () => {
             <div>
               <TmInput
                 control={control}
-                name="phone_number"
+                name="phoneNumber"
                 placeholder="Số điện thoại"
               />
             </div>
@@ -145,7 +158,7 @@ export const InfomationUserCv = () => {
           <div className="mt-4">
             <div className="font-medium">Giới thiệu bản thân</div>
             <div>
-              <CustomCKEditor control={control} name="description" />
+              <CustomCKEditor control={control} name="introduction" />
             </div>
           </div>
           <div className="flex justify-center mt-4">

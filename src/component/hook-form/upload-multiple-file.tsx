@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IUpload } from "./interface/interface";
 import { useController } from "react-hook-form";
 import {
@@ -12,6 +12,8 @@ const CustomUploadMulti: React.FC<IUpload> = ({
   name,
   control,
   title = "Tải CV lên từ máy tính, chọn hoặc kéo thả",
+  link = "",
+  acceptFile = ".jpeg, .jpg, .png, .pdf",
 }) => {
   const {
     field: { value, onChange, onBlur },
@@ -28,6 +30,38 @@ const CustomUploadMulti: React.FC<IUpload> = ({
       fileInputRef.current.click();
     }
   };
+
+  const handleLoadFiles = async (links: string) => {
+    const dataTransfer = new DataTransfer();
+    const listLink = links.split(",");
+    for (const link of listLink) {
+      try {
+        // Fetch the file from the URL
+        const response = await fetch(link);
+        const blob = await response.blob();
+        const fileName = link.split("/").pop() || "file";
+        const file = new File([blob], fileName, { type: blob.type });
+        // Add the file to the DataTransfer object
+        dataTransfer.items.add(file);
+      } catch (error) {
+        console.error(`Error fetching file from ${link}:`, error);
+      }
+    }
+
+    // Assign files to the file input
+    if (fileInputRef.current) {
+      fileInputRef.current.files = dataTransfer.files;
+      const event = new Event("change", { bubbles: true });
+      fileInputRef.current.dispatchEvent(event);
+    }
+    setFiles(Array.from(dataTransfer.files));
+  };
+
+  useEffect(() => {
+    if (link.length > 0) {
+      handleLoadFiles(link);
+    }
+  }, [link]);
 
   const convertArrayToFileList = (filesArray: File[]): FileList => {
     const dataTransfer = new DataTransfer();
@@ -92,9 +126,7 @@ const CustomUploadMulti: React.FC<IUpload> = ({
           <CloudArrowUpIcon className="w-6 text-default font-semibold sm:mx-0 mx-auto" />
           <div>{title}</div>
         </div>
-        <div className="text-center mt-4">
-          Dung lượng tối đa 5MB, định dạng: Jpeg, JPG, PNG, PDF
-        </div>
+        <div className="text-center mt-4">Dung lượng tối đa 5MB</div>
       </div>
       {error !== null && error?.message !== "" && (
         <div style={{ color: "red", margin: "8px 0" }}>{error?.message}</div>
@@ -102,9 +134,9 @@ const CustomUploadMulti: React.FC<IUpload> = ({
 
       <div className="flex space-2 items-center whitespace-nowrap flex-wrap  mt-4">
         {files &&
-          files.map((item) => {
+          files.map((item, idx) => {
             return (
-              <div key={item.name} className="flex text-xs items-center mr-4">
+              <div key={idx} className="flex text-xs items-center mr-4">
                 <DocumentTextIcon className="w-4 text-default" />
                 <div className="mx-1">{item.name}</div>
                 <button
@@ -122,7 +154,7 @@ const CustomUploadMulti: React.FC<IUpload> = ({
       <input
         ref={fileInputRef}
         type="file"
-        accept=".jpeg, .jpg, .png, .pdf"
+        accept={acceptFile}
         className="hidden"
         multiple
         onChange={handleFileChange}

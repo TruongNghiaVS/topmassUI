@@ -1,9 +1,17 @@
+import { useLoading } from "@/app/context/loading";
+import {
+  ICertificateCv,
+  IInfomationCertificateProps,
+} from "@/app/interface/interface";
 import TmCheckbox from "@/component/hook-form/checkbox";
 import TmInput from "@/component/hook-form/input";
 import TmSelect from "@/component/hook-form/select";
 import TmTextArea from "@/component/hook-form/textarea";
 import CustomUploadMulti from "@/component/hook-form/upload-multiple-file";
 import { months } from "@/mockup-data/data";
+import { ADD_OR_UPDATE_CERTIFY } from "@/utils/api-url";
+import axiosInstance from "@/utils/axios";
+import { getFileUpload } from "@/utils/business/upload-mutiple-file";
 import {
   BuildingOfficeIcon,
   PlusIcon,
@@ -21,31 +29,6 @@ const CustomCKEditor = dynamic(
   { ssr: false }
 );
 
-interface ICertificateCv {
-  certificates: {
-    certificate_name: string;
-    organization: string;
-    month_from: string;
-    year_from: string;
-    month_to?: string;
-    year_to?: string;
-    is_duration?: boolean;
-    description?: string;
-    files?: FileList;
-  }[];
-}
-
-const gender = [
-  {
-    label: "Nam",
-    value: "0",
-  },
-  {
-    label: "Nữ",
-    value: "1",
-  },
-];
-
 const years = Array.from({ length: 100 }, (_, i) => {
   const item = {
     label: `${new Date().getFullYear() - i}`,
@@ -54,33 +37,36 @@ const years = Array.from({ length: 100 }, (_, i) => {
   return item;
 });
 
-export const CertificateInfomationCv = () => {
+export const CertificateInfomationCv = ({
+  certificates,
+  mutate,
+  onClose,
+}: IInfomationCertificateProps) => {
   const schema = yup.object().shape({
     certificates: yup
       .array()
       .of(
         yup.object().shape({
-          certificate_name: yup
+          id: yup.number(),
+          fullName: yup.string().required("Vui lòng nhập tên chứng chỉ"),
+          companyName: yup.string().required("Vui lòng nhập tổ chức"),
+          monthGet: yup.string().required("Vui lòng chọn tháng bắt đầu"),
+          yearGet: yup.string().required("Vui lòng chọn năm bắt đầu"),
+          isExpired: yup.boolean(),
+          monthExpired: yup
             .string()
-            .required("Vui lòng nhập tên chứng chỉ"),
-          organization: yup.string().required("Vui lòng nhập tổ chức"),
-          month_from: yup.string().required("Vui lòng chọn tháng bắt đầu"),
-          year_from: yup.string().required("Vui lòng chọn năm bắt đầu"),
-          is_duration: yup.boolean(),
-          month_to: yup
-            .string()
-            .when("is_duration", ([is_duration], schema) => {
-              console.log(is_duration);
-              return is_duration === false
+            .when("isExpired", ([isExpired], schema) => {
+              console.log(isExpired);
+              return isExpired === false
                 ? schema.required("Vui lòng chọn tháng kết thúc")
                 : schema;
             }),
-          year_to: yup.string().when("is_duration", ([is_duration], schema) => {
-            return is_duration === false
+          yearExpired: yup.string().when("isExpired", ([isExpired], schema) => {
+            return isExpired === false
               ? schema.required("Vui lòng chọn năm kết thúc")
               : schema;
           }),
-          description: yup.string(),
+          introduction: yup.string(),
           files: yup
             .mixed<FileList>()
             .test("fileType", "Chỉ upload file JPEG,JPG,PNG,PDF ", (value) => {
@@ -112,31 +98,69 @@ export const CertificateInfomationCv = () => {
       .required("Vui lòng chọn kinh nghiệm làm việc"),
   });
 
+  const { setLoading } = useLoading();
+
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ICertificateCv>({
     resolver: yupResolver(schema),
     defaultValues: {
-      certificates: [
-        {
-          certificate_name: "",
-          organization: "",
-          month_from: "",
-          year_from: "",
-          month_to: "",
-          year_to: "",
-          is_duration: false,
-          description: "",
-        },
-      ],
+      certificates:
+        certificates?.length > 0
+          ? certificates
+          : [
+              {
+                id: -1,
+                fullName: "",
+                companyName: "",
+                monthGet: "",
+                yearGet: "",
+                monthExpired: "",
+                yearExpired: "",
+                isExpired: false,
+                introduction: "",
+              },
+            ],
     },
   });
 
-  const onSubmit: SubmitHandler<ICertificateCv> = (data: any) => {
-    console.log(data);
-    toast.success("Update thông tin thành công");
+  const onSubmit: SubmitHandler<ICertificateCv> = async (data) => {
+    setLoading(true);
+    try {
+      const listFiles = data.certificates.map((item) => {
+        return item.files;
+      });
+      const linkUploads = await Promise.all(
+        listFiles.map(async (item: FileList | undefined, index) => {
+          const link = await getFileUpload(item, certificates[index]?.linkFile);
+          return link;
+        })
+      );
+
+      const dataUpload = data.certificates.map((item, index) => {
+        const dataTemp: any = { ...item };
+        if (linkUploads[index] && linkUploads[index]?.length > 0) {
+          dataTemp.linkFile = linkUploads[index];
+        }
+        return dataTemp;
+      });
+
+      const res = await axiosInstance.post(ADD_OR_UPDATE_CERTIFY, dataUpload);
+      toast.success("Cập nhật thông tin thành công");
+      if (mutate) {
+        mutate();
+      }
+      if (onClose) {
+        onClose();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Cập nhật thông tin thất bại");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const { fields, append, remove } = useFieldArray({
@@ -169,7 +193,7 @@ export const CertificateInfomationCv = () => {
                   <TmInput
                     control={control}
                     icon={<BuildingOfficeIcon className="w-4" />}
-                    name={`certificates.${index}.certificate_name`}
+                    name={`certificates.${index}.fullName`}
                     placeholder="Tên chứng chỉ"
                   />
                 </div>
@@ -181,7 +205,7 @@ export const CertificateInfomationCv = () => {
                 <div>
                   <TmInput
                     control={control}
-                    name={`certificates.${index}.organization`}
+                    name={`certificates.${index}.companyName`}
                     placeholder="Tổ chức"
                   />
                 </div>
@@ -197,7 +221,7 @@ export const CertificateInfomationCv = () => {
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`certificates.${index}.month_from`}
+                          name={`certificates.${index}.monthGet`}
                           options={months}
                           placeholder="Chọn tháng"
                         />
@@ -205,7 +229,7 @@ export const CertificateInfomationCv = () => {
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`certificates.${index}.year_from`}
+                          name={`certificates.${index}.yearGet`}
                           options={years}
                           placeholder="Chọn năm"
                         />
@@ -218,7 +242,7 @@ export const CertificateInfomationCv = () => {
                       <div>
                         <TmCheckbox
                           control={control}
-                          name={`certificates.${index}.is_duration`}
+                          name={`certificates.${index}.isExpired`}
                           label="Còn học"
                         />
                       </div>
@@ -227,14 +251,14 @@ export const CertificateInfomationCv = () => {
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`certificates.${index}.month_to`}
+                          name={`certificates.${index}.monthExpired`}
                           options={months}
                           placeholder="Chọn tháng"
                         />
                       </div>
                       <div className="flex-1">
                         <TmSelect
-                          name={`certificates.${index}.year_to`}
+                          name={`certificates.${index}.yearExpired`}
                           control={control}
                           options={years}
                           placeholder="Chọn năm"
@@ -249,15 +273,17 @@ export const CertificateInfomationCv = () => {
                 <div>
                   <CustomCKEditor
                     control={control}
-                    name={`certificates.${index}.description`}
+                    name={`certificates.${index}.introduction`}
                   />
                 </div>
               </div>
               <div>
                 <CustomUploadMulti
-                  name="files"
                   title="Tải tệp hoặc File từ máy tính"
                   control={control}
+                  name={`certificates.${index}.files`}
+                  link={certificates[index] && certificates[index].linkFile}
+                  acceptFile=".jpeg, .jpg, .png"
                 />
               </div>
             </div>
@@ -270,14 +296,15 @@ export const CertificateInfomationCv = () => {
             className="mt-4 text-default flex space-x-1"
             onClick={() => {
               append({
-                certificate_name: "",
-                organization: "",
-                month_from: "",
-                year_from: "",
-                month_to: "",
-                year_to: "",
-                is_duration: false,
-                description: "",
+                id: -1,
+                fullName: "",
+                companyName: "",
+                monthGet: "",
+                yearGet: "",
+                monthExpired: "",
+                yearExpired: "",
+                isExpired: false,
+                introduction: "",
               });
             }}
           >

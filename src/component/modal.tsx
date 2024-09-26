@@ -35,7 +35,7 @@ const Modal = ({ isOpen, onClose, children, className, title }: ModalProps) => {
             </button>
           </div>
           <div
-            className={`modal-content md:min-w-[700px] max-h-[60vh] overflow-auto relative ${
+            className={`modal-content md:min-w-[700px] md:max-w-[700px] max-h-[60vh] overflow-auto relative ${
               className && className
             }`}
           >

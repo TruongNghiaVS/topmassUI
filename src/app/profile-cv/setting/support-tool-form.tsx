@@ -1,5 +1,9 @@
+import { useLoading } from "@/app/context/loading";
+import { IInfomationToolViewProps, IToolCv } from "@/app/interface/interface";
 import TmInput from "@/component/hook-form/input";
 import TmInputProgress from "@/component/hook-form/input-progress";
+import { ADD_OR_UPDATE_TOOL } from "@/utils/api-url";
+import axiosInstance from "@/utils/axios";
 import {
   BeakerIcon,
   CogIcon,
@@ -18,22 +22,18 @@ const CustomCKEditor = dynamic(
   { ssr: false }
 );
 
-interface ISupportToolInfomationCv {
-  support_tools: {
-    tool_name: string;
-    proficiency: number;
-    description?: string;
-  }[];
-}
-
-export const SupportToolInfomationCv = () => {
+export const SupportToolInfomationCv = ({
+  tools,
+  mutate,
+  onClose,
+}: IInfomationToolViewProps) => {
   const schema = yup.object().shape({
-    support_tools: yup
+    tools: yup
       .array()
       .of(
         yup.object().shape({
-          tool_name: yup.string().required("Vui lòng nhập tên công cụ"),
-          proficiency: yup
+          fullName: yup.string().required("Vui lòng nhập tên công cụ"),
+          level: yup
             .number()
             .required("Vui lòng chọn độ thông thạo")
             .min(1, "Vui lòng nhập độ thông thạo"),
@@ -44,31 +44,50 @@ export const SupportToolInfomationCv = () => {
       .required("Vui lòng chọn công cụ"),
   });
 
+  const { setLoading } = useLoading();
+
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IToolCv>({
     resolver: yupResolver(schema),
     defaultValues: {
-      support_tools: [
-        {
-          tool_name: "",
-          proficiency: 0,
-          description: "",
-        },
-      ],
+      tools:
+        tools?.length > 0
+          ? tools
+          : [
+              {
+                id: -1,
+                fullName: "",
+                level: 0,
+                description: "",
+              },
+            ],
     },
   });
 
-  const onSubmit: SubmitHandler<ISupportToolInfomationCv> = (data: any) => {
-    console.log(data);
-    toast.success("Update thông tin thành công");
+  const onSubmit: SubmitHandler<IToolCv> = async (data: any) => {
+    setLoading(true);
+    try {
+      const res = await axiosInstance.post(ADD_OR_UPDATE_TOOL, data.tools);
+      toast.success("Cập nhật thông tin thành công");
+      if (mutate) {
+        mutate();
+      }
+      if (onClose) {
+        onClose();
+      }
+    } catch (error) {
+      toast.error("Cập nhật thông tin thất bại");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "support_tools",
+    name: "tools",
   });
 
   return (
@@ -96,7 +115,7 @@ export const SupportToolInfomationCv = () => {
                   <TmInput
                     control={control}
                     icon={<CogIcon className="w-4" />}
-                    name={`support_tools.${index}.tool_name`}
+                    name={`tools.${index}.fullName`}
                     placeholder="Tên công cụ"
                   />
                 </div>
@@ -109,7 +128,7 @@ export const SupportToolInfomationCv = () => {
                   <TmInputProgress
                     control={control}
                     icon={<BeakerIcon className="w-4" />}
-                    name={`support_tools.${index}.proficiency`}
+                    name={`tools.${index}.level`}
                   />
                 </div>
               </div>
@@ -118,22 +137,23 @@ export const SupportToolInfomationCv = () => {
                 <div>
                   <CustomCKEditor
                     control={control}
-                    name={`support_tools.${index}.description`}
+                    name={`tools.${index}.description`}
                   />
                 </div>
               </div>
             </div>
           ))}
-          {errors && errors.support_tools && (
-            <p className="text-red-500">{errors.support_tools.root?.message}</p>
+          {errors && errors.tools && (
+            <p className="text-red-500">{errors.tools.root?.message}</p>
           )}
           <button
             type="button"
             className="mt-4 text-default flex space-x-1"
             onClick={() => {
               append({
-                tool_name: "",
-                proficiency: 0,
+                id: -1,
+                fullName: "",
+                level: 0,
                 description: "",
               });
             }}

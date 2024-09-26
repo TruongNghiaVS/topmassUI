@@ -3,7 +3,7 @@ import {
   ChevronUpIcon,
   PencilSquareIcon,
 } from "@heroicons/react/16/solid";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 interface IInfomationViewEdit {
   title: string;
@@ -17,6 +17,16 @@ export const InfomationViewEdit = ({
   children,
 }: IInfomationViewEdit) => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState<string>("0px");
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (contentRef.current) {
+        setHeight(isOpen ? `${contentRef.current.scrollHeight}px` : "0px");
+      }
+    }, 200);
+  }, [isOpen, children]);
 
   return (
     <div className="p-4 rounded-lg bg-white mt-4">
@@ -46,9 +56,9 @@ export const InfomationViewEdit = ({
         )}
       </div>
       <div
-        className={`transition-[max-height] duration-400 ease-in-out overflow-hidden ${
-          isOpen ? "max-h-[50rem]" : "max-h-0"
-        }  `}
+        className="transition-all duration-400 overflow-hidden "
+        style={{ maxHeight: height }}
+        ref={contentRef}
       >
         {children}
       </div>

@@ -1,3 +1,4 @@
+import { IInfomationSkillViewProps } from "@/app/interface/interface";
 import { AcademicCapIcon, StarIcon } from "@heroicons/react/16/solid";
 import dayjs from "dayjs";
 
@@ -11,27 +12,27 @@ interface IProps {
   data: ISoftSkill[];
 }
 
-export const SoftSkillView = ({ data }: IProps) => {
+export const SoftSkillView = ({ skills }: IInfomationSkillViewProps) => {
   const counts = Array.from({ length: 5 }, (_, i) => {
     return i + 1;
   });
 
   return (
     <div className="mt-4">
-      {data.map((item) => {
+      {skills?.map((item, idx) => {
         return (
-          <div key={item.skill_name} className="mt-4">
+          <div key={idx} className="mt-4">
             <div className="mt-4">
               <div className="grid grid-cols-3 text-xs mt-2">
-                <div className="col-span-1">{item.skill_name}</div>
+                <div className="col-span-1">{item.fullName}</div>
                 <div className="col-span-2">
                   <div className="flex space-x-2">
-                    {counts.map((value) => {
+                    {counts.map((value, index) => {
                       return (
                         <StarIcon
-                          key={item.skill_name + value.toString()}
+                          key={index}
                           className={`w-6 ${
-                            value <= item.proficiency
+                            value <= item.level
                               ? "text-default"
                               : "text-gray-400"
                           }`}
@@ -39,7 +40,10 @@ export const SoftSkillView = ({ data }: IProps) => {
                       );
                     })}
                   </div>
-                  <div className="mt2">{item.description}</div>
+                  <div
+                    className="mt2"
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  ></div>
                 </div>
               </div>
             </div>

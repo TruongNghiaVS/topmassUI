@@ -1,44 +1,32 @@
+import { IInfomationProjectProps } from "@/app/interface/interface";
 import { BeakerIcon } from "@heroicons/react/16/solid";
 import dayjs from "dayjs";
 
-interface IProject {
-  project_name: string;
-  customer: string;
-  count_member: number;
-  position: string;
-  technology: string;
-  date_from: string;
-  date_to: string;
-  isStudied?: boolean;
-  description?: string;
-  files?: FileList;
-}
-
-interface IProps {
-  data: IProject[];
-}
-
-export const ProjectView = ({ data }: IProps) => {
+export const ProjectView = ({ projects }: IInfomationProjectProps) => {
   return (
     <div className="mt-4">
-      {data.map((item) => {
+      {projects?.map((item, index) => {
         return (
-          <div key={item.project_name} className="mt-4">
+          <div key={index} className="mt-4">
             <div className="flex justify-between">
               <div className="flex  text-default">
                 <BeakerIcon className="w-4 mr-2" />
-                <div>{item.project_name}</div>
+                <div>{item.projectName}</div>
               </div>
               <div className="flex space-x-2">
                 <div>
-                  {dayjs(item.date_from, "DD-MM-YYYY").format("MM-YYYY")}
+                  {dayjs(new Date(+item.fromYear, +item.fromMonth, 1)).format(
+                    "MM-YYYY"
+                  )}
                 </div>
                 <div>-</div>
                 <div>
-                  {item.isStudied ? (
-                    <div>Còn học</div>
+                  {item.isEnd ? (
+                    <div>Còn làm</div>
                   ) : (
-                    dayjs(item.date_to, "DD-MM-YYYY").format("MM-YYYY")
+                    dayjs(new Date(+item.toMonth, +item.toMonth, 1)).format(
+                      "MM-YYYY"
+                    )
                   )}
                 </div>
               </div>
@@ -46,11 +34,11 @@ export const ProjectView = ({ data }: IProps) => {
             <div className="mt-4">
               <div className="grid grid-cols-3 text-xs mt-2">
                 <div className="col-span-1">Khách hàng:</div>
-                <div className="col-span-2">{item.customer}</div>
+                <div className="col-span-2">{item.customerName}</div>
               </div>
               <div className="grid grid-cols-3 text-xs mt-2">
                 <div className="col-span-1">Số thành viên:</div>
-                <div className="col-span-2">{item.count_member}</div>
+                <div className="col-span-2">{item.numOfMember}</div>
               </div>
               <div className="grid grid-cols-3 text-xs mt-2">
                 <div className="col-span-1">Vị trí:</div>
@@ -62,16 +50,26 @@ export const ProjectView = ({ data }: IProps) => {
               </div>
               <div className="grid grid-cols-3 text-xs mt-2">
                 <div className="col-span-1">Mô tả:</div>
-                <div className="col-span-2">{item.description}</div>
+                <div
+                  className="col-span-2"
+                  dangerouslySetInnerHTML={{ __html: item.introduction }}
+                ></div>
               </div>
               <div className="grid grid-cols-3 text-xs mt-2">
                 <div className="col-span-1">Hình ảnh:</div>
                 <div className="col-span-2">
-                  <img
-                    src="/imgs/img-profile-cv.png"
-                    alt=""
-                    className="w-full"
-                  />
+                  {item.linkFile &&
+                    item.linkFile.length > 0 &&
+                    item.linkFile.split(",").map((link, index) => {
+                      return (
+                        <img
+                          key={index}
+                          src={link}
+                          alt=""
+                          className="w-full mt-2"
+                        />
+                      );
+                    })}
                 </div>
               </div>
             </div>

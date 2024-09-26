@@ -1,5 +1,9 @@
+import { useLoading } from "@/app/context/loading";
+import { IInfomationSkillViewProps, ISkillCv } from "@/app/interface/interface";
 import TmInput from "@/component/hook-form/input";
 import TmInputProgress from "@/component/hook-form/input-progress";
+import { ADD_OR_UPDATE_SKILL } from "@/utils/api-url";
+import axiosInstance from "@/utils/axios";
 import {
   BeakerIcon,
   CogIcon,
@@ -8,6 +12,7 @@ import {
 } from "@heroicons/react/16/solid";
 import { yupResolver } from "@hookform/resolvers/yup";
 import dynamic from "next/dynamic";
+import { useEffect } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
@@ -18,22 +23,19 @@ const CustomCKEditor = dynamic(
   { ssr: false }
 );
 
-interface ISkillCv {
-  skill: {
-    skill_name: string;
-    proficiency: number;
-    description?: string;
-  }[];
-}
-
-export const SoftSkillInfomationCv = () => {
+export const SkillInfomationCv = ({
+  skills,
+  mutate,
+  onClose,
+}: IInfomationSkillViewProps) => {
   const schema = yup.object().shape({
-    skill: yup
+    skills: yup
       .array()
       .of(
         yup.object().shape({
-          skill_name: yup.string().required("Vui lòng nhập tên kỹ năng"),
-          proficiency: yup
+          id: yup.number(),
+          fullName: yup.string().required("Vui lòng nhập tên kỹ năng"),
+          level: yup
             .number()
             .required("Vui lòng chọn độ thông thạo")
             .min(1, "Vui lòng nhập độ thông thạo"),
@@ -44,6 +46,10 @@ export const SoftSkillInfomationCv = () => {
       .required("Vui lòng chọn kỹ năng"),
   });
 
+  const { setLoading } = useLoading();
+
+  useEffect(() => {}, [skills]);
+
   const {
     control,
     handleSubmit,
@@ -51,24 +57,41 @@ export const SoftSkillInfomationCv = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      skill: [
-        {
-          skill_name: "",
-          proficiency: 0,
-          description: "",
-        },
-      ],
+      skills:
+        skills?.length > 0
+          ? skills
+          : [
+              {
+                id: -1,
+                fullName: "",
+                level: 0,
+                description: "",
+              },
+            ],
     },
   });
 
-  const onSubmit: SubmitHandler<ISkillCv> = (data: any) => {
-    console.log(data);
-    toast.success("Update thông tin thành công");
+  const onSubmit: SubmitHandler<ISkillCv> = async (data) => {
+    setLoading(true);
+    try {
+      const res = await axiosInstance.post(ADD_OR_UPDATE_SKILL, data.skills);
+      toast.success("Cập nhật thông tin thành công");
+      if (mutate) {
+        mutate();
+      }
+      if (onClose) {
+        onClose();
+      }
+    } catch (error) {
+      toast.error("Cập nhật thông tin thất bại");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "skill",
+    name: "skills",
   });
 
   return (
@@ -96,7 +119,7 @@ export const SoftSkillInfomationCv = () => {
                   <TmInput
                     control={control}
                     icon={<CogIcon className="w-4" />}
-                    name={`skill.${index}.skill_name`}
+                    name={`skills.${index}.fullName`}
                     placeholder="Tên kỹ năng"
                   />
                 </div>
@@ -109,7 +132,7 @@ export const SoftSkillInfomationCv = () => {
                   <TmInputProgress
                     control={control}
                     icon={<BeakerIcon className="w-4" />}
-                    name={`skill.${index}.proficiency`}
+                    name={`skills.${index}.level`}
                   />
                 </div>
               </div>
@@ -118,22 +141,23 @@ export const SoftSkillInfomationCv = () => {
                 <div>
                   <CustomCKEditor
                     control={control}
-                    name={`skill.${index}.description`}
+                    name={`skills.${index}.description`}
                   />
                 </div>
               </div>
             </div>
           ))}
-          {errors && errors.skill && (
-            <p className="text-red-500">{errors.skill.root?.message}</p>
+          {errors && errors.skills && (
+            <p className="text-red-500">{errors.skills.root?.message}</p>
           )}
           <button
             type="button"
             className="mt-4 text-default flex space-x-1"
             onClick={() => {
               append({
-                skill_name: "",
-                proficiency: 0,
+                id: -1,
+                fullName: "",
+                level: 0,
                 description: "",
               });
             }}

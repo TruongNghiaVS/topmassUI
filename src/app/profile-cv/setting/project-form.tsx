@@ -1,8 +1,13 @@
+import { useLoading } from "@/app/context/loading";
+import { IInfomationProjectProps, IProjectCv } from "@/app/interface/interface";
 import TmCheckbox from "@/component/hook-form/checkbox";
 import TmInput from "@/component/hook-form/input";
 import TmSelect from "@/component/hook-form/select";
 import CustomUploadMulti from "@/component/hook-form/upload-multiple-file";
 import { months } from "@/mockup-data/data";
+import { ADD_OR_UPDATE_PROJECT } from "@/utils/api-url";
+import axiosInstance from "@/utils/axios";
+import { getFileUpload } from "@/utils/business/upload-mutiple-file";
 import { BeakerIcon, PlusIcon, TrashIcon } from "@heroicons/react/16/solid";
 import { yupResolver } from "@hookform/resolvers/yup";
 import dynamic from "next/dynamic";
@@ -16,34 +21,6 @@ const CustomCKEditor = dynamic(
   { ssr: false }
 );
 
-interface IProjectCv {
-  experiences: {
-    project_name: string;
-    customer: string;
-    count_member: number;
-    position: string;
-    technology: string;
-    month_from: string;
-    year_from: string;
-    month_to?: string;
-    year_to?: string;
-    is_project?: boolean;
-    description?: string;
-    files?: FileList;
-  }[];
-}
-
-const gender = [
-  {
-    label: "Nam",
-    value: "0",
-  },
-  {
-    label: "Nữ",
-    value: "1",
-  },
-];
-
 const years = Array.from({ length: 100 }, (_, i) => {
   const item = {
     label: `${new Date().getFullYear() - i}`,
@@ -52,41 +29,41 @@ const years = Array.from({ length: 100 }, (_, i) => {
   return item;
 });
 
-export const ProjectUserCv = () => {
+export const ProjectUserCv = ({
+  projects,
+  mutate,
+  onClose,
+}: IInfomationProjectProps) => {
   const schema = yup.object().shape({
-    experiences: yup
+    projects: yup
       .array()
       .of(
         yup.object().shape({
-          project_name: yup.string().required("Vui lòng nhập tên dự án"),
-          customer: yup.string().required("Vui lòng nhập khách hàng"),
-          count_member: yup.number().required("Vui lòng nhập số thành viên"),
+          id: yup.number(),
+          projectName: yup.string().required("Vui lòng nhập tên dự án"),
+          customerName: yup.string().required("Vui lòng nhập khách hàng"),
+          numOfMember: yup.number().required("Vui lòng nhập số thành viên"),
           position: yup.string().required("Vui lòng nhập vị trí"),
           technology: yup.string().required("Vui lòng nhập công nghệ sử dụng"),
-          month_from: yup.string().required("Vui lòng chọn tháng bắt đầu"),
-          year_from: yup.string().required("Vui lòng chọn năm bắt đầu"),
-          is_project: yup.boolean(),
-          month_to: yup.string().when("is_project", ([is_project], schema) => {
-            return is_project === false
+          fromMonth: yup.string().required("Vui lòng chọn tháng bắt đầu"),
+          fromYear: yup.string().required("Vui lòng chọn năm bắt đầu"),
+          isEnd: yup.boolean(),
+          toMonth: yup.string().when("isEnd", ([isEnd], schema) => {
+            return isEnd === false
               ? schema.required("Vui lòng chọn tháng kết thúc")
               : schema;
           }),
-          year_to: yup.string().when("is_project", ([is_project], schema) => {
-            return is_project === false
+          toYear: yup.string().when("isEnd", ([isEnd], schema) => {
+            return isEnd === false
               ? schema.required("Vui lòng chọn năm kết thúc")
               : schema;
           }),
-          description: yup.string(),
+          introduction: yup.string(),
           files: yup
             .mixed<FileList>()
             .test("fileType", "Chỉ upload file JPEG,JPG,PNG,PDF ", (value) => {
               if (value && value.length > 0) {
-                const allowedFormats = [
-                  "image/jpeg",
-                  "image/jpg",
-                  "image/png",
-                  "application/pdf",
-                ];
+                const allowedFormats = ["image/jpeg", "image/jpg", "image/png"];
                 return Array.from(value).every((file: File) =>
                   allowedFormats.includes(file.type)
                 );
@@ -108,39 +85,75 @@ export const ProjectUserCv = () => {
       .required("Vui lòng chọn dự án"),
   });
 
+  const { setLoading } = useLoading();
+
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IProjectCv>({
     resolver: yupResolver(schema),
     defaultValues: {
-      experiences: [
-        {
-          project_name: "",
-          customer: "",
-          count_member: 0,
-          position: "",
-          technology: "",
-          month_from: "",
-          year_from: "",
-          month_to: "",
-          year_to: "",
-          is_project: false,
-          description: "",
-        },
-      ],
+      projects:
+        projects?.length > 0
+          ? projects
+          : [
+              {
+                id: -1,
+                projectName: "",
+                customerName: "",
+                numOfMember: 0,
+                position: "",
+                technology: "",
+                fromMonth: "",
+                fromYear: "",
+                toMonth: "",
+                toYear: "",
+                isEnd: false,
+                introduction: "",
+              },
+            ],
     },
   });
 
-  const onSubmit: SubmitHandler<IProjectCv> = (data: any) => {
-    console.log(data);
-    toast.success("Update thông tin thành công");
+  const onSubmit: SubmitHandler<IProjectCv> = async (data) => {
+    setLoading(true);
+    try {
+      const listFiles = data.projects.map((item) => {
+        return item.files;
+      });
+      const linkUploads = await Promise.all(
+        listFiles.map(async (item: FileList | undefined, index) => {
+          const link = await getFileUpload(item, projects[index]?.linkFile);
+          return link;
+        })
+      );
+
+      const dataUpload = data.projects.map((item, index) => {
+        const dataTemp: any = { ...item };
+        dataTemp.numOfMember = dataTemp.numOfMember.toString();
+        dataTemp.linkFile = linkUploads[index];
+        return dataTemp;
+      });
+      const res = await axiosInstance.post(ADD_OR_UPDATE_PROJECT, dataUpload);
+      toast.success("Cập nhật thông tin học vấn thành công");
+      if (mutate) {
+        mutate();
+      }
+      if (onClose) {
+        onClose();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Cập nhật kinh nghiệm thất bại");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "experiences",
+    name: "projects",
   });
 
   return (
@@ -168,7 +181,7 @@ export const ProjectUserCv = () => {
                   <TmInput
                     control={control}
                     icon={<BeakerIcon className="w-4" />}
-                    name={`experiences.${index}.project_name`}
+                    name={`projects.${index}.projectName`}
                     placeholder="Dự án"
                   />
                 </div>
@@ -180,7 +193,7 @@ export const ProjectUserCv = () => {
                 <div>
                   <TmInput
                     control={control}
-                    name={`experiences.${index}.customer`}
+                    name={`projects.${index}.customerName`}
                     placeholder="Khách hàng"
                   />
                 </div>
@@ -193,7 +206,7 @@ export const ProjectUserCv = () => {
                   <TmInput
                     control={control}
                     type="number"
-                    name={`experiences.${index}.count_member`}
+                    name={`projects.${index}.numOfMember`}
                     placeholder="Số thành viên"
                   />
                 </div>
@@ -205,7 +218,7 @@ export const ProjectUserCv = () => {
                 <div>
                   <TmInput
                     control={control}
-                    name={`experiences.${index}.position`}
+                    name={`projects.${index}.position`}
                     placeholder="Vị trí"
                   />
                 </div>
@@ -217,7 +230,7 @@ export const ProjectUserCv = () => {
                 <div>
                   <TmInput
                     control={control}
-                    name={`experiences.${index}.technology`}
+                    name={`projects.${index}.technology`}
                     placeholder="Công nghệ sử dụng"
                   />
                 </div>
@@ -233,7 +246,7 @@ export const ProjectUserCv = () => {
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`experiences.${index}.month_from`}
+                          name={`projects.${index}.fromMonth`}
                           options={months}
                           placeholder="Chọn tháng"
                         />
@@ -241,7 +254,7 @@ export const ProjectUserCv = () => {
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`experiences.${index}.year_from`}
+                          name={`projects.${index}.fromYear`}
                           options={years}
                           placeholder="Chọn năm"
                         />
@@ -254,7 +267,7 @@ export const ProjectUserCv = () => {
                       <div>
                         <TmCheckbox
                           control={control}
-                          name={`experiences.${index}.is_project`}
+                          name={`projects.${index}.isEnd`}
                           label="Dự án vẫn đang hoàn thành"
                         />
                       </div>
@@ -263,14 +276,14 @@ export const ProjectUserCv = () => {
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`experiences.${index}.month_to`}
+                          name={`projects.${index}.toMonth`}
                           options={months}
                           placeholder="Chọn tháng"
                         />
                       </div>
                       <div className="flex-1">
                         <TmSelect
-                          name={`experiences.${index}.year_to`}
+                          name={`projects.${index}.toYear`}
                           control={control}
                           options={years}
                           placeholder="Chọn năm"
@@ -285,38 +298,41 @@ export const ProjectUserCv = () => {
                 <div>
                   <CustomCKEditor
                     control={control}
-                    name={`experiences.${index}.description`}
+                    name={`projects.${index}.introduction`}
                   />
                 </div>
               </div>
               <div>
                 <CustomUploadMulti
-                  name={`experiences.${index}.files`}
+                  name={`projects.${index}.files`}
                   title="Tải tệp hoặc File từ máy tính"
                   control={control}
+                  acceptFile=".jpeg, .jpg, .png"
+                  link={projects[index] && projects[index].linkFile}
                 />
               </div>
             </div>
           ))}
-          {errors && errors.experiences && (
-            <p className="text-red-500">{errors.experiences.root?.message}</p>
+          {errors && errors.projects && (
+            <p className="text-red-500">{errors.projects.root?.message}</p>
           )}
           <button
             type="button"
             className="mt-4 text-default flex space-x-1"
             onClick={() => {
               append({
-                project_name: "",
-                customer: "",
+                id: -1,
+                projectName: "",
+                customerName: "",
                 position: "",
-                count_member: 0,
+                numOfMember: 0,
                 technology: "",
-                month_from: "",
-                year_from: "",
-                month_to: "",
-                year_to: "",
-                is_project: false,
-                description: "",
+                fromMonth: "",
+                fromYear: "",
+                toMonth: "",
+                toYear: "",
+                isEnd: false,
+                introduction: "",
               });
             }}
           >
