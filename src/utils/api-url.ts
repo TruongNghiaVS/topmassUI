@@ -76,7 +76,7 @@ export const GET_FULL_PROFILE_USER_CV = "/api/User/GetFullProfileUser";
 export const GET_JobSearch_HotJob = "/api/JobSearch/GetAllBestJobOptimization";
 
 //------------- blog -----------------//
-
+export const GET_AllBlogs_ByCategory = "/api/Web/GetAllArticle";
 
 //---------------- Master data ------------------//
 export const GET_PROVINCE = "/api/Location/GetAllProvinces";

@@ -534,3 +534,22 @@ export interface ISliderFormParram extends ISliderJobsParram {
 export interface ISearchJobsParram {
    allJobs: any
 }
+
+
+export type IBlogDataItem = {
+  title: string;
+  coverImage: string;
+  coverFullLink: string;
+  keyWord: string,
+  content: string,
+  shortDes: string, 
+  categoryName: string, 
+  slug : string, 
+  status: number, 
+  id:number
+};
+
+export type IBlogData = { 
+  item: IBlogDataItem,
+  slug: string
+}

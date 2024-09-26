@@ -12,7 +12,9 @@ import { RELATION_JOB } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
 import { IJobSame } from "@/app/interface/interface";
 
-const NewDetail = () => {
+const NewDetail = ({params} : {params : {id: string}}) => {
+  const {id } = params;
+
   const { data: jobSame, error: errorJobSame } = useSWR(
     `${RELATION_JOB}?JobId=12`,
     fetcher
@@ -100,4 +102,4 @@ const NewDetail = () => {
 
 export default NewDetail;
 
-export const revalidate = 100;
+
