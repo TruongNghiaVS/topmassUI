@@ -26,6 +26,8 @@ export const ADD_CV = "/api/CV/CreateCV";
 //------------ User ------------//
 export const GET_JOB_APPLY = "/api/User/GetAllCVApply";
 export const GET_JOB_SAVE = "/api/User/GetAllJobSave";
+export const SAVE_JOB_SETTING = "/api/UserSetting/SaveJobSetting";
+export const GET_JOB_SETTING = "/api/UserSetting/GetJobSetting";
 
 //------------ Company ------------//
 export const GET_All_Company = "/api/Company/GetAllCompany";
@@ -68,3 +70,7 @@ export const ADD_OR_UPDATE_CERTIFY = "/api/CertifyUser/SaveCertifyUsers";
 export const SAVE_USER_CV = "/api/User/SaveProfileCv";
 export const GET_INFOMATION_USER_CV = "/api/User/GetProfileUserCV";
 export const GET_FULL_PROFILE_USER_CV = "/api/User/GetFullProfileUser";
+
+//---------------- Master data ------------------//
+export const GET_PROVINCE = "/api/Location/GetAllProvinces";
+export const GET_CAREER = "/api/MasterData/GetAllCareer";

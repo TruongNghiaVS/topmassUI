@@ -1,75 +1,186 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { ISettingSuggestJob } from "../interface/interface";
+import { ISettingSuggestJob, SettingJobState } from "../interface/interface";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TmRadio from "@/component/hook-form/radio";
 import { BriefcaseIcon } from "@heroicons/react/16/solid";
-import CustomSelectSearchForm from "@/component/hook-form/customSelectSearchForm";
 import CustomMultipleSelectSearchForm from "@/component/hook-form/customMultipleSelectSearchForm";
 import { InfomationUser } from "@/component/infomation-user-right";
+import {
+  GET_CAREER,
+  GET_JOB_SETTING,
+  GET_PROVINCE,
+  SAVE_JOB_SETTING,
+} from "@/utils/api-url";
+import axiosInstance, { fetcher } from "@/utils/axios";
+import { useEffect, useState } from "react";
+import { Option } from "@/component/hook-form/interface/interface";
+import TmInput from "@/component/hook-form/input";
+import CustomSelectSearchForm from "@/component/hook-form/customSelectSearchForm";
+import { useLoading } from "../context/loading";
+import { toast } from "react-toastify";
+import useSWR from "swr";
+
+const gender = [
+  {
+    label: "Nam",
+    value: 1,
+  },
+  {
+    label: "Nữ",
+    value: 2,
+  },
+  {
+    label: "Không xác định",
+    value: 0,
+  },
+];
+
+const salaryOptions = [
+  {
+    label: "Dưới 10 triệu",
+    value: "1",
+  },
+  {
+    label: "10 - 15 triệu",
+    value: "2",
+  },
+  {
+    label: "15 - 20 triệu",
+    value: "3",
+  },
+  {
+    label: "20 - 25 triệu",
+    value: "4",
+  },
+  {
+    label: "25 - 30 triệu",
+    value: "5",
+  },
+  {
+    label: "30 - 50 triệu",
+    value: "6",
+  },
+  {
+    label: "trên 50 triệu",
+    value: "7",
+  },
+  {
+    label: "Thoả thuận",
+    value: "0",
+  },
+];
 
 export default function SettingSuggestJob() {
+  const [provinces, setProvinces] = useState<Option[]>([]);
+  const [careers, setCareers] = useState<Option[]>([]);
+  const [settingJob, setSettingJob] = useState<SettingJobState>({
+    position: "",
+    field: [],
+    skill: "",
+    salary: "",
+    locationAddress: [],
+    experience: "",
+    gender: -1,
+  });
+
+  const { setLoading } = useLoading();
+
+  const { data: dataSetting, mutate } = useSWR(GET_JOB_SETTING, fetcher);
+  const getMasterdata = async () => {
+    const response = await axiosInstance.get(GET_PROVINCE);
+    const listData = response.data.data.map((item: any) => {
+      return {
+        value: item.code,
+        label: item.name,
+      };
+    });
+    setProvinces(listData);
+    const resCareers = await axiosInstance.get(GET_CAREER);
+    const listCareers = resCareers.data.map((item: any) => {
+      return {
+        value: item.id,
+        label: item.text,
+      };
+    });
+
+    const resSetting = axiosInstance.get(GET_JOB_SETTING);
+    setCareers(listCareers);
+  };
+
+  useEffect(() => {
+    getMasterdata();
+    if (dataSetting && dataSetting.data) {
+      reset({
+        position: dataSetting.data.position ? dataSetting.data.position : "",
+        field: dataSetting.data.field
+          ? dataSetting.data.field.split(",").map((item: any) => +item)
+          : [],
+        skill: dataSetting.data.skill ? dataSetting.data.skill : "",
+        salary: dataSetting.data.salary ? dataSetting.data.salary : "",
+        locationAddress: dataSetting.data.locationAddress
+          ? dataSetting.data.locationAddress.split(",")
+          : [],
+        experience: dataSetting.data.experience
+          ? dataSetting.data.experience
+          : "",
+        gender: dataSetting.data.gender ? dataSetting.data.gender : -1,
+      });
+    }
+  }, [dataSetting]);
+
   const schema = yup.object().shape({
     position: yup.string().required("Vui lòng chọn vị trí công việc"),
-    job_type: yup
+    field: yup
       .array()
       .min(1, "Vui lòng chọn ít nhất 1 ngành nghề")
       .of(yup.string().required())
       .required("Ngành nghề không được để trống"),
-    skill: yup.array(),
+    skill: yup.string(),
     experience: yup.string().required("Vui lòng chọn kinh nghiệm làm việc"),
     salary: yup.string().required("Vui lòng chọn mức lương"),
-    location: yup
+    locationAddress: yup
       .array()
       .min(1, "Vui lòng chọn ít nhất 1 địa điểm làm việc")
       .of(yup.string().required())
       .required("Địa điểm làm việc không được để trống"),
+    gender: yup.number(),
   });
 
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ISettingSuggestJob>({
     resolver: yupResolver(schema),
     defaultValues: {
       position: "",
-      job_type: [],
-      skill: [],
-      location: [],
+      field: [],
+      skill: "",
+      salary: "",
+      locationAddress: [],
       experience: "",
+      gender: -1,
     },
   });
 
-  const onSubmit: SubmitHandler<ISettingSuggestJob> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<ISettingSuggestJob> = async (data) => {
+    setLoading(true);
+    try {
+      const dataUpdate: any = data;
+      dataUpdate.field = data.field.join(",");
+      dataUpdate.locationAddress = data.locationAddress.join(",");
+      const res = await axiosInstance.post(SAVE_JOB_SETTING, dataUpdate);
+      toast.success("Lưu thông tin thành công");
+      mutate();
+    } catch (error) {
+      toast.error("Lưu thông tin thất bại");
+    } finally {
+      setLoading(false);
+    }
   };
-
-  const gender = [
-    {
-      label: "Nam",
-      value: "1",
-    },
-    {
-      label: "Nữ",
-      value: "2",
-    },
-    {
-      label: "Không xác định",
-      value: "0",
-    },
-  ];
-
-  const options = [
-    { value: "react", label: "React" },
-    { value: "nextjs", label: "Next.js" },
-    { value: "typescript", label: "TypeScript" },
-    { value: "tailwind", label: "TailwindCSS" },
-    { value: "tailwind1", label: "TailwindCSS1" },
-    { value: "tailwind2", label: "TailwindCSS2" },
-    { value: "tailwind3", label: "TailwindCSS3" },
-  ];
 
   return (
     <div className="max-1280:px-2 bg-white">
@@ -114,10 +225,9 @@ export default function SettingSuggestJob() {
                   <div className="">
                     Vị trí công việc <span className="text-[#dc2f2f]">*</span>
                   </div>
-                  <CustomSelectSearchForm
+                  <TmInput
                     name="position"
                     control={control}
-                    options={options}
                     placeholder="Vị trí công việc"
                   />
                 </div>
@@ -126,18 +236,17 @@ export default function SettingSuggestJob() {
                     Ngành nghề <span className="text-[#dc2f2f]">*</span>
                   </div>
                   <CustomMultipleSelectSearchForm
-                    name="job_type"
+                    name="field"
                     control={control}
-                    options={options}
+                    options={careers}
                     placeholder="Chọn ngành nghề"
                   />
                 </div>
                 <div className="mb-4">
                   <div>Kỹ năng </div>
-                  <CustomMultipleSelectSearchForm
+                  <TmInput
                     name="skill"
                     control={control}
-                    options={options}
                     placeholder="Chọn kỹ năng"
                   />
                 </div>
@@ -145,10 +254,9 @@ export default function SettingSuggestJob() {
                   <div>
                     Kinh nghiệm <span className="text-[#dc2f2f]">*</span>
                   </div>
-                  <CustomSelectSearchForm
+                  <TmInput
                     name="experience"
                     control={control}
-                    options={options}
                     placeholder="Chọn kinh nghiệm làm việc"
                   />
                 </div>
@@ -159,7 +267,7 @@ export default function SettingSuggestJob() {
                   <CustomSelectSearchForm
                     name="salary"
                     control={control}
-                    options={options}
+                    options={salaryOptions}
                     placeholder="Chọn mức lương"
                   />
                 </div>
@@ -168,9 +276,9 @@ export default function SettingSuggestJob() {
                     Địa điểm làm việc <span className="text-[#dc2f2f]">*</span>
                   </div>
                   <CustomMultipleSelectSearchForm
-                    name="location"
+                    name="locationAddress"
                     control={control}
-                    options={options}
+                    options={provinces}
                     placeholder="Chọn địa điểm làm việc"
                   />
                 </div>
