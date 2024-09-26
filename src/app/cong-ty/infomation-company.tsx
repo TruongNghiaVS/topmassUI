@@ -1,36 +1,45 @@
 import Link from "next/link";
+import { PopupLoginDetailJob } from "../viec-lam/[id]/popup-login-detail-job";
+import { useCallback, useEffect, useState } from "react";
+import { IInfomationCompany } from "../interface/interface";
 
-export const InfomationCompany = ({ item }: any) => {
+export const InfomationCompany = ({ item , handleOpenModal } : IInfomationCompany ) => {
+
+ 
+  
+  let slugCompany = "/cong-ty/" + item.slug;
   return (
     <div className="overflow-hidden rounded-lg md:mb-10 mb-4 border border-[#F37A20]">
       <div>
-        <Link href="/cong-ty/test">
-          <img src={`imgs/${item.img}`} alt="" className="w-full" />
+        <Link href={`${slugCompany}`}>
+          <img src={`${item.coverFullLink}`} alt="" className="w-full" />
         </Link>
       </div>
       <div className="p-2 bg-white">
         <div className="flex items-center">
           <div className="p-2 bg-[#EAE9E8] rounded mr-4">
-            <Link href="/cong-ty/test">
-              <img src={`/imgs/${item.img_small}`} alt="" className="" />
+            <Link href={`${slugCompany}`}>
+              <img src={`${item.logoFullLink}`} alt="" className="w-20" />
             </Link>
           </div>
           <div>
-            <Link href="/cong-ty/test">
+            <Link href={`${slugCompany}`}>
               <div className="text-lg font-medium line-clamp-2">
-                Công ty cổ phần VietStar
+                {item.fullName}
               </div>
             </Link>
             <div className="flex justify-between">
               <div className="font-normal text-[10px]">
-                {item.follow} lượt theo dõi
+                {item.followCount} lượt theo dõi
               </div>
-              <button className="text-default text-xs ">+ Theo dõi</button>
+              <button  onClick={() => {
+                        handleOpenModal();
+                      }} className="text-default text-xs ">+ Theo dõi</button>
             </div>
           </div>
         </div>
         <div>
-          {item.data.map((value: any, index: number) => {
+          {/* {item.data.map((value: any, index: number) => {
             return (
               <div
                 key={index.toString() + value.name}
@@ -53,7 +62,7 @@ export const InfomationCompany = ({ item }: any) => {
                 </div>
               </div>
             );
-          })}
+          })} */}
         </div>
         <div className="px-4 py-4">
           <Link href={`/cong-ty/${item.slug}`} className="p-0">
