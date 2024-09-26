@@ -444,6 +444,7 @@ export interface IInfomationUserCv {
   phoneNumber: string;
   introduction?: string;
   linkFile?: string;
+  addressInfo: string;
 }
 
 export interface IInfoamtionFormUserCv {

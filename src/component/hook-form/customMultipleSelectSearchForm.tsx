@@ -50,7 +50,7 @@ const CustomMultipleSelectSearchForm: React.FC<SearchSelectProps> = ({
     <div className="relative w-full">
       <div className="flex flex-col">
         <div
-          className="mt-2 flex flex-wrap space-x-1 space-y-1 border p-1 bg-white rounded-lg items-center cursor-text	hover:border hover:border-[#F37A20]"
+          className="mt-2 flex flex-wrap space-x-1 space-y-1 border p-1 bg-white rounded-lg items-center cursor-text"
           onClick={() => {
             setIsOpen(!isOpen);
             handleParentClick();

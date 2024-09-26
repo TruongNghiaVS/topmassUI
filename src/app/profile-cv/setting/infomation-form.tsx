@@ -39,6 +39,7 @@ export const InfomationUserCv = ({
     fullName: yup.string().required("Vui lòng nhập họ và tên"),
     position: yup.string().required("Vui lòng nhập vị trí"),
     level: yup.string().required("Vui lòng nhập chức vụ"),
+    addressInfo: yup.string().required("Vui lòng nhập Địa chỉ"),
     gender: yup
       .number()
       .required("Vui lòng chọn giới tính")
@@ -55,7 +56,6 @@ export const InfomationUserCv = ({
   });
 
   const { setLoading } = useLoading();
-
   const {
     control,
     handleSubmit,
@@ -72,8 +72,11 @@ export const InfomationUserCv = ({
           email: "",
           phoneNumber: "",
           introduction: "",
+          addressInfo: "",
         },
   });
+
+  console.log(errors);
 
   const onSubmit: SubmitHandler<IInfomationUserCv> = async (data) => {
     setLoading(true);
@@ -137,10 +140,27 @@ export const InfomationUserCv = ({
           </div>
           <div className="mt-4">
             <div className="font-medium">
+              Địa chỉ hiện tại <span className="text-[#dc2f2f]">*</span>
+            </div>
+            <div>
+              <TmInput
+                control={control}
+                name="addressInfo"
+                placeholder="Địa chỉ"
+              />
+            </div>
+          </div>
+          <div className="mt-4">
+            <div className="font-medium">
               Mail liên hệ <span className="text-[#dc2f2f]">*</span>
             </div>
             <div>
-              <TmInput control={control} name="email" placeholder="Email" />
+              <TmInput
+                control={control}
+                name="email"
+                type="email"
+                placeholder="Email"
+              />
             </div>
           </div>
           <div className="mt-4">

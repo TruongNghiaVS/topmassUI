@@ -39,6 +39,7 @@ import {
 } from "@/utils/api-url";
 import { SkillInfomationCv } from "./setting/skill-form";
 import { AvatarCv } from "@/component/avatar-cv";
+import { useLoading } from "../context/loading";
 
 type IProps = {
   title: string;
@@ -54,7 +55,7 @@ export default function ProfileCV() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const searchParams = useSearchParams();
   const [avatarCv, setAvatarCv] = useState("");
-
+  const { setLoading } = useLoading();
   const {
     data: infoEducation,
     error: errEducation,
@@ -176,24 +177,29 @@ export default function ProfileCV() {
   ];
 
   const downloadPDF = async () => {
-    const response = await fetch("/api/generate-pdf", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const response = await fetch("/api/generate-pdf", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (response.ok) {
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.target = "_blank";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    } else {
-      console.error("Failed to generate PDF");
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } else {
+        console.error("Failed to generate PDF");
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
     }
   };
 
