@@ -2,13 +2,8 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { useController } from "react-hook-form";
-import { SearchSelectProps } from "./interface/interface";
+import { Option, SearchSelectProps } from "./interface/interface";
 import { CheckIcon } from "@heroicons/react/16/solid";
-
-interface Option {
-  value: string;
-  label: string;
-}
 
 const CustomMultipleSelectSearchForm: React.FC<SearchSelectProps> = ({
   name,
@@ -63,7 +58,7 @@ const CustomMultipleSelectSearchForm: React.FC<SearchSelectProps> = ({
             return (
               <span
                 key={val}
-                className="p-2 bg-[#F37A20] text-white rounded-md flex items-center"
+                className="p-2 bg-[#F37A20] text-white rounded-md flex items-center !mt-0"
               >
                 {selectedOption?.label}
                 <button
@@ -105,7 +100,7 @@ const CustomMultipleSelectSearchForm: React.FC<SearchSelectProps> = ({
                 </li>
               ))
             ) : (
-              <li className="p-2 text-gray-500">No options found</li>
+              <li className="p-2 text-gray-500">Không có thông tin phù hợp</li>
             )}
           </ul>
         )}

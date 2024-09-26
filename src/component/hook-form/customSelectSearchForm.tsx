@@ -1,19 +1,8 @@
 // components/SearchSelect.tsx
 "use client";
 import React, { useState } from "react";
-import { useController, Control } from "react-hook-form";
-
-interface Option {
-  value: string;
-  label: string;
-}
-
-interface SearchSelectProps {
-  name: string;
-  control: Control<any>;
-  options: Option[];
-  placeholder?: string;
-}
+import { useController } from "react-hook-form";
+import { Option, SearchSelectProps } from "./interface/interface";
 
 const CustomSelectSearchForm: React.FC<SearchSelectProps> = ({
   name,
@@ -48,7 +37,7 @@ const CustomSelectSearchForm: React.FC<SearchSelectProps> = ({
           error ? "border-red-500" : "border-gray-300"
         }`}
       >
-        {value ? (
+        {value !== "" && value > -1 ? (
           <span>{options.find((opt) => opt.value === value)?.label}</span>
         ) : (
           <span className="text-gray-400">{placeholder}</span>
@@ -75,7 +64,7 @@ const CustomSelectSearchForm: React.FC<SearchSelectProps> = ({
                 </li>
               ))
             ) : (
-              <li className="p-2 text-gray-500">No options found</li>
+              <li className="p-2 text-gray-500">Không có dữ liệu phù hợp</li>
             )}
           </ul>
         </div>

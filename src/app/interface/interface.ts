@@ -34,13 +34,23 @@ export interface IConfirmResetPassword {
 }
 
 export interface ISettingSuggestJob {
-  gender?: string;
+  gender?: number;
   position: string;
-  job_type: string[];
-  skill?: string[];
+  field: string[];
+  skill?: string;
   experience: string;
   salary: string;
-  location: string[];
+  locationAddress: string[];
+}
+
+export interface SettingJobState {
+  gender: number;
+  position: string;
+  field: string[];
+  skill: string;
+  experience: string;
+  salary: string;
+  locationAddress: string[];
 }
 
 export interface IContact {
@@ -98,8 +108,8 @@ export interface IAvatarCvProps extends IAvatarProps {
 export interface IApplyModal {
   isModalOpen: boolean;
   onClose: () => void;
-  jobId?: number
-  mutate?: KeyedMutator<any>
+  jobId?: number;
+  mutate?: KeyedMutator<any>;
 }
 
 export interface IModalLoginProps extends IApplyModal {
@@ -213,54 +223,51 @@ export interface ILoadCv {
   file: File;
 }
 
-export interface ICompanyData{
-  item: ICompanyItemData
+export interface ICompanyData {
+  item: ICompanyItemData;
 }
 
-
 export interface ICompanyItemData {
-  coverFullLink: string,
-  followCount: number,
-  fullName:  string,
-  id: number,
-  logoFullLink: string,
-  slug:  string}
+  coverFullLink: string;
+  followCount: number;
+  fullName: string;
+  id: number;
+  logoFullLink: string;
+  slug: string;
+}
 
 export interface IInfomationCompany extends ICompanyData {
-  handleOpenModal: () => void
+  handleOpenModal: () => void;
 }
 
 export interface IjobDisplayItemData {
-  jobName: string,
-  companyName: number,
-  avatarLink:  string,
-  fullLink: number,
-  rangeSalary: string,
-  isJobSave : boolean,
-  isJobApply: boolean,
-  locationText:  string,
-  dayRemainApply : string, 
-  statusCode : number,
-  dateExpried: string,
-  slug: string, 
-  jobId : number
-
+  jobName: string;
+  companyName: number;
+  avatarLink: string;
+  fullLink: number;
+  rangeSalary: string;
+  isJobSave: boolean;
+  isJobApply: boolean;
+  locationText: string;
+  dayRemainApply: string;
+  statusCode: number;
+  dateExpried: string;
+  slug: string;
+  jobId: number;
 }
 
 export interface IJobInfoCompanyDisplay {
-  item: IjobDisplayItemData
+  item: IjobDisplayItemData;
 }
 
 export interface IjobCompanyDisplay extends IJobInfoCompanyDisplay {
-  handleOpenModal: () => void
-  mutate?: KeyedMutator<any>
+  handleOpenModal: () => void;
+  mutate?: KeyedMutator<any>;
 }
 
 export interface IProvinceData {
-  code: number,
-  name: string,
- 
-
+  code: number;
+  name: string;
 }
 export interface ImasterData {
   id: number,
