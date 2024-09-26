@@ -1,23 +1,25 @@
 "use client";
 import { CreateCv } from "@/component/create-cv";
 import { InfomationJobLike } from "@/component/infomation-job/infomation-job-like";
-import { jobSlider } from "@/mockup-data/data";
 import { ChevronDoubleRightIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { NewInfomation } from "../../new-infomation";
 import { InfomationJobSame } from "@/component/infomation-job/infomation-job-same";
 import { TitleCustom } from "@/component/custom-title";
 import useSWR from "swr";
-import { RELATION_JOB } from "@/utils/api-url";
+import { GET_JOBSEARCH_HOTJOB, RELATION_JOB } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
-import { IJobSame } from "@/app/interface/interface";
+import { IHotJob, IJobSame } from "@/app/interface/interface";
 
 const NewDetail = () => {
   const { data: jobSame, error: errorJobSame } = useSWR(
     `${RELATION_JOB}?JobId=12`,
     fetcher
   );
+
   const list = [1, 2, 3, 4];
+
+  const { data: allJobs } = useSWR(`${GET_JOBSEARCH_HOTJOB}`, fetcher);
   return (
     <div className="">
       <div className="mx-auto container">
@@ -73,10 +75,10 @@ const NewDetail = () => {
             />
 
             <div>
-              {list.map((item) => {
+              {allJobs?.data.map((item: IHotJob, idx: number) => {
                 return (
-                  <div className="mt-4" key={item.toString() + jobSlider.title}>
-                    <InfomationJobLike item={jobSlider} />
+                  <div className="mt-4" key={idx}>
+                    <InfomationJobLike item={item} />
                   </div>
                 );
               })}
@@ -89,7 +91,7 @@ const NewDetail = () => {
           <TitleCustom title="Cùng chuyên mục" />
           <div className="grid xl:grid-cols-4 gap-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-4">
             {list.map((value, idx) => {
-              return <NewInfomation key={value.toString() + idx.toString()} />;
+              return <NewInfomation key={idx} />;
             })}
           </div>
         </div>

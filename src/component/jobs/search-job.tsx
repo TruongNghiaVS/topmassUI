@@ -9,7 +9,7 @@ import { experiences, locations, prices } from "@/mockup-data/data";
 import { HotJobs } from "./hot-jobs";
 import { ISearchJobsParram } from "@/app/interface/interface";
 
-export const SearchJobs = ({  allJobs  }: ISearchJobsParram) => {
+export const SearchJobs = ({ allJobs }: ISearchJobsParram) => {
   const { control } = useForm();
 
   const [selectedValue, setSelectedValue] = useState<number>(0);
@@ -58,7 +58,7 @@ export const SearchJobs = ({  allJobs  }: ISearchJobsParram) => {
             </span>
           </div>
         </div>
-        <HotJobs  allJobs ={allJobs} />
+        <HotJobs allJobs={allJobs} />
       </div>
     </div>
   );

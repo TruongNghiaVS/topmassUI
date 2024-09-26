@@ -1,27 +1,13 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { MagnifyingGlassIcon, MapPinIcon } from "@heroicons/react/16/solid";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import { IFormSlider } from "@/interface/form-slider";
-import TmInput from "./hook-form/input";
-import TmSelect from "./hook-form/select";
-import { BagBootstrapIcon } from "@/theme/icons/bagBootstrapIcon";
-import { optionsLocation, optionsType } from "@/mockup-data/data";
-import { useRouter } from "next/navigation";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { ISliderFormParram } from "@/app/interface/interface";
+import { SliderForm } from "./form-search-slider";
 
 // import required modules
 
 export const Slider = () => {
-
-
-  
   return (
     <div
       id="slider"
@@ -128,79 +114,7 @@ export const Slider = () => {
             </SwiperSlide>
           </Swiper>
         </div>
-        <SliderForm allProvinces = {[]} allRealms= {[]} />
-      </div>
-    </div>
-  );
-};
-
-export const SliderForm = ({ allProvinces , allRealms  }: ISliderFormParram) => {
-
- 
-  const schema = yup.object().shape({
-    work: yup.string(),
-    location: yup.string(),
-    type: yup.string(),
-  });
-  const { handleSubmit, control } = useForm<IFormSlider>({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      location: "",
-      work: "",
-      type: "",
-    },
-  });
-
-  const router = useRouter();
-
-  const onSubmit: SubmitHandler<IFormSlider> = (data: any) => {
-    const queryString = new URLSearchParams(data).toString();
-    router.push(`/tim-kiem-viec-lam?${queryString}`);
-  };
-
-  return (
-    <div className="xl:px-48 lg:px-40 px-2">
-      <div className="w-full mt-4 relative ">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex items-stretch bg-white rounded-3xl py-2 px-4 shadow-[0px_-8px_0_rgb(248,158,27)] flex-wrap	"
-        >
-          <div className="flex-1 relative after:absolute after:right-0 after:top-0 after:bottom-0 after:w-[1px] after:h-[70%] after:bg-black after:my-auto">
-            <TmInput
-              name="work"
-              className="border-0"
-              placeholder="Tìm kiếm việc làm"
-              control={control}
-            />
-          </div>
-          <div className="flex-1">
-            <TmSelect
-              icon={<MapPinIcon className="w-6 mr-2" />}
-              name="location"
-              className="border-0"
-              placeholder=""
-              control={control}
-              options={allProvinces}
-            />
-          </div>
-
-          <div className="flex-1 mr-2">
-            <TmSelect
-              icon={<BagBootstrapIcon className="w-4 mr-2" />}
-              className="border-0"
-              name="type"
-              placeholder=""
-              control={control}
-              options={allRealms}
-            />
-          </div>
-          <div className="bg-[#F37A20] text-white grid text-center rounded-3xl ">
-            <button type="submit" className="px-4 py-2 flex">
-              <MagnifyingGlassIcon className="mr-2 w-6" />
-              Tìm kiếm
-            </button>
-          </div>
-        </form>
+        <SliderForm allProvinces={[]} allRealms={[]} />
       </div>
     </div>
   );

@@ -1,13 +1,18 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { InfomationJob } from "./infomation-job/infomation-job";
 import { jobSlider } from "@/mockup-data/data";
+import useSWR from "swr";
+import { GET_JOBSEARCH_HOTJOB } from "@/utils/api-url";
+import { fetcher } from "@/utils/axios";
+import { IHotJob } from "@/app/interface/interface";
 
 export const SliderJob = () => {
+  const { data: allJobs } = useSWR(`${GET_JOBSEARCH_HOTJOB}`, fetcher);
   const arrIndex = [
     1,
     2,
@@ -41,7 +46,7 @@ export const SliderJob = () => {
     30,
   ];
 
-  const arrMap = converArray(arrIndex, 9);
+  const arrMap = converArray(allJobs?.data, 9);
   return (
     <div id="slider" className="relative max-xl:px-2">
       <Swiper
@@ -68,16 +73,11 @@ export const SliderJob = () => {
       >
         {arrMap.map((values, index) => {
           return (
-            <div key={index.toString()}>
+            <div key={index}>
               <SwiperSlide className="bg-primary w-full border-r">
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2 ">
-                  {values.map((value, index) => {
-                    return (
-                      <InfomationJob
-                        key={value.toString() + jobSlider.title}
-                        item={jobSlider}
-                      />
-                    );
+                  {values.map((value, idx) => {
+                    return <InfomationJob key={idx} item={value} />;
                   })}
                 </div>
               </SwiperSlide>
@@ -97,10 +97,10 @@ export const SliderJob = () => {
   );
 };
 
-const converArray = (arr: number[], size: number) => {
-  let tempArray: number[][] = [];
-  for (let index = 0; index < arr.length; index = index += size) {
-    const myChunk = arr.slice(index, index + size);
+const converArray = (allJobs: IHotJob[], size: number) => {
+  let tempArray: IHotJob[][] = [];
+  for (let index = 0; index < allJobs?.length; index = index += size) {
+    const myChunk = allJobs.slice(index, index + size);
     tempArray.push(myChunk);
   }
   return tempArray;

@@ -56,7 +56,7 @@ const JobsPage = () => {
         allProvinces={provicesOptionData}
         allRealms={dataInfoRealms}
       />
-      <SearchJobs allJobs={allJobs} />
+      <SearchJobs allJobs={allJobs?.data} />
       <Image />
       <JobType />
       <JobTypePage />

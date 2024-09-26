@@ -1,12 +1,7 @@
-import {  ISliderJobsParram } from "@/app/interface/interface";
-import { SliderForm } from "@/component/slider";
+import { ISliderJobsParram } from "@/app/interface/interface";
+import { SliderForm } from "../form-search-slider";
 
-
-
-const SliderJobs = ({ allProvinces ,allRealms  }: ISliderJobsParram) => {
-
- 
-
+const SliderJobs = ({ allProvinces, allRealms }: ISliderJobsParram) => {
   return (
     <div className="bg-bgHeaderJobCustom pb-10">
       <div className="container mx-auto">
@@ -14,7 +9,7 @@ const SliderJobs = ({ allProvinces ,allRealms  }: ISliderJobsParram) => {
           Tìm việc làm nhanh chóng, phù hợp với nhu cầu của bạn
         </div>
         <div className="mb-9">
-          <SliderForm allProvinces = {allProvinces} allRealms = {allRealms}/>
+          <SliderForm allProvinces={allProvinces} allRealms={allRealms} />
         </div>
         <div>
           <img

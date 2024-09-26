@@ -8,9 +8,9 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { TitleCustom } from "./custom-title";
+import { IHotCompany } from "@/app/interface/interface";
 
-export const HotCompany = () => {
-  const lst = [1, 2, 3, 4, 5, 6, 7, 8];
+export const HotCompany = ({ companys }: IHotCompany) => {
   return (
     <>
       <div className=" mt-[60px] max-1280:px-2 bg-white">
@@ -49,14 +49,18 @@ export const HotCompany = () => {
               modules={[Navigation]}
               className="mySwiper !pt-5 !pb-16"
             >
-              {lst.map((value) => {
+              {companys?.map((item, index) => {
                 return (
-                  <SwiperSlide key={value.toString() + "test"} className="p-2">
+                  <SwiperSlide key={index} className="p-2">
                     <div className="hover:outline outline-[#F37A20] p-4 rounded-lg">
                       <div className="flex justify-center">
                         <Link href="/cong-ty">
                           <img
-                            src="/imgs/logo-work.png"
+                            src={
+                              item.logoFullLink
+                                ? item.logoFullLink
+                                : "/imgs/logo-work.png"
+                            }
                             alt=""
                             className="w-auto"
                           />
@@ -64,7 +68,7 @@ export const HotCompany = () => {
                       </div>
                       <Link href="/cong-ty">
                         <div className=" uppercase text-center my-5">
-                          Công ty cổ phần tập đoàn VietStar
+                          {item.fullName}
                         </div>
                       </Link>
                       <Link href="/viec-lam">

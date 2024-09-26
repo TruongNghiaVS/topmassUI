@@ -1,3 +1,4 @@
+import { Option } from "@/component/hook-form/interface/interface";
 import { Dispatch, SetStateAction } from "react";
 import { Key, KeyedMutator } from "swr";
 
@@ -270,8 +271,8 @@ export interface IProvinceData {
   name: string;
 }
 export interface ImasterData {
-  id: number,
-  text: string,
+  id: number;
+  text: string;
 }
 export interface IInfoEducation {
   fromMonth: string;
@@ -515,22 +516,43 @@ export interface IInfoamtionFormUserCv {
   onClose: () => void;
 }
 
-
-export type OptionSelect = {
-  label: string;
-  value: any;
-};
-
 export interface ISliderJobsParram {
-  allProvinces : OptionSelect[],
-  allRealms:  OptionSelect[]
- 
+  allProvinces: Option[];
+  allRealms: Option[];
 }
 
-export interface ISliderFormParram extends ISliderJobsParram {
+export interface ISliderFormParram extends ISliderJobsParram {}
 
+export interface IHotJob {
+  companyLogo: string;
+  jobId: number;
+  jobSlug: string;
+  lastUpdate: string;
+  locationText: string;
+  positionText: string;
+  rangeSalary: string;
+  salaryTo: number;
+  salaryfrom: number;
+  companyName: string;
 }
 
 export interface ISearchJobsParram {
-   allJobs: any
+  allJobs: IHotJob[];
+}
+
+export interface IInfomationJobProps {
+  item: IHotJob;
+}
+
+export interface IHotCompanyDetail {
+  coverFullLink: string;
+  logoFullLink: string;
+  fullName: string;
+  slug: string;
+  id: number;
+  followCount: number;
+}
+
+export interface IHotCompany {
+  companys: IHotCompanyDetail[];
 }
