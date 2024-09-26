@@ -22,7 +22,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 
-export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
+export const PopupApplyJob = ({ isModalOpen, onClose ,jobId,mutate}: IApplyModal) => {
   const { setLoading } = useLoading();
   const [cvValue, setCvValue] = useState(0);
   const [file, setFile] = useState<File | null>(null);
@@ -80,9 +80,8 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
         fullName: data.username,
         phone: data.phone_number,
         email: data.email,
-        jobId: 12,
+        jobId: jobId ? jobId : 12,
       };
-
       if (file) {
         const response = await axiosInstanceImg.post(UPLOAD_IMG, {
           file: file,
@@ -97,10 +96,12 @@ export const PopupApplyJob = ({ isModalOpen, onClose }: IApplyModal) => {
       }
 
       const url = cvValue > 0 ? APPLY_CV_WITH_CV : APPLY_CV_WITH_FILE;
-
-      const res = axiosInstance.post(url, dataApply);
+      const res = await axiosInstance.post(url, dataApply);
       setCvValue(listCv[0].id);
       setFile(null);
+      if(mutate){
+        mutate();
+      }
       toast.success("Nộp CV thành công");
       onClose();
     } catch (error) {

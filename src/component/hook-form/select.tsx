@@ -9,7 +9,7 @@ const TmSelect: React.FC<ITmSelect> = ({
   label,
   icon,
   options,
-  placeholder = "Select an option...",
+  placeholder = "",
   className,
 }) => {
   const {
@@ -32,9 +32,14 @@ const TmSelect: React.FC<ITmSelect> = ({
             icon && "pl-10"
           }  ${error ? "border-red-500" : "border-gray-300"}`}
         >
-          <option value="" disabled>
+          {
+            placeholder.length > 0 && (
+<option value="" disabled>
             {placeholder}
           </option>
+            )
+          }
+          
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}

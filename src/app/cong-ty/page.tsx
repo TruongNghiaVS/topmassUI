@@ -10,8 +10,18 @@ import { Description } from "@/component/description";
 import { TitleCustom } from "@/component/custom-title";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { GET_All_Company } from "@/utils/api-url";
+import useSWR from "swr";
+import { axiosInstanceNotToken, fetcher } from "@/utils/axios";
+import { ICompanyData, ICompanyItemData } from "../interface/interface";
+import { getToken } from "@/utils/token";
+import { useCallback, useEffect, useState } from "react";
+import { PopupLoginDetailJob } from "../viec-lam/[id]/popup-login-detail-job";
+import { useLoading } from "../context/loading";
+
 
 export default function CompanyPage() {
+  const [key,setKey] = useState("");
   const list = [1, 2, 3, 4, 5, 6, 7, 8];
   const schema = yup.object().shape({
     key: yup.string(),
@@ -22,9 +32,36 @@ export default function CompanyPage() {
       key: "",
     },
   });
-  const onSubmit: SubmitHandler<IFormSearchDetail> = (data) =>
-    console.log(data);
+  const { data: DatallCompany, error: ErrorDataAllCompany, mutate } = useSWR(
+    `${GET_All_Company}?KeyWord=${key}`,
+    fetcher
+  );
+  const [isOpenModalLogin, setIsOpenModalLogin] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOpenModal = () => {
+    const token = getToken();
+    if (token) {
+     
+    } else {
+      setIsOpenModalLogin(true);
+    }
+  };
+
+  const {setLoading} = useLoading()
+
+  const onSubmit: SubmitHandler<IFormSearchDetail> = async (data) => {
+    setKey(data.key || "")
+  }
+  
+  
   return (
     <div className="bg-[#EAE9E8]">
       <div className="bg-bgHeaderJobCustom max-1280:px-2">
@@ -51,7 +88,7 @@ export default function CompanyPage() {
                   />
                 </div>
                 <div className="bg-[#F37A20] text-white grid text-center rounded-3xl ">
-                  <button type="submit" className="px-4 py-2">
+                  <button  type="submit" className="px-4 py-2" >
                     Tìm kiếm
                   </button>
                 </div>
@@ -62,21 +99,38 @@ export default function CompanyPage() {
       </div>
       <div className="max-1280:px-2">
         <div className="mx-auto container">
-          <TitleCustom title="Danh Sách công ty" className="mb-8" />
-          <div className="mt-4 grid xl:grid-cols-3 md:grid-cols-2 gap-4">
-            {list.map((value) => {
+         
+          
+      { DatallCompany?.data.length >0 ? (
+        <>
+        <TitleCustom title="Danh Sách công ty" className="mb-8" />
+        <div className="mt-4 grid xl:grid-cols-3 md:grid-cols-2 gap-4">
+            {DatallCompany?.data.map((value: ICompanyItemData,index: number) => {
               return (
-                <div key={value.toString() + companys.slug}>
-                  <InfomationCompany item={companys} />
+                <div key={index}>
+                  <InfomationCompany handleOpenModal = {handleOpenModal}  item={value} />
                 </div>
               );
             })}
           </div>
+          </>
+      ): (
+       
+        <div className="font-normal text-xs mt-4">
+       Không tìm thấy thông tin công ty phù hợp với yêu cầu của bạn.
+      </div>
+      ) }
+          
         </div>
       </div>
       <div>
         <Description />
       </div>
+      <PopupLoginDetailJob
+        isModalOpen={isOpenModalLogin}
+        onClose={() => setIsOpenModalLogin(false)}
+        onOpen={openModal}
+      />
     </div>
   );
 }

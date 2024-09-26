@@ -180,6 +180,12 @@ export const optionsLocation = [
   { value: "ha-noi", label: "Hà Nội" },
 ];
 
+export const optionsLocations = [
+  { value: 1, label: "Bình Định" },
+  { value: 2, label: "TP.HCM" },
+  { value: 3, label: "Hà Nội" },
+];
+
 export const loations = [
   "Tất cả tỉnh/thành phố",
   "Bình Định",
