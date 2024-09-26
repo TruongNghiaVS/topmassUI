@@ -41,3 +41,6 @@ export const Post_Company_AddFolow = "/api/Company/AddFolow";
 //------------ Location ------------//
 
 export const GET_All_Provinces = "/api/Location/GetAllProvinces";
+
+
+//------------ masterData ------------//

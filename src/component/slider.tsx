@@ -18,6 +18,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 // import required modules
 
 export const Slider = () => {
+
+
+  
   return (
     <div
       id="slider"
