@@ -68,3 +68,14 @@ export const ADD_OR_UPDATE_CERTIFY = "/api/CertifyUser/SaveCertifyUsers";
 export const SAVE_USER_CV = "/api/User/SaveProfileCv";
 export const GET_INFOMATION_USER_CV = "/api/User/GetProfileUserCV";
 export const GET_FULL_PROFILE_USER_CV = "/api/User/GetFullProfileUser";
+
+//------------- MasterData -----------------//
+export const GET_MasterData_Realms = "/api/MasterData/InfoRealms";
+
+//------------- JobSearch -----------------//
+
+export const GET_JobSearch_HotJob = "/api/JobSearch/GetAllBestJobOptimization";
+
+//------------- blog -----------------//
+
+

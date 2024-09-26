@@ -262,6 +262,10 @@ export interface IProvinceData {
  
 
 }
+export interface ImasterData {
+  id: number,
+  text: string,
+}
 export interface IInfoEducation {
   fromMonth: string;
   fromYear: string;
@@ -502,4 +506,24 @@ export interface IInfoamtionFormUserCv {
   user: IInfomationUserCv;
   mutate: KeyedMutator<any>;
   onClose: () => void;
+}
+
+
+export type OptionSelect = {
+  label: string;
+  value: any;
+};
+
+export interface ISliderJobsParram {
+  allProvinces : OptionSelect[],
+  allRealms:  OptionSelect[]
+ 
+}
+
+export interface ISliderFormParram extends ISliderJobsParram {
+
+}
+
+export interface ISearchJobsParram {
+   allJobs: any
 }

@@ -7,8 +7,9 @@ import { useState } from "react";
 import { ScrollFilterJob } from "./scroll-filter-job";
 import { experiences, locations, prices } from "@/mockup-data/data";
 import { HotJobs } from "./hot-jobs";
+import { ISearchJobsParram } from "@/app/interface/interface";
 
-export const SearchJobs = () => {
+export const SearchJobs = ({  allJobs  }: ISearchJobsParram) => {
   const { control } = useForm();
 
   const [selectedValue, setSelectedValue] = useState<number>(0);
@@ -57,7 +58,7 @@ export const SearchJobs = () => {
             </span>
           </div>
         </div>
-        <HotJobs />
+        <HotJobs  allJobs ={allJobs} />
       </div>
     </div>
   );

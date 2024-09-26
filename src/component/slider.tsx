@@ -14,6 +14,7 @@ import { optionsLocation, optionsType } from "@/mockup-data/data";
 import { useRouter } from "next/navigation";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ISliderFormParram } from "@/app/interface/interface";
 
 // import required modules
 
@@ -127,13 +128,15 @@ export const Slider = () => {
             </SwiperSlide>
           </Swiper>
         </div>
-        <SliderForm />
+        <SliderForm allProvinces = {[]} allRealms= {[]} />
       </div>
     </div>
   );
 };
 
-export const SliderForm = () => {
+export const SliderForm = ({ allProvinces , allRealms  }: ISliderFormParram) => {
+
+ 
   const schema = yup.object().shape({
     work: yup.string(),
     location: yup.string(),
@@ -175,9 +178,9 @@ export const SliderForm = () => {
               icon={<MapPinIcon className="w-6 mr-2" />}
               name="location"
               className="border-0"
-              placeholder="Địa điểm làm việc"
+              placeholder=""
               control={control}
-              options={optionsLocation}
+              options={allProvinces}
             />
           </div>
 
@@ -186,9 +189,9 @@ export const SliderForm = () => {
               icon={<BagBootstrapIcon className="w-4 mr-2" />}
               className="border-0"
               name="type"
-              placeholder="Ngành nghề"
+              placeholder=""
               control={control}
-              options={optionsType}
+              options={allRealms}
             />
           </div>
           <div className="bg-[#F37A20] text-white grid text-center rounded-3xl ">

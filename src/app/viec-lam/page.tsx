@@ -7,37 +7,17 @@ import SliderJobs from "@/component/jobs/slider-job";
 import { useEffect, useState } from "react";
 import { Option } from "@/component/hook-form/interface/interface";
 import useSWR from "swr";
-import { GET_All_Provinces } from "@/utils/api-url";
+import { GET_All_Provinces, GET_JobSearch_HotJob, GET_MasterData_Realms } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
-import { IProvinceData } from "../interface/interface";
 
 
 const JobsPage = () => {
-
+  
   const [provicesOptionData, setProvicesOptionData]= useState<Option[]>([]);
-
   const [dataInfoRealms, setdataInfoRealms]= useState<Option[]>([]);
-  const { data: allRealms} =   useSWR(`${GET_All_Provinces}`, fetcher);
-
   const { data: allProvinces} =   useSWR(`${GET_All_Provinces}`, fetcher);
-  
-  let arrayListprovices = [{
-     value: -1, label: "Tất cả" 
-  }];
-  allProvinces?.data.map((value: IProvinceData)=> {
-
-    arrayListprovices.push( {
-      value :  value.code,
-      label:  value.name
-    });
-  
-  });
-
-  if( allProvinces?.length >0)
-  {
-     setProvicesOptionData(allProvinces);
-  }
-  console.log(allProvinces);
+  const { data: allRealms} =   useSWR(`${GET_MasterData_Realms}`, fetcher);
+  const { data: allJobs, mutate: mutateGetAllJobs } =  useSWR(`${GET_JobSearch_HotJob}`, fetcher);
 
   useEffect(() => {
     if(allProvinces) {
@@ -48,15 +28,24 @@ const JobsPage = () => {
         }
       })])
     }
+
+    if(allRealms) {
+      setdataInfoRealms([{label: "Tất cả ngành nghề",value: ""} ,...allRealms.map((item:any) => {
+        return {
+          label: item.text,
+          value: item.id
+        }
+      })])
+    }
    
-  }, [allProvinces]);
+  }, [allProvinces, allRealms]);
 
   
 
   return (
     <div>
-      <SliderJobs />
-      <SearchJobs />
+      <SliderJobs  allProvinces ={provicesOptionData} allRealms ={ dataInfoRealms} />
+      <SearchJobs allJobs = {allJobs} />
       <Image />
       <JobType />
       <JobTypePage />

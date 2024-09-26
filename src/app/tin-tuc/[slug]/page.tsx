@@ -1,8 +1,21 @@
+"use client";
 import { news } from "@/mockup-data/data";
 import { New } from "./new";
 import { TitleCustom } from "@/component/custom-title";
+import { GET_All_Company } from "@/utils/api-url";
+import useSWR from "swr";
+import { fetcher } from "@/utils/axios";
 
-export default function NewCategory() {
+
+export default function NewCategory({params} : {params : {slug: string}} ) {
+  debugger;
+  const {slug } = params;
+
+  const { data: DatallCompany, error: ErrorDataAllCompany, mutate } = useSWR(
+    `${GET_All_Company}?SlugCategory=${slug}`,
+    fetcher
+  );
+
   return (
     <div className="bg-[#f0f0f0] pb-10 max-1280:px-2">
       <div className="mx-auto container">
@@ -21,4 +34,4 @@ export default function NewCategory() {
   );
 }
 
-export const revalidate = 100;
+

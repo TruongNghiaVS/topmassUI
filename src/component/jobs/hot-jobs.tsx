@@ -1,10 +1,10 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { InfomationJob } from "../infomation-job/infomation-job";
 import { jobSlider } from "@/mockup-data/data";
+import { ISearchJobsParram } from "@/app/interface/interface";
 
-export const HotJobs = () => {
+export const HotJobs =  ({  allJobs  }: ISearchJobsParram) => {
   const listIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
   return (
     <div>
       <div className="container mx-auto">

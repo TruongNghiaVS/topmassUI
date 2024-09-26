@@ -55,17 +55,7 @@ export default function CompanyDetail({params} : {params : {id: string}} ) {
 
   const { data: allProvinces} =   useSWR(`${GET_All_Provinces}`, fetcher);
   
-  let arrayListprovices = [{
-     value: -1, label: "Tất cả" 
-  }];
-  allProvinces?.data.map((value: IProvinceData)=> {
 
-    arrayListprovices.push( {
-      value :  value.code,
-      label:  value.name
-    });
-  
-  });
 
   if( allProvinces?.length >0)
   {
