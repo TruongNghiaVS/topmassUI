@@ -8,44 +8,52 @@ import { NewInfomation } from "../../new-infomation";
 import { InfomationJobSame } from "@/component/infomation-job/infomation-job-same";
 import { TitleCustom } from "@/component/custom-title";
 import useSWR from "swr";
-import { RELATION_JOB } from "@/utils/api-url";
+import { GET_BLOG_DETAIL, RELATION_JOB } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
 import { IJobSame } from "@/app/interface/interface";
 
 const NewDetail = ({params} : {params : {id: string}}) => {
   const {id } = params;
-
+  const { data: blogDetail } = useSWR(
+    `${GET_BLOG_DETAIL}?articleSlug=${id}`,
+    fetcher
+  );
+  
   const { data: jobSame, error: errorJobSame } = useSWR(
     `${RELATION_JOB}?JobId=12`,
     fetcher
   );
   const list = [1, 2, 3, 4];
+
+
   return (
     <div className="">
+
       <div className="mx-auto container">
         <div className="sm:grid grid-cols-12 gap-4 mt-4 max-1280:px-2">
           <div className="xl:col-span-8 md:col-span-7">
-            <div className="text-xs font-normal">Cẩm nang nghề nghiệp</div>
+            <div className="text-xs font-normal">{blogDetail?.categoryName}</div>
             <div className="text-2xl font-bold">
-              KOL là gì? Bật mí 7 bước trở thành KOL chuyên nghiệp thu hút triệu
-              fans
+              {blogDetail?.title}
             </div>
             <div className="flex text-xs">
-              <div className="mr-4">By Minh Phạm</div>
+              <div className="mr-4">Tạo bởi  Minh Phạm</div>
               <div className="pl-2 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:my-auto before:w-1 before:h-1 before:rounded-full before:bg-black">
-                25/05/2023
+                {blogDetail?.createAt }
               </div>
             </div>
             <div className="my-4">
               <img
-                src="/imgs/img-detail-new.png"
+               src={`${blogDetail?.coverFullLink}`}
                 alt=""
                 className="w-full rounded-lg"
               />
             </div>
-            <div>content</div>
-            <div className="mt-6 m-3 p-3 bg-[#FFF9F3] rounded-xl">
-              <div className="text-center">
+            <div    dangerouslySetInnerHTML={{ __html: blogDetail?.content }}></div>
+
+            
+            {/* <div className="mt-6 m-3 p-3 bg-[#FFF9F3] rounded-xl"> */}
+              {/* <div className="text-center">
                 <TitleCustom title="Việc làm liên quan" />
                 <div className="mt-2">
                   {jobSame?.data.map((item: IJobSame, index: number) => {
@@ -62,8 +70,8 @@ const NewDetail = ({params} : {params : {id: string}}) => {
                     <ChevronDoubleRightIcon className="w-4 text-default" />
                   </div>
                 </Link>
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
             <div>
               <CreateCv />
             </div>

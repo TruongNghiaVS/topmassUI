@@ -73,6 +73,7 @@ export const GET_JOBSEARCH_HOTJOB = "/api/JobSearch/GetAllBestJobOptimization";
 
 //------------- blog -----------------//
 export const GET_AllBlogs_ByCategory = "/api/Web/GetAllArticle";
+export const GET_BLOG_DETAIL = "/api/Web/GetArticle";
 
 //---------------- Master data ------------------//
 export const GET_PROVINCE = "/api/Location/GetAllProvinces";
