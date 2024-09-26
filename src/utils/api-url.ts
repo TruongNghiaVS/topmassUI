@@ -30,13 +30,10 @@ export const SAVE_JOB_SETTING = "/api/UserSetting/SaveJobSetting";
 export const GET_JOB_SETTING = "/api/UserSetting/GetJobSetting";
 
 //------------ Company ------------//
-export const GET_All_Company = "/api/Company/GetAllCompany";
-export const GET_Company_Detail = "/api/Company/GetDetail";
-export const GET_Company_GetAllJob = "/api/Company/GetAllJobOfCompany";
-export const Post_Company_AddFolow = "/api/Company/AddFolow";
-
-//------------ Location ------------//
-export const GET_All_Provinces = "/api/Location/GetAllProvinces";
+export const GET_ALL_COMPANY = "/api/Company/GetAllCompany";
+export const GET_COMPANY_DETAIL = "/api/Company/GetDetail";
+export const GET_COMPANY_GETALLJOB = "/api/Company/GetAllJobOfCompany";
+export const POST_COMPANY_ADDFOLLOW = "/api/Company/AddFolow";
 
 //------------ Education ------------//
 export const GET_ALL_EDUCATION = "/api/Education/GetAllEducation";
@@ -72,13 +69,11 @@ export const GET_INFOMATION_USER_CV = "/api/User/GetProfileUserCV";
 export const GET_FULL_PROFILE_USER_CV = "/api/User/GetFullProfileUser";
 
 //------------- JobSearch -----------------//
-
-export const GET_JobSearch_HotJob = "/api/JobSearch/GetAllBestJobOptimization";
+export const GET_JOBSEARCH_HOTJOB = "/api/JobSearch/GetAllBestJobOptimization";
 
 //------------- blog -----------------//
-
 
 //---------------- Master data ------------------//
 export const GET_PROVINCE = "/api/Location/GetAllProvinces";
 export const GET_CAREER = "/api/MasterData/GetAllCareer";
-export const GET_MasterData_Realms = "/api/MasterData/InfoRealms";
+export const GET_MASTERDATA_REALMS = "/api/MasterData/InfoRealms";

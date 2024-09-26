@@ -38,6 +38,7 @@ export interface ITmSelect extends InputHTMLAttributes<HTMLSelectElement> {
   icon?: any;
   options: Option[];
   placeholder?: string;
+  classNameCustom?: string;
 }
 
 export interface ITmRadio {

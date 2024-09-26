@@ -85,7 +85,7 @@ export default function JobSave() {
             </div>
           </div>
           <div className="xl:col-span-4 md:col-span-5">
-            <InfomationCompany item={companys} />
+            {/* <InfomationCompany item={companys} /> */}
             <div className="mt-8 p-4 rounded-lg bg-gradient-to-r from-[#F15A24] to-[#F7931E]">
               <img
                 src="/imgs/img-no.png"

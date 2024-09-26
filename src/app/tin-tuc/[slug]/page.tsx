@@ -2,17 +2,16 @@
 import { news } from "@/mockup-data/data";
 import { New } from "./new";
 import { TitleCustom } from "@/component/custom-title";
-import { GET_All_Company } from "@/utils/api-url";
 import useSWR from "swr";
 import { fetcher } from "@/utils/axios";
+import { GET_ALL_COMPANY } from "@/utils/api-url";
 
-
-export default function NewCategory({params} : {params : {slug: string}} ) {
+export default function NewCategory({ params }: { params: { slug: string } }) {
   debugger;
-  const {slug } = params;
+  const { slug } = params;
 
   const { data: DatallCompany, error: ErrorDataAllCompany, mutate } = useSWR(
-    `${GET_All_Company}?SlugCategory=${slug}`,
+    `${GET_ALL_COMPANY}?SlugCategory=${slug}`,
     fetcher
   );
 
@@ -33,5 +32,3 @@ export default function NewCategory({params} : {params : {slug: string}} ) {
     </div>
   );
 }
-
-
