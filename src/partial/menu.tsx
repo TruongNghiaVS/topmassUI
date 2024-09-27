@@ -120,6 +120,35 @@ export const Menu = () => {
             <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
+        {
+          title: "Thị Trường Lương",
+          slug: "/tin-tuc/thi-truong-luong",
+          icon: (
+            <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+          ),
+        },
+        {
+          title: "Cẩm Nang Nghề Nghiệp",
+          slug: "/tin-tuc/cam-nang-nghe-nghiep",
+          icon: (
+            <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+          ),
+        },
+        {
+          title: "Thị Trường - Xu Hướng Tìm Việc",
+          slug: "/tin-tuc/thi-truong-xu-huong-tim-viec",
+          icon: (
+            <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+          ),
+        },
+        {
+          title: " Kỹ Năng Phỏng Vấn",
+          slug: "/tin-tuc/ky-nang-phong-van",
+          icon: (
+            <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+          ),
+        }
+       
       ],
       link: "/tin-tuc",
       isShow: false,

@@ -18,6 +18,8 @@ export const ADD_VIEW_JOB = "/api/Job/AddViewForJob";
 export const DETAIL_JOB = "/api/JobWeb/GetDetailInfo";
 export const RELATION_JOB = "/api/JobWeb/GetRelationJob";
 export const JOB_LIKE = "/api/JobWeb/GetRecommended";
+export const GET_HOT_JOB = "/api/JobSearch/GetAttractiveJobs";
+export const GET_SUITABLEJOB = "/api/JobSearch/GetSuitableJob";
 
 //------------ cv -----------//
 export const GET_ALL_CV = "/api/CV/GetAllCV";
@@ -70,10 +72,15 @@ export const GET_FULL_PROFILE_USER_CV = "/api/User/GetFullProfileUser";
 
 //------------- JobSearch -----------------//
 export const GET_JOBSEARCH_HOTJOB = "/api/JobSearch/GetAllBestJobOptimization";
+export const SEARCH_JOBS = "/api/JobSearch/SearchJob";
 
 //------------- blog -----------------//
+export const GET_AllBlogs_ByCategory = "/api/Web/GetAllArticle";
+export const GET_BLOG_DETAIL = "/api/Web/GetArticle";
 
 //---------------- Master data ------------------//
 export const GET_PROVINCE = "/api/Location/GetAllProvinces";
 export const GET_CAREER = "/api/MasterData/GetAllCareer";
 export const GET_MASTERDATA_REALMS = "/api/MasterData/InfoRealms";
+export const GET_MASTERDATA_EXPERIENCE = "/api/MasterData/GetAllExperience";
+export const GET_MASTER_DATA_CAREER = "/api/MasterData/GetAllCareer";

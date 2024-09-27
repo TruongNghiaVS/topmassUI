@@ -1,3 +1,4 @@
+import { IBlogData, IBlogDataItem } from "@/app/interface/interface";
 import Link from "next/link";
 
 export interface INew {
@@ -11,11 +12,11 @@ export interface INewProps {
   slug: string;
 }
 
-export const New = ({ item, slug }: INewProps) => {
+export const New = ({ item, slug }: IBlogData) => {
   return (
     <div className="rounded bg-white overflow-hidden">
       <Link href={`/tin-tuc/${slug}/${item.slug}`}>
-        <img src={`/imgs/${item.img}`} alt="" className="w-full" />
+        <img src={`${item.coverFullLink}`} alt="" className="w-full" />
       </Link>
       <Link href={`/tin-tuc/${slug}/${item.slug}`}>
         <div className="m-5 text-lg font-semibold line-clamp-3">

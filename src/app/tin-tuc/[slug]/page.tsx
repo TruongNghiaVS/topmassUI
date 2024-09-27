@@ -2,28 +2,62 @@
 import { news } from "@/mockup-data/data";
 import { New } from "./new";
 import { TitleCustom } from "@/component/custom-title";
+import { GET_AllBlogs_ByCategory } from "@/utils/api-url";
 import useSWR from "swr";
 import { fetcher } from "@/utils/axios";
-import { GET_ALL_COMPANY } from "@/utils/api-url";
+import { IBlogDataItem, ICompanyData } from "@/app/interface/interface";
 
 export default function NewCategory({ params }: { params: { slug: string } }) {
-  debugger;
   const { slug } = params;
 
-  const { data: DatallCompany, error: ErrorDataAllCompany, mutate } = useSWR(
-    `${GET_ALL_COMPANY}?SlugCategory=${slug}`,
+  const { data: DataAllBlogs, error: ErrorDataAllBlogs, mutate } = useSWR(
+    `${GET_AllBlogs_ByCategory}?SlugCategory=${slug}`,
     fetcher
   );
+
+  let categoryName = "";
+
+  switch (slug) {
+    case "bi-quyet-tim-viec":
+      categoryName = "Bí Quyết Tìm Việc";
+      break;
+    case "thi-truong-xu-huong":
+      categoryName = "Thị Trường - Xu Hướng";
+      break;
+    case "goc-thu-gian":
+      categoryName = "Góc thư giản";
+      break;
+    case "tien-ich":
+      categoryName = "Tiện Ích";
+      break;
+    case "goc-bao-chi":
+      categoryName = "Góc Báo Chí";
+      break;
+    case "thi-truong-luong":
+      categoryName = "Thị Trường Lương";
+      break;
+    case "cam-nang-nghe-nghiep":
+      categoryName = "Cẩm Nang Nghề Nghiệp";
+      break;
+    case "thi-truong-xu-huong-tim-viec":
+      categoryName = "Thị Trường - Xu Hướng Tìm Việc";
+      break;
+    case "ky-nang-phong-van":
+      categoryName = "Kỹ Năng Phỏng Vấn";
+      break;
+    default:
+      break;
+  }
 
   return (
     <div className="bg-[#f0f0f0] pb-10 max-1280:px-2">
       <div className="mx-auto container">
-        <TitleCustom title="Bí quyết tìm việc" className="py-8 text-3xl" />
+        <TitleCustom title={categoryName} className="py-8 text-3xl" />
         <div className="grid grid-cols-4 gap-6">
-          {news.map((item, index) => {
+          {DataAllBlogs?.data?.map((item: IBlogDataItem, index: number) => {
             return (
-              <div key={index.toString() + item.title} className="col-span-1">
-                <New item={item} slug="bi-quyet-tim-viec" />
+              <div key={index} className="col-span-1">
+                <New item={item} slug={slug} />
               </div>
             );
           })}

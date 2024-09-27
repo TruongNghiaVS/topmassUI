@@ -3,16 +3,24 @@
 import { FilterIcon } from "@/theme/icons/filterBootstrapIcon";
 import TmSelect from "../hook-form/select";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import { ScrollFilterJob } from "./scroll-filter-job";
-import { experiences, locations, prices } from "@/mockup-data/data";
+import { prices } from "@/mockup-data/data";
 import { HotJobs } from "./hot-jobs";
-import { ISearchJobsParram } from "@/app/interface/interface";
+import { ISearchJobWithTypeFilter } from "@/app/interface/job";
+import { Career, Experiences, Provinces } from "@/module/helper/master-data";
 
-export const SearchJobs = ({ allJobs }: ISearchJobsParram) => {
+export const SearchJobs = ({
+  jobs,
+  search,
+  setSearch,
+  selectedValue,
+  setSelectedValue,
+}: ISearchJobWithTypeFilter) => {
   const { control } = useForm();
 
-  const [selectedValue, setSelectedValue] = useState<number>(0);
+  const { listProvinces } = Provinces();
+  const { listExperiences } = Experiences();
+  const { listCareers } = Career();
 
   const childrenSelect = [
     { value: "0", label: "Địa điểm" },
@@ -22,7 +30,7 @@ export const SearchJobs = ({ allJobs }: ISearchJobsParram) => {
   ];
 
   return (
-    <div className="pt-12 bg-[#EAE9E8] max-1280:px-2">
+    <div className="pt-6 bg-[#EAE9E8] max-1280:px-2">
       <div className="container mx-auto">
         <div className="text-[22px] leading-[30px] font-bold flex">
           <img src="/imgs/img-job-hot.png" alt="" className="w-auto mr-2" />
@@ -31,21 +39,47 @@ export const SearchJobs = ({ allJobs }: ISearchJobsParram) => {
           </div>
         </div>
         <div className="mt-2">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
             <div className="mr-4">
               <TmSelect
                 icon={<FilterIcon className="w-4 mr-2" />}
                 name="searchType"
-                onChange={(evt) => setSelectedValue(+evt.target.value)}
+                onChange={(evt) => {
+                  setSelectedValue(evt.target.value), setSearch("");
+                }}
                 className="min-w-[250px]"
                 control={control}
                 options={childrenSelect}
               />
             </div>
-            {selectedValue == 0 && <ScrollFilterJob data={locations} />}
-            {selectedValue == 1 && <ScrollFilterJob data={prices} />}
-            {selectedValue == 2 && <ScrollFilterJob data={experiences} />}
-            {selectedValue == 3 && <ScrollFilterJob data={locations} />}
+            {selectedValue === "0" && (
+              <ScrollFilterJob
+                optionSearch={listProvinces}
+                search={search}
+                setSearch={setSearch}
+              />
+            )}
+            {selectedValue === "1" && (
+              <ScrollFilterJob
+                optionSearch={prices}
+                search={search}
+                setSearch={setSearch}
+              />
+            )}
+            {selectedValue === "2" && (
+              <ScrollFilterJob
+                optionSearch={listExperiences}
+                search={search}
+                setSearch={setSearch}
+              />
+            )}
+            {selectedValue === "3" && (
+              <ScrollFilterJob
+                optionSearch={listCareers}
+                search={search}
+                setSearch={setSearch}
+              />
+            )}
           </div>
         </div>
         <div className="mt-2">
@@ -58,7 +92,7 @@ export const SearchJobs = ({ allJobs }: ISearchJobsParram) => {
             </span>
           </div>
         </div>
-        <HotJobs allJobs={allJobs} />
+        <HotJobs jobs={jobs} />
       </div>
     </div>
   );

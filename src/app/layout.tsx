@@ -14,6 +14,7 @@ import { LoadingProvider } from "./context/loading";
 import GlobalLoadingIndicator from "@/component/loading-componet";
 import useAuth from "@/component/hook/useAuthToken";
 import { Suspense } from "react";
+import { SWRConfig } from "swr";
 
 dayjs.extend(customParseFormat);
 
@@ -62,17 +63,23 @@ export default function RootLayout({
       <body className={`${roboto.variable} font-roboto`}>
         <LoadingProvider>
           <Suspense>
-            <GlobalLoadingIndicator />
-            {!pathValidated.includes(path) && (
-              <div className="relative z-[10]">
-                <Header />
-              </div>
-            )}
-            <main className="min-h-screen m-auto relative bg-[#EAE9E8]">
-              {children}
-              <ToastContainer autoClose={2000} />
-            </main>
-            {!pathValidated.includes(path) && <Footer />}
+            <SWRConfig
+              value={{
+                revalidateOnFocus: false, // Disable revalidation on focus
+              }}
+            >
+              <GlobalLoadingIndicator />
+              {!pathValidated.includes(path) && (
+                <div className="relative z-[10]">
+                  <Header />
+                </div>
+              )}
+              <main className="min-h-screen m-auto relative bg-[#EAE9E8]">
+                {children}
+                <ToastContainer autoClose={2000} />
+              </main>
+              {!pathValidated.includes(path) && <Footer />}
+            </SWRConfig>
           </Suspense>
         </LoadingProvider>
       </body>

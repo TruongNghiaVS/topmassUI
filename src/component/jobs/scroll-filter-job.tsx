@@ -1,11 +1,13 @@
 import { useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
+import { Option } from "../hook-form/interface/interface";
+import { IScrollSearchDetailProps } from "@/app/interface/job";
 
-export interface IScrollProps {
-  data: any[];
-}
-
-export const ScrollFilterJob = ({ data }: IScrollProps) => {
+export const ScrollFilterJob = ({
+  optionSearch,
+  search,
+  setSearch,
+}: IScrollSearchDetailProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollHorizontally = (distance: number) => {
@@ -19,9 +21,6 @@ export const ScrollFilterJob = ({ data }: IScrollProps) => {
 
   const scrollLeftHorizontally = (distance: number) => {
     if (scrollContainerRef.current) {
-      console.log(scrollContainerRef.current.clientWidth);
-      console.log(scrollContainerRef.current.offsetWidth);
-      console.log(scrollContainerRef.current.scrollWidth);
       scrollContainerRef.current.scrollBy({
         left: -distance,
         behavior: "smooth",
@@ -31,7 +30,7 @@ export const ScrollFilterJob = ({ data }: IScrollProps) => {
 
   return (
     <>
-      <div className="flex overflow-hidden px-2 lg:px-0 mt-2 lg:mt-0 items-center">
+      <div className="flex overflow-hidden px-2 lg:px-0 mt-2 lg:mt-0 items-center flex-1">
         <div className="mr-2">
           <button
             className="border border-[#F37A20] rounded-full border-[2px] p-1 border-solid min-w-[auto]"
@@ -43,15 +42,22 @@ export const ScrollFilterJob = ({ data }: IScrollProps) => {
 
         <div
           ref={scrollContainerRef}
-          className="overflow-x-scroll"
+          className="overflow-x-scroll flex-1"
           style={{ scrollbarWidth: "none" }}
         >
-          <div className="flex">
-            {data.map((item: any, idx: number) => {
+          <div className="flex flex-1">
+            {optionSearch?.map((item, idx) => {
               return (
                 <button
-                  key={idx.toString() + item}
-                  className="px-4 py-2 text-white bg-[#F37A20] rounded-[21px] whitespace-nowrap mx-2"
+                  key={idx}
+                  className={`px-4 py-2 border border-[#F37A20] ${
+                    search === item.value
+                      ? "text-white bg-[#F37A20] "
+                      : "text-[#F37A20]"
+                  } rounded-[21px] whitespace-nowrap mx-2`}
+                  onClick={() => {
+                    setSearch(item.value);
+                  }}
                 >
                   {item.label}
                 </button>

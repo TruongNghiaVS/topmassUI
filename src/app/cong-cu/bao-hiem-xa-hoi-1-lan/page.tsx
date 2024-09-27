@@ -34,7 +34,6 @@ export default function InsuranceOneTime() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("_____");
   };
 
   const years = Array.from({ length: 100 }, (_, i) => {

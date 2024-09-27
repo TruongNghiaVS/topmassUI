@@ -7,9 +7,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
+import { IHotCompanyProps } from "@/app/interface/interface";
 
-export const JobTypePage = () => {
-  const lst = [1, 2, 3, 4, 5, 6, 7, 8];
+export const JobTypePage = ({ companys }: IHotCompanyProps) => {
   return (
     <>
       <div className=" mt-[60px] max-1280:px-2">
@@ -47,24 +47,28 @@ export const JobTypePage = () => {
                 prevEl: "#prev-hot-job",
                 nextEl: "#next-hot-job",
               }}
-              modules={[Navigation]}
+              modules={[Navigation, Autoplay]}
               className="mySwiper !pt-5 !pb-16"
             >
-              {lst.map((value) => {
+              {companys?.map((item, index) => {
                 return (
-                  <SwiperSlide key={value.toString() + "test"}>
-                    <div className="">
+                  <SwiperSlide key={index}>
+                    <div className="hover:outline hover:outline-[#F37A20] p-4 m-1 rounded-lg">
                       <div className="flex justify-center">
-                        <Link href="/cong-ty">
+                        <Link href={`/cong-ty/${item.slug}`}>
                           <img
-                            src="/imgs/logo-work.png"
+                            src={
+                              item.logoFullLink
+                                ? item.logoFullLink
+                                : "/imgs/logo-work.png"
+                            }
                             alt=""
                             className="w-auto"
                           />
                         </Link>
                       </div>
                       <div className=" uppercase text-center my-5">
-                        <Link href="/cong-ty">
+                        <Link href={`/cong-ty/${item.slug}`}>
                           Công ty cổ phần tập đoàn VietStar
                         </Link>
                       </div>

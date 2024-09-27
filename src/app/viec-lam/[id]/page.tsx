@@ -19,7 +19,7 @@ import { useCallback, useEffect, useState } from "react";
 import { getToken } from "@/utils/token";
 import { PopupLoginDetailJob } from "./popup-login-detail-job";
 import { useLoading } from "@/app/context/loading";
-import axiosInstance, { axiosInstanceNotToken, fetcher } from "@/utils/axios";
+import axiosInstance, { fetcher } from "@/utils/axios";
 import {
   ADD_SAVE_JOB,
   ADD_VIEW_JOB,
@@ -35,12 +35,11 @@ export default function DetailJob({ params }: { params: { id: any } }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOpenModalLogin, setIsOpenModalLogin] = useState(false);
   const [saveJob, setSaveJob] = useState(false);
-  const [isView, setIsView] = useState(false);
   const { setLoading } = useLoading();
 
-  const { data: detail, error } = useSWR(`${DETAIL_JOB}?JobId=12`, fetcher);
+  const { data: detail, error } = useSWR(`${DETAIL_JOB}?JobId=${id}`, fetcher);
   const { data: jobSame, error: errorJobSame } = useSWR(
-    `${RELATION_JOB}?JobId=12`,
+    `${RELATION_JOB}?JobId=${id}`,
     fetcher
   );
 

@@ -158,28 +158,6 @@ export interface IInfomationBasicJobProps {
   infomation: IInfomationBasicJob;
 }
 
-export interface IJobSame {
-  isLike: boolean;
-  positionText: string;
-  companyName: string;
-  logoImage: string;
-  salaryFrom: number;
-  salaryTo: number;
-  fieldArray: string;
-  jobId: number;
-  jobSlug: string;
-  lastUpdate: string;
-  locationtext: string;
-}
-
-export interface IJobSameProps {
-  jobs: IJobSame[];
-}
-
-export interface IInfomationJobSameProps {
-  item: IJobSame;
-}
-
 export interface IJobAplly {
   positionText: string;
   companyName: string;
@@ -523,27 +501,6 @@ export interface ISliderJobsParram {
 
 export interface ISliderFormParram extends ISliderJobsParram {}
 
-export interface IHotJob {
-  companyLogo: string;
-  jobId: number;
-  jobSlug: string;
-  lastUpdate: string;
-  locationText: string;
-  positionText: string;
-  rangeSalary: string;
-  salaryTo: number;
-  salaryfrom: number;
-  companyName: string;
-}
-
-export interface ISearchJobsParram {
-  allJobs: IHotJob[];
-}
-
-export interface IInfomationJobProps {
-  item: IHotJob;
-}
-
 export interface IHotCompanyDetail {
   coverFullLink: string;
   logoFullLink: string;
@@ -553,6 +510,24 @@ export interface IHotCompanyDetail {
   followCount: number;
 }
 
-export interface IHotCompany {
+export interface IHotCompanyProps {
   companys: IHotCompanyDetail[];
 }
+
+export type IBlogDataItem = {
+  title: string;
+  coverImage: string;
+  coverFullLink: string;
+  keyWord: string;
+  content: string;
+  shortDes: string;
+  categoryName: string;
+  slug: string;
+  status: number;
+  id: number;
+};
+
+export type IBlogData = {
+  item: IBlogDataItem;
+  slug: string;
+};

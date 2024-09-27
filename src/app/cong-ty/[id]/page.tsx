@@ -52,7 +52,7 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
   });
 
   const { data: detail, error, mutate } = useSWR(
-    `${GET_COMPANY_DETAIL}?slug=cong-ty-co-phan-vs`,
+    `${GET_COMPANY_DETAIL}?slug=${id}`,
     fetcher
   );
 
@@ -63,7 +63,7 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
   }
 
   const { data: allJobs, mutate: mutateAllJobs } = useSWR(
-    `${GET_COMPANY_GETALLJOB}?slug=cong-ty-co-phan-vs&location=${searchObj.location}&work=${searchObj.work}`,
+    `${GET_COMPANY_GETALLJOB}?slug=${id}&location=${searchObj.location}&work=${searchObj.work}`,
     fetcher
   );
 

@@ -4,16 +4,16 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { TitleCustom } from "./custom-title";
-import { IHotCompany } from "@/app/interface/interface";
+import { IHotCompanyProps } from "@/app/interface/interface";
 
-export const HotCompany = ({ companys }: IHotCompany) => {
+export const HotCompany = ({ companys }: IHotCompanyProps) => {
   return (
     <>
-      <div className=" mt-[60px] max-1280:px-2 bg-white">
+      <div className=" mt-[30px] max-1280:px-2 bg-white">
         <div className="container mx-auto">
           <TitleCustom title="Đối tác tiềm năng của Topmass" className="" />
           <div>
@@ -54,7 +54,7 @@ export const HotCompany = ({ companys }: IHotCompany) => {
                   <SwiperSlide key={index} className="p-2">
                     <div className="hover:outline outline-[#F37A20] p-4 rounded-lg">
                       <div className="flex justify-center">
-                        <Link href="/cong-ty">
+                        <Link href={`/cong-ty/${item.slug}`}>
                           <img
                             src={
                               item.logoFullLink
@@ -66,7 +66,7 @@ export const HotCompany = ({ companys }: IHotCompany) => {
                           />
                         </Link>
                       </div>
-                      <Link href="/cong-ty">
+                      <Link href={`/cong-ty/${item.slug}`}>
                         <div className=" uppercase text-center my-5">
                           {item.fullName}
                         </div>

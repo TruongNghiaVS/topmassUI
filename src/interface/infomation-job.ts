@@ -27,16 +27,3 @@ export interface IInfomationJobSave {
 export interface IInfomationJobSaveProps {
   item: IInfomationJobSave;
 }
-export interface IInfomationJobSame {
-  title: string;
-  slug: string;
-  company: string;
-  price: string;
-  city: string;
-  status: string;
-  groupType: string[];
-}
-
-export interface IInfomationJobSameProps {
-  item: IInfomationJobSame;
-}

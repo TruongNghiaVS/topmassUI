@@ -10,8 +10,11 @@ import TmInput from "./hook-form/input";
 import TmSelect from "./hook-form/select";
 import { MagnifyingGlassIcon, MapPinIcon } from "@heroicons/react/16/solid";
 import { BagBootstrapIcon } from "@/theme/icons/bagBootstrapIcon";
+import { Career, Provinces } from "@/module/helper/master-data";
 
-export const SliderForm = ({ allProvinces, allRealms }: ISliderFormParram) => {
+export const SliderForm = () => {
+  const { provinces } = Provinces();
+  const { careers } = Career();
   const schema = yup.object().shape({
     work: yup.string(),
     location: yup.string(),
@@ -55,7 +58,7 @@ export const SliderForm = ({ allProvinces, allRealms }: ISliderFormParram) => {
               className="border-0"
               placeholder="Địa điểm làm việc"
               control={control}
-              options={allProvinces}
+              options={provinces}
             />
           </div>
 
@@ -66,7 +69,7 @@ export const SliderForm = ({ allProvinces, allRealms }: ISliderFormParram) => {
               name="type"
               placeholder="Ngành nghề"
               control={control}
-              options={allRealms}
+              options={careers}
             />
           </div>
           <div className="bg-[#F37A20] text-white grid text-center rounded-3xl ">

@@ -114,7 +114,7 @@ export const Slider = () => {
             </SwiperSlide>
           </Swiper>
         </div>
-        <SliderForm allProvinces={[]} allRealms={[]} />
+        <SliderForm />
       </div>
     </div>
   );

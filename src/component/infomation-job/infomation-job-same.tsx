@@ -1,7 +1,6 @@
 "use client";
 
-import { IInfomationJobSameProps } from "@/app/interface/interface";
-import {} from "@/interface/infomation-job";
+import { IInfomationJobSameProps } from "@/app/interface/job";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 import Link from "next/link";
@@ -10,12 +9,18 @@ import { toast } from "react-toastify";
 export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
   const groupType = item.fieldArray.split(",");
   let listShow = groupType.length > 3 ? groupType.slice(0, 3) : groupType;
+  listShow = listShow.filter((item) => item.length > 0);
   let count = groupType.length > 3 ? groupType.length - 3 : 0;
 
   const getDay = (dayString: string) => {
     const day = dayjs().diff(dayString, "d");
     return day === 0 ? "Mới cập nhật" : `Cập nhật ${day} trước`;
   };
+
+  const styleAfter =
+    "after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]";
+  const styleAfterArray =
+    "lg:after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]";
 
   return (
     <div className="border-[1px] bg-white p-4 rounded-md hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px] relative border-solid border-[#FC7E00]">
@@ -30,7 +35,7 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
           <Link href={`/viec-lam/${item.jobSlug}`}>
             <img
               src={
-                item.logoImage.length > 0
+                item.logoImage && item.logoImage.length > 0
                   ? item.logoImage
                   : `/imgs/logo-work.png`
               }
@@ -52,7 +57,11 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
             <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
           </div>
           <div className="flex mt-2	justify-center sm:justify-start">
-            <div className="text-sm text-[#F46800] pr-[0.65em] mr-2 relative after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]">
+            <div
+              className={`text-sm text-[#F46800] pr-[0.65em] mr-2 relative  ${
+                item.locationText.length > 0 && styleAfter
+              }`}
+            >
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 {item.salaryFrom > 0 && item.salaryTo > 0
                   ? `${item.salaryFrom} - ${item.salaryTo} triệu`
@@ -61,12 +70,16 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
             </div>
             <div className="text-sm px-[0.65em]">
               <Link href={`/viec-lam/${item.jobSlug}`}>
-                {item.locationtext}
+                {item.locationText}
               </Link>
             </div>
           </div>
           <div className="lg:flex mt-2	items-center">
-            <div className="text-sm pr-[0.65em] mr-2 relative lg:after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]">
+            <div
+              className={`text-sm pr-[0.65em] mr-2 relative ${
+                listShow.length > 0 && styleAfterArray
+              }`}
+            >
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 {getDay(item.lastUpdate)}
               </Link>

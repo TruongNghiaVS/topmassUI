@@ -1,16 +1,16 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { InfomationJob } from "../infomation-job/infomation-job";
-import { ISearchJobsParram } from "@/app/interface/interface";
 import { useState } from "react";
+import { IAllJobsProps } from "@/app/interface/job";
 
-export const HotJobs = ({ allJobs }: ISearchJobsParram) => {
-  const [page, setPage] = useState(allJobs ? allJobs.length : 1);
+export const HotJobs = ({ jobs }: IAllJobsProps) => {
+  const [page, setPage] = useState(jobs ? jobs.length : 1);
   const [currentPage, setCurrentPage] = useState(1);
   return (
     <div>
       <div className="container mx-auto">
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2 ">
-          {allJobs?.map((item, idx) => {
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2">
+          {jobs?.map((item, idx) => {
             return <InfomationJob key={idx} item={item} />;
           })}
         </div>

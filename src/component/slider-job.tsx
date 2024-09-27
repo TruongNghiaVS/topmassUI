@@ -5,48 +5,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { InfomationJob } from "./infomation-job/infomation-job";
-import { jobSlider } from "@/mockup-data/data";
-import useSWR from "swr";
-import { GET_JOBSEARCH_HOTJOB } from "@/utils/api-url";
-import { fetcher } from "@/utils/axios";
-import { IHotJob } from "@/app/interface/interface";
+import { IJob, IAllJobsProps } from "@/app/interface/job";
 
-export const SliderJob = () => {
-  const { data: allJobs } = useSWR(`${GET_JOBSEARCH_HOTJOB}`, fetcher);
-  const arrIndex = [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30,
-  ];
-
-  const arrMap = converArray(allJobs?.data, 9);
+export const SliderJob = ({ jobs }: IAllJobsProps) => {
+  const arrMap = converArray(jobs, 9);
   return (
     <div id="slider" className="relative max-xl:px-2">
       <Swiper
@@ -75,7 +37,7 @@ export const SliderJob = () => {
           return (
             <div key={index}>
               <SwiperSlide className="bg-primary w-full border-r">
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2 ">
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2">
                   {values.map((value, idx) => {
                     return <InfomationJob key={idx} item={value} />;
                   })}
@@ -97,8 +59,8 @@ export const SliderJob = () => {
   );
 };
 
-const converArray = (allJobs: IHotJob[], size: number) => {
-  let tempArray: IHotJob[][] = [];
+const converArray = (allJobs: IJob[], size: number) => {
+  let tempArray: IJob[][] = [];
   for (let index = 0; index < allJobs?.length; index = index += size) {
     const myChunk = allJobs.slice(index, index + size);
     tempArray.push(myChunk);

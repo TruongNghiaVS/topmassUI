@@ -1,19 +1,17 @@
 "use client";
 import { CreateCv } from "@/component/create-cv";
 import { InfomationJobLike } from "@/component/infomation-job/infomation-job-like";
-import { ChevronDoubleRightIcon } from "@heroicons/react/16/solid";
-import Link from "next/link";
 import { NewInfomation } from "../../new-infomation";
-import { InfomationJobSame } from "@/component/infomation-job/infomation-job-same";
 import { TitleCustom } from "@/component/custom-title";
 import useSWR from "swr";
-import { GET_JOBSEARCH_HOTJOB, RELATION_JOB } from "@/utils/api-url";
+import { GET_BLOG_DETAIL, GET_JOBSEARCH_HOTJOB } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
-import { IHotJob, IJobSame } from "@/app/interface/interface";
+import { IJob } from "@/app/interface/job";
 
-const NewDetail = () => {
-  const { data: jobSame, error: errorJobSame } = useSWR(
-    `${RELATION_JOB}?JobId=12`,
+const NewDetail = ({ params }: { params: { id: string } }) => {
+  const { id } = params;
+  const { data: blogDetail } = useSWR(
+    `${GET_BLOG_DETAIL}?articleSlug=${id}`,
     fetcher
   );
 
@@ -25,45 +23,27 @@ const NewDetail = () => {
       <div className="mx-auto container">
         <div className="sm:grid grid-cols-12 gap-4 mt-4 max-1280:px-2">
           <div className="xl:col-span-8 md:col-span-7">
-            <div className="text-xs font-normal">Cẩm nang nghề nghiệp</div>
-            <div className="text-2xl font-bold">
-              KOL là gì? Bật mí 7 bước trở thành KOL chuyên nghiệp thu hút triệu
-              fans
+            <div className="text-xs font-normal">
+              {blogDetail?.categoryName}
             </div>
+            <div className="text-2xl font-bold">{blogDetail?.title}</div>
             <div className="flex text-xs">
-              <div className="mr-4">By Minh Phạm</div>
+              <div className="mr-4">Tạo bởi Minh Phạm</div>
               <div className="pl-2 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:my-auto before:w-1 before:h-1 before:rounded-full before:bg-black">
-                25/05/2023
+                {blogDetail?.createAt}
               </div>
             </div>
             <div className="my-4">
               <img
-                src="/imgs/img-detail-new.png"
+                src={`${blogDetail?.coverFullLink}`}
                 alt=""
                 className="w-full rounded-lg"
               />
             </div>
-            <div>content</div>
-            <div className="mt-6 m-3 p-3 bg-[#FFF9F3] rounded-xl">
-              <div className="text-center">
-                <TitleCustom title="Việc làm liên quan" />
-                <div className="mt-2">
-                  {jobSame?.data.map((item: IJobSame, index: number) => {
-                    return (
-                      <div className="mt-4" key={index}>
-                        <InfomationJobSame item={jobSame} />
-                      </div>
-                    );
-                  })}
-                </div>
-                <Link href="#">
-                  <div className="mt-2 text-default flex justify-center mt-4">
-                    Xem thêm{" "}
-                    <ChevronDoubleRightIcon className="w-4 text-default" />
-                  </div>
-                </Link>
-              </div>
-            </div>
+            <div
+              dangerouslySetInnerHTML={{ __html: blogDetail?.content }}
+            ></div>
+
             <div>
               <CreateCv />
             </div>
@@ -75,7 +55,7 @@ const NewDetail = () => {
             />
 
             <div>
-              {allJobs?.data.map((item: IHotJob, idx: number) => {
+              {allJobs?.data.map((item: IJob, idx: number) => {
                 return (
                   <div className="mt-4" key={idx}>
                     <InfomationJobLike item={item} />
@@ -101,5 +81,3 @@ const NewDetail = () => {
 };
 
 export default NewDetail;
-
-export const revalidate = 100;
