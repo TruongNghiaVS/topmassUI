@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
-import { IChangePassword } from "../interface/interface";
+import { IChangePassword } from "../../interface/interface";
 import { InfomationUser } from "@/component/infomation-user-right";
 import axiosInstance from "@/utils/axios";
 import { FORGOT_CHANGE_PASSWORD } from "@/utils/api-url";

@@ -1,4 +1,4 @@
-import { ILogin, ILoginForm } from "@/app/interface/interface";
+import { ILogin, ILoginForm } from "@/interface/interface";
 import { LOGIN } from "@/utils/api-url";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AxiosError } from "axios";

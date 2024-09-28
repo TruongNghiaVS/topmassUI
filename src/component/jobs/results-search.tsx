@@ -1,4 +1,4 @@
-import { IJob, IJobSameProps } from "@/app/interface/job";
+import { IJob, IJobSameProps } from "@/interface/job";
 import { InfomationJobSame } from "../infomation-job/infomation-job-same";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 

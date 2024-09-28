@@ -1,4 +1,4 @@
-import { IInfomationSkillViewProps } from "@/app/interface/interface";
+import { IInfomationSkillViewProps } from "@/interface/interface";
 import { AcademicCapIcon, StarIcon } from "@heroicons/react/16/solid";
 import dayjs from "dayjs";
 

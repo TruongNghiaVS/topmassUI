@@ -1,4 +1,4 @@
-import { IInfomationBasicJobProps } from "@/app/interface/interface";
+import { IInfomationBasicJobProps } from "@/interface/interface";
 import { BarChartStepBootstrapIcon } from "@/theme/icons/barChartStepBootstrapIcon";
 import { CalendaPlusBootstrapIcon } from "@/theme/icons/calendaPlusBootstrapIcon";
 import { HourClockSpitBootstrapICon } from "@/theme/icons/hourClockSpitBootstrapICon";

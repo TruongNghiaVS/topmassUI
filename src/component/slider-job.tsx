@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { InfomationJob } from "./infomation-job/infomation-job";
-import { IJob, IAllJobsProps } from "@/app/interface/job";
+import { IAllJobsProps, IJob } from "@/interface/job";
 
 export const SliderJob = ({ jobs }: IAllJobsProps) => {
   const arrMap = converArray(jobs, 9);

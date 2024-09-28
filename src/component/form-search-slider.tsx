@@ -1,7 +1,5 @@
 "use client";
 
-import { ISliderFormParram } from "@/app/interface/interface";
-import { IFormSlider } from "@/interface/form-slider";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -11,21 +9,22 @@ import TmSelect from "./hook-form/select";
 import { MagnifyingGlassIcon, MapPinIcon } from "@heroicons/react/16/solid";
 import { BagBootstrapIcon } from "@/theme/icons/bagBootstrapIcon";
 import { Career, Provinces } from "@/module/helper/master-data";
+import { IFormSlider } from "@/interface/search-job";
 
 export const SliderForm = () => {
   const { provinces } = Provinces();
   const { careers } = Career();
   const schema = yup.object().shape({
-    work: yup.string(),
-    location: yup.string(),
-    type: yup.string(),
+    KeyWord: yup.string(),
+    Location: yup.string(),
+    Field: yup.string(),
   });
   const { handleSubmit, control } = useForm<IFormSlider>({
     resolver: yupResolver(schema),
     defaultValues: {
-      location: "",
-      work: "",
-      type: "",
+      Location: "",
+      KeyWord: "",
+      Field: "",
     },
   });
 
@@ -45,7 +44,7 @@ export const SliderForm = () => {
         >
           <div className="flex-1 relative after:absolute after:right-0 after:top-0 after:bottom-0 after:w-[1px] after:h-[70%] after:bg-black after:my-auto">
             <TmInput
-              name="work"
+              name="KeyWord"
               className="border-0"
               placeholder="Tìm kiếm việc làm"
               control={control}
@@ -54,7 +53,7 @@ export const SliderForm = () => {
           <div className="flex-1">
             <TmSelect
               icon={<MapPinIcon className="w-6 mr-2" />}
-              name="location"
+              name="Location"
               className="border-0"
               placeholder="Địa điểm làm việc"
               control={control}
@@ -66,7 +65,7 @@ export const SliderForm = () => {
             <TmSelect
               icon={<BagBootstrapIcon className="w-4 mr-2" />}
               className="border-0"
-              name="type"
+              name="Field"
               placeholder="Ngành nghề"
               control={control}
               options={careers}

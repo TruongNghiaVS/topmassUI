@@ -1,6 +1,6 @@
 "use client";
 import { useLoading } from "@/app/context/loading";
-import { IAvatarProps } from "@/app/interface/interface";
+import { IAvatarProps } from "@/interface/interface";
 import { UPDATE_BASIC_INFO, UPLOAD_IMG } from "@/utils/api-url";
 import axiosInstance, { axiosInstanceImg } from "@/utils/axios";
 import { CameraIcon } from "@heroicons/react/16/solid";

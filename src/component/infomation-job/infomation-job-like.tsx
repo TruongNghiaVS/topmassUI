@@ -1,6 +1,6 @@
 "use client";
 
-import { IInfomationJobProps } from "@/app/interface/job";
+import { IInfomationJobProps } from "@/interface/job";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { toast } from "react-toastify";

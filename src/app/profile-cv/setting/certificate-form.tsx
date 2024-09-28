@@ -2,7 +2,7 @@ import { useLoading } from "@/app/context/loading";
 import {
   ICertificateCv,
   IInfomationCertificateProps,
-} from "@/app/interface/interface";
+} from "@/interface/interface";
 import TmCheckbox from "@/component/hook-form/checkbox";
 import TmInput from "@/component/hook-form/input";
 import TmSelect from "@/component/hook-form/select";

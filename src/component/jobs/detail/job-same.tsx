@@ -1,5 +1,5 @@
-import { IAllJobsProps } from "@/app/interface/job";
 import { InfomationJobSame } from "@/component/infomation-job/infomation-job-same";
+import { IAllJobsProps } from "@/interface/job";
 
 export const JobSame = ({ jobs = [] }: IAllJobsProps) => {
   return (

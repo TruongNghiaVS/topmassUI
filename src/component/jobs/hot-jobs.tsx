@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { InfomationJob } from "../infomation-job/infomation-job";
 import { useState } from "react";
-import { IAllJobsProps } from "@/app/interface/job";
+import { IAllJobsProps } from "@/interface/job";
 
 export const HotJobs = ({ jobs }: IAllJobsProps) => {
   const [page, setPage] = useState(jobs ? jobs.length : 1);

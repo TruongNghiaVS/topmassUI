@@ -1,6 +1,7 @@
 import {
   GET_MASTER_DATA_CAREER,
   GET_MASTERDATA_EXPERIENCE,
+  GET_MASTERDATA_RANK,
   GET_MASTERDATA_REALMS,
   GET_PROVINCE,
 } from "@/utils/api-url";
@@ -119,6 +120,36 @@ export const Realm = () => {
     isLoading,
     realms,
     listRealms,
+    mutate,
+  };
+};
+
+export const Rank = () => {
+  const { data, error, mutate, isLoading } = useSWR(
+    GET_MASTERDATA_RANK,
+    fetcher
+  );
+
+  const ranks = data
+    ? data?.map((item: any) => {
+        return {
+          value: item.id.toString(),
+          label: item.text,
+        };
+      })
+    : [];
+  const listRanks = [
+    {
+      label: "Tất cả",
+      value: "",
+    },
+    ...ranks,
+  ];
+  return {
+    error,
+    isLoading,
+    ranks,
+    listRanks,
     mutate,
   };
 };

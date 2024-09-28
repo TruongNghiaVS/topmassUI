@@ -40,6 +40,7 @@ import {
 import { SkillInfomationCv } from "./setting/skill-form";
 import { AvatarCv } from "@/component/avatar-cv";
 import { useLoading } from "../context/loading";
+import { toast } from "react-toastify";
 
 type IProps = {
   title: string;
@@ -177,6 +178,7 @@ export default function ProfileCV() {
   ];
 
   const downloadPDF = async () => {
+    setLoading(true);
     try {
       const response = await fetch("/api/generate-pdf", {
         method: "GET",
@@ -196,8 +198,10 @@ export default function ProfileCV() {
         document.body.removeChild(a);
       } else {
         console.error("Failed to generate PDF");
+        toast.error("Tạo cv mẫu thất bại");
       }
     } catch (error) {
+      toast.error("Tạo cv mẫu thất bại");
     } finally {
       setLoading(false);
     }

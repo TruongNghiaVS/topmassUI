@@ -1,17 +1,16 @@
 "use client";
-import { news } from "@/mockup-data/data";
 import { New } from "./new";
 import { TitleCustom } from "@/component/custom-title";
-import { GET_AllBlogs_ByCategory } from "@/utils/api-url";
+import { GET_ALLBLOGS_BYCATEGORY } from "@/utils/api-url";
 import useSWR from "swr";
 import { fetcher } from "@/utils/axios";
-import { IBlogDataItem, ICompanyData } from "@/app/interface/interface";
+import { IBlogDataItem } from "@/interface/interface";
 
 export default function NewCategory({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
-  const { data: DataAllBlogs, error: ErrorDataAllBlogs, mutate } = useSWR(
-    `${GET_AllBlogs_ByCategory}?SlugCategory=${slug}`,
+  const { data: DataAllBlogs } = useSWR(
+    `${GET_ALLBLOGS_BYCATEGORY}?SlugCategory=${slug}`,
     fetcher
   );
 
@@ -56,7 +55,7 @@ export default function NewCategory({ params }: { params: { slug: string } }) {
         <div className="grid grid-cols-4 gap-6">
           {DataAllBlogs?.data?.map((item: IBlogDataItem, index: number) => {
             return (
-              <div key={index} className="col-span-1">
+              <div key={index} className="col-span-1 bg-white">
                 <New item={item} slug={slug} />
               </div>
             );

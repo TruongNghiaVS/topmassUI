@@ -1,22 +1,24 @@
+import { IBlogRelationProps } from "@/interface/blog";
 import Link from "next/link";
 
-export const NewInfomation = () => {
+export const NewInfomation = ({ item }: IBlogRelationProps) => {
   return (
     <div>
       <div>
         <Link href="#">
           <img
-            src="/imgs/img-detail-new.png"
+            src={`${
+              item.coverFullLink.length > 0
+                ? item.coverFullLink
+                : "/imgs/img-detail-new.png"
+            }  `}
             alt=""
             className="w-full rounded-lg"
           />
         </Link>
       </div>
       <Link href="#">
-        <div className="font-normal mt-3 line-clamp-3">
-          KOL là gì? Bật mí 7 bước trở thành KOL chuyên nghiệp thu hút triệu
-          fans
-        </div>
+        <div className="font-normal mt-3 line-clamp-3">{item.title}</div>
       </Link>
     </div>
   );

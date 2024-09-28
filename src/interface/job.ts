@@ -1,6 +1,5 @@
 import { Option } from "@/component/hook-form/interface/interface";
 import { Dispatch, SetStateAction } from "react";
-import { KeyedMutator } from "swr";
 
 export interface IScrollFilterProps {
   setSearch: Dispatch<SetStateAction<string>>;
@@ -12,21 +11,56 @@ export interface IScrollSearchDetailProps extends IScrollFilterProps {
 }
 
 export interface IJob {
-  businessDate: string;
+  positionText: string;
   companyName: string;
+  salaryTo: number;
   fieldArray: string;
-  id: number;
-  isLike: boolean;
-  isSave: boolean;
   jobId: number;
   jobSlug: string;
   lastUpdate: string;
+  salaryFrom: number;
+  rangeSalary: string;
   locationText: string;
   logoImage: string;
-  positionText: string;
-  rangeSalary: string;
-  salaryFrom: number;
-  salaryTo: number;
+  businessDate: string;
+  id: number;
+  isLike: boolean;
+  isSave: boolean;
+}
+
+export interface IDetailJob {
+  companyData: {
+    addressInfo: string;
+    avatarLink: string;
+    capacity: string;
+    companyId: number;
+    companyName: string;
+    slug: string;
+  };
+  dataJob: {
+    commonData: {
+      experienceText: string;
+      fieldText: string;
+      formOfWork: string;
+      genderText: string;
+      levelText: string;
+      numOfRecruits: number;
+      professionText: string;
+      publishDate: string;
+    };
+    content: string;
+    experienceText: string;
+    hashtags: string;
+    jobName: string;
+    locationText: string;
+    rangeSalary: string;
+    slug: string;
+  };
+  jobExtra: {
+    isAply: boolean;
+    isSave: boolean;
+  };
+  id: number;
 }
 
 export interface IHotJobProps extends IScrollFilterProps {

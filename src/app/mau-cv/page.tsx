@@ -3,12 +3,19 @@ import { BoxCV } from "@/component/box-cv";
 import CustomSelectSearch from "@/component/hook-form/customSelectSearch";
 import { useState } from "react";
 import { NewInfomation } from "../tin-tuc/new-infomation";
+import useSWR from "swr";
+import { GET_BLOG_REATION } from "@/utils/api-url";
+import { fetcher } from "@/utils/axios";
+import { IBlog } from "@/interface/blog";
 
 export default function CreateNewCv() {
   const data = [1, 2, 3, 4];
 
   const [selectedValue, setSelectedValue] = useState("");
-
+  const { data: listBlog } = useSWR(
+    `${GET_BLOG_REATION}?articleSlug=test`,
+    fetcher
+  );
   const options = [
     { value: "", label: "Tất cả thiết kế" },
     { value: "don-gian", label: "Đơn giản" },
@@ -63,10 +70,8 @@ export default function CreateNewCv() {
           <div className="mt-4">
             <div className="font-medium text-2xl">Bài viết được đề xuất</div>
             <div className="grid xl:grid-cols-4 gap-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-4">
-              {data.map((value, idx) => {
-                return (
-                  <NewInfomation key={value.toString() + idx.toString()} />
-                );
+              {listBlog?.map((item: IBlog, idx: number) => {
+                return <NewInfomation key={idx} item={item} />;
               })}
             </div>
           </div>

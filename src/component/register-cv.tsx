@@ -7,11 +7,12 @@ import { jobCV } from "@/mockup-data/data";
 import { InfomationUser } from "./infomation-user-right";
 import Link from "next/link";
 import useSWR from "swr";
-import { GET_ALL_CV } from "@/utils/api-url";
+import { GET_ALL_CV, GET_SUITABLEJOB } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
-import { ICvCreate } from "@/app/interface/interface";
+import { ICvCreate } from "@/interface/interface";
 import { useEffect, useState } from "react";
 import { PopupUploadCv } from "./popup-upload-cv";
+import { IJob } from "@/interface/job";
 
 export const RegisterCV = () => {
   const [cvCreate, setCvCreate] = useState<ICvCreate[]>([]);
@@ -19,6 +20,7 @@ export const RegisterCV = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const { data: listCv, error, mutate } = useSWR(GET_ALL_CV, fetcher);
+  const { data: jobs } = useSWR(GET_SUITABLEJOB, fetcher);
 
   useEffect(() => {
     if (listCv) {
@@ -128,10 +130,10 @@ export const RegisterCV = () => {
               </div>
             </div>
             <div className="mt-4">
-              {list.map((index) => {
+              {jobs?.data.map((item: IJob, idx: number) => {
                 return (
-                  <div key={index.toString() + jobCV.title} className="mt-2">
-                    <InfomationJobCV item={jobCV} />
+                  <div key={idx} className="mt-2">
+                    <InfomationJobCV item={item} />
                   </div>
                 );
               })}

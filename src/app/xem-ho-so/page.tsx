@@ -1,10 +1,16 @@
+"use client";
 import Link from "next/link";
 import { CompanySeenCV } from "./company-see-cv";
 import { InfomationJobSee } from "@/component/infomation-job/infomation-job-see";
 import { jobSave } from "@/mockup-data/data";
 import { InfomationUser } from "@/component/infomation-user-right";
+import { GET_SUITABLEJOB } from "@/utils/api-url";
+import { fetcher } from "@/utils/axios";
+import useSWR from "swr";
+import { IJob } from "@/interface/job";
 
 export default function EmployeeSeeCv() {
+  const { data: jobs } = useSWR(GET_SUITABLEJOB, fetcher);
   const list = [1, 2, 3, 4];
   return (
     <div className="bg-[#F4F5F5] max-1280:px-2">
@@ -22,7 +28,7 @@ export default function EmployeeSeeCv() {
               </div>
               <div className="text-center mt-8">
                 <Link
-                  href="/tao-cv"
+                  href="/quan-ly-cv"
                   className="mr-2 px-2 py-1 text-white bg-[#F37A20] rounded"
                 >
                   Tạo CV
@@ -43,10 +49,10 @@ export default function EmployeeSeeCv() {
               })}
             </div>
             <div className="p-4 rounded-lg mt-8 bg-white">
-              {list.map((value) => {
+              {jobs?.data.map((item: IJob, index: number) => {
                 return (
-                  <div className="mt-4" key={value}>
-                    <InfomationJobSee item={jobSave} />
+                  <div className="mt-4" key={index}>
+                    <InfomationJobSee item={item} />
                   </div>
                 );
               })}

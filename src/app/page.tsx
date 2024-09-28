@@ -9,7 +9,12 @@ import { JobSuggest } from "@/component/job-suggest";
 import { JobType } from "@/component/job-type";
 import { Slider } from "@/component/slider";
 import { Ultil } from "@/component/ultil";
-import { GET_ALL_COMPANY, GET_HOT_JOB, GET_SUITABLEJOB } from "@/utils/api-url";
+import {
+  GET_ALL_COMPANY,
+  GET_ALLBLOGS_BYCATEGORY,
+  GET_HOT_JOB,
+  GET_SUITABLEJOB,
+} from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
 import { useState } from "react";
 import useSWR from "swr";
@@ -23,6 +28,11 @@ export default function Home() {
     fetcher
   );
 
+  const { data: blogs } = useSWR(
+    `${GET_ALLBLOGS_BYCATEGORY}?SlugCategory=bi-quyet-tim-viec`,
+    fetcher
+  );
+
   return (
     <div className="bg-white">
       <Slider />
@@ -31,7 +41,7 @@ export default function Home() {
       <CreateCv />
       <JobSuggest jobs={suitableJob?.data} />
       <JobType />
-      <Career />
+      <Career blogs={blogs?.data} />
       <Ultil />
       <Description />
     </div>

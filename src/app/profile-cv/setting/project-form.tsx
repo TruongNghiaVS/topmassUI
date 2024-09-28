@@ -1,5 +1,5 @@
 import { useLoading } from "@/app/context/loading";
-import { IInfomationProjectProps, IProjectCv } from "@/app/interface/interface";
+import { IInfomationProjectProps, IProjectCv } from "@/interface/interface";
 import TmCheckbox from "@/component/hook-form/checkbox";
 import TmInput from "@/component/hook-form/input";
 import TmSelect from "@/component/hook-form/select";

@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
-import { IContact } from "../interface/interface";
+import { IContact } from "../../interface/interface";
 
 export default function Contact() {
   const schema = yup.object().shape({

@@ -1,5 +1,5 @@
 import { useLoading } from "@/app/context/loading";
-import { IJobApplyProps, IJobSaveProps } from "@/app/interface/interface";
+import { IJobApplyProps, IJobSaveProps } from "@/interface/interface";
 import { PopupApplyJob } from "@/app/viec-lam/[id]/popup-apply-job";
 import { REMOVE_SAVE_JOB } from "@/utils/api-url";
 import axiosInstance from "@/utils/axios";

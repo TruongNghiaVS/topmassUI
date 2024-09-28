@@ -1,6 +1,6 @@
-import { IAllJobsProps } from "@/app/interface/job";
 import { TitleCustom } from "@/component/custom-title";
 import { InfomationJobDetail } from "@/component/infomation-job/infomation-job-detail";
+import { IAllJobsProps } from "@/interface/job";
 
 export const JobLike = ({ jobs = [] }: IAllJobsProps) => {
   return (

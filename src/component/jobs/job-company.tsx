@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
-import { IHotCompanyProps } from "@/app/interface/interface";
+import { IHotCompanyProps } from "@/interface/interface";
 
 export const JobTypePage = ({ companys }: IHotCompanyProps) => {
   return (

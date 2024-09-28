@@ -1,4 +1,4 @@
-import { IInfomationExperienceProps } from "@/app/interface/interface";
+import { IInfomationExperienceProps } from "@/interface/interface";
 import { CogIcon } from "@heroicons/react/16/solid";
 import dayjs from "dayjs";
 

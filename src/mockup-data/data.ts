@@ -108,12 +108,6 @@ export const areaCode = [
   },
 ];
 
-export const optionsLocation = [
-  { value: "binh-dinh", label: "Bình Định" },
-  { value: "hcm", label: "TP.HCM" },
-  { value: "ha-noi", label: "Hà Nội" },
-];
-
 export const optionsLocations = [
   { value: 1, label: "Bình Định" },
   { value: 2, label: "TP.HCM" },

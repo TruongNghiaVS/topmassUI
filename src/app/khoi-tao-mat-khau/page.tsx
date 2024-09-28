@@ -4,7 +4,7 @@ import { AuthorizeLayout } from "@/component/authorize";
 import TmInput from "@/component/hook-form/input";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { IConfirmResetPassword } from "../interface/interface";
+import { IConfirmResetPassword } from "../../interface/interface";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";

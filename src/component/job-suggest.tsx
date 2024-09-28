@@ -1,5 +1,5 @@
+import { IAllJobsProps } from "@/interface/job";
 import { TitleCustom } from "./custom-title";
-import { IAllJobsProps } from "@/app/interface/job";
 import { InfomationJobLike } from "./infomation-job/infomation-job-like";
 
 export const JobSuggest = ({ jobs }: IAllJobsProps) => {

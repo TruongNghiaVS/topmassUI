@@ -18,7 +18,7 @@ import { LoginForm } from "@/component/login";
 import { toast } from "react-toastify";
 import useSWR from "swr";
 import { getToken, removeToken } from "@/utils/token";
-import { IDropdownMenu } from "@/app/interface/interface";
+import { IDropdownMenu } from "@/interface/interface";
 import { usePathname, useRouter } from "next/navigation";
 
 export const Header = () => {

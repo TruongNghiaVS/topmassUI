@@ -1,4 +1,4 @@
-import { IInfoEducationProps } from "@/app/interface/interface";
+import { IInfoEducationProps } from "@/interface/interface";
 import { AcademicCapIcon } from "@heroicons/react/16/solid";
 import dayjs from "dayjs";
 

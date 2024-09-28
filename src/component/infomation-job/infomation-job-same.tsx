@@ -1,6 +1,6 @@
 "use client";
 
-import { IInfomationJobSameProps } from "@/app/interface/job";
+import { IInfomationJobSameProps } from "@/interface/job";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 import Link from "next/link";
@@ -31,7 +31,7 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
         <HeartIcon className="w-6 text-[#FC7E00]" />
       </div>
       <div className="sm:flex mt-4 ">
-        <div className="w-20 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
+        <div className="w-24 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
           <Link href={`/viec-lam/${item.jobSlug}`}>
             <img
               src={
@@ -45,7 +45,7 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
           </Link>
         </div>
         <div className="text-center sm:text-start">
-          <div className="text-[16px]	leading-[18px] font-bold ">
+          <div className="text-[16px]	leading-6 font-bold ">
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
                 hot

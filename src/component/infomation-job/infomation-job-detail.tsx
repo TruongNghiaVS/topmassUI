@@ -1,4 +1,4 @@
-import { IInfomationJobSameProps } from "@/app/interface/job";
+import { IInfomationJobSameProps } from "@/interface/job";
 import Link from "next/link";
 
 export const InfomationJobDetail = ({ item }: IInfomationJobSameProps) => {

@@ -7,7 +7,7 @@ import { fetcher } from "@/utils/axios";
 import Link from "next/link";
 import { useState } from "react";
 import useSWR from "swr";
-import { IJobAplly } from "../interface/interface";
+import { IJobAplly } from "../../interface/interface";
 import { InfomationJobApply } from "@/component/infomation-job/infomation-job-apply";
 
 export default function JobApply() {

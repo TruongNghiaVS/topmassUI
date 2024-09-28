@@ -1,4 +1,4 @@
-import { ISliderJobsParram } from "@/app/interface/interface";
+import { ISliderJobsParram } from "@/interface/interface";
 import { SliderForm } from "../form-search-slider";
 
 const SliderJobs = () => {

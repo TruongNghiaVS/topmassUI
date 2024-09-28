@@ -2,7 +2,7 @@
 import { SliderJob } from "./slider-job";
 import { ScrollFilter } from "./scrol-filter";
 import { TitleCustom } from "./custom-title";
-import { IHotJobProps } from "@/app/interface/job";
+import { IHotJobProps } from "@/interface/job";
 
 export const HotJob = ({ search, setSearch, jobs }: IHotJobProps) => {
   return (

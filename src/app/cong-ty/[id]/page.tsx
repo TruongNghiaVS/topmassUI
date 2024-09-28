@@ -3,7 +3,6 @@ import TmInput from "@/component/hook-form/input";
 import TmSelect from "@/component/hook-form/select";
 import { useEffect, useState } from "react";
 import { InfomationJobCompany } from "@/component/infomation-job/infomation-job-company";
-import { IFormCompany } from "@/interface/form-slider";
 import { SendCheckFillBootstrapIcon } from "@/theme/icons/sendCheckFillBootstrapIcon";
 import {
   BuildingOffice2Icon,
@@ -22,7 +21,7 @@ import { useLoading } from "@/app/context/loading";
 import axiosInstance, { fetcher } from "@/utils/axios";
 import useSWR from "swr";
 import { toast } from "react-toastify";
-import { IjobDisplayItemData, IProvinceData } from "@/app/interface/interface";
+import { IjobDisplayItemData } from "@/interface/interface";
 import { Option } from "@/component/hook-form/interface/interface";
 import {
   GET_COMPANY_DETAIL,
@@ -30,6 +29,7 @@ import {
   GET_PROVINCE,
   POST_COMPANY_ADDFOLLOW,
 } from "@/utils/api-url";
+import { IFormCompany } from "@/interface/search-job";
 
 export default function CompanyDetail({ params }: { params: { id: string } }) {
   const schema = yup.object().shape({

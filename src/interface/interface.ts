@@ -109,7 +109,7 @@ export interface IAvatarCvProps extends IAvatarProps {
 export interface IApplyModal {
   isModalOpen: boolean;
   onClose: () => void;
-  jobId?: number;
+  jobId?: string;
   mutate?: KeyedMutator<any>;
 }
 

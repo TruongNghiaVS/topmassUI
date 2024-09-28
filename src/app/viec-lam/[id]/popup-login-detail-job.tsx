@@ -1,5 +1,5 @@
 import { useLoading } from "@/app/context/loading";
-import { ILogin, IModalLoginProps } from "@/app/interface/interface";
+import { ILogin, IModalLoginProps } from "@/interface/interface";
 import Modal from "@/component/modal";
 import { LOGIN } from "@/utils/api-url";
 import { axiosInstanceNotToken } from "@/utils/axios";

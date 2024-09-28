@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
-import { Option } from "../hook-form/interface/interface";
-import { IScrollSearchDetailProps } from "@/app/interface/job";
+import { IScrollSearchDetailProps } from "@/interface/job";
 
 export const ScrollFilterJob = ({
   optionSearch,

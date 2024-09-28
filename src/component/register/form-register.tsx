@@ -2,7 +2,7 @@
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import TmInput from "../hook-form/input";
-import { IRegister } from "@/app/interface/interface";
+import { IRegister } from "@/interface/interface";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";

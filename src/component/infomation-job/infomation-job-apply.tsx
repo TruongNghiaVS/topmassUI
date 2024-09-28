@@ -1,4 +1,4 @@
-import { IJobApplyProps } from "@/app/interface/interface";
+import { IJobApplyProps } from "@/interface/interface";
 import dayjs from "dayjs";
 import Link from "next/link";
 

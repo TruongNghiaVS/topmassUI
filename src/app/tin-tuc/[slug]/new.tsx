@@ -1,4 +1,4 @@
-import { IBlogData, IBlogDataItem } from "@/app/interface/interface";
+import { IBlogData, IBlogDataItem } from "@/interface/interface";
 import Link from "next/link";
 
 export interface INew {

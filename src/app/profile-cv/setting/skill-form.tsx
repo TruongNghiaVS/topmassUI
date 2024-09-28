@@ -1,5 +1,5 @@
 import { useLoading } from "@/app/context/loading";
-import { IInfomationSkillViewProps, ISkillCv } from "@/app/interface/interface";
+import { IInfomationSkillViewProps, ISkillCv } from "@/interface/interface";
 import TmInput from "@/component/hook-form/input";
 import TmInputProgress from "@/component/hook-form/input-progress";
 import { ADD_OR_UPDATE_SKILL } from "@/utils/api-url";

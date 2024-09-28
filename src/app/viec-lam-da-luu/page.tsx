@@ -7,7 +7,7 @@ import { InfomationJobSave } from "@/component/infomation-job/infomation-job-sav
 import useSWR from "swr";
 import { GET_JOB_SAVE } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
-import { IJobAplly } from "../interface/interface";
+import { IJobAplly } from "../../interface/interface";
 
 export default function JobSave() {
   const [selectedRadio, setSelectedRadio] = useState("");

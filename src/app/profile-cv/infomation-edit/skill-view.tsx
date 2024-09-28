@@ -1,4 +1,4 @@
-import { IInfomationSkillViewProps } from "@/app/interface/interface";
+import { IInfomationSkillViewProps } from "@/interface/interface";
 import { StarIcon } from "@heroicons/react/16/solid";
 
 export const SkillView = ({ skills }: IInfomationSkillViewProps) => {

@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { InfomationUser } from "@/component/infomation-user-right";
 import { toast } from "react-toastify";
-import { IProfileInfomation } from "../interface/interface";
+import { IProfileInfomation } from "../../interface/interface";
 import { useLoading } from "../context/loading";
 import axiosInstance, { fetcher } from "@/utils/axios";
 import { CURRENT_USER, UPDATE_BASIC_INFO } from "@/utils/api-url";

@@ -2,7 +2,7 @@ import { useLoading } from "@/app/context/loading";
 import {
   IInfoamtionFormUserCv,
   IInfomationUserCv,
-} from "@/app/interface/interface";
+} from "@/interface/interface";
 import TmInput from "@/component/hook-form/input";
 import TmRadio from "@/component/hook-form/radio";
 import { SAVE_USER_CV } from "@/utils/api-url";

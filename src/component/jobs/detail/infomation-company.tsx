@@ -1,4 +1,4 @@
-import { ICompanyDetailJobProps } from "@/app/interface/interface";
+import { ICompanyDetailJobProps } from "@/interface/interface";
 import { BuildingFillUpBootstrapIcon } from "@/theme/icons/buildingFillUpBootstrapIcon";
 import { PeopleFillBootstrapIcon } from "@/theme/icons/peopleFillBootstrapIcon";
 import { MapPinIcon } from "@heroicons/react/16/solid";

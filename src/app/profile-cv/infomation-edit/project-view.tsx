@@ -1,4 +1,4 @@
-import { IInfomationProjectProps } from "@/app/interface/interface";
+import { IInfomationProjectProps } from "@/interface/interface";
 import { BeakerIcon } from "@heroicons/react/16/solid";
 import dayjs from "dayjs";
 

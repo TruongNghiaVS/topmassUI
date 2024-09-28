@@ -1,7 +1,7 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { ISettingSuggestJob, SettingJobState } from "../interface/interface";
+import { ISettingSuggestJob, SettingJobState } from "../../interface/interface";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TmRadio from "@/component/hook-form/radio";
 import { BriefcaseIcon } from "@heroicons/react/16/solid";

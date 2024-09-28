@@ -44,14 +44,14 @@ export default function DetailJob({ params }: { params: { id: any } }) {
   );
 
   const { data: jobLike, error: errorJobLike } = useSWR(
-    `${JOB_LIKE}?JobId=12`,
+    `${JOB_LIKE}?JobId=${id}`,
     fetcher
   );
 
   const viewJobs = useCallback(async () => {
     try {
       await axiosInstance.post(ADD_VIEW_JOB, {
-        jobId: 12,
+        jobId: id,
       });
     } catch (error) {}
   }, []);
@@ -82,7 +82,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
     try {
       const url = saveJob ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
       await axiosInstance.post(url, {
-        jobId: 12,
+        jobId: id,
       });
       setSaveJob(!saveJob);
     } catch (error) {
@@ -140,36 +140,46 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                 </div>
                 <div className="flex items-center justify-between px-4 ">
                   <div className="w-[67%] mr-8">
-                    <button
-                      className="flex justify-center items-center w-full py-2 bg-[#F37A20] rounded"
-                      onClick={() => {
-                        handleOpenModal();
-                      }}
-                    >
-                      <SendFillBootstrapIcon className="w-6 mr-2 text-white" />
-                      <div className="text-xs font-bold text-white">
-                        Ứng tuyển ngay
+                    {detail?.jobExtra.isAply ? (
+                      <div className="flex text-white justify-center items-center w-full py-2 bg-[#F37A20] rounded px-4 py-2 font-medium">
+                        Đã ứng tuyển
                       </div>
-                    </button>
+                    ) : (
+                      <button
+                        className="flex justify-center items-center w-full py-2 bg-[#F37A20] rounded px-4 py-2"
+                        onClick={() => {
+                          handleOpenModal();
+                        }}
+                      >
+                        <SendFillBootstrapIcon className="w-4 mr-2 text-white" />
+                        <div className="text-xs font-bold text-white">
+                          Ứng tuyển ngay
+                        </div>
+                      </button>
+                    )}
                   </div>
                   <div>
                     <button
                       className={`flex whitespace-nowrap justify-center py-2 border-[#F37A20] border-solid border-[1px] rounded px-6 ${
-                        saveJob && "bg-[#F37A20]"
+                        detail?.jobExtra.isSave && "bg-[#F37A20]"
                       }`}
                       onClick={() => handleSaveJob()}
                     >
                       <HeartIcon
                         className={`w-4 mr-2 ${
-                          saveJob ? "text-white" : "text-[#F37A20]"
+                          detail?.jobExtra.isSave
+                            ? "text-white"
+                            : "text-[#F37A20]"
                         }`}
                       />
                       <div
                         className={`text-xs font-bold ${
-                          saveJob ? "text-white" : "text-[#F37A20]"
+                          detail?.jobExtra.isSave
+                            ? "text-white"
+                            : "text-[#F37A20]"
                         }`}
                       >
-                        {saveJob ? "Đã lưu tin" : "Lưu tin"}
+                        {detail?.jobExtra.isSave ? "Đã lưu tin" : "Lưu tin"}
                       </div>
                     </button>
                   </div>
@@ -192,42 +202,54 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                 </div>
                 <div className="flex items-center mt-6 ">
                   <div className="mr-2">
-                    <button
-                      className="flex justify-center items-center w-full py-2 bg-[#F37A20] rounded px-4 py-2"
-                      onClick={() => {
-                        handleOpenModal();
-                      }}
-                    >
-                      <SendFillBootstrapIcon className="w-4 mr-2 text-white" />
-                      <div className="text-xs font-bold text-white">
-                        Ứng tuyển ngay
+                    {detail?.jobExtra.isAply ? (
+                      <div className="flex text-white justify-center items-center w-full py-2 bg-[#F37A20] rounded px-4 py-2 font-medium">
+                        Đã ứng tuyển
                       </div>
-                    </button>
+                    ) : (
+                      <button
+                        className="flex justify-center items-center w-full py-2 bg-[#F37A20] rounded px-4 py-2"
+                        onClick={() => {
+                          handleOpenModal();
+                        }}
+                      >
+                        <SendFillBootstrapIcon className="w-4 mr-2 text-white" />
+                        <div className="text-xs font-bold text-white">
+                          Ứng tuyển ngay
+                        </div>
+                      </button>
+                    )}
                   </div>
                   <div>
                     <button
                       className={`flex whitespace-nowrap justify-center py-2 border-[#F37A20] border-solid border-[1px] rounded px-6 ${
-                        saveJob && "bg-[#F37A20]"
+                        detail?.jobExtra.isSave && "bg-[#F37A20]"
                       }`}
                       onClick={() => handleSaveJob()}
                     >
                       <HeartIcon
                         className={`w-4 mr-2 ${
-                          saveJob ? "text-white" : "text-[#F37A20]"
+                          detail?.jobExtra.isSave
+                            ? "text-white"
+                            : "text-[#F37A20]"
                         }`}
                       />
                       <div
                         className={`text-xs font-bold ${
-                          saveJob ? "text-white" : "text-[#F37A20]"
+                          detail?.jobExtra.isSave
+                            ? "text-white"
+                            : "text-[#F37A20]"
                         }`}
                       >
-                        {saveJob ? "Đã lưu tin" : "Lưu tin"}
+                        {detail?.jobExtra.isSave ? "Đã lưu tin" : "Lưu tin"}
                       </div>
                     </button>
                   </div>
                 </div>
               </div>
-              <KeyWord hagtags={detail?.dataJob.hashtags} />
+              {detail?.dataJob.hashtags.length > 0 && (
+                <KeyWord hagtags={detail?.dataJob.hashtags} />
+              )}
               <JobSame jobs={jobSame?.data} />
               <div className="block sm:hidden">
                 <SliderDetail />
@@ -243,7 +265,11 @@ export default function DetailJob({ params }: { params: { id: any } }) {
           </div>
         </div>
       </div>
-      <PopupApplyJob isModalOpen={isModalOpen} onClose={closeModal} />
+      <PopupApplyJob
+        isModalOpen={isModalOpen}
+        onClose={closeModal}
+        jobId={id}
+      />
       <PopupLoginDetailJob
         isModalOpen={isOpenModalLogin}
         onClose={() => setIsOpenModalLogin(false)}

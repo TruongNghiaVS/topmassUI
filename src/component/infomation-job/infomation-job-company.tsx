@@ -4,8 +4,7 @@ import { HeartIcon as HearIconSolid } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { useState } from "react";
 import { getToken } from "@/utils/token";
-import { KeyedMutator } from "swr";
-import { IjobCompanyDisplay } from "@/app/interface/interface";
+import { IjobCompanyDisplay } from "@/interface/interface";
 
 export const InfomationJobCompany = ({
   item,
@@ -90,7 +89,7 @@ export const InfomationJobCompany = ({
       <PopupApplyJob
         isModalOpen={isModalOpen}
         onClose={closeModal}
-        jobId={item?.jobId}
+        jobId={item.slug}
         mutate={mutate}
       />
     </div>

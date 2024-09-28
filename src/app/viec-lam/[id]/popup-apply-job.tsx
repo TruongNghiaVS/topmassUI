@@ -1,5 +1,5 @@
 import { useLoading } from "@/app/context/loading";
-import { IApplyCv, IApplyModal, ICv, ILogin } from "@/app/interface/interface";
+import { IApplyCv, IApplyModal, ICv, ILogin } from "@/interface/interface";
 import UploadFile from "@/component/hook-form/custom-upload";
 import TmInput from "@/component/hook-form/input";
 import TmTextArea from "@/component/hook-form/textarea";
@@ -22,7 +22,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 
-export const PopupApplyJob = ({ isModalOpen, onClose ,jobId,mutate}: IApplyModal) => {
+export const PopupApplyJob = ({
+  isModalOpen,
+  onClose,
+  jobId,
+  mutate,
+}: IApplyModal) => {
   const { setLoading } = useLoading();
   const [cvValue, setCvValue] = useState(0);
   const [file, setFile] = useState<File | null>(null);
@@ -99,7 +104,7 @@ export const PopupApplyJob = ({ isModalOpen, onClose ,jobId,mutate}: IApplyModal
       const res = await axiosInstance.post(url, dataApply);
       setCvValue(listCv[0].id);
       setFile(null);
-      if(mutate){
+      if (mutate) {
         mutate();
       }
       toast.success("Nộp CV thành công");

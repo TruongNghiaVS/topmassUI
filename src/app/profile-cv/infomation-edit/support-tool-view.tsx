@@ -1,4 +1,4 @@
-import { IInfomationToolViewProps } from "@/app/interface/interface";
+import { IInfomationToolViewProps } from "@/interface/interface";
 import { StarIcon } from "@heroicons/react/16/solid";
 
 export const SupportToolView = ({ tools }: IInfomationToolViewProps) => {

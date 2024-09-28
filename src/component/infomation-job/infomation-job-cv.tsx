@@ -1,40 +1,40 @@
-import { IInfomationJobCVProps } from "@/interface/infomation-job";
+import { IInfomationJobProps } from "@/interface/job";
 import { TrashIcon } from "@heroicons/react/16/solid";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
-export const InfomationJobCV = ({ item }: IInfomationJobCVProps) => {
+export const InfomationJobCV = ({ item }: IInfomationJobProps) => {
   return (
     <div className="border-[1px] border-[#d9dbe9] bg-white p-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
       <div className="sm:flex items-center my-2 h-full">
         <div className="w-20 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
-          <Link href={`/viec-lam/${item.slug}`}>
+          <Link href={`/viec-lam/${item.jobSlug}`}>
             <img src="/imgs/logo-work.png" alt="" className="w-full" />
           </Link>
         </div>
         <div className="text-center sm:text-start w-full">
           <div className="sm:flex justify-between">
             <div className="text-[16px]	leading-[18px] font-bold ">
-              <Link href={`/viec-lam/${item.slug}`}>
+              <Link href={`/viec-lam/${item.jobSlug}`}>
                 <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
                   hot
                 </span>
-                {item.title}
+                {item.positionText}
               </Link>
             </div>
-            <div className="text-sm font-normal text-default">{item.price}</div>
+            <div className="text-sm font-normal text-default"></div>
           </div>
           <div className="text-sm font-normal mt-2.5 ">
-            <Link href={`/viec-lam/${item.slug}`}>{item.company}</Link>
+            <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
           </div>
           <div className="mt-4 sm:flex grid sm:items-end justify-center sm:justify-between">
             <div>
               <div className="inline-block rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 mt-2">
-                {item.city}
+                {item.locationText}
               </div>
               <div className="inline-block rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 mt-2">
-                còn <span className="font-semibold">{item.date}</span> ngày để
-                ứng tuyển
+                còn <span className="font-semibold">{item.businessDate}</span>{" "}
+                ngày để ứng tuyển
               </div>
               <div className="inline-block rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 mt-2">
                 Cập nhật 50 phút trước

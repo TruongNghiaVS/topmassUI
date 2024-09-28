@@ -1,4 +1,4 @@
-import { ILoadCv, IPopupUploadCv } from "@/app/interface/interface";
+import { ILoadCv, IPopupUploadCv } from "@/interface/interface";
 import Modal from "./modal";
 import * as yup from "yup";
 import { SubmitHandler, useForm } from "react-hook-form";

@@ -1,16 +1,57 @@
 "use client";
 
-import { FilterSearchForm } from "@/component/filter-search-job";
 import { ResutlSearchJob } from "@/component/jobs/results-search";
 import { SearchJobForm } from "@/component/search-job-form";
 import { SEARCH_JOBS } from "@/utils/api-url";
-import { fetcher } from "@/utils/axios";
-import { useState } from "react";
+import axiosInstance, { fetcher } from "@/utils/axios";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
+import { useLoading } from "../context/loading";
+import { IJob } from "@/interface/job";
+import { toast } from "react-toastify";
+import { IFormSearchJob } from "@/interface/search-job";
 
 export default function SearchJob() {
-  const { data: jobs } = useSWR(SEARCH_JOBS, fetcher);
+  const [search, setSearch] = useState<IFormSearchJob>({
+    ModeGet: "",
+    KeyWord: "",
+    Location: "",
+    Field: "",
+    RankLevel: "",
+    TypeOfWork: "",
+  });
+  const [dataSearch, setDataSearch] = useState<IJob[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const searchParams = useSearchParams();
+  const params = Object.fromEntries(searchParams.entries());
+  const { setLoading } = useLoading();
+  useEffect(() => {
+    if (params) {
+      setSearch((prevSearch) => {
+        prevSearch.KeyWord = params.KeyWord ? params.KeyWord : "";
+        prevSearch.Location = params.Location ? params.Location : "";
+        prevSearch.Field = params.Field ? params.Field : "";
+        return prevSearch;
+      });
+      searchJob();
+    }
+  }, [searchParams]);
+
+  const searchJob = async () => {
+    setLoading(true);
+    try {
+      const res = await axiosInstance.get(SEARCH_JOBS, {
+        params: search,
+      });
+      setDataSearch(res.data.data);
+    } catch (error) {
+      toast.error("Lấy thông tin không thành công");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const list = [1, 2, 3, 4, 5];
   return (
     <div>
@@ -19,8 +60,11 @@ export default function SearchJob() {
           <div className="uppercase text-[26px] leading-[34px] text-center text-[#F26700] font-bold pt-8 pb-16">
             Tìm việc làm nhanh chóng, phù hợp với nhu cầu của bạn
           </div>
-          <SearchJobForm />
-          <FilterSearchForm />
+          <SearchJobForm
+            search={search}
+            setSearch={setSearch}
+            getJobSearch={searchJob}
+          />
         </div>
       </div>
       <div className="max-1280:px-2">
@@ -28,7 +72,7 @@ export default function SearchJob() {
           <div className="sm:grid grid-cols-12 gap-4 ">
             <div className="xl:col-span-8 md:col-span-7">
               <ResutlSearchJob
-                jobs={jobs?.data}
+                jobs={dataSearch}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
               />

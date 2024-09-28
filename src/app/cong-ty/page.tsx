@@ -12,7 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { GET_ALL_COMPANY } from "@/utils/api-url";
 import useSWR from "swr";
 import { fetcher } from "@/utils/axios";
-import { ICompanyItemData } from "../interface/interface";
+import { ICompanyItemData } from "../../interface/interface";
 import { getToken } from "@/utils/token";
 import { useState } from "react";
 import { PopupLoginDetailJob } from "../viec-lam/[id]/popup-login-detail-job";

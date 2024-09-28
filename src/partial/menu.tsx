@@ -1,4 +1,4 @@
-import { ISubmenuProps } from "@/app/interface/interface";
+import { ISubmenuProps } from "@/interface/interface";
 import { BagBootstrapIcon } from "@/theme/icons/bagBootstrapIcon";
 import { EnvelopePaperHeartFillBootstrapIcon } from "@/theme/icons/envelopePaperHeartFillBootstrapIcon";
 import { PersonBargeBootstrapIcon } from "@/theme/icons/personBargeBootstrapIcon";
@@ -147,8 +147,7 @@ export const Menu = () => {
           icon: (
             <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
-        }
-       
+        },
       ],
       link: "/tin-tuc",
       isShow: false,

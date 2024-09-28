@@ -1,5 +1,5 @@
 import { useLoading } from "@/app/context/loading";
-import { IInfomationRewardProps, IReWardCv } from "@/app/interface/interface";
+import { IInfomationRewardProps, IReWardCv } from "@/interface/interface";
 import TmInput from "@/component/hook-form/input";
 import TmSelect from "@/component/hook-form/select";
 import CustomUploadMulti from "@/component/hook-form/upload-multiple-file";

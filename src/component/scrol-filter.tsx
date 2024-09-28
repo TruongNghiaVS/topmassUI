@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { Option } from "./hook-form/interface/interface";
-import { IScrollFilterProps } from "@/app/interface/job";
 import { Provinces } from "@/module/helper/master-data";
+import { IScrollFilterProps } from "@/interface/job";
 
 export const ScrollFilter = ({ search, setSearch }: IScrollFilterProps) => {
   const { listProvinces } = Provinces();
