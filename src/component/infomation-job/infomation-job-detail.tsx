@@ -1,4 +1,4 @@
-import { IInfomationJobSameProps } from "@/app/interface/interface";
+import { IInfomationJobSameProps } from "@/app/interface/job";
 import Link from "next/link";
 
 export const InfomationJobDetail = ({ item }: IInfomationJobSameProps) => {
@@ -28,7 +28,7 @@ export const InfomationJobDetail = ({ item }: IInfomationJobSameProps) => {
                 {item.salaryFrom} - {item.salaryTo} triệu
               </div>
               <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em]">
-                {item.locationtext}
+                {item.locationText}
               </div>
             </div>
           </Link>

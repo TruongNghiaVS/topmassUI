@@ -1,7 +1,7 @@
-import { IJobSameProps } from "@/app/interface/interface";
+import { IAllJobsProps } from "@/app/interface/job";
 import { InfomationJobSame } from "@/component/infomation-job/infomation-job-same";
 
-export const JobSame = ({ jobs = [] }: IJobSameProps) => {
+export const JobSame = ({ jobs = [] }: IAllJobsProps) => {
   return (
     <div>
       <div className="text-[22px] leading-[30px] font-bold flex my-8">

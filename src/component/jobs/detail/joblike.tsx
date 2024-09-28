@@ -1,8 +1,8 @@
-import { IJobSameProps } from "@/app/interface/interface";
+import { IAllJobsProps } from "@/app/interface/job";
 import { TitleCustom } from "@/component/custom-title";
 import { InfomationJobDetail } from "@/component/infomation-job/infomation-job-detail";
 
-export const JobLike = ({ jobs = [] }: IJobSameProps) => {
+export const JobLike = ({ jobs = [] }: IAllJobsProps) => {
   return (
     <div className="bg-white rounded-lg p-8 mb-8">
       <TitleCustom
