@@ -19,6 +19,5 @@ export interface IFormCompany {
 
 export interface ISearchJobProps {
   search: IFormSearchJob;
-  getJobSearch: () => void;
   setSearch: Dispatch<SetStateAction<IFormSearchJob>>;
 }

@@ -3,7 +3,7 @@ import { FormRegister } from "@/component/register/form-register";
 
 export default function Register() {
   return (
-    <div className="bg-white max-1280:px-2">
+    <div className="bg-white ">
       <AuthorizeLayout>
         <FormRegister />
       </AuthorizeLayout>

@@ -126,7 +126,7 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
               className="w-full"
             />
           </div>
-          <div className="relative py-4 lg:px-10 lg:pl-60 bg-[url(/imgs/bg-title-company.png)] bg-no-repeat bg-[length:100%_100%] ">
+          <div className="relative py-4 lg:px-10 lg:pl-60 bg-[url(/imgs/bg-title-company.png)] bg-no-repeat bg-[length:100%_100%] max-1280:px-2">
             <div className="w-[180px] h-[180px] rounded-full bg-white flex items-center justify-center lg:absolute left-10 top-[-90px] mx-auto lg:mt-0 md:mt-[-90px]">
               <img
                 src={`${companyDetail?.logoFullLink}`}

@@ -8,51 +8,61 @@ export const JobType = () => {
       title: "Xây dựng",
       img: "nganhhang_xaydung.png",
       count: 1800,
+      slug: "11",
     },
     {
       title: "Thương mại điện tử",
       img: "nganhhang_thuongmaidientu.png",
       count: 1800,
+      slug: "12",
     },
     {
       title: "Tài chính / ngân hàng",
       img: "nganhhang_taichinhnganhang.png",
       count: 1800,
+      slug: "13",
     },
     {
       title: "Nhà hàng khách sạn",
       img: "nganhhang_nhahangkhachsan.png",
       count: 1800,
+      slug: "14",
     },
     {
       title: "Hàng tiêu dùng",
       img: "nganhhang_hangtieudung.png",
       count: 1800,
+      slug: "15",
     },
     {
       title: "Giáo dục",
       img: "nganhhang_giaoduc.png",
       count: 1800,
+      slug: "16",
     },
     {
       title: "Du lịch",
       img: "nganhhang_dulich.png",
       count: 1800,
+      slug: "17",
     },
     {
       title: "Kinh doanh",
       img: "nganhhang_kinhdoanh.png",
       count: 1800,
+      slug: "18",
     },
     {
       title: "Bưu chính viễn thông",
       img: "nganhhang_bcvt.png",
       count: 1800,
+      slug: "19",
     },
     {
       title: "Bảo hiểm",
       img: "nganhhang_baohiem.png",
       count: 1800,
+      slug: "20",
     },
   ];
   return (
@@ -70,7 +80,7 @@ export const JobType = () => {
                 key={value.title}
                 className="rounded-xl transition duration-300 p-5 col-span-1 border border-[1px] border-solid hover:!border-[#F89E1B] border-transparent bg-[#f0f8ff]	 hover:bg-white hover:shadow-[0_3px_10px_rgba(248,158,27,1)]"
               >
-                <Link href="/viec-lam">
+                <Link href={`/viec-lam/${value.slug}`}>
                   <div className=" flex justify-center">
                     <img
                       src={`/imgs/${value.img}`}

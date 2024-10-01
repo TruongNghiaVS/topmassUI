@@ -1,13 +1,28 @@
 "use client";
 
+import { useLoading } from "@/app/context/loading";
 import { IInfomationJobProps } from "@/interface/job";
+import { ADD_SAVE_JOB, REMOVE_SAVE_JOB } from "@/utils/api-url";
+import axiosInstance from "@/utils/axios";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
 export const InfomationJobLike = ({ item }: IInfomationJobProps) => {
-  const likeJob = () => {
-    toast.success("Thích tin thành công");
+  const { setLoading } = useLoading();
+  const likeJob = async () => {
+    setLoading(true);
+    try {
+      const url = item ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
+      await axiosInstance.post(url, {
+        jobId: item.jobSlug,
+      });
+      toast.success("Thích tin thành công");
+    } catch (error) {
+      toast.error("Thích tin bị lỗi");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -19,7 +34,7 @@ export const InfomationJobLike = ({ item }: IInfomationJobProps) => {
           </Link>
         </div>
         <div className="text-center sm:text-start grow">
-          <div className="text-[16px]	leading-[22px] font-bold ">
+          <div className="text-[16px]	leading-[22px] font-bold line-clamp-2 ">
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
                 hot
@@ -33,10 +48,10 @@ export const InfomationJobLike = ({ item }: IInfomationJobProps) => {
           <div className="flex mt-4 justify-between items-center	">
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <div>
-                <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2">
+                <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 text-xs">
                   {item.rangeSalary}
                 </div>
-                <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em]">
+                <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] text-xs">
                   {item.locationText}
                 </div>
               </div>

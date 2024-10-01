@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export const InfomationJob = ({ item }: IInfomationJobProps) => {
   return (
-    <div className="relative bg-white">
-      <div className="border-[1px] border-[#d9dbe9] bg-white p-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
+    <div className="relative bg-white border-[1px] border-[#d9dbe9] rounded-md  ">
+      <div className="bg-white p-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
         <div className="sm:flex items-center my-2 h-full">
           <div className="w-20 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
             <Link href={`/viec-lam/${item.jobSlug}`}>

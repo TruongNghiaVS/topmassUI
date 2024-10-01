@@ -12,28 +12,22 @@ import { Career, Provinces, Rank, Realm } from "@/module/helper/master-data";
 import { IFormSearchJob, ISearchJobProps } from "@/interface/search-job";
 import { useEffect } from "react";
 
-export const SearchJobForm = ({
-  search,
-  getJobSearch,
-  setSearch,
-}: ISearchJobProps) => {
+export const SearchJobForm = ({ search, setSearch }: ISearchJobProps) => {
   const { realms } = Realm();
   const { provinces } = Provinces();
   const { careers } = Career();
   const { ranks } = Rank();
 
   useEffect(() => {
-    console.log(search.KeyWord);
-
     reset(search);
   }, [search.KeyWord, search.Location, search.Field]);
+
   const { handleSubmit, control, reset } = useForm<IFormSearchJob>({
     defaultValues: search,
   });
 
   const onSubmit: SubmitHandler<IFormSearchJob> = async (data) => {
-    setSearch(data);
-    getJobSearch();
+    await setSearch(data);
   };
   return (
     <div className="xl:px-48 lg:px-40 px-2">

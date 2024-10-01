@@ -20,6 +20,7 @@ import useSWR from "swr";
 import { getToken, removeToken } from "@/utils/token";
 import { IDropdownMenu } from "@/interface/interface";
 import { usePathname, useRouter } from "next/navigation";
+import { MenuMobile } from "./menu-mobile";
 
 export const Header = () => {
   const headerRef = useRef<HTMLDivElement | null>(null);
@@ -88,11 +89,11 @@ export const Header = () => {
 
   return (
     <>
-      <section id="header" ref={headerRef} className="md:block hidden">
+      <section id="header" ref={headerRef}>
         <div
           className={`${
             isFixed ? "fixed" : ""
-          }  flex justify-between items-center bg-white left-0 top-0 right-0 pt-3 px-[22px] z-[10]`}
+          }  lg:flex justify-between items-center bg-white left-0 top-0 right-0 pt-3 px-[22px] z-[10] hidden `}
         >
           <div className="logo-header">
             <Link href="/">
@@ -158,6 +159,27 @@ export const Header = () => {
                 />
               </div>
             </div>
+          </div>
+        </div>
+        <div
+          className={`${
+            isFixed ? "fixed" : ""
+          }  lg:hidden block bg-white left-0 top-0 right-0 z-[10]`}
+        >
+          <div className="relative flex justify-center items-center">
+            <img
+              src="/imgs/bg-logo-footer.png"
+              alt=""
+              className="max-h-[50px] absolute right-5 top-0 bottom-0"
+            />
+            <Link href="/">
+              <img
+                src="/imgs/logo-new.svg"
+                alt="/"
+                className="w-auto h-[50px] py-3 "
+              />
+            </Link>
+            <MenuMobile />
           </div>
         </div>
       </section>

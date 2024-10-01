@@ -157,7 +157,7 @@ export const Menu = () => {
   return (
     <>
       <div className="w-full">
-        <ul className="xl:flex hidden p-0">
+        <ul className="lg:flex hidden p-0">
           {navItems.map((item) => (
             <li
               key={item.title}

@@ -14,7 +14,6 @@ import { PrizeInfomationCv } from "./setting/reward-form";
 import { CertificateInfomationCv } from "./setting/certificate-form";
 import { InfomationViewEdit } from "./infomation-edit/infomation-view-edit";
 import { EducationView } from "./infomation-edit/education-view";
-import { certificateViews } from "@/mockup-data/data";
 import { ExperienceView } from "./infomation-edit/experience-view";
 import { ProjectView } from "./infomation-edit/project-view";
 import { SoftSkillView } from "./infomation-edit/soft-skill";
@@ -219,7 +218,7 @@ export default function ProfileCV() {
                 alt=""
               />
               <div className="relative py-3 pl-[210px]">
-                <div className="absolute top-[-60px] left-[30px] flex items-center">
+                <div className="absolute top-[-60px] left-[30px] flex items-center min-h-[115px]">
                   <AvatarCv
                     avatarLink={avatarCv}
                     setAvatarLink={setAvatarCv}
