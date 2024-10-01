@@ -373,7 +373,6 @@ export interface ISkillCv {
     id?: number;
     fullName: string;
     level: number;
-    description?: string;
   }[];
 }
 

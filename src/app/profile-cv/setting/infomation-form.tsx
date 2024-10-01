@@ -12,6 +12,8 @@ import dynamic from "next/dynamic";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
+import TmSelect from "@/component/hook-form/select";
+import { Rank } from "@/module/helper/master-data";
 const CustomCKEditor = dynamic(
   () => {
     return import("../../../component/hook-form/ck-editor");
@@ -38,7 +40,7 @@ export const InfomationUserCv = ({
   const schema = yup.object().shape({
     fullName: yup.string().required("Vui lòng nhập họ và tên"),
     position: yup.string().required("Vui lòng nhập vị trí"),
-    level: yup.string().required("Vui lòng nhập chức vụ"),
+    level: yup.string().required("Vui lòng nhập cấp bậc"),
     addressInfo: yup.string().required("Vui lòng nhập Địa chỉ"),
     gender: yup
       .number()
@@ -54,6 +56,8 @@ export const InfomationUserCv = ({
       .matches(/^[0-9]{10}$/, "Số điện thoại phải là 10 ký tự"),
     introduction: yup.string(),
   });
+
+  const { ranks } = Rank();
 
   const { setLoading } = useLoading();
   const {
@@ -119,10 +123,15 @@ export const InfomationUserCv = ({
           </div>
           <div className="mt-4">
             <div className="font-medium">
-              Chức vụ <span className="text-[#dc2f2f]">*</span>
+              Cấp bậc <span className="text-[#dc2f2f]">*</span>
             </div>
             <div>
-              <TmInput control={control} name="level" placeholder="Chức vụ" />
+              <TmSelect
+                control={control}
+                name="level"
+                placeholder="Cấp bậc"
+                options={ranks}
+              />
             </div>
           </div>
           <div className="mt-4">

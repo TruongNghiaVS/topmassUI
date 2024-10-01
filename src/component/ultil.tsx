@@ -1,5 +1,6 @@
 import { ArrowLongRightIcon } from "@heroicons/react/16/solid";
 import { TitleCustom } from "./custom-title";
+import Link from "next/link";
 
 export const Ultil = () => {
   return (
@@ -8,21 +9,39 @@ export const Ultil = () => {
         <TitleCustom title="Công cụ tiện ích" className="mb-4" />
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-4 items-center lg:px-14 px-2">
           <div className=" sm:row-auto col-start-1 row-start-2 row-end-2 ">
-            <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
-              <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
+            <div className="sm:inline-flex flex items-center px-4 py-2 bg-white rounded-xl mb-2	">
+              <div className="p-2 bg-[#FCE5B4] rounded-full mr-4">
+                <img src="/imgs/net-gross-icon.png" alt="" className="w-10" />
+              </div>
               <div>
                 <div>Tính lương NET và GROSS</div>
                 <div className="text-[#D14B00] text-[10px] flex items-center">
-                  Sử dụng ngay <ArrowLongRightIcon className="w-4" />
+                  <Link
+                    href="/cong-cu/net-and-gross"
+                    className="flex items-center"
+                  >
+                    Sử dụng ngay <ArrowLongRightIcon className="w-4" />
+                  </Link>
                 </div>
               </div>
             </div>
-            <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
-              <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
+            <div className="sm:inline-flex flex items-center px-4 py-2 bg-white rounded-xl mb-2	">
+              <div className="p-2 bg-[#FCE5B4] rounded-full mr-4">
+                <img
+                  src="/imgs/personal-icome-icon.png"
+                  alt=""
+                  className="w-10"
+                />
+              </div>
               <div>
                 <div>Tính thuế thu nhập cá nhân</div>
-                <div className="text-[#D14B00] text-[10px] flex items-center">
-                  Sử dụng ngay <ArrowLongRightIcon className="w-4" />
+                <div className="text-[#D14B00] text-[10px] ">
+                  <Link
+                    href="/cong-cu/thu-nhap-ca-nhan"
+                    className="flex items-center"
+                  >
+                    Sử dụng ngay <ArrowLongRightIcon className="w-4" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -35,21 +54,43 @@ export const Ultil = () => {
             />
           </div>
           <div className="text-end col-span-1 sm:row-auto row-start-3">
-            <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
-              <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
+            <div className="sm:inline-flex flex items-center px-4 py-2 bg-white rounded-xl mb-2	">
+              <div className="p-2 py-3 bg-[#FCE5B4] rounded-full mr-4">
+                <img
+                  src="/imgs/insuarance-unemployment-icon.png"
+                  alt=""
+                  className="w-10"
+                />
+              </div>
               <div className="text-start">
                 <div>Tính bảo hiểm thất nghiệp</div>
                 <div className="text-[#D14B00] text-[10px] flex items-center">
-                  Sử dụng ngay <ArrowLongRightIcon className="w-4" />
+                  <Link
+                    href="/cong-cu/bao-hiem-that-nghiep"
+                    className="flex items-center"
+                  >
+                    Sử dụng ngay <ArrowLongRightIcon className="w-4" />
+                  </Link>
                 </div>
               </div>
             </div>
-            <div className="sm:inline-flex flex items-center px-6 py-4 bg-white rounded-xl mb-2	">
-              <div className="w-12 h-12 bg-[#FCE5B4] rounded-full mr-4"></div>
+            <div className="sm:inline-flex flex items-center px-4 py-2 bg-white rounded-xl mb-2	">
+              <div className="p-2 bg-[#FCE5B4] rounded-full mr-4">
+                <img
+                  src="/imgs/social-insurance-icon.png"
+                  alt=""
+                  className="w-10"
+                />
+              </div>
               <div className="text-start">
-                <div>Tính bảo hiểm thất nghiệp 1 lần</div>
+                <div>Tính bảo hiểm xã hội 1 lần</div>
                 <div className="text-[#D14B00] text-[10px] flex items-center">
-                  Sử dụng ngay <ArrowLongRightIcon className="w-4" />
+                  <Link
+                    href="/cong-cu/bao-hiem-xa-hoi-1-lan"
+                    className="flex items-center"
+                  >
+                    Sử dụng ngay <ArrowLongRightIcon className="w-4" />
+                  </Link>
                 </div>
               </div>
             </div>

@@ -70,7 +70,7 @@ export default function CreateNewCv() {
           <div className="mt-4">
             <div className="font-medium text-2xl">Bài viết được đề xuất</div>
             <div className="grid xl:grid-cols-4 gap-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-4">
-              {listBlog?.map((item: IBlog, idx: number) => {
+              {listBlog?.data.map((item: IBlog, idx: number) => {
                 return <NewInfomation key={idx} item={item} />;
               })}
             </div>

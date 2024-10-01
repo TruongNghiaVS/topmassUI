@@ -49,7 +49,7 @@ export const EducationUserCv = ({
           id: yup.number(),
           schoolName: yup.string().required("Vui lòng nhập trường học"),
           major: yup.string().required("Vui lòng nhập chuyên ngành"),
-          position: yup.string().required("Vui lòng nhập cấp bậc"),
+          position: yup.string().required("Vui lòng nhập hệ đào tạo"),
           fromMonth: yup.string().required("Vui lòng chọn tháng bắt đầu"),
           fromYear: yup.string().required("Vui lòng chọn năm bắt đầu"),
           isEnd: yup.boolean(),
@@ -217,13 +217,13 @@ export const EducationUserCv = ({
               </div>
               <div className="mt-4">
                 <div className="font-medium">
-                  Cấp bậc <span className="text-[#dc2f2f]">*</span>
+                  Hệ đào tạo <span className="text-[#dc2f2f]">*</span>
                 </div>
                 <div>
                   <TmInput
                     control={control}
                     name={`educations.${index}.position`}
-                    placeholder="Cấp bậc"
+                    placeholder="Hệ đào tạo"
                   />
                 </div>
               </div>

@@ -71,12 +71,7 @@ export const CertificateInfomationCv = ({
             .mixed<FileList>()
             .test("fileType", "Chỉ upload file JPEG,JPG,PNG,PDF ", (value) => {
               if (value && value.length > 0) {
-                const allowedFormats = [
-                  "image/jpeg",
-                  "image/jpg",
-                  "image/png",
-                  "application/pdf",
-                ];
+                const allowedFormats = ["image/jpeg", "image/jpg", "image/png"];
                 return Array.from(value).every((file: File) =>
                   allowedFormats.includes(file.type)
                 );
@@ -91,6 +86,9 @@ export const CertificateInfomationCv = ({
                 );
               }
               return true;
+            })
+            .test("required", "Vui lòng chọn file", (value) => {
+              return value && value.length > 0;
             }),
         })
       )
@@ -216,7 +214,7 @@ export const CertificateInfomationCv = ({
                 </div>
                 <div className="flex space-x-3">
                   <div className="flex-1">
-                    <div>Ngày cấp</div>
+                    <div>Thời gian đào tạo</div>
                     <div className="mt-[14px] flex space-x-2">
                       <div className="flex-1">
                         <TmSelect

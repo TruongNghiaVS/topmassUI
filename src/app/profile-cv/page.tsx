@@ -150,12 +150,12 @@ export default function ProfileCV() {
       isShow: infoSkill?.data.length > 0 ? true : false,
       component: <SkillView skills={infoSkill?.data} />,
     },
-    {
-      title: "Kỹ năng mềm",
-      numberSelect: 5,
-      isShow: infoSoftSkill?.data.length > 0 ? true : false,
-      component: <SoftSkillView skills={infoSoftSkill?.data} />,
-    },
+    // {
+    //   title: "Kỹ năng mềm",
+    //   numberSelect: 5,
+    //   isShow: infoSoftSkill?.data.length > 0 ? true : false,
+    //   component: <SoftSkillView skills={infoSoftSkill?.data} />,
+    // },
     {
       title: "Công cụ hỗ trợ",
       numberSelect: 6,
@@ -241,10 +241,10 @@ export default function ProfileCV() {
                         <div>Thông tin giới thiệu</div>
                         <PencilSquareIcon className="w-4" />
                       </div>
-                      <div className="flex space-x-2 items-center bg-[#F37A20] py-1 px-3 rounded-lg text-white">
-                        <div className=" ">Chia sẽ trang cá nhân</div>
+                      {/* <div className="flex space-x-2 items-center bg-[#F37A20] py-1 px-3 rounded-lg text-white">
+                        <div className=" ">Chia sẻ trang cá nhân</div>
                         <LinkIcon className="w-4" />
-                      </div>
+                      </div> */}
                       <div
                         className="flex space-x-2 items-center bg-[#F37A20] cursor-pointer py-1 px-3 rounded-lg text-white"
                         onClick={downloadPDF}
@@ -340,13 +340,13 @@ export default function ProfileCV() {
               onClose={onClose}
             />
           )}
-          {selected === 5 && (
+          {/* {selected === 5 && (
             <SoftSkillInfomationCv
               skills={infoSoftSkill?.data}
               mutate={mutateSoftSkill}
               onClose={onClose}
             />
-          )}
+          )} */}
           {selected === 6 && (
             <SupportToolInfomationCv
               tools={infoTools.data}

@@ -39,7 +39,6 @@ export const SkillInfomationCv = ({
             .number()
             .required("Vui lòng chọn độ thông thạo")
             .min(1, "Vui lòng nhập độ thông thạo"),
-          description: yup.string(),
         })
       )
       .min(1, "Phải có ít nhất 1 kỹ năng")
@@ -54,7 +53,7 @@ export const SkillInfomationCv = ({
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ISkillCv>({
     resolver: yupResolver(schema),
     defaultValues: {
       skills:
@@ -65,7 +64,6 @@ export const SkillInfomationCv = ({
                 id: -1,
                 fullName: "",
                 level: 0,
-                description: "",
               },
             ],
     },
@@ -136,15 +134,6 @@ export const SkillInfomationCv = ({
                   />
                 </div>
               </div>
-              <div className="mt-4">
-                <div className="font-medium">Mô tả chi tiết</div>
-                <div>
-                  <CustomCKEditor
-                    control={control}
-                    name={`skills.${index}.description`}
-                  />
-                </div>
-              </div>
             </div>
           ))}
           {errors && errors.skills && (
@@ -158,7 +147,6 @@ export const SkillInfomationCv = ({
                 id: -1,
                 fullName: "",
                 level: 0,
-                description: "",
               });
             }}
           >

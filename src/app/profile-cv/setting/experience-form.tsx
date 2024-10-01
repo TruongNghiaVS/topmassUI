@@ -248,7 +248,7 @@ export const ExperienceUserCv = ({
                       <div className="flex-1">
                         <TmSelect
                           control={control}
-                          name={`experiences.${index}.toYear`}
+                          name={`experiences.${index}.toMonth`}
                           options={months}
                           placeholder="Chọn tháng"
                         />
