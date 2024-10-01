@@ -38,7 +38,6 @@ export const SoftSkillInfomationCv = ({
             .number()
             .required("Vui lòng chọn độ thông thạo")
             .min(1, "Vui lòng nhập độ thông thạo"),
-          description: yup.string(),
         })
       )
       .min(1, "Phải có ít nhất 1 kỹ năng")
@@ -62,7 +61,6 @@ export const SoftSkillInfomationCv = ({
                 id: -1,
                 fullName: "",
                 level: 0,
-                description: "",
               },
             ],
     },
@@ -158,7 +156,6 @@ export const SoftSkillInfomationCv = ({
                 id: -1,
                 fullName: "",
                 level: 0,
-                description: "",
               });
             }}
           >
