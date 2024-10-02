@@ -26,6 +26,9 @@ export interface IJob {
   id: number;
   isLike: boolean;
   isSave: boolean;
+  isApply: boolean;
+  typeMoney: string;
+  aggrement: boolean;
 }
 
 export interface IDetailJob {

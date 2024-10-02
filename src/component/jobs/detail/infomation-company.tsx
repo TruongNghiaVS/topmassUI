@@ -27,7 +27,7 @@ export const ImfomationCompany = ({ company }: ICompanyDetailJobProps) => {
       </div>
       <div className="flex justify-center items-center text-[#F37A20]">
         <BuildingFillUpBootstrapIcon className="w-6 mr-2" />
-        <Link href={`/cong-ty/${company?.companyId}`}>
+        <Link href={`/cong-ty/${company?.slug}`}>
           <div className="text-xs font-medium">Xem trang công ty</div>
         </Link>
       </div>

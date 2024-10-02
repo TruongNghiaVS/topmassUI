@@ -30,7 +30,15 @@ export const InfomationJob = ({ item }: IInfomationJobProps) => {
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <div className="flex mt-4 justify-center sm:justify-start	">
                 <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2">
-                  {item.rangeSalary}
+                  {item.aggrement
+                    ? "Thoả thuận"
+                    : `${item.salaryFrom} - ${item.salaryTo} ${
+                        +item.typeMoney === 0
+                          ? "VND"
+                          : +item.typeMoney === 1
+                          ? "USD"
+                          : ""
+                      }`}
                 </div>
                 <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em]">
                   {item.locationText}

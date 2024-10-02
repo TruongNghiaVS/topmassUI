@@ -13,13 +13,13 @@ export const InfomationJobLike = ({ item }: IInfomationJobProps) => {
   const likeJob = async () => {
     setLoading(true);
     try {
-      const url = item ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
+      const url = item.isSave ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
       await axiosInstance.post(url, {
         jobId: item.jobSlug,
       });
-      toast.success("Thích tin thành công");
+      toast.success("Lưu tin thành công");
     } catch (error) {
-      toast.error("Thích tin bị lỗi");
+      toast.error("Lưu tin bị lỗi");
     } finally {
       setLoading(false);
     }
@@ -49,7 +49,15 @@ export const InfomationJobLike = ({ item }: IInfomationJobProps) => {
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <div>
                 <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 text-xs">
-                  {item.rangeSalary}
+                  {item.aggrement
+                    ? "Thoả thuận"
+                    : `${item.salaryFrom} - ${item.salaryTo} ${
+                        +item.typeMoney === 0
+                          ? "VND"
+                          : +item.typeMoney === 1
+                          ? "USD"
+                          : ""
+                      }`}
                 </div>
                 <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] text-xs">
                   {item.locationText}

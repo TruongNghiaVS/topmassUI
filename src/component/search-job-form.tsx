@@ -30,7 +30,7 @@ export const SearchJobForm = ({ search, setSearch }: ISearchJobProps) => {
     await setSearch(data);
   };
   return (
-    <div className="xl:px-48 lg:px-40 px-2">
+    <div className="xl:px-44 lg:px-40 px-2">
       <div className="w-full mt-4 relative ">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex items-stretch bg-white rounded-3xl py-2 px-4 shadow-[0px_-8px_0_rgb(248,158,27)] flex-wrap	">
@@ -60,7 +60,7 @@ export const SearchJobForm = ({ search, setSearch }: ISearchJobProps) => {
           </div>
           <div className=" px-2">
             <div className="w-full mt-8 relative ">
-              <div className="p-1 border rounded-lg shadow-md flex items-center bg-white sm:justify-between flex-wrap">
+              <div className="p-1 border rounded-lg shadow-md grid sm:grid-cols-5 grid-cols-1 items-center bg-white gap-1 ">
                 <TmSelect
                   name="Field"
                   control={control}
@@ -84,7 +84,7 @@ export const SearchJobForm = ({ search, setSearch }: ISearchJobProps) => {
                 />
                 <button
                   type="button"
-                  className="px-3 py-2 border rounded border-[#DDDDDD] sm:mt-0 mt-2 mr-2"
+                  className="px-3 py-2 border text-start rounded border-[#DDDDDD] sm:mt-0 mt-2 mr-2"
                 >
                   Tuyển gấp
                 </button>

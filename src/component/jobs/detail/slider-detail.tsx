@@ -30,20 +30,12 @@ export const SliderDetail = () => {
         }}
         className="mySwiper !pb-10"
       >
-        {list.map((value) => {
-          return (
-            <SwiperSlide
-              key={value.toString() + "img-no"}
-              className="bg-primary"
-            >
-              <img
-                src="/imgs/img-no.png"
-                alt=""
-                className="w-full rounded-lg"
-              />
-            </SwiperSlide>
-          );
-        })}
+        <SwiperSlide className="bg-primary">
+          <img src="/imgs/banner-1.png" alt="" className="w-full rounded-lg" />
+        </SwiperSlide>
+        <SwiperSlide className="bg-primary">
+          <img src="/imgs/banner-2.png" alt="" className="w-full rounded-lg" />
+        </SwiperSlide>
       </Swiper>
     </div>
   );

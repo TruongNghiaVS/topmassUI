@@ -5,10 +5,10 @@ import { TitleCustom } from "./custom-title";
 export const JobType = () => {
   const company = [
     {
-      title: "Xây dựng",
+      title: "Kiến trúc/ Xây dựng",
       img: "nganhhang_xaydung.png",
       count: 1800,
-      slug: "11",
+      slug: "57",
     },
     {
       title: "Thương mại điện tử",
@@ -17,28 +17,28 @@ export const JobType = () => {
       slug: "12",
     },
     {
-      title: "Tài chính / ngân hàng",
+      title: "Ngân hàng & Dịch vụ tài chính",
       img: "nganhhang_taichinhnganhang.png",
       count: 1800,
-      slug: "13",
+      slug: "60",
     },
     {
-      title: "Nhà hàng khách sạn",
+      title: "Nhà hàng- Khách sạn/ Du lịch",
       img: "nganhhang_nhahangkhachsan.png",
       count: 1800,
-      slug: "14",
+      slug: "61",
     },
     {
-      title: "Hàng tiêu dùng",
+      title: "Bán lẻ/ Tiêu dùng",
       img: "nganhhang_hangtieudung.png",
       count: 1800,
-      slug: "15",
+      slug: "44",
     },
     {
-      title: "Giáo dục",
+      title: "Giáo dục/ Đào tạo",
       img: "nganhhang_giaoduc.png",
       count: 1800,
-      slug: "16",
+      slug: "52",
     },
     {
       title: "Du lịch",
@@ -47,10 +47,10 @@ export const JobType = () => {
       slug: "17",
     },
     {
-      title: "Kinh doanh",
+      title: "Kinh doanh/ Bán hàng",
       img: "nganhhang_kinhdoanh.png",
       count: 1800,
-      slug: "18",
+      slug: "56",
     },
     {
       title: "Bưu chính viễn thông",
@@ -62,7 +62,7 @@ export const JobType = () => {
       title: "Bảo hiểm",
       img: "nganhhang_baohiem.png",
       count: 1800,
-      slug: "20",
+      slug: "31",
     },
   ];
   return (
