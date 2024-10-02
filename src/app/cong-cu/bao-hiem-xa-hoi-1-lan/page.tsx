@@ -5,13 +5,6 @@ import { InsuranceSecurity } from "./insurance/insurance-security";
 import { VoluntarySocialInsurance } from "./insurance/voluntary-social-insurance";
 import { VoluntaryCompulsoryInsurance } from "./insurance/voluntary-compulsory-insurance";
 
-export const options = [
-  { label: "Vùng 1", value: "Vùng 1" },
-  { label: "Vùng 2", value: "Vùng 2" },
-  { label: "Vùng 3", value: "Vùng 3" },
-  { label: "Vùng 4", value: "Vùng 4" },
-];
-
 export default function InsuranceOneTime() {
   const [active, setActive] = useState(1);
 
