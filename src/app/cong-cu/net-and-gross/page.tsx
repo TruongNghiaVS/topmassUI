@@ -16,14 +16,13 @@ const options = [
 export default function PersonalIncome() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("_____");
   };
 
   return (
     <div>
       <div className="p-4 bg-white rounded">
         <div className="text-xs">Công cụ tiện ích</div>
-        <div className="mt-2 text-default text-2xl">
+        <div className="mt-2 text-default text-2xl font-bold">
           Công cụ tính lương Net và Gross
         </div>
         <div className="mt-2">
@@ -140,13 +139,13 @@ export default function PersonalIncome() {
             </div>
             <div className="text-center mt-4 flex justify-center space-x-4">
               <button
-                className="text-white px-3 py-2 rounded bg-[#F37A20] flex space-x-2"
+                className="text-white px-3 py-2 rounded bg-[#F37A20] flex space-x-3 items-center"
                 type="submit"
               >
                 GROSS <ArrowLeftIcon className="w-4" /> NET
               </button>
               <button
-                className="text-white px-3 py-2 rounded bg-[#F37A20] flex space-x-2"
+                className="text-white px-3 py-2 rounded bg-[#F37A20] flex space-x-3 items-center"
                 type="button"
               >
                 NET <ArrowLeftIcon className="w-4" /> GROSSS

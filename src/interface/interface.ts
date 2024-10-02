@@ -530,3 +530,25 @@ export type IBlogData = {
   item: IBlogDataItem;
   slug: string;
 };
+
+export interface IInsuranceOneTime {
+  month_from: string;
+  year_from: string;
+  month_to: string;
+  year_to: string;
+  salary: number;
+  status: number;
+}
+
+export interface IInsuarnceVoluntary {
+  month_from: string;
+  year_from: string;
+  month_to: string;
+  year_to: string;
+  salary: number;
+  object: number;
+}
+
+export interface IVoluntaryCompulsoryInsurance extends IInsuranceOneTime {
+  object: number;
+}

@@ -66,7 +66,7 @@ export const Ultil = () => {
                 <div>Tính bảo hiểm thất nghiệp</div>
                 <div className="text-[#D14B00] text-[10px] flex items-center">
                   <Link
-                    href="/cong-cu/bao-hiem-that-nghiep"
+                    href="/cong-cu/bao-hiem-xa-hoi-that-nghiep"
                     className="flex items-center"
                   >
                     Sử dụng ngay <ArrowLongRightIcon className="w-4" />

@@ -3,9 +3,13 @@
 import {
   ArrowRightEndOnRectangleIcon,
   Bars3Icon,
+  ChartBarIcon,
   DocumentTextIcon,
   MagnifyingGlassIcon,
   PlusIcon,
+  ScaleIcon,
+  ShieldCheckIcon,
+  ShieldExclamationIcon,
   XMarkIcon,
 } from "@heroicons/react/16/solid";
 import { TransitionMobile } from "./item-transition-mobile";
@@ -14,9 +18,14 @@ import { BagBootstrapIcon } from "@/theme/icons/bagBootstrapIcon";
 import { EnvelopePaperHeartFillBootstrapIcon } from "@/theme/icons/envelopePaperHeartFillBootstrapIcon";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import useSWR from "swr";
+import { getToken } from "@/utils/token";
 
 export const MenuMobile = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const { data: token } = useSWR("token", getToken, { refreshInterval: 500 });
+
   const handleOpenMenuMobile = () => {
     setIsOpenMenu(true);
   };
@@ -29,6 +38,9 @@ export const MenuMobile = () => {
   };
 
   useEffect(() => {
+    if (token) {
+      setIsLogin(true);
+    }
     const handleScroll = () => {
       const scrollTop = divRef.current?.scrollTop ?? 0;
       console.log("Container scrolled. Current scroll position:", scrollTop);
@@ -50,7 +62,7 @@ export const MenuMobile = () => {
       container?.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOpenMenu]);
+  }, [isOpenMenu, token]);
 
   const navItems = [
     {
@@ -60,7 +72,7 @@ export const MenuMobile = () => {
           title: "Việc làm",
           slug: "/viec-lam",
           icon: (
-            <MagnifyingGlassIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
+            <MagnifyingGlassIcon className="text-white mr-2 leading-4 w-6" />
           ),
           border: true,
         },
@@ -68,22 +80,20 @@ export const MenuMobile = () => {
           title: "Tìm việc làm",
           slug: "/tim-kiem-viec-lam",
           icon: (
-            <MagnifyingGlassIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
+            <MagnifyingGlassIcon className="text-white mr-2 leading-4 w-6" />
           ),
           border: true,
         },
         {
           title: `Việc làm đã ứng tuyển`,
           slug: "/viec-lam-da-ung-tuyen",
-          icon: (
-            <BagBootstrapIcon className="text-white mr-2 text-[15px] leading-4 w-5" />
-          ),
+          icon: <BagBootstrapIcon className="text-white mr-2 leading-4 w-5" />,
         },
         {
           title: "Việc làm đã lưu",
           slug: "/viec-lam-da-luu",
           icon: (
-            <EnvelopePaperHeartFillBootstrapIcon className="text-white mr-2 text-[15px] leading-4 w-5" />
+            <EnvelopePaperHeartFillBootstrapIcon className="text-white mr-2 leading-4 w-5" />
           ),
           border: true,
         },
@@ -96,21 +106,21 @@ export const MenuMobile = () => {
           title: "Profile CV",
           slug: "/profile-cv",
           icon: (
-            <PersonBargeBootstrapIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
+            <PersonBargeBootstrapIcon className="text-white mr-2 leading-4 w-6" />
           ),
         },
         {
           title: "Quản lý CV",
           slug: "/quan-ly-cv",
           icon: (
-            <PersonBargeBootstrapIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
+            <PersonBargeBootstrapIcon className="text-white mr-2 leading-4 w-6" />
           ),
         },
         {
           title: "Mẫu CV",
           slug: "/mau-cv",
           icon: (
-            <PersonBargeBootstrapIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
+            <PersonBargeBootstrapIcon className="text-white mr-2 leading-4 w-6" />
           ),
         },
       ],
@@ -127,67 +137,78 @@ export const MenuMobile = () => {
         {
           title: "Bí Quyết Tìm Việc",
           slug: "/tin-tuc/bi-quyet-tim-viec",
-          icon: (
-            <DocumentTextIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
-          ),
+          icon: <DocumentTextIcon className="text-white mr-2 leading-4 w-6" />,
         },
         {
           title: "Thị Trường - Xu Hướng",
           slug: "/tin-tuc/thi-truong-xu-huong",
-          icon: (
-            <DocumentTextIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
-          ),
+          icon: <DocumentTextIcon className="text-white mr-2 leading-4 w-6" />,
         },
         {
           title: "Góc Thư Giản",
           slug: "/tin-tuc/goc-thu-gian",
-          icon: (
-            <DocumentTextIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
-          ),
+          icon: <DocumentTextIcon className="text-white mr-2 leading-4 w-6" />,
         },
         {
           title: "Tiện Ích",
           slug: "/tin-tuc/tien-ich",
-          icon: (
-            <DocumentTextIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
-          ),
+          icon: <DocumentTextIcon className="text-white mr-2 leading-4 w-6" />,
         },
         {
           title: "Góc Báo Chí",
           slug: "/tin-tuc/goc-bao-chi",
-          icon: (
-            <DocumentTextIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
-          ),
+          icon: <DocumentTextIcon className="text-white mr-2 leading-4 w-6" />,
         },
         {
           title: "Thị Trường Lương",
           slug: "/tin-tuc/thi-truong-luong",
-          icon: (
-            <DocumentTextIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
-          ),
+          icon: <DocumentTextIcon className="text-white mr-2 leading-4 w-6" />,
         },
         {
           title: "Cẩm Nang Nghề Nghiệp",
           slug: "/tin-tuc/cam-nang-nghe-nghiep",
-          icon: (
-            <DocumentTextIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
-          ),
+          icon: <DocumentTextIcon className="text-white mr-2 leading-4 w-6" />,
         },
         {
           title: "Thị Trường - Xu Hướng Tìm Việc",
           slug: "/tin-tuc/thi-truong-xu-huong-tim-viec",
-          icon: (
-            <DocumentTextIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
-          ),
+          icon: <DocumentTextIcon className="text-white mr-2 leading-4 w-6" />,
         },
         {
           title: " Kỹ Năng Phỏng Vấn",
           slug: "/tin-tuc/ky-nang-phong-van",
-          icon: (
-            <DocumentTextIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
-          ),
+          icon: <DocumentTextIcon className="text-white mr-2 leading-4 w-6" />,
         },
       ],
+    },
+    {
+      title: "Công cụ",
+      subMenu: [
+        {
+          title: "Tính lương GROSS - NET",
+          slug: "/cong-cu/net-and-gross",
+          icon: <ScaleIcon className="text-white mr-2 leading-4 w-6" />,
+        },
+        {
+          title: "Tính thuế thu nhập cá nhân",
+          slug: "/cong-cu/thue-thu-nhap-ca-nhan",
+          icon: <ChartBarIcon className="text-white mr-2 leading-4 w-6" />,
+        },
+        {
+          title: "Tính mức hưởng bảo hiểm thất nghiệp",
+          slug: "/cong-cu/bao-hiem-xa-hoi-that-nghiep",
+          icon: (
+            <ShieldExclamationIcon className="text-white mr-2 leading-4 w-6" />
+          ),
+        },
+        {
+          title: "Tính bảo hiểm xã hội 1 lần",
+          slug: "/cong-cu/bao-hiem-xa-hoi-1-lan",
+          icon: <ShieldCheckIcon className="text-white mr-2 leading-4 w-6" />,
+        },
+      ],
+      link: "#",
+      isShow: true,
     },
   ];
 
@@ -202,8 +223,8 @@ export const MenuMobile = () => {
       </div>
 
       <div
-        className={`absolute left-0 top-0 h-screen w-full bg-black z-40 opacity-30 ${
-          isOpenMenu ? "w-[90%]" : "w-0"
+        className={`absolute left-0 top-0 h-screen bg-black z-40 opacity-30 ${
+          isOpenMenu ? "w-full" : "w-0"
         }`}
       ></div>
       <div
@@ -219,17 +240,22 @@ export const MenuMobile = () => {
           >
             <XMarkIcon className="w-6 text-[#F37A20]" />
           </button>
-          <div className="bg-white py-2 flex justify-center">
-            <img src="/imgs/logo-new.png" alt="" />
-          </div>
-          <div className="p-4 border-b-4 border-white">
-            <div className=" flex justify-center">
-              <img src="/imgs/no-img-mobile.png" alt="" className="w-24" />
+          {isLogin && (
+            <div>
+              <div className="bg-white py-2 flex justify-center">
+                <img src="/imgs/logo-new.png" alt="" />
+              </div>
+              <div className="p-4 border-b-4 border-white">
+                <div className=" flex justify-center">
+                  <img src="/imgs/no-img-mobile.png" alt="" className="w-24" />
+                </div>
+                <div className="mt-2 text-lg font-medium uppercase text-center text-white">
+                  Welcome to topmass
+                </div>
+              </div>
             </div>
-            <div className="mt-2 text-lg font-medium uppercase text-center text-white">
-              Welcome to topmass
-            </div>
-          </div>
+          )}
+
           <div className="py-4 px-6 border-b-4 boder-whiteborder-b-4 border-white">
             {navItems.map((item, idx) => {
               return (
@@ -268,27 +294,29 @@ export const MenuMobile = () => {
               );
             })}
           </div>
-          <div className="p-4">
-            <div className="mt-2">
-              <Link href="/dang-nhap">
-                <div className="font-medium text-[#3B4358] no-underline text-white px-[15px] py-1 flex items-center">
-                  <ArrowRightEndOnRectangleIcon className="text-white mr-2 text-[15px] leading-4 w-6" />
-                  <div>Đăng nhập</div>
-                </div>
-              </Link>
-            </div>
-            <div className="mt-2">
-              <Link href="/dang-ky">
-                <div className="font-medium text-[#3B4358] no-underline text-white px-[15px] py-1 flex items-center relative">
-                  <div className="mr-2 relative">
-                    <div className="absolute left-0 top-0 right-0 bottom-0 rotate-45 bg-white z-[-1]"></div>
-                    <PlusIcon className="text-[#F37A20] w-4 " />
+          {!isLogin && (
+            <div className="p-4">
+              <div className="mt-2">
+                <Link href="/dang-nhap">
+                  <div className="font-medium text-[#3B4358] no-underline text-white px-[15px] py-1 flex items-center">
+                    <ArrowRightEndOnRectangleIcon className="text-white mr-2 leading-4 w-6" />
+                    <div>Đăng nhập</div>
                   </div>
-                  <div>Đăng ký</div>
-                </div>
-              </Link>
+                </Link>
+              </div>
+              <div className="mt-2">
+                <Link href="/dang-ky">
+                  <div className="font-medium text-[#3B4358] no-underline text-white px-[15px] py-1 flex items-center relative">
+                    <div className="mr-2 relative">
+                      <div className="absolute left-0 top-0 right-0 bottom-0 rotate-45 bg-white z-[-1]"></div>
+                      <PlusIcon className="text-[#F37A20] w-4 " />
+                    </div>
+                    <div>Đăng ký</div>
+                  </div>
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

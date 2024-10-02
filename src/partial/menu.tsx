@@ -3,8 +3,12 @@ import { BagBootstrapIcon } from "@/theme/icons/bagBootstrapIcon";
 import { EnvelopePaperHeartFillBootstrapIcon } from "@/theme/icons/envelopePaperHeartFillBootstrapIcon";
 import { PersonBargeBootstrapIcon } from "@/theme/icons/personBargeBootstrapIcon";
 import {
+  ChartBarIcon,
   DocumentTextIcon,
   MagnifyingGlassIcon,
+  ScaleIcon,
+  ShieldCheckIcon,
+  ShieldExclamationIcon,
 } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -151,6 +155,41 @@ export const Menu = () => {
       ],
       link: "/tin-tuc",
       isShow: false,
+    },
+    {
+      title: "Công cụ",
+      subMenu: [
+        {
+          title: "Tính lương GROSS - NET",
+          slug: "/cong-cu/net-and-gross",
+          icon: (
+            <ScaleIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+          ),
+        },
+        {
+          title: "Tính thuế thu nhập cá nhân",
+          slug: "/cong-cu/thue-thu-nhap-ca-nhan",
+          icon: (
+            <ChartBarIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+          ),
+        },
+        {
+          title: "Tính mức hưởng bảo hiểm thất nghiệp",
+          slug: "/cong-cu/bao-hiem-xa-hoi-that-nghiep",
+          icon: (
+            <ShieldExclamationIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+          ),
+        },
+        {
+          title: "Tính bảo hiểm xã hội 1 lần",
+          slug: "/cong-cu/bao-hiem-xa-hoi-1-lan",
+          icon: (
+            <ShieldCheckIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+          ),
+        },
+      ],
+      link: "#",
+      isShow: true,
     },
   ];
 

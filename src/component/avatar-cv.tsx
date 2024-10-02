@@ -53,7 +53,7 @@ export const AvatarCv = ({
       <img
         src={avatarLink.length > 0 ? avatarLink : "/imgs/no-img.png"}
         alt=""
-        className="w-[115px] rounded-full"
+        className="w-[115px] h-[115px] object-cover rounded-full"
       />
       <div className="absolute right-0 bottom-0 ">
         <button
