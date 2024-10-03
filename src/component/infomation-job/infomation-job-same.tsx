@@ -25,7 +25,7 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
   return (
     <div className="border-[1px] bg-white p-4 rounded-md hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px] relative border-solid border-[#FC7E00]">
       <div
-        className="absolute right-4 top-4 cursor-pointer"
+        className="absolute right-2 top-2 cursor-pointer"
         onClick={() => toast.success("Thích tin thành công")}
       >
         <HeartIcon className="w-6 text-[#FC7E00]" />

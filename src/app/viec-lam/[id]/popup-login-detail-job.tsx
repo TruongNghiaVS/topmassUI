@@ -49,7 +49,7 @@ export const PopupLoginDetailJob = ({
         toast.success("Đăng nhập thành công");
       }
       onClose();
-      onOpen();
+      if (onOpen) onOpen();
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(

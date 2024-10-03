@@ -21,7 +21,6 @@ import { useLoading } from "@/app/context/loading";
 import axiosInstance, { fetcher } from "@/utils/axios";
 import useSWR from "swr";
 import { toast } from "react-toastify";
-import { IjobDisplayItemData } from "@/interface/interface";
 import { Option } from "@/component/hook-form/interface/interface";
 import {
   GET_COMPANY_DETAIL,
@@ -30,6 +29,7 @@ import {
   POST_COMPANY_ADDFOLLOW,
 } from "@/utils/api-url";
 import { IFormCompany } from "@/interface/search-job";
+import { IJob } from "@/interface/job";
 
 export default function CompanyDetail({ params }: { params: { id: string } }) {
   const schema = yup.object().shape({
@@ -241,7 +241,7 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
                   </div>
                 </form>
                 <div className="mt-4">
-                  {allJobs?.map((value: IjobDisplayItemData, index: number) => {
+                  {allJobs?.map((value: IJob, index: number) => {
                     return (
                       <div key={index.toString()} className="mt-4">
                         <InfomationJobCompany

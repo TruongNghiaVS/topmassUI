@@ -1,4 +1,5 @@
 import { IInfomationJobSameProps } from "@/interface/job";
+import { convertToMillionDongFixed } from "@/utils/business/custom-hook";
 import Link from "next/link";
 
 export const InfomationJobDetail = ({ item }: IInfomationJobSameProps) => {
@@ -25,7 +26,21 @@ export const InfomationJobDetail = ({ item }: IInfomationJobSameProps) => {
           <Link href={`/viec-lam/${item.jobSlug}`}>
             <div className="flex mt-4 justify-center lg:justify-start	">
               <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2">
-                {item.salaryFrom} - {item.salaryTo} triệu
+                {item.aggrement
+                  ? "Thoả thuận"
+                  : `${convertToMillionDongFixed(
+                      item.salaryFrom,
+                      item.currencyCode
+                    )} - ${convertToMillionDongFixed(
+                      item.salaryTo,
+                      item.currencyCode
+                    )} ${
+                      item.currencyCode === "0"
+                        ? "Triệu"
+                        : item.currencyCode === "1"
+                        ? "USD"
+                        : ""
+                    }`}
               </div>
               <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em]">
                 {item.locationText}

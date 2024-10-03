@@ -4,7 +4,8 @@ import { HeartIcon as HearIconSolid } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { useState } from "react";
 import { getToken } from "@/utils/token";
-import { IjobCompanyDisplay } from "@/interface/interface";
+import { IjobCompanyDisplay } from "@/interface/job";
+import { convertToMillionDongFixed } from "@/utils/business/custom-hook";
 
 export const InfomationJobCompany = ({
   item,
@@ -37,21 +38,37 @@ export const InfomationJobCompany = ({
     <div className="border-[1px] border-[#d9dbe9] bg-white p-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
       <div className="sm:flex items-center my-2 h-full">
         <div className="w-20 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
-          <Link href={`/viec-lam/${item.slug}`}>
-            <img src={`${item.fullLink}`} alt="" className="w-full" />
+          <Link href={`/viec-lam/${item.jobSlug}`}>
+            <img src={`${item.logoImage}`} alt="" className="w-full" />
           </Link>
         </div>
         <div className="text-center sm:text-start w-full">
           <div className="sm:flex justify-between">
             <div className="text-[16px]	leading-[18px] font-bold ">
-              <Link href={`/viec-lam/${item.slug}`}>{item.jobName}</Link>
+              <Link href={`/viec-lam/${item.jobSlug}`}>
+                {item.positionText}
+              </Link>
             </div>
             <div className="text-sm font-normal text-default">
-              {item.rangeSalary}
+              {item.aggrement
+                ? "Thoả thuận"
+                : `${convertToMillionDongFixed(
+                    item.salaryFrom,
+                    item.currencyCode
+                  )} - ${convertToMillionDongFixed(
+                    item.salaryTo,
+                    item.currencyCode
+                  )} ${
+                    item.currencyCode === "0"
+                      ? "Triệu"
+                      : item.currencyCode === "1"
+                      ? "USD"
+                      : ""
+                  }`}
             </div>
           </div>
           <div className="text-sm font-normal mt-2.5 ">
-            <Link href={`/viec-lam/${item.slug}`}>{item.companyName}</Link>
+            <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
           </div>
           <div className="mt-4 sm:flex grid sm:items-end justify-center sm:justify-between">
             <div>
@@ -60,7 +77,7 @@ export const InfomationJobCompany = ({
               </div>
             </div>
             <div className="flex justify-center mt-4 sm:mt-0">
-              {item.isJobApply == true ? (
+              {item.isApply == true ? (
                 <button className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2">
                   Đã ứng tuyển
                 </button>
@@ -73,7 +90,7 @@ export const InfomationJobCompany = ({
                 </button>
               )}
 
-              {item.isJobSave == true ? (
+              {item.isSave == true ? (
                 <button>
                   <HearIconSolid className="w-6 mr-2 text-default" />
                 </button>
@@ -89,7 +106,7 @@ export const InfomationJobCompany = ({
       <PopupApplyJob
         isModalOpen={isModalOpen}
         onClose={closeModal}
-        jobId={item.slug}
+        jobId={item.jobSlug}
         mutate={mutate}
       />
     </div>

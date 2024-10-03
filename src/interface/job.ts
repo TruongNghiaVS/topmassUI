@@ -1,5 +1,6 @@
 import { Option } from "@/component/hook-form/interface/interface";
 import { Dispatch, SetStateAction } from "react";
+import { KeyedMutator } from "swr";
 
 export interface IScrollFilterProps {
   setSearch: Dispatch<SetStateAction<string>>;
@@ -84,6 +85,10 @@ export interface IInfomationJobProps {
   item: IJob;
 }
 
+export interface IInfomationJobLikeProps extends IInfomationJobProps {
+  likeJob: () => Promise<void>;
+}
+
 export interface IJobSameProps {
   jobs: IJob[];
   currentPage: number;
@@ -92,4 +97,9 @@ export interface IJobSameProps {
 
 export interface IInfomationJobSameProps {
   item: IJob;
+}
+
+export interface IjobCompanyDisplay extends IInfomationJobSameProps {
+  handleOpenModal: () => void;
+  mutate?: KeyedMutator<any>;
 }

@@ -1,5 +1,5 @@
 import { Option } from "@/component/hook-form/interface/interface";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Key, KeyedMutator } from "swr";
 
 export interface IRegister {
@@ -114,7 +114,7 @@ export interface IApplyModal {
 }
 
 export interface IModalLoginProps extends IApplyModal {
-  onOpen: () => void;
+  onOpen?: () => void;
 }
 
 export interface ICv {
@@ -237,11 +237,6 @@ export interface IjobDisplayItemData {
 
 export interface IJobInfoCompanyDisplay {
   item: IjobDisplayItemData;
-}
-
-export interface IjobCompanyDisplay extends IJobInfoCompanyDisplay {
-  handleOpenModal: () => void;
-  mutate?: KeyedMutator<any>;
 }
 
 export interface IProvinceData {
@@ -551,4 +546,10 @@ export interface IInsuarnceVoluntary {
 
 export interface IVoluntaryCompulsoryInsurance extends IInsuranceOneTime {
   object: number;
+}
+
+export interface IButtonLogin {
+  className: string;
+  onClick: () => void;
+  children: ReactNode;
 }
