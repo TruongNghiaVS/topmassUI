@@ -2,10 +2,8 @@
 import "./globals.css";
 import { Header } from "@/partial/header";
 import { Footer } from "@/partial/footer";
-// import ThemeProvider from "@/theme";
 import localFont from "next/font/local";
 import { usePathname } from "next/navigation";
-import { GlobalProvider } from "./global-context";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dayjs from "dayjs";

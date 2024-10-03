@@ -95,7 +95,7 @@ export default function JobApply() {
             </div>
             <div className="mt-8 p-4 rounded-lg bg-gradient-to-r from-[#F15A24] to-[#F7931E]">
               <img
-                src="/imgs/img-no.png"
+                src="/imgs/banner-3.png"
                 alt=""
                 className="w-full rounded-lg"
               />

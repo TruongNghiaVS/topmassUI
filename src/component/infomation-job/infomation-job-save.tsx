@@ -25,14 +25,14 @@ export const InfomationJobSave = ({ item, mutate }: IJobSaveProps) => {
 
   const getDay = (dayString: string) => {
     const day = dayjs().diff(dayString, "d");
-    return day === 0 ? "Mới cập nhật" : `Cập nhật ${day} trước`;
+    return day === 0 ? "Mới cập nhật" : `Cập nhật ${day} ngày trước`;
   };
 
   const handleRemoveSaveJob = async (id: number) => {
     setLoading(true);
     try {
       await axiosInstance.post(REMOVE_SAVE_JOB, {
-        jobId: 12,
+        jobId: item.jobId,
       });
       toast.success("Bỏ lưu tin thành công");
       mutate();

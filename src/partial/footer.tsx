@@ -5,70 +5,61 @@ import {
   MapPinIcon,
   PhoneIcon,
 } from "@heroicons/react/16/solid";
+import { HOST_RECUMENT } from "@/config-global";
+
+console.log(HOST_RECUMENT);
 
 export const Footer = () => {
   const topMass = [
     {
       title: "Giới thiệu",
-      link: "/new/1",
+      link: "/gioi-thieu",
     },
     {
       title: "Tuyển dụng",
-      link: "/new/1",
+      link: `${HOST_RECUMENT ? HOST_RECUMENT : "#"} `,
     },
     {
       title: "Liên hệ",
       link: "/lien-he",
     },
     {
-      title: "Chính sách bảo mật",
-      link: "/hr-center/chinh-sach-bao-mat",
-    },
-    {
-      title: "Điều khoản dịch vụ",
-      link: "/new/1",
+      title: "Chính sách & điều khoảng",
+      link: "/dieu-khoan-dich-vu",
     },
   ];
 
   const cv = [
     {
       title: "Quản lý hồ sơ",
-      link: "/new/1",
+      link: "/profile-cv",
     },
     {
       title: "Hướng dẫn viết CV",
-      link: "/new/1",
+      link: "#",
     },
     {
       title: "Thư viện CV mẫu",
-      link: "/new/1",
-    },
-    {
-      title: "CV theo ngành nghề",
-      link: "/new/1",
+      link: "/mau-cv",
     },
   ];
 
   const blog = [
     {
-      title: "Việc làm tốt nhất",
-      link: "/new/1",
+      title: "Kỹ năng phỏng vấn",
+      link: "/tin-tuc/ky-nang-phong-van",
     },
     {
-      title: "Việc làm cho sinh viên",
-      link: "/new/1",
+      title: "Bí quyết tìm việc",
+      link: "/tin-tuc/bi-quyet-tim-viec",
     },
     {
-      title: "Việc làm online",
-      link: "/new/1",
+      title: "Cẩm nang nghề nghiệp",
+      link: "/tin-tuc/cam-nang-nghe-nghiep",
     },
     {
-      title: "Việc làm lương cao",
-      link: "/new/1",
-    },
-    {
-      title: "Việc làm tài chính",
-      link: "/new/1",
+      title: "Thị trường & xu hướng",
+      link: "/tin-tuc/thi-truong-xu-huong",
     },
   ];
 

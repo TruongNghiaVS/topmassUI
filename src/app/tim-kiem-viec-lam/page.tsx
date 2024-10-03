@@ -69,7 +69,7 @@ export default function SearchJob() {
                   return (
                     <img
                       key={value}
-                      src="/imgs/img-no.png"
+                      src="/imgs/banner-2.png"
                       alt=""
                       className="w-full rounded-lg mt-4"
                     />

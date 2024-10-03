@@ -296,7 +296,7 @@ export default function SettingSuggestJob() {
           <div className="xl:col-span-4 md:col-span-5 sm:row-auto row-start-1 row-end-1">
             <InfomationUser />
             <div className="mt-4 rounded-lg overflow-hidden sm:block hidden">
-              <img src="/imgs/img-no.png" className="w-full" alt="" />
+              <img src="/imgs/banner-4.png" className="w-full" alt="" />
             </div>
           </div>
         </div>

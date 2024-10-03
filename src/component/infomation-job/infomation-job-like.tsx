@@ -4,8 +4,10 @@ import { useLoading } from "@/app/context/loading";
 import { IInfomationJobProps } from "@/interface/job";
 import { ADD_SAVE_JOB, REMOVE_SAVE_JOB } from "@/utils/api-url";
 import axiosInstance from "@/utils/axios";
+import { converNumber } from "@/utils/business/custom-hook";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import numeral from "numeral";
 import { toast } from "react-toastify";
 
 export const InfomationJobLike = ({ item }: IInfomationJobProps) => {
@@ -47,14 +49,16 @@ export const InfomationJobLike = ({ item }: IInfomationJobProps) => {
           </div>
           <div className="flex mt-4 justify-between items-center	">
             <Link href={`/viec-lam/${item.jobSlug}`}>
-              <div>
+              <div className="flex">
                 <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 text-xs">
                   {item.aggrement
                     ? "Thoả thuận"
-                    : `${item.salaryFrom} - ${item.salaryTo} ${
-                        +item.typeMoney === 0
+                    : `${converNumber(item.salaryFrom)} - ${converNumber(
+                        item.salaryTo
+                      )} ${
+                        item.currencyCode === "0"
                           ? "VND"
-                          : +item.typeMoney === 1
+                          : item.currencyCode === "1"
                           ? "USD"
                           : ""
                       }`}

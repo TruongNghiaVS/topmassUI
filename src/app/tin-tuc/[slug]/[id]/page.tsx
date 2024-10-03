@@ -34,10 +34,8 @@ const NewDetail = ({ params }: { params: { id: string } }) => {
       <div className="mx-auto container">
         <div className="sm:grid grid-cols-12 gap-4 mt-4 max-1280:px-2">
           <div className="xl:col-span-8 md:col-span-7">
-            <div className="text-xs font-normal">
-              {blogDetail?.categoryName}
-            </div>
-            <div className="text-2xl font-bold">{blogDetail?.title}</div>
+            <h1 className="text-xs font-normal">{blogDetail?.categoryName}</h1>
+            <h1>{blogDetail?.title}</h1>
             <div className="flex text-xs">
               <div className="mr-4">Tạo bởi Minh Phạm</div>
               <div className="pl-2 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:my-auto before:w-1 before:h-1 before:rounded-full before:bg-black">

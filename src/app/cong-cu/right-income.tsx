@@ -6,7 +6,7 @@ export const RightIncome = () => {
   return (
     <div>
       <div>
-        <img src="/imgs/img-no.png" alt="" className="w-full rounded-lg" />
+        <img src="/imgs/banner-5.png" alt="" className="w-full rounded-lg" />
       </div>
       <div className="mt-4 p-4 rounded-lg bg-white">
         <div className="flex text-default text-xl">
@@ -26,10 +26,10 @@ export const RightIncome = () => {
         </div>
       </div>
       <div className="mt-4">
-        <img src="/imgs/img-no.png" alt="" className="w-full rounded-lg" />
+        <img src="/imgs/banner-6.png" alt="" className="w-full rounded-lg" />
       </div>
       <div className="mt-4">
-        <img src="/imgs/img-no.png" alt="" className="w-full rounded-lg" />
+        <img src="/imgs/banner-7.png" alt="" className="w-full rounded-lg" />
       </div>
     </div>
   );

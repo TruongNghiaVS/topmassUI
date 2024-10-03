@@ -1,4 +1,5 @@
 import { IInfomationJobProps } from "@/interface/job";
+import { converNumber } from "@/utils/business/custom-hook";
 import Link from "next/link";
 
 export const InfomationJob = ({ item }: IInfomationJobProps) => {
@@ -6,7 +7,7 @@ export const InfomationJob = ({ item }: IInfomationJobProps) => {
     <div className="relative bg-white border-[1px] border-[#d9dbe9] rounded-md  ">
       <div className="bg-white p-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
         <div className="sm:flex items-center my-2 h-full">
-          <div className="w-20 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
+          <div className="flex-auto w-28 sm:mx-0 sm:mr-2 mx-auto sm:mb-0 mb-2">
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <img
                 src={item.logoImage ? item.logoImage : "/imgs/logo-work.png"}
@@ -15,8 +16,8 @@ export const InfomationJob = ({ item }: IInfomationJobProps) => {
               />
             </Link>
           </div>
-          <div className="text-center sm:text-start">
-            <div className="text-[16px]	leading-6 font-bold ">
+          <div className="flex-auto w-72 text-center sm:text-start">
+            <div className="text-[16px]	leading-6 font-bold line-clamp-2">
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
                   hot
@@ -29,13 +30,15 @@ export const InfomationJob = ({ item }: IInfomationJobProps) => {
             </div>
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <div className="flex mt-4 justify-center sm:justify-start	">
-                <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2">
+                <div className="rounded-[3px] text-xs bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2">
                   {item.aggrement
                     ? "Thoả thuận"
-                    : `${item.salaryFrom} - ${item.salaryTo} ${
-                        +item.typeMoney === 0
-                          ? "VND"
-                          : +item.typeMoney === 1
+                    : `${converNumber(item.salaryFrom)} - ${converNumber(
+                        item.salaryTo
+                      )} ${
+                        item.currencyCode === "0"
+                          ? "VNĐ"
+                          : item.currencyCode === "1"
                           ? "USD"
                           : ""
                       }`}

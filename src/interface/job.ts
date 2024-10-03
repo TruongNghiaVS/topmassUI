@@ -29,6 +29,7 @@ export interface IJob {
   isApply: boolean;
   typeMoney: string;
   aggrement: boolean;
+  currencyCode: string;
 }
 
 export interface IDetailJob {
