@@ -215,8 +215,8 @@ export const PopupApplyJob = ({
               <TmTextArea
                 name="description"
                 control={control}
-                label="Description"
-                placeholder="Enter your description"
+                label="Mô tả"
+                placeholder="Mô tả"
                 rows={5}
               />
             </div>
