@@ -16,8 +16,6 @@ import {
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { PopupApplyJob } from "./popup-apply-job";
 import { useCallback, useEffect, useState } from "react";
-import { getToken } from "@/utils/token";
-import { PopupLoginDetailJob } from "./popup-login-detail-job";
 import { useLoading } from "@/app/context/loading";
 import axiosInstance, { fetcher } from "@/utils/axios";
 import {
@@ -29,16 +27,19 @@ import {
   REMOVE_SAVE_JOB,
 } from "@/utils/api-url";
 import useSWR from "swr";
+import { WrapButtonLogin } from "@/component/button-modal-login";
+import { toast } from "react-toastify";
 
 export default function DetailJob({ params }: { params: { id: any } }) {
   const { id } = params;
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isOpenModalLogin, setIsOpenModalLogin] = useState(false);
-  const [saveJob, setSaveJob] = useState(false);
   const { setLoading } = useLoading();
 
-  const { data: detail, error } = useSWR(`${DETAIL_JOB}?JobId=${id}`, fetcher);
-  const { data: jobSame, error: errorJobSame } = useSWR(
+  const { data: detail, error, mutate: mutateDetail } = useSWR(
+    `${DETAIL_JOB}?JobId=${id}`,
+    fetcher
+  );
+  const { data: jobSame, error: errorJobSame, mutate: mutateJobSame } = useSWR(
     `${RELATION_JOB}?JobId=${id}`,
     fetcher
   );
@@ -69,23 +70,28 @@ export default function DetailJob({ params }: { params: { id: any } }) {
   };
 
   const handleOpenModal = () => {
-    const token = getToken();
-    if (token) {
-      openModal();
-    } else {
-      setIsOpenModalLogin(true);
-    }
+    openModal();
   };
 
   const handleSaveJob = async () => {
     setLoading(true);
     try {
-      const url = saveJob ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
+      const url = detail?.jobExtra.isSave ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
       await axiosInstance.post(url, {
         jobId: id,
       });
-      setSaveJob(!saveJob);
+      if (detail?.jobExtra.isSave) {
+        toast.success("Lưu tin thành công");
+      } else {
+        toast.success("Bỏ lưu tin thành công");
+      }
+      mutateDetail();
     } catch (error) {
+      if (detail?.jobExtra.isSave) {
+        toast.success("Lưu tin thất bại");
+      } else {
+        toast.success("Bỏ lưu tin thất bại");
+      }
     } finally {
       setLoading(false);
     }
@@ -145,7 +151,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                         Đã ứng tuyển
                       </div>
                     ) : (
-                      <button
+                      <WrapButtonLogin
                         className="flex justify-center items-center w-full py-2 bg-[#F37A20] rounded px-4 py-2"
                         onClick={() => {
                           handleOpenModal();
@@ -155,11 +161,11 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                         <div className="text-xs font-bold text-white">
                           Ứng tuyển ngay
                         </div>
-                      </button>
+                      </WrapButtonLogin>
                     )}
                   </div>
                   <div>
-                    <button
+                    <WrapButtonLogin
                       className={`flex whitespace-nowrap justify-center py-2 border-[#F37A20] border-solid border-[1px] rounded px-6 ${
                         detail?.jobExtra.isSave && "bg-[#F37A20]"
                       }`}
@@ -181,7 +187,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                       >
                         {detail?.jobExtra.isSave ? "Đã lưu tin" : "Lưu tin"}
                       </div>
-                    </button>
+                    </WrapButtonLogin>
                   </div>
                 </div>
               </div>
@@ -207,7 +213,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                         Đã ứng tuyển
                       </div>
                     ) : (
-                      <button
+                      <WrapButtonLogin
                         className="flex justify-center items-center w-full py-2 bg-[#F37A20] rounded px-4 py-2"
                         onClick={() => {
                           handleOpenModal();
@@ -217,11 +223,11 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                         <div className="text-xs font-bold text-white">
                           Ứng tuyển ngay
                         </div>
-                      </button>
+                      </WrapButtonLogin>
                     )}
                   </div>
                   <div>
-                    <button
+                    <WrapButtonLogin
                       className={`flex whitespace-nowrap justify-center py-2 border-[#F37A20] border-solid border-[1px] rounded px-6 ${
                         detail?.jobExtra.isSave && "bg-[#F37A20]"
                       }`}
@@ -243,14 +249,14 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                       >
                         {detail?.jobExtra.isSave ? "Đã lưu tin" : "Lưu tin"}
                       </div>
-                    </button>
+                    </WrapButtonLogin>
                   </div>
                 </div>
               </div>
               {detail?.dataJob.hashtags.length > 0 && (
                 <KeyWord hagtags={detail?.dataJob.hashtags} />
               )}
-              <JobSame jobs={jobSame?.data} />
+              <JobSame jobs={jobSame?.data} mutate={mutateJobSame} />
               <div className="block sm:hidden">
                 <SliderDetail />
                 <JobLike jobs={jobLike?.data} />
@@ -269,11 +275,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
         isModalOpen={isModalOpen}
         onClose={closeModal}
         jobId={id}
-      />
-      <PopupLoginDetailJob
-        isModalOpen={isOpenModalLogin}
-        onClose={() => setIsOpenModalLogin(false)}
-        onOpen={openModal}
+        mutate={mutateDetail}
       />
     </div>
   );

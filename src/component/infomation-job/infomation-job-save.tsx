@@ -1,5 +1,4 @@
 import { useLoading } from "@/app/context/loading";
-import { IJobApplyProps, IJobSaveProps } from "@/interface/interface";
 import { PopupApplyJob } from "@/app/viec-lam/[id]/popup-apply-job";
 import { REMOVE_SAVE_JOB } from "@/utils/api-url";
 import axiosInstance from "@/utils/axios";
@@ -8,6 +7,8 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { convertToMillionDongFixed } from "@/utils/business/custom-hook";
+import { IJobSaveProps } from "@/interface/job";
 
 export const InfomationJobSave = ({ item, mutate }: IJobSaveProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,23 +47,34 @@ export const InfomationJobSave = ({ item, mutate }: IJobSaveProps) => {
   return (
     <div className="border-[1px] border-[#d9dbe9] bg-white p-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
       <div className="sm:flex items-center my-2 h-full">
-        <div className="w-20 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
+        <div className="flex-auto w-28 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
           <Link href={`/viec-lam/${item.jobSlug}`}>
             <img src="/imgs/logo-work.png" alt="" className="w-full" />
           </Link>
         </div>
-        <div className="text-center sm:text-start w-full">
+        <div className="flex-auto w-72 text-center sm:text-start w-full">
           <div className="sm:flex justify-between">
-            <div className="text-[16px]	leading-[18px] font-bold text-[#FF3600] ">
+            <div className=" text-[16px]	leading-[18px] font-bold text-[#FF3600] ">
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 {item.positionText}
               </Link>
             </div>
-            <div className="text-sm font-normal text-default">
-              {" "}
-              {item.salaryFrom > 0 && item.salaryTo > 0
-                ? `${item.salaryFrom} - ${item.salaryTo} triệu`
-                : "Thoả thuận"}
+            <div className="text-sm font-normal text-default whitespace-nowrap">
+              {item.aggrement
+                ? "Thoả thuận"
+                : `${convertToMillionDongFixed(
+                    item.salaryFrom,
+                    item.currencyCode
+                  )} - ${convertToMillionDongFixed(
+                    item.salaryTo,
+                    item.currencyCode
+                  )} ${
+                    item.currencyCode === "0"
+                      ? "Triệu"
+                      : item.currencyCode === "1"
+                      ? "USD"
+                      : ""
+                  }`}
             </div>
           </div>
           <div className="text-sm font-medium font-normal mt-2 ">

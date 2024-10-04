@@ -6,7 +6,7 @@ export const convertParams = (params: any) => {
     .join("&");
 };
 
-export const converNumber = (value: number) => {
+export const convertNumber = (value: number) => {
   return numeral(value).format("0,0");
 };
 

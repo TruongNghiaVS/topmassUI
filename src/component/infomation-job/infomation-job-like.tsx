@@ -1,54 +1,55 @@
 "use client";
 
 import { useLoading } from "@/app/context/loading";
-import { PopupLoginDetailJob } from "@/app/viec-lam/[id]/popup-login-detail-job";
-import { IInfomationJobProps } from "@/interface/job";
+import { IInfomationJobProps, IInfomationJobSameProps } from "@/interface/job";
 import { ADD_SAVE_JOB, REMOVE_SAVE_JOB } from "@/utils/api-url";
 import axiosInstance from "@/utils/axios";
-import {
-  converNumber,
-  convertToMillionDongFixed,
-} from "@/utils/business/custom-hook";
-import { getToken } from "@/utils/token";
+import { convertToMillionDongFixed } from "@/utils/business/custom-hook";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { useState } from "react";
 import { toast } from "react-toastify";
+import { WrapButtonLogin } from "../button-modal-login";
+import { HeartIcon as HeartIconSolid } from "@heroicons/react/16/solid";
 
-export const InfomationJobLike = ({ item }: IInfomationJobProps) => {
+export const InfomationJobLike = ({
+  item,
+  mutate,
+}: IInfomationJobSameProps) => {
   const { setLoading } = useLoading();
-  const [isOpenModalLogin, setIsOpenModalLogin] = useState(false);
 
   const likeJob = async () => {
-    const token = getToken();
-    if (!token) {
-      setIsOpenModalLogin(true);
-    } else {
-      setLoading(true);
-
-      try {
-        const url = item.isSave ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
-        await axiosInstance.post(url, {
-          jobId: item.jobSlug,
-        });
+    setLoading(true);
+    try {
+      const url = item.isSave ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
+      await axiosInstance.post(url, {
+        jobId: item.jobSlug,
+      });
+      if (!item.isSave) {
         toast.success("Lưu tin thành công");
-      } catch (error) {
-        toast.error("Lưu tin bị lỗi");
-      } finally {
-        setLoading(false);
+      } else {
+        toast.success("Bỏ lưu tin thành công");
       }
+      if (mutate) mutate();
+    } catch (error) {
+      if (!item.isSave) {
+        toast.success("Lưu tin thất bại");
+      } else {
+        toast.success("Bỏ lưu tin thất bại");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="border-[1px] border-[#d9dbe9]  bg-white p-2 sm:mt-0 mt-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
       <div className="xl:flex grid sm:justify-start justify-center items-center my-2">
-        <div className="w-20 lg:mx-0 lg:mr-8 mx-auto lg:mb-0 mb-2">
+        <div className="flex-auto w-20 lg:mx-0 lg:mr-8 mx-auto lg:mb-0 mb-2">
           <Link href={`/viec-lam/${item.jobSlug}`}>
             <img src="/imgs/logo-work.png" alt="" className="w-full" />
           </Link>
         </div>
-        <div className="text-center sm:text-start grow">
+        <div className=" flex-auto w-72 text-center sm:text-start grow">
           <div className="text-[16px]	leading-[22px] font-bold line-clamp-2 ">
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
@@ -85,9 +86,13 @@ export const InfomationJobLike = ({ item }: IInfomationJobProps) => {
                 </div>
               </div>
             </Link>
-            <div className="cursor-pointer" onClick={likeJob}>
-              <HeartIcon className="w-6 text-[#CCCACA]" />
-            </div>
+            <WrapButtonLogin onClick={() => likeJob()}>
+              {item.isSave ? (
+                <HeartIconSolid className="w-6 text-[#FC7E00]" />
+              ) : (
+                <HeartIcon className="w-6 text-[#FC7E00]" />
+              )}
+            </WrapButtonLogin>
           </div>
         </div>
       </div>

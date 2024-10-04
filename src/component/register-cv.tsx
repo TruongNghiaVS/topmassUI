@@ -3,7 +3,6 @@
 import { CloudArrowUpFillBootstrapIcon } from "@/theme/icons/cloudArrowUpFillBootstrapIcon";
 import { ClipboardDocumentListIcon, EyeIcon } from "@heroicons/react/16/solid";
 import { InfomationJobCV } from "./infomation-job/infomation-job-cv";
-import { jobCV } from "@/mockup-data/data";
 import { InfomationUser } from "./infomation-user-right";
 import Link from "next/link";
 import useSWR from "swr";
@@ -13,14 +12,17 @@ import { ICvCreate } from "@/interface/interface";
 import { useEffect, useState } from "react";
 import { PopupUploadCv } from "./popup-upload-cv";
 import { IJob } from "@/interface/job";
+import { PopupApplyJob } from "@/app/viec-lam/[id]/popup-apply-job";
 
 export const RegisterCV = () => {
   const [cvCreate, setCvCreate] = useState<ICvCreate[]>([]);
   const [cvUpdate, setCvUpdate] = useState<ICvCreate[]>([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenModalApply, setIsOpenModalApply] = useState(false);
+  const [slugItem, setSlugItem] = useState("");
 
   const { data: listCv, error, mutate } = useSWR(GET_ALL_CV, fetcher);
-  const { data: jobs } = useSWR(GET_SUITABLEJOB, fetcher);
+  const { data: jobs, mutate: mutateJob } = useSWR(GET_SUITABLEJOB, fetcher);
 
   useEffect(() => {
     if (listCv) {
@@ -133,7 +135,12 @@ export const RegisterCV = () => {
               {jobs?.data.map((item: IJob, idx: number) => {
                 return (
                   <div key={idx} className="mt-2">
-                    <InfomationJobCV item={item} />
+                    <InfomationJobCV
+                      item={item}
+                      onOpen={() => setIsOpenModalApply(true)}
+                      setSlugItem={setSlugItem}
+                      mutate={mutateJob}
+                    />
                   </div>
                 );
               })}
@@ -148,6 +155,12 @@ export const RegisterCV = () => {
         isOpenModal={isOpenModal}
         onClose={() => setIsOpenModal(false)}
         mutate={mutate}
+      />
+
+      <PopupApplyJob
+        isModalOpen={isOpenModalApply}
+        onClose={() => setIsOpenModalApply(false)}
+        jobId={slugItem}
       />
     </div>
   );

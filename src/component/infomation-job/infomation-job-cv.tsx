@@ -1,9 +1,40 @@
-import { IInfomationJobProps } from "@/interface/job";
-import { TrashIcon } from "@heroicons/react/16/solid";
+import { IjobCompanyDisplay } from "@/interface/job";
 import { HeartIcon } from "@heroicons/react/24/outline";
+import { HeartIcon as HeartIconSolid } from "@heroicons/react/16/solid";
 import Link from "next/link";
+import { WrapButtonLogin } from "../button-modal-login";
+import { ADD_SAVE_JOB, REMOVE_SAVE_JOB } from "@/utils/api-url";
+import axiosInstance from "@/utils/axios";
+import { toast } from "react-toastify";
 
-export const InfomationJobCV = ({ item }: IInfomationJobProps) => {
+export const InfomationJobCV = ({
+  item,
+  mutate,
+  onOpen,
+  setSlugItem,
+}: IjobCompanyDisplay) => {
+  const likeJob = async () => {
+    try {
+      const url = item.isSave ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
+      await axiosInstance.post(url, {
+        jobId: item.jobSlug,
+      });
+      if (!item.isSave) {
+        toast.success("Lưu tin thành công");
+      } else {
+        toast.success("Bỏ lưu tin thành công");
+      }
+      if (mutate) mutate();
+    } catch (error) {
+      if (!item.isSave) {
+        toast.success("Lưu tin thất bại");
+      } else {
+        toast.success("Bỏ lưu tin thất bại");
+      }
+    } finally {
+    }
+  };
+
   return (
     <div className="border-[1px] border-[#d9dbe9] bg-white p-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
       <div className="sm:flex items-center my-2 h-full">
@@ -41,15 +72,28 @@ export const InfomationJobCV = ({ item }: IInfomationJobProps) => {
               </div>
             </div>
             <div className="flex justify-center mt-4 sm:mt-0">
-              <button className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2">
-                Ứng tuyển
-              </button>
-              <button>
-                <HeartIcon className="w-6 mr-2 text-default" />
-              </button>
-              <button>
-                <TrashIcon className="w-6 text-default" />
-              </button>
+              {item.isApply == true ? (
+                <button className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2">
+                  Đã ứng tuyển
+                </button>
+              ) : (
+                <WrapButtonLogin
+                  className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2"
+                  onClick={() => {
+                    setSlugItem(item.jobSlug);
+                    onOpen();
+                  }}
+                >
+                  Ứng tuyển
+                </WrapButtonLogin>
+              )}
+              <WrapButtonLogin onClick={() => likeJob()}>
+                {item.isSave ? (
+                  <HeartIconSolid className="w-6 text-[#FC7E00]" />
+                ) : (
+                  <HeartIcon className="w-6 text-[#FC7E00]" />
+                )}
+              </WrapButtonLogin>
             </div>
           </div>
         </div>

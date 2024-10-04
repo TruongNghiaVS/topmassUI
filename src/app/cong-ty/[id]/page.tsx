@@ -15,7 +15,6 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { PopupLoginDetailJob } from "../../viec-lam/[id]/popup-login-detail-job";
 import { getToken } from "@/utils/token";
 import { useLoading } from "@/app/context/loading";
 import axiosInstance, { fetcher } from "@/utils/axios";
@@ -30,6 +29,8 @@ import {
 } from "@/utils/api-url";
 import { IFormCompany } from "@/interface/search-job";
 import { IJob } from "@/interface/job";
+import { WrapButtonLogin } from "@/component/button-modal-login";
+import { PopupApplyJob } from "@/app/viec-lam/[id]/popup-apply-job";
 
 export default function CompanyDetail({ params }: { params: { id: string } }) {
   const schema = yup.object().shape({
@@ -37,8 +38,8 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
     location: yup.string(),
   });
   const { id } = params;
-  const [isOpenModalLogin, setIsOpenModalLogin] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [slugItem, setSlugItem] = useState("");
   const { setLoading } = useLoading();
   const [searchObj, setSearchObj] = useState({
     work: "",
@@ -80,19 +81,6 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
       ]);
     }
   }, [allProvinces]);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOpenModal = () => {
-    const token = getToken();
-    if (token) {
-      AddFollow();
-    } else {
-      setIsOpenModalLogin(true);
-    }
-  };
 
   const companyDetail = detail?.data;
   const AddFollow = async () => {
@@ -171,14 +159,14 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
               <div className="md:mt-4 lg:mt-0 md:grid justify-centerpx-8 py-2">
                 {companyDetail?.isFollow == false ? (
                   <div className="">
-                    <button
+                    <WrapButtonLogin
                       className="py-2 px-4 bg-white text-default rounded-lg"
                       onClick={() => {
-                        handleOpenModal();
+                        AddFollow();
                       }}
                     >
                       + Theo dõi công ty
-                    </button>
+                    </WrapButtonLogin>
                   </div>
                 ) : (
                   <div className="flex justify-center items-center">
@@ -245,8 +233,9 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
                     return (
                       <div key={index.toString()} className="mt-4">
                         <InfomationJobCompany
-                          handleOpenModal={handleOpenModal}
                           item={value}
+                          onOpen={() => setIsModalOpen(true)}
+                          setSlugItem={setSlugItem}
                           mutate={mutateAllJobs}
                         />
                       </div>
@@ -299,12 +288,12 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
+        <PopupApplyJob
+          isModalOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          jobId={slugItem}
+        />
       </div>
-      <PopupLoginDetailJob
-        isModalOpen={isOpenModalLogin}
-        onClose={() => setIsOpenModalLogin(false)}
-        onOpen={openModal}
-      />
     </div>
   );
 }

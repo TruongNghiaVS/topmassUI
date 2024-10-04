@@ -1,5 +1,5 @@
 import { TitleCustom } from "@/component/custom-title";
-import { InfomationJobDetail } from "@/component/infomation-job/infomation-job-detail";
+import { InfomationJobLikeDetail } from "@/component/infomation-job/infomation-job-like-detail";
 import { IAllJobsProps } from "@/interface/job";
 
 export const JobLike = ({ jobs = [] }: IAllJobsProps) => {
@@ -12,7 +12,7 @@ export const JobLike = ({ jobs = [] }: IAllJobsProps) => {
       {jobs.map((value, index) => {
         return (
           <div className="mt-2" key={index}>
-            <InfomationJobDetail item={value} />
+            <InfomationJobLikeDetail item={value} />
           </div>
         );
       })}

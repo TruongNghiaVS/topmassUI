@@ -1,5 +1,5 @@
 import { useLoading } from "@/app/context/loading";
-import { ILogin, IModalLoginProps } from "@/interface/interface";
+import { ILogin } from "@/interface/interface";
 import Modal from "@/component/modal";
 import { LOGIN } from "@/utils/api-url";
 import { axiosInstanceNotToken } from "@/utils/axios";
@@ -11,13 +11,12 @@ import * as yup from "yup";
 import Cookies from "js-cookie";
 import TmInput from "@/component/hook-form/input";
 import Link from "next/link";
+import { useModalStore } from "@/store/useModalStore";
+import { reset } from "numeral";
 
-export const PopupLoginDetailJob = ({
-  isModalOpen,
-  onClose,
-  onOpen,
-}: IModalLoginProps) => {
+export const ModalLogin = () => {
   const { setLoading } = useLoading();
+  const { isOpen, closeModal } = useModalStore();
 
   const schema = yup.object().shape({
     userName: yup
@@ -48,8 +47,8 @@ export const PopupLoginDetailJob = ({
         Cookies.set("token", response.token, { expires: 7 });
         toast.success("Đăng nhập thành công");
       }
-      onClose();
-      if (onOpen) onOpen();
+      reset();
+      closeModal();
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(
@@ -74,8 +73,8 @@ export const PopupLoginDetailJob = ({
 
   return (
     <Modal
-      isOpen={isModalOpen}
-      onClose={onClose}
+      isOpen={isOpen}
+      onClose={closeModal}
       className="md:min-w-[700px] max-h-[60vh] overflow-auto relative"
     >
       <div>

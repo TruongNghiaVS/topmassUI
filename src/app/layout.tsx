@@ -13,6 +13,7 @@ import GlobalLoadingIndicator from "@/component/loading-componet";
 import useAuth from "@/component/hook/useAuthToken";
 import { Suspense } from "react";
 import { SWRConfig } from "swr";
+import { ModalLogin } from "@/component/modal-login";
 
 dayjs.extend(customParseFormat);
 
@@ -79,6 +80,7 @@ export default function RootLayout({
               {!pathValidated.includes(path) && <Footer />}
             </SWRConfig>
           </Suspense>
+          <ModalLogin />
         </LoadingProvider>
       </body>
     </html>

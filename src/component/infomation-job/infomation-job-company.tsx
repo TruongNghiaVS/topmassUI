@@ -1,39 +1,45 @@
-import { PopupApplyJob } from "@/app/viec-lam/[id]/popup-apply-job";
 import { HeartIcon } from "@heroicons/react/24/outline";
-import { HeartIcon as HearIconSolid } from "@heroicons/react/16/solid";
 import Link from "next/link";
-import { useState } from "react";
-import { getToken } from "@/utils/token";
+import { HeartIcon as HeartIconSolid } from "@heroicons/react/16/solid";
 import { IjobCompanyDisplay } from "@/interface/job";
 import { convertToMillionDongFixed } from "@/utils/business/custom-hook";
+import { WrapButtonLogin } from "../button-modal-login";
+import { ADD_SAVE_JOB, REMOVE_SAVE_JOB } from "@/utils/api-url";
+import axiosInstance from "@/utils/axios";
+import { toast } from "react-toastify";
+import { useLoading } from "@/app/context/loading";
 
 export const InfomationJobCompany = ({
   item,
-  handleOpenModal,
   mutate,
+  onOpen,
+  setSlugItem,
 }: IjobCompanyDisplay) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    const token = getToken();
-    if (token) {
-      setIsModalOpen(true);
-    } else {
-      handleOpenModal();
+  const { setLoading } = useLoading();
+  const likeJob = async () => {
+    setLoading(true);
+    try {
+      const url = item.isSave ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
+      await axiosInstance.post(url, {
+        jobId: item.jobSlug,
+      });
+      if (!item.isSave) {
+        toast.success("Lưu tin thành công");
+      } else {
+        toast.success("Bỏ lưu tin thành công");
+      }
+      if (mutate) mutate();
+    } catch (error) {
+      if (!item.isSave) {
+        toast.success("Lưu tin thất bại");
+      } else {
+        toast.success("Bỏ lưu tin thất bại");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
-  const openFormSaveJob = () => {
-    const token = getToken();
-    if (token) {
-    } else {
-      handleOpenModal();
-    }
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
   return (
     <div className="border-[1px] border-[#d9dbe9] bg-white p-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
       <div className="sm:flex items-center my-2 h-full">
@@ -44,12 +50,12 @@ export const InfomationJobCompany = ({
         </div>
         <div className="text-center sm:text-start w-full">
           <div className="sm:flex justify-between">
-            <div className="text-[16px]	leading-[18px] font-bold ">
+            <div className="text-[16px] flex-auto	leading-[18px] font-bold ">
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 {item.positionText}
               </Link>
             </div>
-            <div className="text-sm font-normal text-default">
+            <div className="text-sm font-normal whitespace-nowrap text-default">
               {item.aggrement
                 ? "Thoả thuận"
                 : `${convertToMillionDongFixed(
@@ -82,33 +88,28 @@ export const InfomationJobCompany = ({
                   Đã ứng tuyển
                 </button>
               ) : (
-                <button
+                <WrapButtonLogin
                   className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2"
-                  onClick={openModal}
+                  onClick={() => {
+                    setSlugItem(item.jobSlug);
+                    onOpen();
+                  }}
                 >
                   Ứng tuyển
-                </button>
+                </WrapButtonLogin>
               )}
 
-              {item.isSave == true ? (
-                <button>
-                  <HearIconSolid className="w-6 mr-2 text-default" />
-                </button>
-              ) : (
-                <button onClick={openFormSaveJob}>
-                  <HeartIcon className="w-6 mr-2 text-default" />
-                </button>
-              )}
+              <WrapButtonLogin onClick={() => likeJob()}>
+                {item.isSave ? (
+                  <HeartIconSolid className="w-6 text-[#FC7E00]" />
+                ) : (
+                  <HeartIcon className="w-6 text-[#FC7E00]" />
+                )}
+              </WrapButtonLogin>
             </div>
           </div>
         </div>
       </div>
-      <PopupApplyJob
-        isModalOpen={isModalOpen}
-        onClose={closeModal}
-        jobId={item.jobSlug}
-        mutate={mutate}
-      />
     </div>
   );
 };

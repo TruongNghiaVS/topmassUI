@@ -79,6 +79,7 @@ export interface ISearchJobWithTypeFilter extends IHotJobProps {
 
 export interface IAllJobsProps {
   jobs: IJob[];
+  mutate?: KeyedMutator<any>;
 }
 
 export interface IInfomationJobProps {
@@ -97,9 +98,19 @@ export interface IJobSameProps {
 
 export interface IInfomationJobSameProps {
   item: IJob;
+  mutate?: KeyedMutator<any>;
 }
 
 export interface IjobCompanyDisplay extends IInfomationJobSameProps {
-  handleOpenModal: () => void;
+  setSlugItem: Dispatch<SetStateAction<string>>;
+  onOpen: () => void;
   mutate?: KeyedMutator<any>;
+}
+
+export interface IJobApplyProps {
+  item: IJob;
+}
+
+export interface IJobSaveProps extends IJobApplyProps {
+  mutate: KeyedMutator<any>;
 }

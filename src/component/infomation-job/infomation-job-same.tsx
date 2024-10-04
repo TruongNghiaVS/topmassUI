@@ -2,11 +2,20 @@
 
 import { IInfomationJobSameProps } from "@/interface/job";
 import { HeartIcon } from "@heroicons/react/24/outline";
+import { HeartIcon as HeartIconSolid } from "@heroicons/react/16/solid";
 import dayjs from "dayjs";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { WrapButtonLogin } from "../button-modal-login";
+import { useLoading } from "@/app/context/loading";
+import { ADD_SAVE_JOB, REMOVE_SAVE_JOB } from "@/utils/api-url";
+import axiosInstance from "@/utils/axios";
+import { convertToMillionDongFixed } from "@/utils/business/custom-hook";
 
-export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
+export const InfomationJobSame = ({
+  item,
+  mutate,
+}: IInfomationJobSameProps) => {
   const groupType = item.fieldArray.split(",");
   let listShow = groupType.length > 3 ? groupType.slice(0, 3) : groupType;
   listShow = listShow.filter((item) => item.length > 0);
@@ -17,6 +26,32 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
     return day === 0 ? "Mới cập nhật" : `Cập nhật ${day} trước`;
   };
 
+  const { setLoading } = useLoading();
+
+  const handleSaveJob = async () => {
+    setLoading(true);
+    try {
+      const url = item.isSave ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
+      await axiosInstance.post(url, {
+        jobId: item.jobSlug,
+      });
+      if (!item.isSave) {
+        toast.success("Lưu tin thành công");
+      } else {
+        toast.success("Bỏ lưu tin thành công");
+      }
+      if (mutate) mutate();
+    } catch (error) {
+      if (!item.isSave) {
+        toast.success("Lưu tin thất bại");
+      } else {
+        toast.success("Bỏ lưu tin thất bại");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const styleAfter =
     "after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]";
   const styleAfterArray =
@@ -24,12 +59,16 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
 
   return (
     <div className="border-[1px] bg-white p-4 rounded-md hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px] relative border-solid border-[#FC7E00]">
-      <div
+      <WrapButtonLogin
         className="absolute right-2 top-2 cursor-pointer"
-        onClick={() => toast.success("Thích tin thành công")}
+        onClick={() => handleSaveJob()}
       >
-        <HeartIcon className="w-6 text-[#FC7E00]" />
-      </div>
+        {item.isSave ? (
+          <HeartIconSolid className="w-6 text-[#FC7E00]" />
+        ) : (
+          <HeartIcon className="w-6 text-[#FC7E00]" />
+        )}
+      </WrapButtonLogin>
       <div className="sm:flex mt-4 ">
         <div className="w-24 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
           <Link href={`/viec-lam/${item.jobSlug}`}>
@@ -45,7 +84,7 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
           </Link>
         </div>
         <div className="text-center sm:text-start">
-          <div className="text-[16px]	leading-6 font-bold ">
+          <div className="text-[16px]	leading-6 font-bold line-clamp-2">
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
                 hot
@@ -63,9 +102,21 @@ export const InfomationJobSame = ({ item }: IInfomationJobSameProps) => {
               }`}
             >
               <Link href={`/viec-lam/${item.jobSlug}`}>
-                {item.salaryFrom > 0 && item.salaryTo > 0
-                  ? `${item.salaryFrom} - ${item.salaryTo} triệu`
-                  : "Thoả thuận"}
+                {item.aggrement
+                  ? "Thoả thuận"
+                  : `${convertToMillionDongFixed(
+                      item.salaryFrom,
+                      item.currencyCode
+                    )} - ${convertToMillionDongFixed(
+                      item.salaryTo,
+                      item.currencyCode
+                    )} ${
+                      item.currencyCode === "0"
+                        ? "Triệu"
+                        : item.currencyCode === "1"
+                        ? "USD"
+                        : ""
+                    }`}
               </Link>
             </div>
             <div className="text-sm px-[0.65em]">

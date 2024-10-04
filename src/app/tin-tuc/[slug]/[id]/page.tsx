@@ -28,7 +28,10 @@ const NewDetail = ({ params }: { params: { id: string } }) => {
 
   const list = [1, 2, 3, 4];
 
-  const { data: allJobs } = useSWR(`${GET_JOBSEARCH_HOTJOB}`, fetcher);
+  const { data: allJobs, mutate: mutateAllJob } = useSWR(
+    `${GET_JOBSEARCH_HOTJOB}`,
+    fetcher
+  );
   return (
     <div className="pt-2">
       <div className="mx-auto container">
@@ -67,7 +70,7 @@ const NewDetail = ({ params }: { params: { id: string } }) => {
               {allJobs?.data.map((item: IJob, idx: number) => {
                 return (
                   <div className="mt-4" key={idx}>
-                    <InfomationJobLike item={item} />
+                    <InfomationJobLike item={item} mutate={mutateAllJob} />
                   </div>
                 );
               })}

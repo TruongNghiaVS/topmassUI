@@ -113,10 +113,6 @@ export interface IApplyModal {
   mutate?: KeyedMutator<any>;
 }
 
-export interface IModalLoginProps extends IApplyModal {
-  onOpen?: () => void;
-}
-
 export interface ICv {
   label: string;
   link: string;
@@ -156,33 +152,6 @@ export interface IInfomationBasicJob {
 
 export interface IInfomationBasicJobProps {
   infomation: IInfomationBasicJob;
-}
-
-export interface IJobAplly {
-  positionText: string;
-  companyName: string;
-  businessDate: string;
-  logoImage: string;
-  salaryFrom: number;
-  salaryTo: number;
-  fieldArray: string;
-  id: number;
-  jobId: number;
-  jobSlug: string;
-  lastUpdate: string;
-  reasonText: string;
-  reasonId: number;
-  note: string;
-  linkFile: string;
-  locationText: string;
-}
-
-export interface IJobApplyProps {
-  item: IJobAplly;
-}
-
-export interface IJobSaveProps extends IJobApplyProps {
-  mutate: KeyedMutator<any>;
 }
 
 export interface ICvCreate {
@@ -549,7 +518,7 @@ export interface IVoluntaryCompulsoryInsurance extends IInsuranceOneTime {
 }
 
 export interface IButtonLogin {
-  className: string;
+  className?: string;
   onClick: () => void;
   children: ReactNode;
 }

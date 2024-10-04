@@ -7,8 +7,6 @@ import {
 } from "@heroicons/react/16/solid";
 import { HOST_RECUMENT } from "@/config-global";
 
-console.log(HOST_RECUMENT);
-
 export const Footer = () => {
   const topMass = [
     {

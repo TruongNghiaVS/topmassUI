@@ -1,12 +1,7 @@
 import Link from "next/link";
-import { PopupLoginDetailJob } from "../viec-lam/[id]/popup-login-detail-job";
-import { useCallback, useEffect, useState } from "react";
-import { IInfomationCompany } from "../../interface/interface";
+import { ICompanyData } from "../../interface/interface";
 
-export const InfomationCompany = ({
-  item,
-  handleOpenModal,
-}: IInfomationCompany) => {
+export const InfomationCompany = ({ item }: ICompanyData) => {
   let slugCompany = "/cong-ty/" + item.slug;
   return (
     <div className="overflow-hidden rounded-lg md:mb-10 mb-4 border border-[#F37A20]">
@@ -32,12 +27,7 @@ export const InfomationCompany = ({
               <div className="font-normal text-[10px]">
                 {item.followCount} lượt theo dõi
               </div>
-              <button
-                onClick={() => {
-                  handleOpenModal();
-                }}
-                className="text-default text-xs "
-              >
+              <button onClick={() => {}} className="text-default text-xs ">
                 + Theo dõi
               </button>
             </div>

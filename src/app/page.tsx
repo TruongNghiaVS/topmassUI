@@ -23,10 +23,7 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const { data: companys } = useSWR(GET_ALL_COMPANY, fetcher);
   const { data: allJobs } = useSWR(`${GET_HOT_JOB}?ModeGet=${search}`, fetcher);
-  const { data: suitableJob } = useSWR(
-    `${GET_SUITABLEJOB}?ModeGet=${search}`,
-    fetcher
-  );
+  const { data: suitableJob } = useSWR(`${GET_SUITABLEJOB}`, fetcher);
 
   const { data: blogs } = useSWR(
     `${GET_ALLBLOGS_BYCATEGORY}?SlugCategory=bi-quyet-tim-viec`,

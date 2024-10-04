@@ -1,13 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CustomRadio from "@/component/hook-form/customRadio";
-import { companys } from "@/mockup-data/data";
-import { InfomationCompany } from "../cong-ty/infomation-company";
 import { InfomationJobSave } from "@/component/infomation-job/infomation-job-save";
 import useSWR from "swr";
 import { GET_JOB_SAVE } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
-import { IJobAplly } from "../../interface/interface";
+import { IJob } from "@/interface/job";
 
 export default function JobSave() {
   const [selectedRadio, setSelectedRadio] = useState("");
@@ -54,7 +52,7 @@ export default function JobSave() {
               </div>
               <div className="my-10 text-center p-4">
                 {jobSave?.length > 0 ? (
-                  jobSave?.map((item: IJobAplly, index: number) => {
+                  jobSave?.map((item: IJob, index: number) => {
                     return (
                       <div key={index} className="mt-4">
                         <InfomationJobSave item={item} mutate={mutate} />

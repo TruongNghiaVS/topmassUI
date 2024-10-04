@@ -2,15 +2,19 @@
 import Link from "next/link";
 import { CompanySeenCV } from "./company-see-cv";
 import { InfomationJobSee } from "@/component/infomation-job/infomation-job-see";
-import { jobSave } from "@/mockup-data/data";
 import { InfomationUser } from "@/component/infomation-user-right";
 import { GET_SUITABLEJOB } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
 import useSWR from "swr";
 import { IJob } from "@/interface/job";
+import { PopupApplyJob } from "../viec-lam/[id]/popup-apply-job";
+import { useState } from "react";
 
 export default function EmployeeSeeCv() {
-  const { data: jobs } = useSWR(GET_SUITABLEJOB, fetcher);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [slugItem, setSlugItem] = useState("");
+
+  const { data: jobs, mutate } = useSWR(GET_SUITABLEJOB, fetcher);
   const list = [1, 2, 3, 4];
   return (
     <div className="bg-[#F4F5F5] max-1280:px-2">
@@ -29,13 +33,13 @@ export default function EmployeeSeeCv() {
               <div className="text-center mt-8">
                 <Link
                   href="/quan-ly-cv"
-                  className="mr-2 px-2 py-1 text-white bg-[#F37A20] rounded"
+                  className="mr-2 px-4 py-2 text-white bg-[#F37A20] rounded"
                 >
                   Tạo CV
                 </Link>
                 <Link
                   href="/viec-lam"
-                  className="mr-2 px-2 py-1 text-white bg-[#F37A20] rounded"
+                  className="mr-2 px-4 py-2 text-white bg-[#F37A20] rounded"
                 >
                   Gợi ý tìm việc làm
                 </Link>
@@ -52,7 +56,12 @@ export default function EmployeeSeeCv() {
               {jobs?.data.map((item: IJob, index: number) => {
                 return (
                   <div className="mt-4" key={index}>
-                    <InfomationJobSee item={item} />
+                    <InfomationJobSee
+                      item={item}
+                      onOpen={() => setIsModalOpen(true)}
+                      setSlugItem={setSlugItem}
+                      mutate={mutate}
+                    />
                   </div>
                 );
               })}
@@ -72,6 +81,11 @@ export default function EmployeeSeeCv() {
           </div>
         </div>
       </div>
+      <PopupApplyJob
+        isModalOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        jobId={slugItem}
+      />
     </div>
   );
 }

@@ -13,10 +13,7 @@ import { GET_ALL_COMPANY } from "@/utils/api-url";
 import useSWR from "swr";
 import { fetcher } from "@/utils/axios";
 import { ICompanyItemData } from "../../interface/interface";
-import { getToken } from "@/utils/token";
 import { useState } from "react";
-import { PopupLoginDetailJob } from "../viec-lam/[id]/popup-login-detail-job";
-import { useLoading } from "../context/loading";
 
 export default function CompanyPage() {
   const [key, setKey] = useState("");
@@ -34,25 +31,6 @@ export default function CompanyPage() {
     `${GET_ALL_COMPANY}?KeyWord=${key}`,
     fetcher
   );
-  const [isOpenModalLogin, setIsOpenModalLogin] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOpenModal = () => {
-    const token = getToken();
-    if (token) {
-    } else {
-      setIsOpenModalLogin(true);
-    }
-  };
-
-  const { setLoading } = useLoading();
 
   const onSubmit: SubmitHandler<IFormSearchDetail> = async (data) => {
     setKey(data.key || "");
@@ -103,10 +81,7 @@ export default function CompanyPage() {
                   (value: ICompanyItemData, index: number) => {
                     return (
                       <div key={index}>
-                        <InfomationCompany
-                          handleOpenModal={handleOpenModal}
-                          item={value}
-                        />
+                        <InfomationCompany item={value} />
                       </div>
                     );
                   }
@@ -123,11 +98,6 @@ export default function CompanyPage() {
       <div>
         <Description />
       </div>
-      <PopupLoginDetailJob
-        isModalOpen={isOpenModalLogin}
-        onClose={() => setIsOpenModalLogin(false)}
-        onOpen={openModal}
-      />
     </div>
   );
 }

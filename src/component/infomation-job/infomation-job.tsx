@@ -1,5 +1,5 @@
 import { IInfomationJobProps } from "@/interface/job";
-import { converNumber } from "@/utils/business/custom-hook";
+import { convertToMillionDongFixed } from "@/utils/business/custom-hook";
 import Link from "next/link";
 
 export const InfomationJob = ({ item }: IInfomationJobProps) => {
@@ -33,11 +33,15 @@ export const InfomationJob = ({ item }: IInfomationJobProps) => {
                 <div className="rounded-[3px] text-xs bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2">
                   {item.aggrement
                     ? "Thoả thuận"
-                    : `${converNumber(item.salaryFrom)} - ${converNumber(
-                        item.salaryTo
+                    : `${convertToMillionDongFixed(
+                        item.salaryFrom,
+                        item.currencyCode
+                      )} - ${convertToMillionDongFixed(
+                        item.salaryTo,
+                        item.currencyCode
                       )} ${
                         item.currencyCode === "0"
-                          ? "VNĐ"
+                          ? "Triệu"
                           : item.currencyCode === "1"
                           ? "USD"
                           : ""
