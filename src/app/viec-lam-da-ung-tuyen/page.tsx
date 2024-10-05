@@ -7,8 +7,8 @@ import { fetcher } from "@/utils/axios";
 import Link from "next/link";
 import { useState } from "react";
 import useSWR from "swr";
-import { IJobAplly } from "../../interface/interface";
 import { InfomationJobApply } from "@/component/infomation-job/infomation-job-apply";
+import { IJob } from "@/interface/job";
 
 export default function JobApply() {
   const [selectedValue, setSelectedValue] = useState("");
@@ -49,7 +49,7 @@ export default function JobApply() {
               </div>
               {JobApply?.data.length > 0 ? (
                 <div>
-                  {JobApply?.data.map((item: IJobAplly, index: number) => {
+                  {JobApply?.data.map((item: IJob, index: number) => {
                     return (
                       <div className="mt-4" key={index}>
                         <InfomationJobApply item={item} />

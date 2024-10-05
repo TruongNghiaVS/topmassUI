@@ -1,4 +1,4 @@
-import { IJobApplyProps } from "@/interface/interface";
+import { IJobApplyProps } from "@/interface/job";
 import dayjs from "dayjs";
 import Link from "next/link";
 
@@ -46,7 +46,7 @@ export const InfomationJobApply = ({ item }: IJobApplyProps) => {
               </Link>
             </div>
             <div className="text-xs font-normal hover:text-[#F37A20]">
-              <Link href={item.linkFile} target="_blank">
+              <Link href="#" target="_blank">
                 Xem cv
               </Link>
             </div>
