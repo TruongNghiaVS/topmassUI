@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ArrowLeftStartOnRectangleIcon,
   ArrowRightEndOnRectangleIcon,
   Bars3Icon,
   ChartBarIcon,
@@ -19,13 +20,15 @@ import { EnvelopePaperHeartFillBootstrapIcon } from "@/theme/icons/envelopePaper
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
-import { getToken } from "@/utils/token";
+import { getToken, removeToken } from "@/utils/token";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export const MenuMobile = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const { data: token } = useSWR("token", getToken, { refreshInterval: 500 });
-
+  const router = useRouter();
   const handleOpenMenuMobile = () => {
     setIsOpenMenu(true);
   };
@@ -294,6 +297,26 @@ export const MenuMobile = () => {
               );
             })}
           </div>
+          {isLogin && (
+            <div
+              className={` normal-case whitespace-nowrap my-2 p-0 rounded`}
+              onClick={() => {
+                removeToken();
+                setIsLogin(false);
+                toast.success("Đăng xuất thành công");
+                router.push("/");
+                setIsOpenMenu(false);
+              }}
+            >
+              <Link
+                href="#"
+                className={`font-medium text-[white] no-underline group-hover/item:text-default px-[15px] py-3 flex items-center relative`}
+              >
+                <ArrowLeftStartOnRectangleIcon className="text-default mr-2 text-white text-[15px] leading-4 w-6" />
+                Đăng xuất
+              </Link>
+            </div>
+          )}
           {!isLogin && (
             <div className="p-4">
               <div className="mt-2">

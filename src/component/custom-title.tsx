@@ -6,7 +6,7 @@ interface props {
 export const TitleCustom = ({ title, className }: props) => {
   return (
     <div
-      className={`text-[22px] px-0 overflow-visible mx-4 text-defaultText font-bold capitalize leading-[44px] relative mr-14 flex ${
+      className={`sm:text-[22px] text-lg px-0 overflow-visible mx-4 text-defaultText font-bold capitalize leading-[44px] relative mr-14 flex ${
         className && className
       }`}
     >
