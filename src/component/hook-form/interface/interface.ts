@@ -6,6 +6,7 @@ export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<any>;
   label?: string;
   icon?: any;
+  afterIcon?: any;
   placeholder?: string;
   type?: string;
   min?: number;

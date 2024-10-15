@@ -40,9 +40,9 @@ export const SliderForm = () => {
       <div className="w-full mt-4 relative ">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex items-stretch bg-white rounded-3xl py-2 px-4 shadow-[0px_-8px_0_rgb(248,158,27)] flex-wrap	"
+          className="flex items-stretch bg-white rounded-3xl py-2 px-4 shadow-[0px_-8px_0_rgb(248,158,27)] flex-wrap sm:flex-row flex-col	"
         >
-          <div className="flex-1 relative after:absolute after:right-0 after:top-0 after:bottom-0 after:w-[1px] after:h-[70%] after:bg-black after:my-auto">
+          <div className="flex-1 relative sm:after:absolute after:right-0 after:top-0 after:bottom-0 after:w-[1px] after:h-[70%] after:bg-black after:my-auto">
             <TmInput
               name="KeyWord"
               className="border-0"

@@ -17,7 +17,7 @@ export const InfomationJob = ({ item }: IInfomationJobProps) => {
             </Link>
           </div>
           <div className="flex-auto w-72 text-center sm:text-start mx-auto">
-            <div className="text-[16px]	leading-6 font-bold line-clamp-2">
+            <div className="text-[16px]	leading-6 font-bold py-1 line-clamp-2">
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
                   hot
@@ -25,12 +25,12 @@ export const InfomationJob = ({ item }: IInfomationJobProps) => {
                 {item.positionText}
               </Link>
             </div>
-            <div className="text-sm font-normal mt-2.5 ">
+            <div className="text-sm font-normal mt-2.5 line-clamp-2 ">
               <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
             </div>
             <Link href={`/viec-lam/${item.jobSlug}`}>
-              <div className="flex mt-4 justify-center sm:justify-start	">
-                <div className="rounded-[3px] text-xs bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2">
+              <div className="flex mt-4 justify-center items-cetner sm:justify-start	">
+                <div className="rounded-[3px] text-xs bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 whitespace-nowrap">
                   {item.aggrement
                     ? "Thoả thuận"
                     : `${convertToMillionDongFixed(
@@ -47,7 +47,7 @@ export const InfomationJob = ({ item }: IInfomationJobProps) => {
                           : ""
                       }`}
                 </div>
-                <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em]">
+                <div className="rounded-[3px] text-xs bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] whitespace-nowrap">
                   {item.locationText}
                 </div>
               </div>

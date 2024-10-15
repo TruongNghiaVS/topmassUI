@@ -39,7 +39,7 @@ export const SearchJobs = ({
           </div>
         </div>
         <div className="mt-2">
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-col sm:flex-row sm:space-x-4">
             <div className="mr-4">
               <TmSelect
                 icon={<FilterIcon className="w-4 mr-2" />}

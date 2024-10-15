@@ -53,17 +53,19 @@ export const HotCompany = ({ companys }: IHotCompanyProps) => {
                 return (
                   <SwiperSlide key={index} className="p-2">
                     <div className="hover:outline outline-[#F37A20] p-4 rounded-lg">
-                      <div className="flex justify-center">
+                      <div className="flex justify-center items-center">
                         <Link href={`/cong-ty/${item.slug}`}>
-                          <img
-                            src={
-                              item.logoFullLink
-                                ? item.logoFullLink
-                                : "/imgs/logo-work.png"
-                            }
-                            alt=""
-                            className="w-auto"
-                          />
+                          <div className="w-[220px] h-[220px] flex justify-center items-center">
+                            <img
+                              src={
+                                item.logoFullLink
+                                  ? item.logoFullLink
+                                  : "/imgs/logo-work.png"
+                              }
+                              alt=""
+                              className="w-full"
+                            />
+                          </div>
                         </Link>
                       </div>
                       <Link href={`/cong-ty/${item.slug}`}>

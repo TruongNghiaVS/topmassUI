@@ -52,7 +52,7 @@ export default function NewCategory({ params }: { params: { slug: string } }) {
     <div className="bg-[#f0f0f0] pb-10 max-1280:px-2">
       <div className="mx-auto container">
         <TitleCustom title={categoryName} className="py-8 text-3xl" />
-        <div className="grid grid-cols-4 gap-6">
+        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
           {DataAllBlogs?.data?.map((item: IBlogDataItem, index: number) => {
             return (
               <div key={index} className="col-span-1 bg-white">

@@ -27,7 +27,7 @@ const Modal = ({ isOpen, onClose, children, className, title }: ModalProps) => {
   return (
     <div className="relative z-[20]">
       <div className="modal-overlay rounded overflow-hidden ">
-        <div className="bg-white rounded mb-4  min-w-[600px]">
+        <div className="bg-white rounded mb-4 mx-2 md:min-w-[600px]">
           <div className="modal-header p-4 relative">
             {title && <div className="text-base font-bold">{title}</div>}
             <button className="modal-close" onClick={onClose}>
@@ -35,7 +35,7 @@ const Modal = ({ isOpen, onClose, children, className, title }: ModalProps) => {
             </button>
           </div>
           <div
-            className={`modal-content md:min-w-[700px] md:max-w-[700px] max-h-[60vh] overflow-auto relative ${
+            className={`modal-content md:min-w-[700px] md:max-w-[700px] w-full max-h-[60vh] overflow-auto relative ${
               className && className
             }`}
           >

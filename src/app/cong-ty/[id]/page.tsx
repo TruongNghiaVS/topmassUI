@@ -105,17 +105,17 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
 
   return (
     <div className="bg-[#F4F5F5]">
-      <div className="container mx-auto ">
+      <div className="container mx-auto mt-2">
         <div className="rounded-lg overflow-hidden">
-          <div>
+          <div className="max-h-60 ">
             <img
               src={`${companyDetail?.coverFullLink}`}
               alt=""
-              className="w-full"
+              className="w-full object-cover"
             />
           </div>
           <div className="relative py-4 lg:px-10 lg:pl-60 bg-[url(/imgs/bg-title-company.png)] bg-no-repeat bg-[length:100%_100%] max-1280:px-2">
-            <div className="w-[180px] h-[180px] rounded-full bg-white flex items-center justify-center lg:absolute left-10 top-[-90px] mx-auto lg:mt-0 md:mt-[-90px]">
+            <div className="w-[180px] h-[180px] rounded-full bg-white flex items-center justify-center lg:absolute left-10 top-[-90px] mx-auto lg:mt-0 md:mt-[-90px] overflow-hidden">
               <img
                 src={`${companyDetail?.logoFullLink}`}
                 alt=""

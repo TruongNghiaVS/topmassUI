@@ -29,7 +29,7 @@ export const ScrollFilterJob = ({
 
   return (
     <>
-      <div className="flex overflow-hidden px-2 lg:px-0 mt-2 lg:mt-0 items-center flex-1">
+      <div className="flex overflow-hidden sm:px-2 lg:px-0 mt-2 lg:mt-0 items-center flex-1">
         <div className="mr-2">
           <button
             className="border border-[#F37A20] rounded-full border-[2px] p-1 border-solid min-w-[auto]"

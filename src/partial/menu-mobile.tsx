@@ -43,6 +43,8 @@ export const MenuMobile = () => {
   useEffect(() => {
     if (token) {
       setIsLogin(true);
+    } else {
+      setIsLogin(false);
     }
     const handleScroll = () => {
       const scrollTop = divRef.current?.scrollTop ?? 0;
@@ -65,7 +67,7 @@ export const MenuMobile = () => {
       container?.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOpenMenu, token]);
+  }, [token, isOpenMenu]);
 
   const navItems = [
     {

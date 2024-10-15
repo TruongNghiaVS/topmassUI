@@ -35,15 +35,13 @@ export const SliderJob = ({ jobs }: IAllJobsProps) => {
       >
         {arrMap.map((values, index) => {
           return (
-            <div key={index}>
-              <SwiperSlide className="bg-primary w-full border-r">
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2">
-                  {values.map((value, idx) => {
-                    return <InfomationJob key={idx} item={value} />;
-                  })}
-                </div>
-              </SwiperSlide>
-            </div>
+            <SwiperSlide key={index} className="bg-primary w-full border-r">
+              <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2">
+                {values.map((value, idx) => {
+                  return <InfomationJob key={idx} item={value} />;
+                })}
+              </div>
+            </SwiperSlide>
           );
         })}
         {/* <div className="swiper-nav-btns">

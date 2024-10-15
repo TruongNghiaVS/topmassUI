@@ -43,7 +43,7 @@ export const InfomationJobLike = ({
 
   return (
     <div className="border-[1px] border-[#d9dbe9]  bg-white p-2 sm:mt-0 mt-4 rounded-md	hover:bg-hoverJob hover:outline-[#e5a2a3] hover:outline-[0.5px]">
-      <div className="xl:flex grid sm:justify-start justify-center items-center my-2">
+      <div className="xl:flex grid lg:justify-start justify-center items-center my-2">
         <div className="flex-auto w-20 lg:mx-0 lg:mr-8 mx-auto lg:mb-0 mb-2">
           <Link href={`/viec-lam/${item.jobSlug}`}>
             <img src="/imgs/logo-work.png" alt="" className="w-full" />
@@ -51,8 +51,8 @@ export const InfomationJobLike = ({
         </div>
         <div className=" flex-auto w-72 text-center sm:text-start grow">
           <div className="text-[16px]	leading-[22px] font-bold line-clamp-2 ">
-            <Link href={`/viec-lam/${item.jobSlug}`}>
-              <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
+            <Link href={`/viec-lam/${item.jobSlug}`} className="">
+              <span className="text-xs uppercase px-1 py-0.5 mr-2 text-white rounded-[10px] bg-[#F90808]">
                 hot
               </span>
               {item.positionText}
