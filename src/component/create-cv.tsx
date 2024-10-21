@@ -14,8 +14,8 @@ export const CreateCv = () => {
               </div>
             </div>
             <div className="text-white sm:text-base text-sm">
-              Tạo CV đơn giản với công cụ có sẳn, những cv mẫu đã được <br />
-              NTD đánh giá cao trước khi cho ra mắt trên hệ thống.
+              Tạo CV đơn giản với công cụ có sẵn, những CV mẫu đã được <br />
+              Nhà Tuyển dụng đánh giá cao trước khi cho ra mắt trên hệ thống
             </div>
             <Link
               href="/quan-ly-cv"

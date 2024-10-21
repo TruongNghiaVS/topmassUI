@@ -55,7 +55,7 @@ export default function NewCategory({ params }: { params: { slug: string } }) {
         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
           {DataAllBlogs?.data?.map((item: IBlogDataItem, index: number) => {
             return (
-              <div key={index} className="col-span-1 bg-white">
+              <div key={index} className="col-span-1">
                 <New item={item} slug={slug} />
               </div>
             );

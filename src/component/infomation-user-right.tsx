@@ -43,7 +43,7 @@ export const InfomationUser = () => {
         mutate();
       }
     } catch (error) {
-      toast.success("Chuyển trạng thái không thành công");
+      toast.error("Chuyển trạng thái không thành công");
     } finally {
       setLoading(false);
     }
@@ -56,9 +56,9 @@ export const InfomationUser = () => {
         <Avatar avatarLink={avatarLink} setAvatarLink={setAvatarLink} />
         <div>
           <div>Chào bạn</div>
-          <div>MKT VietStar</div>
+          <div>{currentUser?.firstName + " " + currentUser?.lastName}</div>
           <div className="text-xs inline-block px-2 py-1 bg-[#555555] text-white rounded">
-            Tài khoản đã xác thực
+            {currentUser?.authenticationLevelText}
           </div>
         </div>
       </div>

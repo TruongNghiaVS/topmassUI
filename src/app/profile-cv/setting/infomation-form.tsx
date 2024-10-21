@@ -42,6 +42,7 @@ export const InfomationUserCv = ({
     position: yup.string().required("Vui lòng nhập vị trí"),
     level: yup.string().required("Vui lòng nhập cấp bậc"),
     addressInfo: yup.string().required("Vui lòng nhập Địa chỉ"),
+    dateOfBirth: yup.date().required("Vui lòng nhập ngày sinh").nullable(),
     gender: yup
       .number()
       .required("Vui lòng chọn giới tính")
@@ -60,11 +61,7 @@ export const InfomationUserCv = ({
   const { ranks } = Rank();
 
   const { setLoading } = useLoading();
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IInfomationUserCv>({
+  const { control, handleSubmit } = useForm<IInfomationUserCv>({
     resolver: yupResolver(schema),
     defaultValues: user
       ? user
@@ -73,14 +70,13 @@ export const InfomationUserCv = ({
           position: "",
           level: "",
           gender: 0,
+          dateOfBirth: null,
           email: "",
           phoneNumber: "",
           introduction: "",
           addressInfo: "",
         },
   });
-
-  console.log(errors);
 
   const onSubmit: SubmitHandler<IInfomationUserCv> = async (data) => {
     setLoading(true);
@@ -136,6 +132,14 @@ export const InfomationUserCv = ({
           </div>
           <div className="mt-4">
             <div className="font-medium">
+              Ngày sinh <span className="text-[#dc2f2f]">*</span>
+            </div>
+            <div>
+              <TmInput name="dateOfBirth" control={control} type="date" />
+            </div>
+          </div>
+          <div className="mt-4">
+            <div className="font-medium">
               Giới tính <span className="text-[#dc2f2f]">*</span>
             </div>
             <div>
@@ -185,7 +189,7 @@ export const InfomationUserCv = ({
             </div>
           </div>
           <div className="mt-4">
-            <div className="font-medium">Giới thiệu bản thân</div>
+            <div className="font-medium">Mục tiêu nghề nghiệp</div>
             <div>
               <CustomCKEditor control={control} name="introduction" />
             </div>

@@ -71,7 +71,10 @@ export const JobType = () => {
         <TitleCustom title="Ngành nghề nổi bật" className="mb-4" />
         <div>
           Xem danh sách việc làm theo ngành nghề{" "}
-          <span className="text-[#F2821D]">tại đây</span>.
+          <Link href="/tim-kiem-viec-lam" className="text-[#F2821D]">
+            tại đây
+          </Link>
+          .
         </div>
         <div className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-6 mt-5 ">
           {company.map((value: any, index: number) => {
@@ -80,7 +83,7 @@ export const JobType = () => {
                 key={value.title}
                 className="rounded-xl transition duration-300 p-5 col-span-1 border border-[1px] border-solid hover:!border-[#F89E1B] border-transparent bg-[#f0f8ff]	 hover:bg-white hover:shadow-[0_3px_10px_rgba(248,158,27,1)]"
               >
-                <Link href={`/viec-lam/${value.slug}`}>
+                <Link href={`/tim-kiem-viec-lam?Field=${value.slug}`}>
                   <div className=" flex justify-center">
                     <img
                       src={`/imgs/${value.img}`}

@@ -15,7 +15,7 @@ export const Career = ({ blogs }: ICareerBlogProps) => {
                 className="rounded-md border-[1px] border-solid boder-[#DBDBDB]"
               >
                 <div className="">
-                  <Link href={`/tin-tuc/bi-quyet-tim-viec/${item.slug}`}>
+                  <Link href={`/tin-tuc/cam-nang-nghe-nghiep/${item.slug}`}>
                     <img
                       src={
                         item.coverFullLink.length > 0
@@ -29,12 +29,12 @@ export const Career = ({ blogs }: ICareerBlogProps) => {
                 </div>
                 <div className="px-4 py-5">
                   <div className="text-xl font-bold line-clamp-3 ">
-                    <Link href={`/tin-tuc/bi-quyet-tim-viec/${item.slug}`}>
+                    <Link href={`/tin-tuc/cam-nang-nghe-nghiep/${item.slug}`}>
                       {item.title}
                     </Link>
                   </div>
                   <div className="line-clamp-4 mt-2">
-                    <Link href={`/tin-tuc/bi-quyet-tim-viec/${item.slug}`}>
+                    <Link href={`/tin-tuc/cam-nang-nghe-nghiep/${item.slug}`}>
                       {item.shortDes}
                     </Link>
                   </div>

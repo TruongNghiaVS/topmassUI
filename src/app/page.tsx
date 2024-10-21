@@ -26,7 +26,7 @@ export default function Home() {
   const { data: suitableJob } = useSWR(`${GET_SUITABLEJOB}`, fetcher);
 
   const { data: blogs } = useSWR(
-    `${GET_ALLBLOGS_BYCATEGORY}?SlugCategory=bi-quyet-tim-viec`,
+    `${GET_ALLBLOGS_BYCATEGORY}?SlugCategory=cam-nang-nghe-nghiep&limit=4`,
     fetcher
   );
 

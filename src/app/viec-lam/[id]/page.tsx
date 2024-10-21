@@ -197,7 +197,17 @@ export default function DetailJob({ params }: { params: { id: any } }) {
               </div>
               <div className="bg-white p-8 rounded-lg mb-8">
                 <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20]">
-                  Thông tin công việc
+                  Mô tả công việc
+                </div>
+                <div className="mt-6">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: detail?.dataJob.content,
+                    }}
+                  ></div>
+                </div>
+                <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20]">
+                  Mô tả công việc
                 </div>
                 <div className="mt-6">
                   <div

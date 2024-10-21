@@ -13,7 +13,7 @@ import dayjs from "dayjs";
 export const ImfomationBasic = ({ infomation }: IInfomationBasicJobProps) => {
   const data = [
     {
-      label: "Ngày đăng",
+      label: "Hạn nhận hồ sơ",
       title: dayjs(infomation?.publishDate).format("DD-MM-YYYY"),
       icon: <CalendaPlusBootstrapIcon className="w-6 mr-4 text-[#F37A20]" />,
     },

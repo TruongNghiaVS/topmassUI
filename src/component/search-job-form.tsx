@@ -13,10 +13,10 @@ import { IFormSearchJob, ISearchJobProps } from "@/interface/search-job";
 import { useEffect } from "react";
 
 export const SearchJobForm = ({ search, setSearch }: ISearchJobProps) => {
-  const { realms } = Realm();
-  const { provinces } = Provinces();
-  const { careers } = Career();
-  const { ranks } = Rank();
+  const { listRealms } = Realm();
+  const { listProvinces } = Provinces();
+  const { listCareers } = Career();
+  const { listRanks } = Rank();
 
   useEffect(() => {
     reset(search);
@@ -49,7 +49,7 @@ export const SearchJobForm = ({ search, setSearch }: ISearchJobProps) => {
                 className="border-0 !rounded-3xl bg-[#DDDDDD] mr-2"
                 placeholder="Địa điểm làm việc"
                 control={control}
-                options={provinces}
+                options={listProvinces}
               />
             </div>
             <div className="bg-[#F37A20] text-white grid text-center rounded-3xl ">
@@ -60,27 +60,20 @@ export const SearchJobForm = ({ search, setSearch }: ISearchJobProps) => {
           </div>
           <div className=" px-2">
             <div className="w-full mt-8 relative ">
-              <div className="p-1 border rounded-lg shadow-md grid sm:grid-cols-5 grid-cols-1 items-center bg-white gap-1 ">
+              <div className="p-1 border rounded-lg shadow-md grid sm:grid-cols-4 grid-cols-1 items-center bg-white gap-1 ">
                 <TmSelect
                   name="Field"
                   control={control}
                   className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
-                  placeholder="Ngành nghề"
-                  options={careers}
-                />
-                <TmSelect
-                  name="TypeOfWork"
-                  className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
-                  placeholder="Tất cả lĩnh vực"
-                  control={control}
-                  options={realms}
+                  placeholder="Ngành nghề/ Cấp bậc"
+                  options={listCareers}
                 />
                 <TmSelect
                   name="RankLevel"
                   control={control}
                   className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
                   placeholder="Tất cả cấp bậc"
-                  options={ranks}
+                  options={listRanks}
                 />
                 <button
                   type="button"

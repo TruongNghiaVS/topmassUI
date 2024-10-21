@@ -184,7 +184,7 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
           <div className="xl:col-span-8 md:col-span-7">
             <div className="bg-white rounded overflow-hidden">
               <div className="bg-gradient-to-r from-[#603813] to-[#F6921E] text-white font-medium text-lg py-2 pl-10">
-                Giới thiệu công ty
+                Thông tin liên hệ
               </div>
               <div
                 className="px-8 py-4"

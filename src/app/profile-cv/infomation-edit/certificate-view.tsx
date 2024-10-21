@@ -17,7 +17,7 @@ export const CertificateView = ({
               </div>
               <div className="flex space-x-2">
                 <div>
-                  {dayjs(new Date(+item.yearGet, +item.monthGet, 1)).format(
+                  {dayjs(new Date(+item.yearGet, +item.monthGet - 1, 1)).format(
                     "MM-YYYY"
                   )}
                 </div>
@@ -27,7 +27,7 @@ export const CertificateView = ({
                     <div>Còn hạn</div>
                   ) : (
                     dayjs(
-                      new Date(+item.yearExpired, +item.monthExpired, 1)
+                      new Date(+item.yearExpired, +item.monthExpired - 1, 1)
                     ).format("MM-YYYY")
                   )}
                 </div>

@@ -444,6 +444,7 @@ export interface IInfomationUserCv {
   position: string;
   level: string;
   gender: number;
+  dateOfBirth: Date | null;
   email: string;
   phoneNumber: string;
   introduction?: string;

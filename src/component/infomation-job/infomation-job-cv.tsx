@@ -40,7 +40,11 @@ export const InfomationJobCV = ({
       <div className="sm:flex items-center my-2 h-full">
         <div className="w-20 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
           <Link href={`/viec-lam/${item.jobSlug}`}>
-            <img src="/imgs/logo-work.png" alt="" className="w-full" />
+            <img
+              src={item.logoImage ? item.logoImage : "/imgs/logo-work.png"}
+              alt=""
+              className="w-full"
+            />
           </Link>
         </div>
         <div className="text-center sm:text-start w-full">

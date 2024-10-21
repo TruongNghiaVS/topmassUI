@@ -56,10 +56,10 @@ export default function PersonalIncome() {
         <div className="mx-2 mt-2 p-2 border border-[#F37A20] space-x-10 flex">
           <div>
             Giảm trừ gia cảnh bản thân{" "}
-            <span className="text-default">11,000,000</span>
+            <span className="text-default">11,000,000 VNĐ</span>
           </div>
           <div>
-            Người phụ thuộc <span className="text-default">4,000,000</span>
+            Người phụ thuộc <span className="text-default">4,000,000 VNĐ</span>
           </div>
         </div>
         <div className="mt-4 p-2">

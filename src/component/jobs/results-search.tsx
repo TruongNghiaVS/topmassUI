@@ -7,9 +7,7 @@ export const ResutlSearchJob = ({
   currentPage,
   setCurrentPage,
 }: IJobSameProps) => {
-  const lengthJob = jobs?.length;
-  let length = lengthJob - (lengthJob % 10);
-  length = lengthJob % 10 > 0 ? length + 1 : length;
+  const length = Math.ceil(jobs?.length / 10);
   const arrLength = Array.from({ length: length }, (_, i) => {
     return i + 1;
   }).filter((i) => i > 0);

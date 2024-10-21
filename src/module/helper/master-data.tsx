@@ -1,4 +1,6 @@
+import { IProfileInfomation } from "@/interface/interface";
 import {
+  CURRENT_USER,
   GET_MASTER_DATA_CAREER,
   GET_MASTERDATA_EXPERIENCE,
   GET_MASTERDATA_RANK,
@@ -21,7 +23,7 @@ export const Provinces = () => {
   const listProvinces = [
     {
       label: "Tất cả",
-      value: "",
+      value: "all",
     },
     ...provinces,
   ];
@@ -51,7 +53,7 @@ export const Experiences = () => {
   const listExperiences = [
     {
       label: "Tất cả",
-      value: "",
+      value: "all",
     },
     ...experiences,
   ];
@@ -81,7 +83,7 @@ export const Career = () => {
   const listCareers = [
     {
       label: "Tất cả",
-      value: "",
+      value: "all",
     },
     ...careers,
   ];
@@ -111,7 +113,7 @@ export const Realm = () => {
   const listRealms = [
     {
       label: "Tất cả",
-      value: "",
+      value: "all",
     },
     ...realms,
   ];
@@ -141,7 +143,7 @@ export const Rank = () => {
   const listRanks = [
     {
       label: "Tất cả",
-      value: "",
+      value: "all",
     },
     ...ranks,
   ];
@@ -151,5 +153,16 @@ export const Rank = () => {
     ranks,
     listRanks,
     mutate,
+  };
+};
+
+export const CurrentUser = () => {
+  const { mutate, data: currentUser, error } = useSWR<IProfileInfomation>(
+    CURRENT_USER,
+    fetcher
+  );
+
+  return {
+    currentUser,
   };
 };

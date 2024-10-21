@@ -3,12 +3,9 @@
 import { ResutlSearchJob } from "@/component/jobs/results-search";
 import { SearchJobForm } from "@/component/search-job-form";
 import { SEARCH_JOBS } from "@/utils/api-url";
-import axiosInstance, { fetcher } from "@/utils/axios";
+import { fetcher } from "@/utils/axios";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useLoading } from "../context/loading";
-import { IJob } from "@/interface/job";
-import { toast } from "react-toastify";
 import { IFormSearchJob } from "@/interface/search-job";
 import useSWR from "swr";
 import { convertParams } from "@/utils/business/custom-hook";
@@ -38,7 +35,7 @@ export default function SearchJob() {
   }, []);
 
   const { data: dataSearch } = useSWR(
-    SEARCH_JOBS + "?" + convertParams(search),
+    `${SEARCH_JOBS}?${convertParams(search)}&Limit=10&Page=${currentPage}`,
     fetcher
   );
 

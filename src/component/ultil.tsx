@@ -37,7 +37,7 @@ export const Ultil = () => {
                 <div>Tính thuế thu nhập cá nhân</div>
                 <div className="text-[#D14B00] text-[10px] ">
                   <Link
-                    href="/cong-cu/thu-nhap-ca-nhan"
+                    href="/cong-cu/thue-thu-nhap-ca-nhan"
                     className="flex items-center"
                   >
                     Sử dụng ngay <ArrowLongRightIcon className="w-4" />

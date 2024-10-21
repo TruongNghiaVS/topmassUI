@@ -21,6 +21,7 @@ import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
+import { CurrentUser } from "@/module/helper/master-data";
 
 export const PopupApplyJob = ({
   isModalOpen,
@@ -51,12 +52,21 @@ export const PopupApplyJob = ({
     return arr[arr.length - 1];
   };
   const token = getToken();
+  const { currentUser } = CurrentUser();
 
   useEffect(() => {
     if (token) {
       getAllCv();
     }
-  }, [token]);
+    if (currentUser) {
+      reset({
+        username: currentUser?.firstName + " " + currentUser?.lastName,
+        phone_number: currentUser?.phone,
+        email: currentUser?.email,
+        description: "",
+      });
+    }
+  }, [token, currentUser]);
 
   const schema = yup.object().shape({
     username: yup.string().required("Bắt buộc nhập họ và tên"),
@@ -68,18 +78,18 @@ export const PopupApplyJob = ({
     description: yup.string(),
   });
 
-  const { handleSubmit, control } = useForm<IApplyCv>({
+  const { handleSubmit, control, reset } = useForm<IApplyCv>({
     resolver: yupResolver(schema),
     defaultValues: {
-      username: "Nguyễn Trường Nghĩa",
-      phone_number: "0123456789",
-      email: "thai.nn@vietstargroup.vn",
-      description:
-        "Với 4 năm trong lĩnh vực marketing. phát triển thị trường trên nền tảng online. Mong muốn làm việc ở môi trường chuyên nghiệp và mang lại hiệu quả cao trong việc cũng như góp phần vào sự phát triển của công ty. Hi vọng sẽ được đồng hành với công ty trong thời gian tới. Xin Cảm Ơn.",
+      username: "",
+      phone_number: "",
+      email: "",
+      description: "",
     },
   });
   const onSubmit: SubmitHandler<IApplyCv> = async (data) => {
     setLoading(true);
+    debugger;
     try {
       const dataApply: any = {
         fullName: data.username,
@@ -110,6 +120,8 @@ export const PopupApplyJob = ({
       toast.success("Nộp CV thành công");
       onClose();
     } catch (error) {
+      toast.error("Nộp hồ sơ thất bại");
+      console.log(error);
     } finally {
       setLoading(false);
     }

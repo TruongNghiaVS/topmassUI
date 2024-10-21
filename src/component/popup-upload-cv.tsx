@@ -41,10 +41,10 @@ export const PopupUploadCv = ({
       };
 
       await axiosInstance.post(ADD_CV, dataApply);
-      toast.success("Thêm mới cv thành công");
+      toast.success("Thêm mới CV thành công");
       mutate();
     } catch (error) {
-      toast.error("Thêm mới cv thất bại");
+      toast.error("Thêm mới CV thất bại");
     } finally {
       setLoading(false);
     }
