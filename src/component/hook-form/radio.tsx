@@ -8,14 +8,25 @@ const TmRadio: React.FC<ITmRadioProps> = ({
   options,
   classNameCustom,
   className,
+  ...rest
 }) => {
   const {
-    field: { value, onChange },
+    field: { onChange, onBlur, value },
     fieldState: { error },
   } = useController({
     name,
     control,
   });
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    value: any
+  ) => {
+    onChange(value); // Update React Hook Form state
+    if (rest.onChange) {
+      rest.onChange(event); // Call the custom onChange handler
+    }
+  };
 
   return (
     <div>
@@ -24,9 +35,10 @@ const TmRadio: React.FC<ITmRadioProps> = ({
           <label key={option.value} className="inline-flex items-center ">
             <input
               type="radio"
-              value={option.value}
+              onBlur={onBlur}
+              {...rest}
               checked={value === option.value}
-              onChange={() => onChange(option.value)}
+              onChange={(e) => handleChange(e, option.value)}
               className={`form-radio text-blue-600 h-4 w-4 ${
                 className && className
               }`}

@@ -47,7 +47,7 @@ export interface ITmRadio {
   label: string;
 }
 
-export interface ITmRadioProps {
+export interface ITmRadioProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   control: Control<any>;
   options: Option[];

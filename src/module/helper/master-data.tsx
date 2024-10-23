@@ -23,7 +23,7 @@ export const Provinces = () => {
   const listProvinces = [
     {
       label: "Tất cả",
-      value: "all",
+      value: "-1",
     },
     ...provinces,
   ];
@@ -53,7 +53,7 @@ export const Experiences = () => {
   const listExperiences = [
     {
       label: "Tất cả",
-      value: "all",
+      value: "-1",
     },
     ...experiences,
   ];
@@ -83,7 +83,7 @@ export const Career = () => {
   const listCareers = [
     {
       label: "Tất cả",
-      value: "all",
+      value: "-1",
     },
     ...careers,
   ];
@@ -113,7 +113,7 @@ export const Realm = () => {
   const listRealms = [
     {
       label: "Tất cả",
-      value: "all",
+      value: "-1",
     },
     ...realms,
   ];
@@ -143,7 +143,7 @@ export const Rank = () => {
   const listRanks = [
     {
       label: "Tất cả",
-      value: "all",
+      value: "-1",
     },
     ...ranks,
   ];

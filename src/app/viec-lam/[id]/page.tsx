@@ -29,6 +29,7 @@ import {
 import useSWR from "swr";
 import { WrapButtonLogin } from "@/component/button-modal-login";
 import { toast } from "react-toastify";
+import { convertToMillionDongFixed } from "@/utils/business/custom-hook";
 
 export default function DetailJob({ params }: { params: { id: any } }) {
   const { id } = params;
@@ -78,19 +79,19 @@ export default function DetailJob({ params }: { params: { id: any } }) {
     try {
       const url = detail?.jobExtra.isSave ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
       await axiosInstance.post(url, {
-        jobId: id,
+        jobId: detail?.jobExtra.isSave ? detail?.jobId : id,
       });
       if (detail?.jobExtra.isSave) {
-        toast.success("Lưu tin thành công");
-      } else {
         toast.success("Bỏ lưu tin thành công");
+      } else {
+        toast.success("Lưu tin thành công");
       }
       mutateDetail();
     } catch (error) {
       if (detail?.jobExtra.isSave) {
-        toast.success("Lưu tin thất bại");
-      } else {
         toast.success("Bỏ lưu tin thất bại");
+      } else {
+        toast.success("Lưu tin thất bại");
       }
     } finally {
       setLoading(false);
@@ -115,7 +116,21 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                     <div>
                       <div className="text-xs font-medium">Mức lương</div>
                       <div className="text-xs font-medium text-default">
-                        {detail?.dataJob.rangeSalary}
+                        {detail?.dataJob.aggrement
+                          ? "Thoả thuận"
+                          : `${convertToMillionDongFixed(
+                              detail?.dataJob.salaryFrom,
+                              detail?.dataJob.currencyCode
+                            )} - ${convertToMillionDongFixed(
+                              detail?.dataJob.salaryTo,
+                              detail?.dataJob.currencyCode
+                            )} ${
+                              detail?.dataJob.currencyCode === "0"
+                                ? "Triệu"
+                                : detail?.dataJob.currencyCode === "1"
+                                ? "USD"
+                                : ""
+                            }`}
                       </div>
                     </div>
                   </div>
@@ -196,23 +211,43 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                 <ImfomationBasic infomation={detail?.dataJob.commonData} />
               </div>
               <div className="bg-white p-8 rounded-lg mb-8">
-                <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20]">
+                <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
                   Mô tả công việc
                 </div>
-                <div className="mt-6">
+                <div className="mt-2">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: detail?.dataJob.description,
+                    }}
+                  ></div>
+                </div>
+                <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
+                  Nội dụng
+                </div>
+                <div className="mt-2">
                   <div
                     dangerouslySetInnerHTML={{
                       __html: detail?.dataJob.content,
                     }}
                   ></div>
                 </div>
-                <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20]">
-                  Mô tả công việc
+                <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
+                  Yêu cầu
                 </div>
-                <div className="mt-6">
+                <div className="mt-2">
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: detail?.dataJob.content,
+                      __html: detail?.dataJob.requirement,
+                    }}
+                  ></div>
+                </div>
+                <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
+                  Quyền lợi ứng viên
+                </div>
+                <div className="mt-2">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: detail?.dataJob.benefit,
                     }}
                   ></div>
                 </div>

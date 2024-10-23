@@ -121,7 +121,7 @@ export const Header = () => {
                 </div>
               </div>
               <Link
-                href="http://42.115.94.180:8586/"
+                href="https://tuyendung.topmass.vn"
                 target="_blank"
                 className="text-xs "
               >
