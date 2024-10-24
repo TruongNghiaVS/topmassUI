@@ -22,7 +22,7 @@ export const InfomationJobLike = ({
     try {
       const url = item.isSave ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
       await axiosInstance.post(url, {
-        jobId: item.jobSlug,
+        jobId: !item.isSave ? item.jobSlug : item.jobId,
       });
       if (!item.isSave) {
         toast.success("Lưu tin thành công");
@@ -32,9 +32,9 @@ export const InfomationJobLike = ({
       if (mutate) mutate();
     } catch (error) {
       if (!item.isSave) {
-        toast.success("Lưu tin thất bại");
+        toast.error("Lưu tin thất bại");
       } else {
-        toast.success("Bỏ lưu tin thất bại");
+        toast.error("Bỏ lưu tin thất bại");
       }
     } finally {
       setLoading(false);
@@ -46,7 +46,15 @@ export const InfomationJobLike = ({
       <div className="xl:flex grid lg:justify-start justify-center items-center my-2">
         <div className="flex-auto w-20 lg:mx-0 lg:mr-8 mx-auto lg:mb-0 mb-2">
           <Link href={`/viec-lam/${item.jobSlug}`}>
-            <img src="/imgs/logo-work.png" alt="" className="w-full" />
+            <img
+              src={
+                item.logoImage.length > 0
+                  ? item.logoImage
+                  : "/imgs/logo-work.png"
+              }
+              alt=""
+              className="w-full"
+            />
           </Link>
         </div>
         <div className=" flex-auto w-72 text-center sm:text-start grow">
@@ -58,7 +66,7 @@ export const InfomationJobLike = ({
               {item.positionText}
             </Link>
           </div>
-          <div className="text-sm font-normal mt-2.5 ">
+          <div className="text-sm font-normal mt-2.5 line-clamp-2 h-10 ">
             <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
           </div>
           <div className="flex mt-4 justify-between items-center	">

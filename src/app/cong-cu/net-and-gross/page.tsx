@@ -11,7 +11,7 @@ import {
 } from "@heroicons/react/16/solid";
 import { yupResolver } from "@hookform/resolvers/yup";
 import numeral from "numeral";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useTypeStore } from "@/store/useModalStore";
@@ -38,7 +38,7 @@ export default function PersonalIncome() {
     salary: yup
       .number()
       .typeError("")
-      .min(1, "Mức lương phải lớn hơn 0")
+      .min(1, "Vui lòng nhập mức lương")
       .required("Vui lòng nhập mức lương"),
     is_salary: yup.number(),
     other_salary: yup.number().when("is_salary", ([isSalary], schema) => {

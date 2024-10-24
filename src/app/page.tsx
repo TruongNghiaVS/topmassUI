@@ -23,7 +23,10 @@ export default function Home() {
   const [search, setSearch] = useState("-1");
   const { data: companys } = useSWR(GET_ALL_COMPANY, fetcher);
   const { data: allJobs } = useSWR(`${GET_HOT_JOB}?ModeGet=${search}`, fetcher);
-  const { data: suitableJob } = useSWR(`${GET_SUITABLEJOB}`, fetcher);
+  const { data: suitableJob } = useSWR(
+    `${GET_SUITABLEJOB}?Limit=9&Page=1`,
+    fetcher
+  );
 
   const { data: blogs } = useSWR(
     `${GET_ALLBLOGS_BYCATEGORY}?SlugCategory=cam-nang-nghe-nghiep&limit=4`,

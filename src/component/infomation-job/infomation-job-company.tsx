@@ -21,7 +21,7 @@ export const InfomationJobCompany = ({
     try {
       const url = item.isSave ? REMOVE_SAVE_JOB : ADD_SAVE_JOB;
       await axiosInstance.post(url, {
-        jobId: item.jobSlug,
+        jobId: item.isSave ? item.jobId : item.jobSlug,
       });
       if (!item.isSave) {
         toast.success("Lưu tin thành công");
@@ -31,9 +31,9 @@ export const InfomationJobCompany = ({
       if (mutate) mutate();
     } catch (error) {
       if (!item.isSave) {
-        toast.success("Lưu tin thất bại");
+        toast.error("Lưu tin thất bại");
       } else {
-        toast.success("Bỏ lưu tin thất bại");
+        toast.error("Bỏ lưu tin thất bại");
       }
     } finally {
       setLoading(false);

@@ -14,7 +14,7 @@ export const Career = ({ blogs }: ICareerBlogProps) => {
                 key={index}
                 className="rounded-md border-[1px] border-solid boder-[#DBDBDB]"
               >
-                <div className="">
+                <div className="w-full h-[200px] object-fill">
                   <Link href={`/tin-tuc/cam-nang-nghe-nghiep/${item.slug}`}>
                     <img
                       src={
@@ -23,12 +23,12 @@ export const Career = ({ blogs }: ICareerBlogProps) => {
                           : "/imgs/img-detail-new.png"
                       }
                       alt=""
-                      className="w-full"
+                      className="w-full h-full"
                     />
                   </Link>
                 </div>
                 <div className="px-4 py-5">
-                  <div className="text-xl font-bold line-clamp-3 ">
+                  <div className="text-xl font-bold line-clamp-3  h-[84px]">
                     <Link href={`/tin-tuc/cam-nang-nghe-nghiep/${item.slug}`}>
                       {item.title}
                     </Link>
