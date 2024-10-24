@@ -32,38 +32,56 @@ export const Slider = () => {
             className="mySwiper !pt-5 !pb-6"
           >
             <SwiperSlide className="bg-primary">
-              <div className="w-full object-cover">
+              <div className="w-full h-full">
                 <img
                   src="/imgs/slider.png"
                   alt=""
-                  className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
+                  className="w-full h-full border border-[#FFB600] border-2 rounded-xl"
                 />
               </div>
             </SwiperSlide>
             <SwiperSlide className="bg-primary">
-              <div className="w-full object-cover">
+              <div className="w-full h-full">
                 <img
                   src="/imgs/slider-1.png"
                   alt=""
-                  className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
+                  className="w-full h-full border border-[#FFB600] border-2 rounded-xl"
                 />
               </div>
             </SwiperSlide>
             <SwiperSlide className="bg-primary">
-              <div className="w-full object-cover">
+              <div className="w-full h-full">
+                <img
+                  src="/imgs/slider-3.png"
+                  alt=""
+                  className="w-full h-full border border-[#FFB600] border-2 rounded-xl"
+                />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="bg-primary">
+              <div className="w-full h-full">
                 <img
                   src="/imgs/slider.png"
                   alt=""
-                  className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
+                  className="w-full h-full border border-[#FFB600] border-2 rounded-xl"
                 />
               </div>
             </SwiperSlide>
             <SwiperSlide className="bg-primary">
-              <div className="w-full object-cover">
+              <div className="w-full h-full">
                 <img
                   src="/imgs/slider-1.png"
                   alt=""
-                  className="w-full h-full border border-[#FFB600] border-2 rounded-[40px]"
+                  className="w-full h-full border border-[#FFB600] border-2 rounded-xl"
+                />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="bg-primary">
+              <div className="w-full h-full">
+                <img
+                  src="/imgs/slider-3.png"
+                  alt=""
+                  className="w-full h-full border border-[#FFB600] border-2 rounded-xl"
                 />
               </div>
             </SwiperSlide>

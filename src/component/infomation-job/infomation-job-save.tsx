@@ -49,7 +49,15 @@ export const InfomationJobSave = ({ item, mutate }: IJobSaveProps) => {
       <div className="sm:flex items-center my-2 h-full">
         <div className="flex-auto w-28 sm:mx-0 sm:mr-8 mx-auto sm:mb-0 mb-2">
           <Link href={`/viec-lam/${item.jobSlug}`}>
-            <img src="/imgs/logo-work.png" alt="" className="w-full" />
+            <img
+              src={
+                item.logoImage.length > 0
+                  ? item.logoImage
+                  : "/imgs/logo-work.png"
+              }
+              alt=""
+              className="w-full"
+            />
           </Link>
         </div>
         <div className="flex-auto w-72 text-center sm:text-start w-full">
