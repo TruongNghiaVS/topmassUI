@@ -72,7 +72,7 @@ export const InfomationJobLike = ({
           <div className="flex mt-4 justify-between items-center	">
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <div className="flex">
-                <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 text-xs">
+                <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 whitespace-nowrap text-xs">
                   {item.aggrement
                     ? "Thoả thuận"
                     : `${convertToMillionDongFixed(

@@ -52,15 +52,15 @@ export async function GET(request: Request) {
     const contact = await getContact(profileUser);
     const education = await getEducation(res.data.data.educations);
     const experience = await getExperience(res.data.data.experiences);
-    const project = await getProject(res.data.data.allProjects);
+    // const project = await getProject(res.data.data.allProjects);
     const reward = await getReward(res.data.data.allReward);
     const skill = await getSkill(res.data.data.allSkill);
-    const softSkill = await getSoftSkill(res.data.data.allsoftSkill);
+    // const softSkill = await getSoftSkill(res.data.data.allsoftSkill);
 
     htmlContent = htmlContent
       .replace(`{contact}`, contact)
       .replace("{education}", education)
-      .replace("{soft_skill}", softSkill)
+      // .replace("{soft_skill}", softSkill)
       .replace("{skill}", skill)
       .replace("{reward}", reward)
       .replace("{certificates}", certificate)
@@ -68,8 +68,8 @@ export async function GET(request: Request) {
       .replace("{name}", profileUser.fullName)
       .replace("{linkProFile}", profileUser.avatarLink)
       .replace("{position}", profileUser.position)
-      .replace("{experiences}", experience)
-      .replace("{project}", project);
+      .replace("{experiences}", experience);
+    // .replace("{project}", project);
 
     // Launch Puppeteer
     const browser = await puppeteer.launch();

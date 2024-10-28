@@ -1,4 +1,5 @@
 import { IJobApplyProps } from "@/interface/job";
+import { convertToMillionDongFixed } from "@/utils/business/custom-hook";
 import dayjs from "dayjs";
 import Link from "next/link";
 
@@ -30,9 +31,21 @@ export const InfomationJobApply = ({ item }: IJobApplyProps) => {
               </Link>
             </div>
             <div className="text-sm font-normal text-default">
-              {item.salaryFrom > 0 && item.salaryTo > 0
-                ? `${item.salaryFrom} - ${item.salaryTo} triệu`
-                : "Thoả thuận"}
+              {item.aggrement
+                ? "Thoả thuận"
+                : `${convertToMillionDongFixed(
+                    item.salaryFrom,
+                    item.currencyCode
+                  )} - ${convertToMillionDongFixed(
+                    item.salaryTo,
+                    item.currencyCode
+                  )} ${
+                    item.currencyCode === "0"
+                      ? "Triệu"
+                      : item.currencyCode === "1"
+                      ? "USD"
+                      : ""
+                  }`}
             </div>
           </div>
           <div className="text-sm font-medium font-normal mt-2 ">

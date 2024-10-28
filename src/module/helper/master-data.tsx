@@ -1,6 +1,7 @@
 import { IProfileInfomation } from "@/interface/interface";
 import {
   CURRENT_USER,
+  GET_EDUCATION_LEVEL,
   GET_MASTER_DATA_CAREER,
   GET_MASTERDATA_EXPERIENCE,
   GET_MASTERDATA_RANK,
@@ -152,6 +153,36 @@ export const Rank = () => {
     isLoading,
     ranks,
     listRanks,
+    mutate,
+  };
+};
+
+export const EducationLevel = () => {
+  const { data, error, mutate, isLoading } = useSWR(
+    GET_EDUCATION_LEVEL,
+    fetcher
+  );
+
+  const educationLevels = data
+    ? data?.map((item: any) => {
+        return {
+          value: item.id.toString(),
+          label: item.text,
+        };
+      })
+    : [];
+  const listEducationLevels = [
+    {
+      label: "Tất cả",
+      value: "",
+    },
+    ...educationLevels,
+  ];
+  return {
+    error,
+    isLoading,
+    educationLevels,
+    listEducationLevels,
     mutate,
   };
 };

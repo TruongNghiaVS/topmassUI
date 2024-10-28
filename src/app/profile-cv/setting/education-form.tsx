@@ -21,6 +21,7 @@ import dynamic from "next/dynamic";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
+import { EducationLevel } from "@/module/helper/master-data";
 const CustomCKEditor = dynamic(
   () => {
     return import("../../../component/hook-form/ck-editor");
@@ -100,12 +101,13 @@ export const EducationUserCv = ({
       .required("Vui lòng chọn trường học"),
   });
 
+  const { educationLevels } = EducationLevel();
+
   const { setLoading } = useLoading();
 
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<IInfomationSchoolCv>({
     resolver: yupResolver(schema),
@@ -217,13 +219,14 @@ export const EducationUserCv = ({
               </div>
               <div className="mt-4">
                 <div className="font-medium">
-                  Hệ đào tạo <span className="text-[#dc2f2f]">*</span>
+                  Trình độ <span className="text-[#dc2f2f]">*</span>
                 </div>
                 <div>
-                  <TmInput
+                  <TmSelect
                     control={control}
                     name={`educations.${index}.position`}
-                    placeholder="Hệ đào tạo"
+                    placeholder="Trình độ"
+                    options={educationLevels}
                   />
                 </div>
               </div>

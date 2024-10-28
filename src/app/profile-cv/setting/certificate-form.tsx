@@ -86,10 +86,10 @@ export const CertificateInfomationCv = ({
                 );
               }
               return true;
-            })
-            .test("required", "Vui lòng chọn file", (value) => {
-              return value && value.length > 0;
             }),
+          // .test("required", "Vui lòng chọn file", (value) => {
+          //   return value && value.length > 0;
+          // }),
         })
       )
       .min(1, "Phải có ít nhất 1 kinh nghiệm làm việc")

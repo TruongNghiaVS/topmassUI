@@ -11,10 +11,12 @@ import Link from "next/link";
 import { axiosInstanceNotToken } from "@/utils/axios";
 import { useLoading } from "@/app/context/loading";
 import Cookies from "js-cookie";
+import { useState } from "react";
+import { EyeIcon } from "@heroicons/react/16/solid";
 
 export const LoginForm = ({ onClose }: ILoginForm) => {
   const { setLoading } = useLoading();
-
+  const [showPassword, setShowPassword] = useState(false);
   const schema = yup.object().shape({
     userName: yup
       .string()
@@ -51,20 +53,7 @@ export const LoginForm = ({ onClose }: ILoginForm) => {
       router.push("/");
     } catch (error) {
       if (error instanceof AxiosError) {
-        toast.error(
-          (props: any) => {
-            return props.data.dataError.map((itemError: any) => {
-              return (
-                <div key={itemError.errorCode}>{itemError.errorMesage}</div>
-              );
-            });
-          },
-          {
-            data: {
-              dataError: error.response?.data.dataEror,
-            },
-          }
-        );
+        toast.error("Đang nhập thất bại. Vui lòng kiểm tra lại thông tin");
       }
     } finally {
       setLoading(false);
@@ -101,7 +90,17 @@ export const LoginForm = ({ onClose }: ILoginForm) => {
             control={control}
             name="password"
             placeholder="Mật khẩu"
-            type="password"
+            type={showPassword ? "text" : "password"}
+            afterIcon={
+              <button
+                type="button"
+                onClick={() => {
+                  setShowPassword(!showPassword);
+                }}
+              >
+                <EyeIcon className="w-5" />
+              </button>
+            }
           />
         </div>
         <div className="font-normal text-base text-right mb-4 text-[#F37A20]">

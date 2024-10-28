@@ -63,9 +63,6 @@ export const PrizeInfomationCv = ({
                 );
               }
               return true;
-            })
-            .test("required", "Vui lòng chọn file", (value) => {
-              return value && value.length > 0;
             }),
         })
       )

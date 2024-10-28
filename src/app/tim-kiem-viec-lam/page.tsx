@@ -39,7 +39,7 @@ export default function SearchJob() {
     fetcher
   );
 
-  const list = [1, 2, 3, 4, 5];
+  const list = [1, 2];
   return (
     <div>
       <div className="bg-bgHeaderJobCustom pb-4">
@@ -66,7 +66,7 @@ export default function SearchJob() {
                   return (
                     <img
                       key={value}
-                      src="/imgs/banner-2.png"
+                      src={`/imgs/banner-${value}.png`}
                       alt=""
                       className="w-full rounded-lg mt-4"
                     />

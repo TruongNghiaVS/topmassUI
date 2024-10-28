@@ -10,12 +10,13 @@ export const EducationView = ({ educations }: IInfoEducationProps) => {
           <div key={idx} className="mt-4">
             <div className="flex justify-between">
               <div className="flex  text-default">
+                <div></div>
                 <AcademicCapIcon className="w-4 mr-2" />
                 <div>{item.schoolName}</div>
               </div>
               <div className="flex space-x-2">
                 <div>
-                  {dayjs(new Date(+item.fromYear, +item.fromMonth, 1)).format(
+                  {dayjs(`${item.fromYear}-${item.fromMonth}-1`).format(
                     "MM-YYYY"
                   )}
                 </div>
@@ -24,9 +25,7 @@ export const EducationView = ({ educations }: IInfoEducationProps) => {
                   {item.isEnd ? (
                     <div>Còn học</div>
                   ) : (
-                    dayjs(new Date(+item.toYear, +item.toMonth, 1)).format(
-                      "MM-YYYY"
-                    )
+                    dayjs(`${item.toYear}-${item.toMonth}-1`).format("MM-YYYY")
                   )}
                 </div>
               </div>
@@ -38,7 +37,7 @@ export const EducationView = ({ educations }: IInfoEducationProps) => {
               </div>
               <div className="grid grid-cols-3 text-xs mt-2">
                 <div className="col-span-1">Hệ đào tạo:</div>
-                <div className="col-span-2">{item.position}</div>
+                <div className="col-span-2">{item.positionText}</div>
               </div>
               <div className="grid grid-cols-3 text-xs mt-2">
                 <div className="col-span-1">Xếp loại:</div>

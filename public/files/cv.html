@@ -32,6 +32,7 @@
   .box-right {
     padding: 20px;
     position: relative;
+
   }
 
   .img {
@@ -84,6 +85,22 @@
     position: absolute;
     right: 0;
     top: 0;
+  }
+
+  .ab-bg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ab-bg img {
+    width: 100%;
   }
 
   .name-cv {
@@ -407,6 +424,9 @@
         </div>
       </div>
       <div class="box-right">
+        <div class="ab-bg">
+          <img src="../imgs/bg-template-cv.png" alt="">
+        </div>
         <div class="ab-cv">
           <img src="http://localhost:3000/imgs/ab-cv.png" alt="">
         </div>

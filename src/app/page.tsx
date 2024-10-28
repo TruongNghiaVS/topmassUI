@@ -43,7 +43,7 @@ export default function Home() {
       <JobType />
       <Career blogs={blogs?.data} />
       <Ultil />
-      <Description />
+      {/* <Description /> */}
     </div>
   );
 }

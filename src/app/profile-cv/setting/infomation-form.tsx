@@ -42,7 +42,7 @@ export const InfomationUserCv = ({
     position: yup.string().required("Vui lòng nhập vị trí"),
     level: yup.string().required("Vui lòng nhập cấp bậc"),
     addressInfo: yup.string().required("Vui lòng nhập Địa chỉ"),
-    dateOfBirth: yup.date().required("Vui lòng nhập ngày sinh").nullable(),
+    dateOfBirth: yup.string().required("Vui lòng nhập ngày sinh"),
     gender: yup
       .number()
       .required("Vui lòng chọn giới tính")
@@ -64,13 +64,16 @@ export const InfomationUserCv = ({
   const { control, handleSubmit } = useForm<IInfomationUserCv>({
     resolver: yupResolver(schema),
     defaultValues: user
-      ? user
+      ? {
+          ...user,
+          dateOfBirth: user.dateOfBirth ? user.dateOfBirth.split("T")[0] : "",
+        }
       : {
           fullName: "",
           position: "",
           level: "",
           gender: 0,
-          dateOfBirth: null,
+          dateOfBirth: new Date().toISOString().split("T")[0],
           email: "",
           phoneNumber: "",
           introduction: "",

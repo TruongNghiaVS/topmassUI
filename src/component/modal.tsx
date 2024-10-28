@@ -6,7 +6,7 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   className?: string;
-  title?: string;
+  title?: any;
 }
 
 const Modal = ({ isOpen, onClose, children, className, title }: ModalProps) => {
@@ -28,7 +28,7 @@ const Modal = ({ isOpen, onClose, children, className, title }: ModalProps) => {
     <div className="relative z-[20]">
       <div className="modal-overlay rounded overflow-hidden ">
         <div className="bg-white rounded mb-4 mx-2 md:min-w-[600px]">
-          <div className="modal-header p-4 relative">
+          <div className="modal-header p-4 pb-2 relative">
             {title && <div className="text-base font-bold">{title}</div>}
             <button className="modal-close" onClick={onClose}>
               <XMarkIcon className="w-4" />
@@ -57,6 +57,7 @@ const Modal = ({ isOpen, onClose, children, className, title }: ModalProps) => {
           }
           .modal-content {
             padding: 20px;
+            padding-top: 10px;
             border-radius: 5px;
             position: relative;
           }

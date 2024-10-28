@@ -15,7 +15,7 @@ export const ExperienceView = ({ experiences }: IInfomationExperienceProps) => {
               </div>
               <div className="flex space-x-2">
                 <div>
-                  {dayjs(new Date(+item.fromYear, +item.fromMonth, 1)).format(
+                  {dayjs(`${item.fromYear}-${item.fromMonth}-1`).format(
                     "MM-YYYY"
                   )}
                 </div>
@@ -24,9 +24,7 @@ export const ExperienceView = ({ experiences }: IInfomationExperienceProps) => {
                   {item.isEnd ? (
                     <div>Còn làm</div>
                   ) : (
-                    dayjs(new Date(+item.toYear, +item.toMonth, 1)).format(
-                      "MM-YYYY"
-                    )
+                    dayjs(`${item.toYear}-${item.toMonth}-1`).format("MM-YYYY")
                   )}
                 </div>
               </div>

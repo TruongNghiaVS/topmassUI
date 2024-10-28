@@ -214,7 +214,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                 <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
                   Mô tả công việc
                 </div>
-                <div className="mt-2">
+                <div className="mt-2 ml-4">
                   <div
                     dangerouslySetInnerHTML={{
                       __html: detail?.dataJob.description,
@@ -222,19 +222,9 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                   ></div>
                 </div>
                 <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
-                  Nội dụng
+                  Yêu cầu ứng viên
                 </div>
-                <div className="mt-2">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: detail?.dataJob.content,
-                    }}
-                  ></div>
-                </div>
-                <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
-                  Yêu cầu
-                </div>
-                <div className="mt-2">
+                <div className="mt-2 ml-4">
                   <div
                     dangerouslySetInnerHTML={{
                       __html: detail?.dataJob.requirement,
@@ -244,7 +234,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                 <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
                   Quyền lợi ứng viên
                 </div>
-                <div className="mt-2">
+                <div className="mt-2 ml-4">
                   <div
                     dangerouslySetInnerHTML={{
                       __html: detail?.dataJob.benefit,

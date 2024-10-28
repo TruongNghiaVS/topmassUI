@@ -17,7 +17,8 @@ export const getContact = async (data: any) => {
   htmlContent = htmlContent
     .replace("{email}", data.email)
     .replace("{addressInfo}", data.addressInfo)
-    .replace("{phoneNumber}", data.phoneNumber);
+    .replace("{phoneNumber}", data.phoneNumber)
+    .replace("{dayOfBirth}", dayjs(data.dateOfBirth).format("DD/MM/YYYY"));
   return htmlContent;
 };
 
@@ -61,7 +62,7 @@ export const getExperience = async (data: any) => {
   </div>`;
   for (const item of data) {
     content += htmlContent
-      .replace("{position}", item.position)
+      .replace("{position}", item.positionText)
       .replace(
         "{fromDate}",
         dayjs(new Date(+item.fromYear, item.fromMonth, 1)).format("MM-YYYY")

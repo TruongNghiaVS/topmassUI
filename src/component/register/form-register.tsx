@@ -13,6 +13,7 @@ import { axiosInstanceNotToken } from "@/utils/axios";
 import { useLoading } from "@/app/context/loading";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { EyeIcon } from "@heroicons/react/16/solid";
 
 const schema = yup.object().shape({
   lastName: yup.string().required("Vui lòng nhập tên"),
@@ -31,6 +32,13 @@ const schema = yup.object().shape({
     .min(6, "Tối thiểu 6 ký tự")
     .max(50, "Tối đa 50 ký tự")
     .matches(/^(?=.*[A-Z])(?=.*\d)/, "Phải có 1 ký tự in hoa và 1 chữ số"),
+  confirm_password: yup
+    .string()
+    .oneOf(
+      [yup.ref("password"), undefined],
+      "Nhập lại mật khẩu không chính xác"
+    )
+    .required("Vui lòng nhập xác nhận mật khẩu"),
   // is_used: yup
   //   .boolean()
   //   .required("Please check")
@@ -39,7 +47,10 @@ const schema = yup.object().shape({
 
 export const FormRegister = () => {
   const [isRegister, setIsRegister] = useState(false);
-
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirm_password: false,
+  });
   const { setLoading } = useLoading();
   const router = useRouter();
   const { handleSubmit, control } = useForm<IRegister>({
@@ -50,6 +61,7 @@ export const FormRegister = () => {
       phone: "",
       email: "",
       password: "",
+      confirm_password: "",
       // is_used: false,
     },
   });
@@ -145,13 +157,54 @@ export const FormRegister = () => {
             </div>
             <div className="mb-2">
               <div>
-                Password <span className="text-[#dc2f2f]">*</span>
+                Mật khẩu <span className="text-[#dc2f2f]">*</span>
               </div>
               <TmInput
                 control={control}
                 name="password"
                 placeholder="Từ 6 tới 50 ký tự,1 chữ hoa, 1 chữ số"
-                type="password"
+                type={showPassword.password ? "text" : "password"}
+                afterIcon={
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowPassword((prevShowPassword) => {
+                        return {
+                          ...prevShowPassword,
+                          password: !prevShowPassword.password,
+                        };
+                      });
+                    }}
+                  >
+                    <EyeIcon className="w-5" />
+                  </button>
+                }
+              />
+            </div>
+            <div className="mb-2">
+              <div>
+                Nhập lại mật khẩu <span className="text-[#dc2f2f]">*</span>
+              </div>
+              <TmInput
+                control={control}
+                name="confirm_password"
+                placeholder="Từ 6 tới 50 ký tự,1 chữ hoa, 1 chữ số"
+                type={showPassword.confirm_password ? "text" : "password"}
+                afterIcon={
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowPassword((prevShowPassword) => {
+                        return {
+                          ...prevShowPassword,
+                          confirm_password: !prevShowPassword.confirm_password,
+                        };
+                      });
+                    }}
+                  >
+                    <EyeIcon className="w-5" />
+                  </button>
+                }
               />
             </div>
 

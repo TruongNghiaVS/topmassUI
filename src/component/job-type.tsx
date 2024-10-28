@@ -94,9 +94,9 @@ export const JobType = () => {
                   <div className="text-center text-[#596D54] mt-2">
                     {value.title}
                   </div>
-                  <div className="text-center text-[#C89836] text-sm">
+                  {/* <div className="text-center text-[#C89836] text-sm">
                     {numeral(value.count).format("0,0")} việc làm
-                  </div>
+                  </div> */}
                 </Link>
               </div>
             );

@@ -65,7 +65,7 @@ export const SearchJobForm = ({ search, setSearch }: ISearchJobProps) => {
                   name="Field"
                   control={control}
                   className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
-                  placeholder="Ngành nghề/ Cấp bậc"
+                  placeholder="Ngành nghề"
                   options={listCareers}
                 />
                 <TmSelect
@@ -77,7 +77,7 @@ export const SearchJobForm = ({ search, setSearch }: ISearchJobProps) => {
                 />
                 <button
                   type="button"
-                  className="px-3 py-2 border text-start rounded border-[#DDDDDD] sm:mt-0 mt-2 mr-2"
+                  className="px-3 py-2 border text-start rounded border-[#DDDDDD] hover:bg-swiperPagin hover:text-white sm:mt-0 mt-2 mr-2"
                 >
                   Tuyển gấp
                 </button>
@@ -100,7 +100,7 @@ export const SearchJobForm = ({ search, setSearch }: ISearchJobProps) => {
             <button className="font-normal mr-2 ">Liên quan nhất</button>
             <button className="font-normal mr-2 ">Lương (cao - thấp)</button>
             <button className="font-normal mr-2 ">Ngày đăng mới nhất</button>
-            <button className="font-normal mr-2 ">Ngày đăng củ nhất</button>
+            <button className="font-normal mr-2 ">Ngày đăng cũ nhất</button>
           </div>
         </div>
       </div>

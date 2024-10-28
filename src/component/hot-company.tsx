@@ -69,7 +69,7 @@ export const HotCompany = ({ companys }: IHotCompanyProps) => {
                         </Link>
                       </div>
                       <Link href={`/cong-ty/${item.slug}`}>
-                        <div className=" uppercase text-center my-5 line-clamp-3">
+                        <div className=" uppercase text-center my-5 line-clamp-3 h-[63px]">
                           {item.fullName}
                         </div>
                       </Link>

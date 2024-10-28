@@ -8,6 +8,7 @@ export interface IRegister {
   phone: string;
   email: string;
   password: string;
+  confirm_password: string;
   // is_used: boolean;
 }
 
@@ -225,6 +226,7 @@ export interface IInfoEducation {
   linkFile?: string;
   major: string;
   position: string;
+  positionText: string;
   relId: number;
   schoolName: string;
   toMonth: string;
@@ -444,7 +446,7 @@ export interface IInfomationUserCv {
   position: string;
   level: string;
   gender: number;
-  dateOfBirth: Date | null;
+  dateOfBirth: string;
   email: string;
   phoneNumber: string;
   introduction?: string;

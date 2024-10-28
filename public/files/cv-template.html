@@ -21,6 +21,7 @@
   .grid-box {
     display: grid;
     grid-template-columns: 1fr 2fr;
+    min-height: 100vh;
   }
 
   .box-left {
@@ -116,6 +117,22 @@
     background-color: #F37A20;
     color: #ffffff;
   }
+
+  .ab-bg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ab-bg img {
+    width: 100%;
+  }
 </style>
 
 <body>
@@ -129,12 +146,15 @@
         </div>
         <div>{contact}</div>
         <div>{education}</div>
-        <div>{soft_skill}</div>
-        <div>{skill}</div>
+        <!-- <div>{soft_skill}</div> -->
+        <!-- <div>{skill}</div> -->
         <div>{reward}</div>
         <div>{certificates}</div>
       </div>
       <div class="box-right">
+        <div class="ab-bg">
+          <img src="http://localhost:3000/imgs/bg-template-cv.png" alt="">
+        </div>
         <div class="ab-cv">
           <img src="http://localhost:3000/imgs/ab-cv.png" alt="">
         </div>
@@ -155,7 +175,7 @@
         <div>
           {experiences}
         </div>
-        <div>{project}</div>
+        <!-- <div>{project}</div> -->
       </div>
     </div>
   </div>

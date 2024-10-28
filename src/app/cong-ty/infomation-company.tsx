@@ -5,12 +5,12 @@ export const InfomationCompany = ({ item }: ICompanyData) => {
   let slugCompany = "/cong-ty/" + item.slug;
   return (
     <div className="overflow-hidden rounded-lg md:mb-10 mb-4 border border-[#F37A20]">
-      <div className=" h-[300px] overflow-hidden bg-white flex items-center justify-center">
+      <div className=" h-[150px]  border-b overflow-hidden bg-white ">
         <Link href={`${slugCompany}`}>
           <img
             src={`${item.coverFullLink}`}
             alt=""
-            className="w-full object-fill"
+            className="w-full h-full object-cover"
           />
         </Link>
       </div>
@@ -19,7 +19,11 @@ export const InfomationCompany = ({ item }: ICompanyData) => {
           <div className="p-2 bg-[#EAE9E8] rounded flex-auto w-[20%] overflow-hidden">
             <Link href={`${slugCompany}`}>
               <img
-                src={`${item.logoFullLink}`}
+                src={
+                  item.logoFullLink != null && item.logoFullLink.length > 0
+                    ? item.logoFullLink
+                    : "/imgs/img-company.png"
+                }
                 alt=""
                 className="w-auto h-auto"
               />
