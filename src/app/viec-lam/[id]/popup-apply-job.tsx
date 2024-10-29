@@ -89,7 +89,6 @@ export const PopupApplyJob = ({
   });
   const onSubmit: SubmitHandler<IApplyCv> = async (data) => {
     setLoading(true);
-    debugger;
     try {
       const dataApply: any = {
         fullName: data.username,

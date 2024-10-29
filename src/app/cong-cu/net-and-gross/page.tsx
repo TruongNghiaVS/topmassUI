@@ -163,6 +163,9 @@ export default function PersonalIncome() {
     }
 
     let salaryBeforeIncome = personalIncomeTax + 11000000;
+    if (taxableIncome < 0) {
+      salaryBeforeIncome += taxableIncome;
+    }
     if (data.people && data.people > 0) {
       salaryBeforeIncome = salaryBeforeIncome + 4400000 * data.people;
     }
