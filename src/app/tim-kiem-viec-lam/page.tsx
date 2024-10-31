@@ -19,6 +19,7 @@ export default function SearchJob() {
     RankLevel: "",
     TypeOfWork: "",
   });
+  const [modeOrderBy, setModeOderBy] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
   const searchParams = useSearchParams();
   const params = Object.fromEntries(searchParams.entries());
@@ -35,7 +36,11 @@ export default function SearchJob() {
   }, []);
 
   const { data: dataSearch } = useSWR(
-    `${SEARCH_JOBS}?${convertParams(search)}&Limit=10&Page=${currentPage}`,
+    `${SEARCH_JOBS}?${convertParams(
+      search
+    )}&Limit=10&Page=${currentPage}&ModeOrderBy=${
+      modeOrderBy === 0 ? -1 : modeOrderBy
+    }`,
     fetcher
   );
 
@@ -47,7 +52,12 @@ export default function SearchJob() {
           <div className="uppercase text-[26px] leading-[34px] text-center text-[#F26700] font-bold pt-8 pb-16">
             Tìm việc làm nhanh chóng, phù hợp với nhu cầu của bạn
           </div>
-          <SearchJobForm search={search} setSearch={setSearch} />
+          <SearchJobForm
+            search={search}
+            setSearch={setSearch}
+            setModeOderby={setModeOderBy}
+            modeOderby={modeOrderBy}
+          />
         </div>
       </div>
       <div className="max-1280:px-2">

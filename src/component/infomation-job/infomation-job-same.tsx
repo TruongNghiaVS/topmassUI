@@ -84,7 +84,7 @@ export const InfomationJobSame = ({
           </Link>
         </div>
         <div className="text-center sm:text-start">
-          <div className="text-[16px]	leading-6 font-bold line-clamp-2">
+          <div className="leading-6 font-bold line-clamp-2">
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
                 hot
@@ -92,12 +92,12 @@ export const InfomationJobSame = ({
               {item.positionText}
             </Link>
           </div>
-          <div className="text-sm font-normal mt-2.5 ">
+          <div className="font-normal mt-2.5 ">
             <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
           </div>
           <div className="flex mt-2	justify-center sm:justify-start">
             <div
-              className={`text-sm text-[#F46800] pr-[0.65em] mr-2 relative  ${
+              className={`text-[#F46800] pr-[0.65em] mr-2 relative  ${
                 item.locationText.length > 0 && styleAfter
               }`}
             >

@@ -50,7 +50,7 @@ export const InfomationJobCompany = ({
         </div>
         <div className="text-center sm:text-start w-full">
           <div className="sm:flex justify-between">
-            <div className="text-[16px] flex-auto	leading-[18px] font-bold ">
+            <div className="flex-auto	leading-[18px] font-bold ">
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 {item.positionText}
               </Link>
@@ -73,12 +73,12 @@ export const InfomationJobCompany = ({
                   }`}
             </div>
           </div>
-          <div className="text-sm font-normal mt-2.5 ">
+          <div className="font-normal mt-2.5 ">
             <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
           </div>
           <div className="mt-4 sm:flex grid sm:items-end justify-center sm:justify-between">
             <div>
-              <div className="inline-block rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 mt-2">
+              <div className="inline-block rounded-[3px] bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 mt-2">
                 {item.locationText}
               </div>
             </div>

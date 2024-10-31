@@ -1,7 +1,7 @@
 "use client";
 
 import { useLoading } from "@/app/context/loading";
-import { IInfomationJobProps, IInfomationJobSameProps } from "@/interface/job";
+import { IInfomationJobSameProps } from "@/interface/job";
 import { ADD_SAVE_JOB, REMOVE_SAVE_JOB } from "@/utils/api-url";
 import axiosInstance from "@/utils/axios";
 import { convertToMillionDongFixed } from "@/utils/business/custom-hook";
@@ -24,12 +24,14 @@ export const InfomationJobLike = ({
       await axiosInstance.post(url, {
         jobId: !item.isSave ? item.jobSlug : item.jobId,
       });
+      if (mutate) {
+        mutate();
+      }
       if (!item.isSave) {
         toast.success("Lưu tin thành công");
       } else {
         toast.success("Bỏ lưu tin thành công");
       }
-      if (mutate) mutate();
     } catch (error) {
       if (!item.isSave) {
         toast.error("Lưu tin thất bại");
@@ -58,7 +60,7 @@ export const InfomationJobLike = ({
           </Link>
         </div>
         <div className=" flex-auto w-72 text-center sm:text-start grow">
-          <div className="text-[16px]	leading-[22px] font-bold line-clamp-2 ">
+          <div className="leading-[22px] font-bold line-clamp-2 ">
             <Link href={`/viec-lam/${item.jobSlug}`} className="">
               <span className="text-xs uppercase px-1 py-0.5 mr-2 text-white rounded-[10px] bg-[#F90808]">
                 hot

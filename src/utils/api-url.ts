@@ -78,6 +78,7 @@ export const SEARCH_JOBS = "/api/JobSearch/SearchJob";
 export const GET_ALLBLOGS_BYCATEGORY = "/api/Web/GetAllArticle";
 export const GET_BLOG_DETAIL = "/api/Web/GetArticle";
 export const GET_BLOG_REATION = "/api/Web/GetAllArticleRelationship";
+export const GET_ALL_BLOG_WITH_CATEGORY = "/api/Web/GetAllCategoryWithBlogs";
 
 //---------------- Master data ------------------//
 export const GET_PROVINCE = "/api/Location/GetAllProvinces";
@@ -87,3 +88,4 @@ export const GET_MASTERDATA_EXPERIENCE = "/api/MasterData/GetAllExperience";
 export const GET_MASTER_DATA_CAREER = "/api/MasterData/GetAllCareer";
 export const GET_MASTERDATA_RANK = "/api/MasterData/GetAllRankCandidate";
 export const GET_EDUCATION_LEVEL = "/api/MasterData/AllEducationLevel";
+export const GET_PROVINCES_TO_FIL_JOB = "/api/Location/GetAllProvinces";

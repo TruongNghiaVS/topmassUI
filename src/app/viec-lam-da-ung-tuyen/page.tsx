@@ -11,23 +11,25 @@ import { InfomationJobApply } from "@/component/infomation-job/infomation-job-ap
 import { IJob } from "@/interface/job";
 
 export default function JobApply() {
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState(-1);
   const { data: jobSame, error: errorJobSame } = useSWR(
     `${RELATION_JOB}?JobId=12`,
     fetcher
   );
 
-  const { data: JobApply, error: errJobApply } = useSWR(GET_JOB_APPLY, fetcher);
+  const { data: JobApply, error: errJobApply } = useSWR(
+    `${GET_JOB_APPLY}?Status=${selectedValue}`,
+    fetcher
+  );
 
   const options = [
-    { value: 1, label: "Đã ứng tuyển" },
-    { value: 2, label: "NTD đã xem hồ sơ" },
-    { value: 3, label: "Hồ sơ phù hợp" },
+    { value: -1, label: "Đã ứng tuyển" },
+    { value: -2, label: "NTD đã xem hồ sơ" },
+    { value: 17, label: "Hồ sơ phù hợp" },
   ];
 
   const handleSelectChange = (value: string) => {
-    setSelectedValue(value);
-    console.log("Selected value:", value);
+    setSelectedValue(+value);
   };
 
   return (
@@ -44,6 +46,7 @@ export default function JobApply() {
                   <CustomSelect
                     options={options}
                     onChange={handleSelectChange}
+                    value={selectedValue}
                   />
                 </div>
               </div>

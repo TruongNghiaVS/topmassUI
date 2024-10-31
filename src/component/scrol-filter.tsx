@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { Option } from "./hook-form/interface/interface";
-import { Provinces } from "@/module/helper/master-data";
+import { ProvincesFilterJob } from "@/module/helper/master-data";
 import { IScrollFilterProps } from "@/interface/job";
 
 export const ScrollFilter = ({ search, setSearch }: IScrollFilterProps) => {
-  const { listProvinces } = Provinces();
+  const { provincesFilterJob } = ProvincesFilterJob();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollHorizontally = (distance: number) => {
@@ -44,7 +44,7 @@ export const ScrollFilter = ({ search, setSearch }: IScrollFilterProps) => {
           style={{ scrollbarWidth: "none" }}
         >
           <div className="flex">
-            {listProvinces?.map((item: Option, idx: number) => {
+            {provincesFilterJob?.map((item: Option, idx: number) => {
               return (
                 <button
                   key={idx}

@@ -12,7 +12,12 @@ import { Career, Provinces, Rank, Realm } from "@/module/helper/master-data";
 import { IFormSearchJob, ISearchJobProps } from "@/interface/search-job";
 import { useEffect } from "react";
 
-export const SearchJobForm = ({ search, setSearch }: ISearchJobProps) => {
+export const SearchJobForm = ({
+  search,
+  setSearch,
+  setModeOderby,
+  modeOderby,
+}: ISearchJobProps) => {
   const { listRealms } = Realm();
   const { listProvinces } = Provinces();
   const { listCareers } = Career();
@@ -96,11 +101,46 @@ export const SearchJobForm = ({ search, setSearch }: ISearchJobProps) => {
         <div className="mt-10">
           <div className="flex sm:justify-between flex-wrap">
             <button className="font-normal mr-2 ">Sắp xếp theo</button>
-            <button className="font-normal mr-2 ">Tất cả</button>
-            <button className="font-normal mr-2 ">Liên quan nhất</button>
-            <button className="font-normal mr-2 ">Lương (cao - thấp)</button>
-            <button className="font-normal mr-2 ">Ngày đăng mới nhất</button>
-            <button className="font-normal mr-2 ">Ngày đăng cũ nhất</button>
+            <button
+              className={`font-normal mr-2 py-1 px-3 rounded-lg ${
+                modeOderby === -1 && "bg-swiperPagin text-white"
+              } `}
+              onClick={() => setModeOderby(-1)}
+            >
+              Tất cả
+            </button>
+            <button
+              className={`font-normal mr-2 py-1 px-3 rounded-lg ${
+                modeOderby === 0 && "bg-swiperPagin text-white"
+              } `}
+              onClick={() => setModeOderby(0)}
+            >
+              Liên quan nhất
+            </button>
+            <button
+              className={`font-normal mr-2 py-1 px-3 rounded-lg ${
+                modeOderby === 2 && "bg-swiperPagin text-white"
+              } `}
+              onClick={() => setModeOderby(2)}
+            >
+              Lương (cao - thấp)
+            </button>
+            <button
+              className={`font-normal mr-2 py-1 px-3 rounded-lg ${
+                modeOderby === 4 && "bg-swiperPagin text-white"
+              } `}
+              onClick={() => setModeOderby(4)}
+            >
+              Ngày đăng mới nhất
+            </button>
+            <button
+              className={`font-normal mr-2 py-1 px-3 rounded-lg ${
+                modeOderby === 5 && "bg-swiperPagin text-white"
+              } `}
+              onClick={() => setModeOderby(5)}
+            >
+              Ngày đăng cũ nhất
+            </button>
           </div>
         </div>
       </div>

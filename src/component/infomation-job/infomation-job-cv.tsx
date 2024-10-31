@@ -49,7 +49,7 @@ export const InfomationJobCV = ({
         </div>
         <div className="text-center sm:text-start w-full">
           <div className="sm:flex justify-between">
-            <div className="text-[16px]	leading-[18px] font-bold ">
+            <div className="leading-[18px] font-bold ">
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
                   hot
@@ -57,21 +57,21 @@ export const InfomationJobCV = ({
                 {item.positionText}
               </Link>
             </div>
-            <div className="text-sm font-normal text-default"></div>
+            <div className="font-normal text-default"></div>
           </div>
-          <div className="text-sm font-normal mt-2.5 ">
+          <div className="font-normal mt-2.5 ">
             <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
           </div>
           <div className="mt-4 sm:flex grid sm:items-end justify-center sm:justify-between">
             <div>
-              <div className="inline-block rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 mt-2">
+              <div className="inline-block rounded-[3px] bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 mt-2">
                 {item.locationText}
               </div>
-              <div className="inline-block rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 mt-2">
+              <div className="inline-block rounded-[3px] bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 mt-2">
                 còn <span className="font-semibold">{item.businessDate}</span>{" "}
                 ngày để ứng tuyển
               </div>
-              <div className="inline-block rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 mt-2">
+              <div className="inline-block rounded-[3px] bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 mt-2">
                 Cập nhật 50 phút trước
               </div>
             </div>

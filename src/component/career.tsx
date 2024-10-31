@@ -28,7 +28,7 @@ export const Career = ({ blogs }: ICareerBlogProps) => {
                   </Link>
                 </div>
                 <div className="px-4 py-5">
-                  <div className="text-xl font-bold line-clamp-3  h-[84px]">
+                  <div className="text-base font-bold line-clamp-3">
                     <Link href={`/tin-tuc/cam-nang-nghe-nghiep/${item.slug}`}>
                       {item.title}
                     </Link>

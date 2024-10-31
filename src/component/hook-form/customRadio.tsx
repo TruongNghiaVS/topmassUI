@@ -2,8 +2,8 @@ import { CheckIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 
 type CustomRadioProps = {
-  value: string;
-  selectedValue: string;
+  value: any;
+  selectedValue: any;
   onChange: (value: string) => void;
 };
 

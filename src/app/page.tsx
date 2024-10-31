@@ -23,7 +23,7 @@ export default function Home() {
   const [search, setSearch] = useState("-1");
   const { data: companys } = useSWR(GET_ALL_COMPANY, fetcher);
   const { data: allJobs } = useSWR(`${GET_HOT_JOB}?ModeGet=${search}`, fetcher);
-  const { data: suitableJob } = useSWR(
+  const { data: suitableJob, mutate: suitableMutate } = useSWR(
     `${GET_SUITABLEJOB}?Limit=9&Page=1`,
     fetcher
   );
@@ -39,7 +39,7 @@ export default function Home() {
       <HotJob search={search} setSearch={setSearch} jobs={allJobs?.data} />
       <HotCompany companys={companys?.data} />
       <CreateCv />
-      <JobSuggest jobs={suitableJob?.data} />
+      <JobSuggest jobs={suitableJob?.data} mutate={suitableMutate} />
       <JobType />
       <Career blogs={blogs?.data} />
       <Ultil />

@@ -9,11 +9,18 @@ type Option = {
 type CustomSelectProps = {
   options: Option[];
   onChange: (value: string) => void;
+  value: any;
 };
 
-const CustomSelect: React.FC<CustomSelectProps> = ({ options, onChange }) => {
+const CustomSelect: React.FC<CustomSelectProps> = ({
+  options,
+  onChange,
+  value,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+  const [selectedOption, setSelectedOption] = useState<Option | undefined>(
+    options.find((option) => option.value === value)
+  );
 
   const handleOptionClick = (option: Option) => {
     setSelectedOption(option);

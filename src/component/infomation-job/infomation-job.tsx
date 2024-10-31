@@ -17,7 +17,7 @@ export const InfomationJob = ({ item }: IInfomationJobProps) => {
             </Link>
           </div>
           <div className="flex-auto w-72 text-center sm:text-start mx-auto">
-            <div className="text-[16px]	leading-6 font-bold line-clamp-2">
+            <div className="leading-6 font-bold line-clamp-2">
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
                   hot

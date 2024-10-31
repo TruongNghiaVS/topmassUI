@@ -31,9 +31,7 @@ export const InfomationCompany = ({ item }: ICompanyData) => {
           </div>
           <div className="flex-auto w-[80%]">
             <Link href={`${slugCompany}`}>
-              <div className="text-lg font-medium line-clamp-2 ">
-                {item.fullName}
-              </div>
+              <div className="font-medium line-clamp-2 ">{item.fullName}</div>
             </Link>
             <div className="flex justify-between">
               <div className="font-normal text-[10px]">

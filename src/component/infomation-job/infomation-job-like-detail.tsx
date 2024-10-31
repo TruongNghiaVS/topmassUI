@@ -16,7 +16,7 @@ export const InfomationJobLikeDetail = ({ item }: IInfomationJobSameProps) => {
           </Link>
         </div>
         <div className="text-center sm:text-start flex-auto w-72">
-          <div className="text-[16px]	leading-[22px] font-bold line-clamp-2">
+          <div className="leading-[22px] font-bold line-clamp-2">
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <span className="text-xs uppercase px-1 py-1 mr-2 text-white rounded-[10px] bg-[#F90808]">
                 hot
@@ -24,7 +24,7 @@ export const InfomationJobLikeDetail = ({ item }: IInfomationJobSameProps) => {
               {item.positionText}
             </Link>
           </div>
-          <div className="text-sm font-normal mt-2.5 ">
+          <div className="font-normal mt-2.5 ">
             <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
           </div>
           <Link href={`/viec-lam/${item.jobSlug}`}>

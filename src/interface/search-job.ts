@@ -20,4 +20,6 @@ export interface IFormCompany {
 export interface ISearchJobProps {
   search: IFormSearchJob;
   setSearch: Dispatch<SetStateAction<IFormSearchJob>>;
+  setModeOderby: Dispatch<SetStateAction<number>>;
+  modeOderby: number;
 }

@@ -25,12 +25,12 @@ export const InfomationJobApply = ({ item }: IJobApplyProps) => {
         </div>
         <div className="text-center sm:text-start w-full">
           <div className="sm:flex justify-between">
-            <div className="text-[16px]	leading-[18px] font-bold text-[#FF3600] ">
+            <div className="leading-[18px] font-bold text-[#FF3600] ">
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 {item.positionText}
               </Link>
             </div>
-            <div className="text-sm font-normal text-default">
+            <div className="font-normal text-default">
               {item.aggrement
                 ? "Thoả thuận"
                 : `${convertToMillionDongFixed(
@@ -48,7 +48,7 @@ export const InfomationJobApply = ({ item }: IJobApplyProps) => {
                   }`}
             </div>
           </div>
-          <div className="text-sm font-medium font-normal mt-2 ">
+          <div className="font-medium font-normal mt-2 ">
             <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
           </div>
           <div className="flex items-center mt-2 ">

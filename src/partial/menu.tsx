@@ -154,7 +154,7 @@ export const Menu = () => {
         },
       ],
       link: "/tin-tuc",
-      isShow: false,
+      isShow: true,
     },
     {
       title: "Công cụ",

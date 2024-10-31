@@ -54,12 +54,12 @@ export const InfomationJobSee = ({
         </div>
         <div className="flex-auto w-72 text-center sm:text-start w-full">
           <div className="sm:flex justify-between">
-            <div className="text-[16px]	leading-[18px] font-bold ">
+            <div className="leading-[18px] font-bold ">
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 {item.positionText}
               </Link>
             </div>
-            <div className="text-sm font-normal text-default whitespace-nowrap">
+            <div className="font-normal text-default whitespace-nowrap">
               {item.aggrement
                 ? "Thoả thuận"
                 : `${convertToMillionDongFixed(
@@ -77,10 +77,10 @@ export const InfomationJobSee = ({
                   }`}
             </div>
           </div>
-          <div className="text-sm font-normal mt-2.5 ">
+          <div className="font-normal mt-2.5 ">
             <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
           </div>
-          <div className="text-sm pr-[0.65em] mr-2">
+          <div className="pr-[0.65em] mr-2">
             <Link href={`/viec-lam/${item.jobSlug}`}>{item.businessDate}</Link>
           </div>
           <div className="mt-4 sm:flex grid sm:items-end justify-center sm:justify-between">

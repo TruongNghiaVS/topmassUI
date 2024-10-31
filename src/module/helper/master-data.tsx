@@ -7,6 +7,7 @@ import {
   GET_MASTERDATA_RANK,
   GET_MASTERDATA_REALMS,
   GET_PROVINCE,
+  GET_PROVINCES_TO_FIL_JOB,
 } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
 import useSWR from "swr";
@@ -33,6 +34,37 @@ export const Provinces = () => {
     isLoading,
     provinces,
     listProvinces,
+    mutate,
+  };
+};
+
+export const ProvincesFilterJob = () => {
+  const { data, error, mutate, isLoading } = useSWR(
+    GET_PROVINCES_TO_FIL_JOB,
+    fetcher
+  );
+  const provincesFilterJob = data
+    ? data?.data
+        .filter((item: any) => item.countJob > 0)
+        .map((item: any) => {
+          return {
+            value: item.code,
+            label: item.name,
+          };
+        })
+    : [];
+  const listProvincesFilterJob = [
+    {
+      label: "Tất cả",
+      value: "-1",
+    },
+    ...provincesFilterJob,
+  ];
+  return {
+    error,
+    isLoading,
+    provincesFilterJob,
+    listProvincesFilterJob,
     mutate,
   };
 };

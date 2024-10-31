@@ -62,7 +62,7 @@ export const InfomationJobSave = ({ item, mutate }: IJobSaveProps) => {
         </div>
         <div className="flex-auto w-72 text-center sm:text-start w-full">
           <div className="sm:flex justify-between">
-            <div className=" text-[16px]	leading-[18px] font-bold text-[#FF3600] ">
+            <div className="leading-[18px] font-bold text-[#FF3600] ">
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 {item.positionText}
               </Link>
@@ -85,7 +85,7 @@ export const InfomationJobSave = ({ item, mutate }: IJobSaveProps) => {
                   }`}
             </div>
           </div>
-          <div className="text-sm font-medium font-normal mt-2 ">
+          <div className="font-medium font-normal mt-2 ">
             <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
           </div>
           <div className="flex items-center mt-2 ">

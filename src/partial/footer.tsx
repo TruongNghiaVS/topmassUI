@@ -79,7 +79,7 @@ export const Footer = () => {
               </Link>
             </div>
             <div className="col-span-7">
-              <div className="text-[28px] font-bold">
+              <div className="text-lg font-bold">
                 Thuộc sở hữu công ty Cổ phần tập đoàn{" "}
                 <span className="text-[#F89E1B]">Vietstar</span>
               </div>

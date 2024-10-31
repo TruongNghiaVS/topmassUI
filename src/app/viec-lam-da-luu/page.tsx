@@ -8,16 +8,19 @@ import { fetcher } from "@/utils/axios";
 import { IJob } from "@/interface/job";
 
 export default function JobSave() {
-  const [selectedRadio, setSelectedRadio] = useState("");
+  const [selectedRadio, setSelectedRadio] = useState(1);
   const { data: jobSave, error: errJobSave, mutate } = useSWR(
-    GET_JOB_SAVE,
+    `${GET_JOB_SAVE}?OrderBy=${selectedRadio === -1 ? 1 : selectedRadio}`,
     fetcher
   );
-  const options = ["Cập nhật gần nhất", "Cần tuyển gấp", "Lương cao nhất"];
+  const options = [
+    { label: "Cập nhật gần nhất", value: 1 },
+    { label: "Cần tuyển gấp", value: -1 },
+    { label: "Lương cao nhất", value: 2 },
+  ];
 
   const handleRadioChange = (value: string) => {
-    setSelectedRadio(value);
-    console.log("Selected radio:", value);
+    setSelectedRadio(+value);
   };
 
   return (
@@ -39,14 +42,14 @@ export default function JobSave() {
               </div>
               <div className="text-xs font-normal p-4 border-b flex justify-between">
                 <div>Ưu tiên hiển thị:</div>
-                {options.map((option) => (
-                  <div key={option} className="flex items-center space-x-2">
+                {options.map((option, index) => (
+                  <div key={index} className="flex items-center space-x-2">
                     <CustomRadio
-                      value={option}
+                      value={option.value}
                       selectedValue={selectedRadio}
                       onChange={handleRadioChange}
                     />
-                    <span>{option}</span>
+                    <span>{option.label}</span>
                   </div>
                 ))}
               </div>
