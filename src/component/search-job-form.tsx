@@ -42,49 +42,51 @@ export const SearchJobForm = ({
   });
 
   const getRangeSalary = (data: IFormSearchJob) => {
-    switch (data.Salary) {
-      case 1:
-        data.SalaryFrom = 1;
-        data.SalaryTo = 3;
-        break;
-      case 2:
-        data.SalaryFrom = 3;
-        data.SalaryTo = 5;
-        break;
-      case 3:
-        data.SalaryFrom = 5;
-        data.SalaryTo = 10;
-        break;
-      case 4:
-        data.SalaryFrom = 10;
-        data.SalaryTo = 15;
-        break;
-      case 5:
-        data.SalaryFrom = 15;
-        data.SalaryTo = 20;
-        break;
-      case 6:
-        data.SalaryFrom = 20;
-        data.SalaryTo = 30;
-        break;
-      case 7:
-        data.SalaryFrom = 30;
-        data.SalaryTo = 40;
-        break;
-      case 8:
-        data.SalaryFrom = 40;
-        data.SalaryTo = 50;
-        break;
-      case 9:
-        data.SalaryFrom = 50;
-        data.SalaryTo = 300;
-        break;
+    if (data.Salary) {
+      switch (+data.Salary) {
+        case 1:
+          data.SalaryFrom = 1;
+          data.SalaryTo = 3;
+          break;
+        case 2:
+          data.SalaryFrom = 3;
+          data.SalaryTo = 5;
+          break;
+        case 3:
+          data.SalaryFrom = 5;
+          data.SalaryTo = 10;
+          break;
+        case 4:
+          data.SalaryFrom = 10;
+          data.SalaryTo = 15;
+          break;
+        case 5:
+          data.SalaryFrom = 15;
+          data.SalaryTo = 20;
+          break;
+        case 6:
+          data.SalaryFrom = 20;
+          data.SalaryTo = 30;
+          break;
+        case 7:
+          data.SalaryFrom = 30;
+          data.SalaryTo = 40;
+          break;
+        case 8:
+          data.SalaryFrom = 40;
+          data.SalaryTo = 50;
+          break;
+        case 9:
+          data.SalaryFrom = 50;
+          data.SalaryTo = 300;
+          break;
+      }
     }
+    return data;
   };
 
   const onSubmit: SubmitHandler<IFormSearchJob> = async (data) => {
-    if (data.Salary && data.Salary > 0) {
-    }
+    data = getRangeSalary(data);
     setSearch(data);
   };
   return (
