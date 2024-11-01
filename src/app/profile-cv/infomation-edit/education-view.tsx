@@ -36,7 +36,7 @@ export const EducationView = ({ educations }: IInfoEducationProps) => {
                 <div className="col-span-2">{item.major}</div>
               </div>
               <div className="grid grid-cols-3 text-xs mt-2">
-                <div className="col-span-1">Hệ đào tạo:</div>
+                <div className="col-span-1">Trình độ:</div>
                 <div className="col-span-2">{item.positionText}</div>
               </div>
               <div className="grid grid-cols-3 text-xs mt-2">

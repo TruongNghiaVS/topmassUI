@@ -62,7 +62,7 @@ export const getExperience = async (data: any) => {
   </div>`;
   for (const item of data) {
     content += htmlContent
-      .replace("{position}", item.positionText)
+      .replace("{position}", item.position)
       .replace(
         "{fromDate}",
         dayjs(new Date(+item.fromYear, item.fromMonth, 1)).format("MM-YYYY")

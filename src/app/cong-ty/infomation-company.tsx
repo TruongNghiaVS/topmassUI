@@ -1,8 +1,27 @@
 import Link from "next/link";
 import { ICompanyData } from "../../interface/interface";
 import { convertToMillionDongFixed } from "@/utils/business/custom-hook";
+import { useLoading } from "../context/loading";
+import axiosInstance from "@/utils/axios";
+import { POST_COMPANY_ADDFOLLOW } from "@/utils/api-url";
+import { toast } from "react-toastify";
 
 export const InfomationCompany = ({ item }: ICompanyData) => {
+  const { setLoading } = useLoading();
+  const AddFollow = async (id: number) => {
+    setLoading(true);
+    try {
+      const res = await axiosInstance.post(POST_COMPANY_ADDFOLLOW, {
+        slug: id,
+      });
+      toast.success("Đã theo dõi công ty");
+    } catch (error) {
+      toast.error("Thao tác thất bại, quay lại sau");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   let slugCompany = "/cong-ty/" + item.slug;
   return (
     <div className="overflow-hidden rounded-lg md:mb-10  bg-white mb-4 border border-[#F37A20]">
@@ -38,7 +57,10 @@ export const InfomationCompany = ({ item }: ICompanyData) => {
               <div className="font-normal text-[10px]">
                 {item.followCount} lượt theo dõi
               </div>
-              <button onClick={() => {}} className="text-default text-xs ">
+              <button
+                onClick={() => AddFollow(item.id)}
+                className="text-default text-xs "
+              >
                 + Theo dõi
               </button>
             </div>
