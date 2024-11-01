@@ -1,16 +1,20 @@
 "use client";
 import TmInput from "@/component/hook-form/input";
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 export interface IFormSearchDetail {
-  key?: string;
+  KeyWord?: string;
 }
 
 export const SearchDetail = () => {
+  const router = useRouter();
   const { handleSubmit, control } = useForm<IFormSearchDetail>();
-  const onSubmit: SubmitHandler<IFormSearchDetail> = (data) =>
-    console.log(data);
+  const onSubmit: SubmitHandler<IFormSearchDetail> = (data: any) => {
+    const queryString = new URLSearchParams(data).toString();
+    router.push(`/tim-kiem-viec-lam?${queryString}`);
+  };
   return (
     <div className="bg-bgHeaderJobCustom">
       <div className="container mx-auto">
@@ -22,7 +26,7 @@ export const SearchDetail = () => {
             <div className="flex-1">
               <TmInput
                 control={control}
-                name="key"
+                name="KeyWord"
                 className="border-0"
                 placeholder="Tìm kiếm việc làm, công ty, ngành nghề"
               />

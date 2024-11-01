@@ -73,7 +73,7 @@ export const HotCompany = ({ companys }: IHotCompanyProps) => {
                           {item.fullName}
                         </div>
                       </Link>
-                      <Link href="/viec-lam">
+                      {/* <Link href="/viec-lam">
                         <div className="flex items-center justify-center">
                           <img
                             src="/imgs/bag.png"
@@ -82,7 +82,7 @@ export const HotCompany = ({ companys }: IHotCompanyProps) => {
                           />
                           5 vị trí đang tuyển
                         </div>
-                      </Link>
+                      </Link> */}
                     </div>
                   </SwiperSlide>
                 );

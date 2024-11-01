@@ -10,6 +10,12 @@ export interface IFormSearchJob extends IFormSlider {
   RankLevel?: string;
   TypeOfWork?: string;
   ModeGet?: string;
+  ExperienceId?: string;
+  SalaryFrom?: number;
+  SalaryTo?: number;
+  Salary?: number;
+  JobType?: string;
+  Gender?: string;
 }
 
 export interface IFormCompany {

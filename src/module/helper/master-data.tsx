@@ -2,6 +2,7 @@ import { IProfileInfomation } from "@/interface/interface";
 import {
   CURRENT_USER,
   GET_EDUCATION_LEVEL,
+  GET_JOB_TYPE,
   GET_MASTER_DATA_CAREER,
   GET_MASTERDATA_EXPERIENCE,
   GET_MASTERDATA_RANK,
@@ -95,6 +96,33 @@ export const Experiences = () => {
     isLoading,
     experiences,
     listExperiences,
+    mutate,
+  };
+};
+
+export const JobType = () => {
+  const { data, error, mutate, isLoading } = useSWR(GET_JOB_TYPE, fetcher);
+
+  const jobType = data
+    ? data?.map((item: any) => {
+        return {
+          value: item.id.toString(),
+          label: item.text,
+        };
+      })
+    : [];
+  const listJobType = [
+    {
+      label: "Tất cả",
+      value: "-1",
+    },
+    ...jobType,
+  ];
+  return {
+    error,
+    isLoading,
+    jobType,
+    listJobType,
     mutate,
   };
 };

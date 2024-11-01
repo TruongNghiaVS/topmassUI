@@ -102,7 +102,7 @@ export const InfomationJobSame = ({
               }`}
             >
               <Link href={`/viec-lam/${item.jobSlug}`}>
-                {item.aggrement
+                {item.salaryFrom === 0 && item.salaryTo === 0
                   ? "Thoả thuận"
                   : `${convertToMillionDongFixed(
                       item.salaryFrom,

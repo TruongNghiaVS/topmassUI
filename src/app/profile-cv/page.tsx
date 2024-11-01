@@ -138,12 +138,12 @@ export default function ProfileCV() {
       isShow: infoExperiences?.data.length > 0 ? true : false,
       component: <ExperienceView experiences={infoExperiences?.data} />,
     },
-    // {
-    //   title: "Dự án",
-    //   numberSelect: 3,
-    //   isShow: infoProject?.data.length > 0 ? true : false,
-    //   component: <ProjectView projects={infoProject?.data} />,
-    // },
+    {
+      title: "Dự án",
+      numberSelect: 3,
+      isShow: infoProject?.data.length > 0 ? true : false,
+      component: <ProjectView projects={infoProject?.data} />,
+    },
     // {
     //   title: "Kỹ năng",
     //   numberSelect: 4,
@@ -326,13 +326,13 @@ export default function ProfileCV() {
               onClose={onClose}
             />
           )}
-          {/* {selected === 3 && (
+          {selected === 3 && (
             <ProjectUserCv
               projects={infoProject?.data}
               mutate={mutateProject}
               onClose={onClose}
             />
-          )} */}
+          )}
           {selected === 4 && (
             <SkillInfomationCv
               skills={infoSkill?.data}

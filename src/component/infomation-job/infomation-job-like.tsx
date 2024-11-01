@@ -75,7 +75,7 @@ export const InfomationJobLike = ({
             <Link href={`/viec-lam/${item.jobSlug}`}>
               <div className="flex">
                 <div className="rounded-[3px] text-sm bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 whitespace-nowrap text-xs">
-                  {item.aggrement
+                  {item.salaryFrom === 0 && item.salaryTo === 0
                     ? "Thoả thuận"
                     : `${convertToMillionDongFixed(
                         item.salaryFrom,

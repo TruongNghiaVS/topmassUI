@@ -94,6 +94,7 @@ export interface IJobSameProps {
   jobs: IJob[];
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
+  mutate: KeyedMutator<any>;
 }
 
 export interface IInfomationJobSameProps {

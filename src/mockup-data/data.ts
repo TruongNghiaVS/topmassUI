@@ -341,3 +341,21 @@ export const certificateViews = [
     description: "",
   },
 ];
+
+export const rankSalary = [
+  { label: "1-3 triệu", value: 1 },
+  { label: "3-5 triệu", value: 2 },
+  { label: "5-10 triệu", value: 3 },
+  { label: "10-15 triệu", value: 4 },
+  { label: "15-20 triệu", value: 5 },
+  { label: "20-30 triệu", value: 6 },
+  { label: "30-40 triệu", value: 7 },
+  { label: "40-50 triệu", value: 8 },
+  { label: "Trên 50 triệu", value: 9 },
+];
+
+export const genderFilter = [
+  { label: "Không yêu cầu", value: 0 },
+  { label: "Nam", value: 1 },
+  { label: "Nữ", value: 2 },
+];

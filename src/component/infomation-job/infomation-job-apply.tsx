@@ -31,7 +31,7 @@ export const InfomationJobApply = ({ item }: IJobApplyProps) => {
               </Link>
             </div>
             <div className="font-normal text-default">
-              {item.aggrement
+              {item.salaryFrom === 0 && item.salaryTo === 0
                 ? "Thoả thuận"
                 : `${convertToMillionDongFixed(
                     item.salaryFrom,

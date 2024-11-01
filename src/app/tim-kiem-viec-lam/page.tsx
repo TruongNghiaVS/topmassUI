@@ -18,6 +18,12 @@ export default function SearchJob() {
     Field: "",
     RankLevel: "",
     TypeOfWork: "",
+    ExperienceId: "-1",
+    SalaryFrom: -1,
+    SalaryTo: -1,
+    Salary: -1,
+    JobType: "",
+    Gender: "0",
   });
   const [modeOrderBy, setModeOderBy] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -35,7 +41,7 @@ export default function SearchJob() {
     }
   }, []);
 
-  const { data: dataSearch } = useSWR(
+  const { data: dataSearch, mutate } = useSWR(
     `${SEARCH_JOBS}?${convertParams(
       search
     )}&Limit=10&Page=${currentPage}&ModeOrderBy=${
@@ -68,6 +74,7 @@ export default function SearchJob() {
                 jobs={dataSearch?.data}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
+                mutate={mutate}
               />
             </div>
             <div className="xl:col-span-4 md:col-span-5 pb-4 ">

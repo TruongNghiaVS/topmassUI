@@ -40,6 +40,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
     `${DETAIL_JOB}?JobId=${id}`,
     fetcher
   );
+
   const { data: jobSame, error: errorJobSame, mutate: mutateJobSame } = useSWR(
     `${RELATION_JOB}?JobId=${id}`,
     fetcher
@@ -241,6 +242,58 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                     }}
                   ></div>
                 </div>
+
+                {detail && detail.dataJob.locationsInfoMation ? (
+                  <div>
+                    <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
+                      Địa điểm làm việc
+                    </div>
+                    <div className="mt-2 ml-4">
+                      {detail.dataJob.locationsInfoMation.map(
+                        (item: any, idx_location: number) => (
+                          <div key={idx_location} className="flex space-x-2">
+                            <div>{item.locationText}:</div>
+                            <div>
+                              <ul>
+                                {item.districts.map(
+                                  (district: any, idx_district: number) => (
+                                    <li key={idx_district}>
+                                      {district.detail_location},{" "}
+                                      {district.districtText}
+                                    </li>
+                                  )
+                                )}
+                              </ul>
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+                {detail && detail.dataJob.time_workings ? (
+                  <div>
+                    <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
+                      Thời gian làm việc
+                    </div>
+                    <div className="mt-2 ml-4">
+                      {JSON.parse(detail.dataJob.time_workings).map(
+                        (item: any, idx_detail: number) => (
+                          <div key={idx_detail}>
+                            <div>
+                              {item.Day_from} - {item.Day_to}: ( Từ{" "}
+                              {item.Time_from} đến {item.Time_to}){" "}
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
                 <div className="flex items-center mt-6 ">
                   <div className="mr-2">
                     {detail?.jobExtra.isAply ? (

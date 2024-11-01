@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   DocumentTextIcon,
+  EnvelopeIcon,
   MapPinIcon,
   PhoneIcon,
 } from "@heroicons/react/16/solid";
@@ -66,16 +67,13 @@ export const Footer = () => {
       <div className=" bg-white px-0 max-1280:px-2">
         <div className="container mx-auto pt-[60px] pb-[30px] gap-x-28	">
           <div className="lg:grid grid-cols-12 items-center">
-            <div className="lg:col-span-5 col-span-4 bg-[url(/imgs/bg-logo-footer.png)] bg-no-repeat bg-[lenght:100% 100%] py-4 mb-2">
+            <div className="lg:col-span-5 col-span-4 py-4 mb-2">
               <Link href="#">
-                <Image
-                  src="/imgs/logo-new.svg"
-                  width={100}
-                  height={100}
-                  priority={true}
+                <img
+                  src="/imgs/logo-footer.png"
                   alt=""
-                  className="w-[180px] "
-                ></Image>
+                  className="w-[350px] "
+                />
               </Link>
             </div>
             <div className="col-span-7">
@@ -102,17 +100,15 @@ export const Footer = () => {
         <div className="container mx-auto text-white">
           <div className="md:grid grid-cols-3">
             <div className="col-span-1 mb-2">
-              <div className="text-4xl	font-bold">Liên hệ</div>
-              <div className="text-[13px] flex items-center">
+              <div className="text-lg	font-bold">Liên hệ</div>
+              <div className="text-[13px] mb-1 flex items-center">
                 <PhoneIcon className="w-4 mr-1" />
-                Hotline hỗ trợ cho người tìm việc
+                Hotline: 1900 255 836
               </div>
-              <div className="text-lg	">0938797478</div>
               <div className="text-[13px] flex items-center">
-                <PhoneIcon className="w-4 mr-1" />
-                Hotline hỗ trợ cho nhà tuyển dụng
+                <EnvelopeIcon className="w-4 mr-1" />
+                Email: support@topmass.vn
               </div>
-              <div className="text-lg	">0938797478</div>
             </div>
             <div className="col-span-2">
               <div className="md:grid grid-cols-3">

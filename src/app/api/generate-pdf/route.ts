@@ -52,11 +52,10 @@ export async function GET(request: Request) {
     const contact = await getContact(profileUser);
     const education = await getEducation(res.data.data.educations);
     const experience = await getExperience(res.data.data.experiences);
-    // const project = await getProject(res.data.data.allProjects);
+    const project = await getProject(res.data.data.allProjects);
     const reward = await getReward(res.data.data.allReward);
     const skill = await getSkill(res.data.data.allSkill);
     // const softSkill = await getSoftSkill(res.data.data.allsoftSkill);
-
     htmlContent = htmlContent
       .replace(`{contact}`, contact)
       .replace("{education}", education)
@@ -68,8 +67,8 @@ export async function GET(request: Request) {
       .replace("{name}", profileUser.fullName)
       .replace("{linkProFile}", profileUser.avatarLink)
       .replace("{position}", profileUser.position)
-      .replace("{experiences}", experience);
-    // .replace("{project}", project);
+      .replace("{experiences}", experience)
+      .replace("{project}", project);
 
     // Launch Puppeteer
     const browser = await puppeteer.launch();
@@ -86,6 +85,7 @@ export async function GET(request: Request) {
 
     // // Close the browser
     await browser.close();
+    console.log("____________");
 
     return new NextResponse(pdfBuffer, {
       status: 200,

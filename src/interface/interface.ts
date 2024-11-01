@@ -1,6 +1,7 @@
 import { Option } from "@/component/hook-form/interface/interface";
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Key, KeyedMutator } from "swr";
+import { IJob } from "./job";
 
 export interface IRegister {
   lastName: string;
@@ -183,6 +184,7 @@ export interface ICompanyItemData {
   id: number;
   logoFullLink: string;
   slug: string;
+  dataJob: IJob[];
 }
 
 export interface IInfomationCompany extends ICompanyData {

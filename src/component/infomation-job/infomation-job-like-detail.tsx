@@ -30,7 +30,7 @@ export const InfomationJobLikeDetail = ({ item }: IInfomationJobSameProps) => {
           <Link href={`/viec-lam/${item.jobSlug}`}>
             <div className="flex mt-4 justify-center lg:justify-start	">
               <div className="rounded-[3px] text-xs bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2">
-                {item.aggrement
+                {item.salaryFrom === 0 && item.salaryTo === 0
                   ? "Thoả thuận"
                   : `${convertToMillionDongFixed(
                       item.salaryFrom,

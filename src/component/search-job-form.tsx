@@ -8,9 +8,16 @@ import {
   MagnifyingGlassIcon,
   MapPinIcon,
 } from "@heroicons/react/16/solid";
-import { Career, Provinces, Rank, Realm } from "@/module/helper/master-data";
+import {
+  Career,
+  Experiences,
+  JobType,
+  Provinces,
+  Rank,
+} from "@/module/helper/master-data";
 import { IFormSearchJob, ISearchJobProps } from "@/interface/search-job";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { genderFilter, rankSalary } from "@/mockup-data/data";
 
 export const SearchJobForm = ({
   search,
@@ -18,10 +25,13 @@ export const SearchJobForm = ({
   setModeOderby,
   modeOderby,
 }: ISearchJobProps) => {
-  const { listRealms } = Realm();
   const { listProvinces } = Provinces();
   const { listCareers } = Career();
   const { listRanks } = Rank();
+  const { listExperiences } = Experiences();
+  const { jobType } = JobType();
+
+  const [isShowExtentFilter, setIsShowExtentFilter] = useState(false);
 
   useEffect(() => {
     reset(search);
@@ -31,8 +41,51 @@ export const SearchJobForm = ({
     defaultValues: search,
   });
 
+  const getRangeSalary = (data: IFormSearchJob) => {
+    switch (data.Salary) {
+      case 1:
+        data.SalaryFrom = 1;
+        data.SalaryTo = 3;
+        break;
+      case 2:
+        data.SalaryFrom = 3;
+        data.SalaryTo = 5;
+        break;
+      case 3:
+        data.SalaryFrom = 5;
+        data.SalaryTo = 10;
+        break;
+      case 4:
+        data.SalaryFrom = 10;
+        data.SalaryTo = 15;
+        break;
+      case 5:
+        data.SalaryFrom = 15;
+        data.SalaryTo = 20;
+        break;
+      case 6:
+        data.SalaryFrom = 20;
+        data.SalaryTo = 30;
+        break;
+      case 7:
+        data.SalaryFrom = 30;
+        data.SalaryTo = 40;
+        break;
+      case 8:
+        data.SalaryFrom = 40;
+        data.SalaryTo = 50;
+        break;
+      case 9:
+        data.SalaryFrom = 50;
+        data.SalaryTo = 300;
+        break;
+    }
+  };
+
   const onSubmit: SubmitHandler<IFormSearchJob> = async (data) => {
-    await setSearch(data);
+    if (data.Salary && data.Salary > 0) {
+    }
+    setSearch(data);
   };
   return (
     <div className="xl:px-44 lg:px-40 px-2">
@@ -64,13 +117,13 @@ export const SearchJobForm = ({
             </div>
           </div>
           <div className=" px-2">
-            <div className="w-full mt-8 relative ">
-              <div className="p-1 border rounded-lg shadow-md grid sm:grid-cols-4 grid-cols-1 items-center bg-white gap-1 ">
+            <div className="w-full mt-8 relative bg-white rounded-lg shadow-md p-1 border shadow-md ">
+              <div className="grid sm:grid-cols-4 grid-cols-1 items-center gap-1 ">
                 <TmSelect
                   name="Field"
                   control={control}
                   className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
-                  placeholder="Ngành nghề"
+                  placeholder="Ngành nghề/lĩnh vực"
                   options={listCareers}
                 />
                 <TmSelect
@@ -90,11 +143,46 @@ export const SearchJobForm = ({
                 <button
                   type="button"
                   className="px-3 py-2 border rounded border-[#DDDDDD] flex items-center sm:mt-0 mt-2"
+                  onClick={() => setIsShowExtentFilter(!isShowExtentFilter)}
                 >
                   <AdjustmentsHorizontalIcon className="w-6 mr-2" />
                   Tất cả bộ lọc
                 </button>
               </div>
+              {isShowExtentFilter ? (
+                <div className="grid sm:grid-cols-4 grid-cols-1 items-center gap-1 mt-2 ">
+                  <TmSelect
+                    name="ExperienceId"
+                    control={control}
+                    className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
+                    placeholder="Tất cả kinh nghiệm"
+                    options={listExperiences}
+                  />
+                  <TmSelect
+                    name="Salary"
+                    control={control}
+                    className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
+                    placeholder="Mức lương"
+                    options={rankSalary}
+                  />
+                  <TmSelect
+                    name="JobType"
+                    control={control}
+                    className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
+                    placeholder="Loại hình công việc"
+                    options={jobType}
+                  />
+                  <TmSelect
+                    name="Gender"
+                    control={control}
+                    className="border rounded border-[#DDDDDD] !px-2 sm:mt-0 mt-2"
+                    placeholder="Giới tính"
+                    options={genderFilter}
+                  />
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </form>

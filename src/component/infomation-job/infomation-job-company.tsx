@@ -56,7 +56,7 @@ export const InfomationJobCompany = ({
               </Link>
             </div>
             <div className="text-sm font-normal whitespace-nowrap text-default">
-              {item.aggrement
+              {item.salaryFrom === 0 && item.salaryTo === 0
                 ? "Thoả thuận"
                 : `${convertToMillionDongFixed(
                     item.salaryFrom,

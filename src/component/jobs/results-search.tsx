@@ -6,6 +6,7 @@ export const ResutlSearchJob = ({
   jobs,
   currentPage,
   setCurrentPage,
+  mutate,
 }: IJobSameProps) => {
   const length = Math.ceil(jobs?.length / 10);
   const arrLength = Array.from({ length: length }, (_, i) => {
@@ -16,7 +17,7 @@ export const ResutlSearchJob = ({
       {jobs?.map((value: IJob, idx: number) => {
         return (
           <div className="mt-4" key={idx}>
-            <InfomationJobSame item={value} />
+            <InfomationJobSame item={value} mutate={mutate} />
           </div>
         );
       })}

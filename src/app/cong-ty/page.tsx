@@ -19,21 +19,21 @@ export default function CompanyPage() {
   const [key, setKey] = useState("");
   const list = [1, 2, 3, 4, 5, 6, 7, 8];
   const schema = yup.object().shape({
-    key: yup.string(),
+    KeyWord: yup.string(),
   });
   const { handleSubmit, control } = useForm<IFormSearchDetail>({
     resolver: yupResolver(schema),
     defaultValues: {
-      key: "",
+      KeyWord: "",
     },
   });
   const { data: DatallCompany, error: ErrorDataAllCompany, mutate } = useSWR(
-    `${GET_ALL_COMPANY}?KeyWord=${key}`,
+    `${GET_ALL_COMPANY}?KeyWord=${key}&LoadDataJob=true`,
     fetcher
   );
 
   const onSubmit: SubmitHandler<IFormSearchDetail> = async (data) => {
-    setKey(data.key || "");
+    setKey(data.KeyWord || "");
   };
 
   return (
@@ -54,7 +54,7 @@ export default function CompanyPage() {
               >
                 <div className="flex-1">
                   <TmInput
-                    name="key"
+                    name="KeyWord"
                     control={control}
                     icon={<MagnifyingGlassIcon className="w-6" />}
                     className="border-0"
@@ -79,11 +79,7 @@ export default function CompanyPage() {
               <div className="mt-4 grid xl:grid-cols-3 md:grid-cols-2 gap-4">
                 {DatallCompany?.data.map(
                   (value: ICompanyItemData, index: number) => {
-                    return (
-                      <div key={index}>
-                        <InfomationCompany item={value} />
-                      </div>
-                    );
+                    return <InfomationCompany key={index} item={value} />;
                   }
                 )}
               </div>
@@ -95,9 +91,9 @@ export default function CompanyPage() {
           )}
         </div>
       </div>
-      <div>
+      {/* <div>
         <Description />
-      </div>
+      </div> */}
     </div>
   );
 }
