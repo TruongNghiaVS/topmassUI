@@ -23,8 +23,12 @@ export const Footer = () => {
       link: "/lien-he",
     },
     {
-      title: "Chính sách & điều khoảng",
-      link: "/dieu-khoan-dich-vu",
+      title: "Chính sách bảo mật",
+      link: "/chinh-sach-bao-mat",
+    },
+    {
+      title: "Điều khoản dịch vụ",
+      link: "/quy-dinh-nha-tuyen-dung",
     },
   ];
 

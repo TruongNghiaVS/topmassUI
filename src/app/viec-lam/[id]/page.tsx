@@ -251,8 +251,13 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                     <div className="mt-2 ml-4">
                       {detail.dataJob.locationsInfoMation.map(
                         (item: any, idx_location: number) => (
-                          <div key={idx_location} className="flex space-x-2">
-                            <div>{item.locationText}:</div>
+                          <div
+                            key={idx_location}
+                            className="flex space-x-2 mb-4"
+                          >
+                            <div className="whitespace-nowrap">
+                              {item.locationText}:
+                            </div>
                             <div>
                               <ul>
                                 {item.districts.map(
@@ -282,7 +287,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                       {JSON.parse(detail.dataJob.time_workings).map(
                         (item: any, idx_detail: number) => (
                           <div key={idx_detail}>
-                            <div>
+                            <div className="mb-4">
                               {item.Day_from} - {item.Day_to}: ( Từ{" "}
                               {item.Time_from} đến {item.Time_to}){" "}
                             </div>

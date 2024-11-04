@@ -29,7 +29,7 @@ export const SearchJobForm = ({
   const { listCareers } = Career();
   const { listRanks } = Rank();
   const { listExperiences } = Experiences();
-  const { jobType } = JobType();
+  const { listJobType } = JobType();
 
   const [isShowExtentFilter, setIsShowExtentFilter] = useState(false);
 
@@ -172,7 +172,7 @@ export const SearchJobForm = ({
                     control={control}
                     className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
                     placeholder="Loại hình công việc"
-                    options={jobType}
+                    options={listJobType}
                   />
                   <TmSelect
                     name="Gender"

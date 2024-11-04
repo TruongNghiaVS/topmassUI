@@ -13,6 +13,7 @@ import { fetcher } from "@/utils/axios";
 import { IJob } from "@/interface/job";
 import { IBlog } from "@/interface/blog";
 import dayjs from "dayjs";
+import TableOfContents from "@/component/table-content-blog";
 
 const NewDetail = ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -37,7 +38,6 @@ const NewDetail = ({ params }: { params: { id: string } }) => {
       <div className="mx-auto container">
         <div className="sm:grid grid-cols-12 gap-4 mt-4 max-1280:px-2">
           <div className="xl:col-span-8 md:col-span-7">
-            <h1 className="text-xs font-normal">{blogDetail?.categoryName}</h1>
             <h1>{blogDetail?.title}</h1>
             <div className="flex text-xs">
               <div className="mr-4">Tạo bởi Minh Phạm</div>
@@ -52,10 +52,13 @@ const NewDetail = ({ params }: { params: { id: string } }) => {
                 className="w-full rounded-lg"
               />
             </div>
-            <div
-              dangerouslySetInnerHTML={{ __html: blogDetail?.content }}
-            ></div>
-
+            {blogDetail?.content ? (
+              <div className="mt-4">
+                <TableOfContents content={blogDetail.content} />
+              </div>
+            ) : (
+              ""
+            )}
             <div>
               <CreateCv />
             </div>

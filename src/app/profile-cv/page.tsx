@@ -144,24 +144,24 @@ export default function ProfileCV() {
       isShow: infoProject?.data.length > 0 ? true : false,
       component: <ProjectView projects={infoProject?.data} />,
     },
-    // {
-    //   title: "Kỹ năng",
-    //   numberSelect: 4,
-    //   isShow: infoSkill?.data.length > 0 ? true : false,
-    //   component: <SkillView skills={infoSkill?.data} />,
-    // },
+    {
+      title: "Kỹ năng",
+      numberSelect: 4,
+      isShow: infoSkill?.data.length > 0 ? true : false,
+      component: <SkillView skills={infoSkill?.data} />,
+    },
     // {
     //   title: "Kỹ năng mềm",
     //   numberSelect: 5,
     //   isShow: infoSoftSkill?.data.length > 0 ? true : false,
     //   component: <SoftSkillView skills={infoSoftSkill?.data} />,
     // },
-    // {
-    //   title: "Công cụ hỗ trợ",
-    //   numberSelect: 6,
-    //   isShow: infoTools?.data.length > 0 ? true : false,
-    //   component: <SupportToolView tools={infoTools?.data} />,
-    // },
+    {
+      title: "Công cụ hỗ trợ",
+      numberSelect: 6,
+      isShow: infoTools?.data.length > 0 ? true : false,
+      component: <SupportToolView tools={infoTools?.data} />,
+    },
     {
       title: "Giải thưởng",
       numberSelect: 7,
@@ -347,13 +347,13 @@ export default function ProfileCV() {
               onClose={onClose}
             />
           )} */}
-          {/* {selected === 6 && (
+          {selected === 6 && (
             <SupportToolInfomationCv
               tools={infoTools.data}
               mutate={mutate}
               onClose={onClose}
             />
-          )} */}
+          )}
           {selected === 7 && (
             <PrizeInfomationCv
               rewards={infoRewards?.data}

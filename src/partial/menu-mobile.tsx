@@ -175,11 +175,11 @@ export const MenuMobile = () => {
           slug: "/tin-tuc/cam-nang-nghe-nghiep",
           icon: <DocumentTextIcon className="text-white mr-2 leading-4 w-6" />,
         },
-        {
-          title: "Thị Trường - Xu Hướng Tìm Việc",
-          slug: "/tin-tuc/thi-truong-xu-huong-tim-viec",
-          icon: <DocumentTextIcon className="text-white mr-2 leading-4 w-6" />,
-        },
+        // {
+        //   title: "Thị Trường - Xu Hướng Tìm Việc",
+        //   slug: "/tin-tuc/thi-truong-xu-huong-tim-viec",
+        //   icon: <DocumentTextIcon className="text-white mr-2 leading-4 w-6" />,
+        // },
         {
           title: " Kỹ Năng Phỏng Vấn",
           slug: "/tin-tuc/ky-nang-phong-van",

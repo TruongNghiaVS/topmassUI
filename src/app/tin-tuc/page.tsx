@@ -10,6 +10,9 @@ export default function News() {
 
   return (
     <div className="bg-white min-h-screen">
+      <div className="">
+        <img src="/imgs/banner-tin-tuc.png" className="w-full" alt="" />
+      </div>
       <div className="container mx-auto">
         <div className="mt-4">
           {blogs?.map((item: any, idx: number) => {

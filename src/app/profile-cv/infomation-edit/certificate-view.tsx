@@ -42,7 +42,9 @@ export const CertificateView = ({
                 {item.linkFile &&
                   item.linkFile.length > 0 &&
                   item.linkFile.split(",").map((link, index) => {
-                    return <img key={index} src={link} className="mt-2" />;
+                    return (
+                      <img key={index} src={link} className="mt-2 w-[200px]" />
+                    );
                   })}
               </div>
             </div>

@@ -26,6 +26,7 @@ export default function JobApply() {
     { value: -1, label: "Đã ứng tuyển" },
     { value: -2, label: "NTD đã xem hồ sơ" },
     { value: 17, label: "Hồ sơ phù hợp" },
+    { value: -2, label: "Hồ sơ chưa phù hợp" },
   ];
 
   const handleSelectChange = (value: string) => {

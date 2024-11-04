@@ -23,7 +23,7 @@ export const InfomationJobSame = ({
 
   const getDay = (dayString: string) => {
     const day = dayjs().diff(dayString, "d");
-    return day === 0 ? "Mới cập nhật" : `Cập nhật ${day} trước`;
+    return day === 0 ? "Mới cập nhật" : `Cập nhật ${day} ngày trước`;
   };
 
   const { setLoading } = useLoading();

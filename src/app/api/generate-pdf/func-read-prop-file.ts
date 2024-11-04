@@ -33,7 +33,7 @@ export const getEducation = async (data: any) => {
   }
   const htmlContent = await fs.readFile(educationPath, "utf8");
   let content = ` <div style="margin-top: 20px;">
-                    <div class="mt-2">Học vấn</div>`;
+                    <div class="mt-2" style="font-size:15px;">Học vấn</div>`;
 
   for (const item of data) {
     content += htmlContent
@@ -57,7 +57,7 @@ export const getExperience = async (data: any) => {
   }
   const htmlContent = await fs.readFile(experiencePath, "utf8");
   let content = `<div>
-  <div class="title-cv" style="margin-top: 10px;">
+  <div class="title-cv" style="margin-top: 10px; font-size: 15px">
     Kinh nghiệm làm việc
   </div>`;
   for (const item of data) {
@@ -65,13 +65,13 @@ export const getExperience = async (data: any) => {
       .replace("{position}", item.position)
       .replace(
         "{fromDate}",
-        dayjs(new Date(+item.fromYear, item.fromMonth, 1)).format("MM-YYYY")
+        dayjs(`${item.fromYear}-${item.fromMonth}-1`).format("MM/YYYY")
       )
       .replace(
         "{toDate}",
         item.isEnd
           ? "Còn học"
-          : dayjs(new Date(+item.fromYear, item.fromMonth, 1)).format("MM-YYYY")
+          : dayjs(`${item.fromYear}-${item.fromMonth}-1`).format("MM/YYYY")
       )
       .replace("{companyName}", item.companyName)
       .replace("{introduction}", item.introduction);
@@ -91,7 +91,7 @@ export const getProject = async (data: any) => {
     return "";
   }
   let content = `<div>
-  <div class="title-cv" style="margin-top: 10px;">
+  <div class="title-cv" style="margin-top: 10px; font-size:15px">
     Dự án
   </div>`;
   const htmlContent = await fs.readFile(projectPath, "utf8");
@@ -100,13 +100,13 @@ export const getProject = async (data: any) => {
       .replace("{projectName}", item.projectName)
       .replace(
         "{fromDate}",
-        dayjs(new Date(+item.fromYear, +item.fromMonth, 1)).format("MM-YYYY")
+        dayjs(`${item.fromYear}-${item.fromMonth}-1`).format("MM/YYYY")
       )
       .replace(
         "{toDate}",
         item.isEnd
           ? "Còn làm"
-          : dayjs(new Date(+item.fromYear, item.fromMonth, 1)).format("MM-YYYY")
+          : dayjs(`${item.fromYear}-${item.fromMonth}-1`).format("MM/YYYY")
       )
       .replace("{customerName}", item.customerName)
       .replace("{position}", item.position)
@@ -126,7 +126,7 @@ export const getReward = async (data: any) => {
     return "";
   }
   let content = `<div style="margin-top: 20px;">
-  <div class="mt-2">Giải thưởng</div>`;
+  <div class="mt-2" style="font-size:15px;">Giải thưởng</div>`;
   const htmlContent = await fs.readFile(rewardPath, "utf8");
   for (const item of data) {
     content += htmlContent.replace("{fullName}", item.fullName);
@@ -146,7 +146,7 @@ export const getCertificate = async (data: any) => {
   }
   let htmlContent = await fs.readFile(certificatePath, "utf8");
   let content = `<div style="margin-top: 20px;">
-  <div class="mt-2">Chứng chỉ</div>`;
+  <div class="mt-2" style="font-size: 15px">Chứng chỉ</div>`;
   for (const item of data) {
     content += htmlContent
       .replace("{companyName}", item.companyName)
@@ -167,7 +167,7 @@ export const getSkill = async (data: any) => {
   }
   let htmlContent = await fs.readFile(skillPath, "utf8");
   let content = `<div style="margin-top: 20px;">
-                    <div class="mt-2">Kỹ năng</div>`;
+                    <div class="mt-2" style="font-size: 15px">Kỹ năng</div>`;
   for (const item of data) {
     let level = "";
     listLevel.forEach((idx) => {
@@ -192,7 +192,7 @@ export const getSoftSkill = async (data: any) => {
   }
   let htmlContent = await fs.readFile(softskillPath, "utf8");
   let content = `<div style="margin-top: 20px;">
-                    <div class="mt-2">Kỹ năng mềm</div>`;
+                    <div class="mt-2" style="font-size: 15px">Kỹ năng mềm</div>`;
   for (const item of data) {
     let level = "";
     listLevel.forEach((idx) => {

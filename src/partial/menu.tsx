@@ -77,7 +77,7 @@ export const Menu = () => {
           border: true,
         },
       ],
-      link: "/viec-Lam",
+      link: "/viec-lam",
       isShow: true,
     },
     {
@@ -138,13 +138,13 @@ export const Menu = () => {
             <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
-        {
-          title: "Thị Trường - Xu Hướng Tìm Việc",
-          slug: "/tin-tuc/thi-truong-xu-huong-tim-viec",
-          icon: (
-            <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
-          ),
-        },
+        // {
+        //   title: "Thị Trường - Xu Hướng Tìm Việc",
+        //   slug: "/tin-tuc/thi-truong-xu-huong-tim-viec",
+        //   icon: (
+        //     <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+        //   ),
+        // },
         {
           title: " Kỹ Năng Phỏng Vấn",
           slug: "/tin-tuc/ky-nang-phong-van",
