@@ -23,6 +23,7 @@ import useSWR from "swr";
 import { getToken, removeToken } from "@/utils/token";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { HOST_RECUMENT } from "@/config-global";
 
 export const MenuMobile = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -71,7 +72,7 @@ export const MenuMobile = () => {
 
   const navItems = [
     {
-      title: "Việc làm",
+      title: "Việc Làm",
       subMenu: [
         {
           title: "Việc làm",
@@ -132,7 +133,7 @@ export const MenuMobile = () => {
     },
 
     {
-      title: "Công ty",
+      title: "Công Ty",
       subMenu: [],
       slug: "/cong-ty",
     },
@@ -187,7 +188,7 @@ export const MenuMobile = () => {
       ],
     },
     {
-      title: "Công cụ",
+      title: "Công Cụ",
       subMenu: [
         {
           title: "Tính lương GROSS - NET",
@@ -235,7 +236,7 @@ export const MenuMobile = () => {
       <div
         ref={divRef}
         className={`absolute transition-all duration-500 left-0 top-0 h-screen bg-[#F27B21] z-50 ${
-          isOpenMenu ? "w-[90%]" : "w-0"
+          isOpenMenu ? "w-[80%]" : "w-0"
         }`}
       >
         <div className="h-full overflow-y-scroll relative">
@@ -298,6 +299,12 @@ export const MenuMobile = () => {
                 </div>
               );
             })}
+            <div className="mt-4 text-white">
+              <Link target="_blank" href={HOST_RECUMENT || ""}>
+                Nhà tuyển dụng <br />{" "}
+                <span className="font-bold">Đăng tin tuyển dụng</span>
+              </Link>
+            </div>
           </div>
           {isLogin && (
             <div

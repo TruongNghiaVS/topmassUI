@@ -21,6 +21,7 @@ import { getToken, removeToken } from "@/utils/token";
 import { IDropdownMenu } from "@/interface/interface";
 import { usePathname, useRouter } from "next/navigation";
 import { MenuMobile } from "./menu-mobile";
+import { HOST_RECUMENT } from "@/config-global";
 
 export const Header = () => {
   const headerRef = useRef<HTMLDivElement | null>(null);
@@ -121,7 +122,7 @@ export const Header = () => {
                 </div>
               </div>
               <Link
-                href="http://42.115.94.180:8586/"
+                href={HOST_RECUMENT || ""}
                 target="_blank"
                 className="text-xs "
               >

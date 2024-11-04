@@ -77,11 +77,11 @@ export const Menu = () => {
           border: true,
         },
       ],
-      link: "/viec-lam",
+      link: "/viec-Lam",
       isShow: true,
     },
     {
-      title: "Công ty",
+      title: "Công Ty",
       subMenu: [],
       link: "/cong-ty",
       isShow: true,
@@ -157,7 +157,7 @@ export const Menu = () => {
       isShow: true,
     },
     {
-      title: "Công cụ",
+      title: "Công Cụ",
       subMenu: [
         {
           title: "Tính lương GROSS - NET",
