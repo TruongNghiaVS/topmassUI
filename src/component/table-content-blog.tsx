@@ -19,7 +19,7 @@ const addTOCInContent = (tocItems: TocItem[]) => {
     content += `<li
               key={item.id}
               style="margin-left: ${(item.level - 1) * 20}px"
-              class="font-medium"
+              class="font-medium hover:text-swiperPagin"
             >
               <a href=#${item.id}>${item.text}</a>
             </li>`;

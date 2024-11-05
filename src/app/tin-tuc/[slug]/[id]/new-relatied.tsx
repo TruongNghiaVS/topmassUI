@@ -1,16 +1,18 @@
 import { IBlogRelationProps } from "@/interface/blog";
 import { getCategorySlug } from "@/utils/business/custom-hook";
+import dayjs from "dayjs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export const NewInfomation = ({ item }: IBlogRelationProps) => {
+export const NewRelative = ({ item }: IBlogRelationProps) => {
   const [slug, setSlug] = useState("");
 
   useEffect(() => {
     setSlug(getCategorySlug(item.categoryName));
   }, [item]);
+
   return (
-    <div>
+    <div className="p-4 rounded-lg bg-white">
       <div>
         <Link href={`/tin-tuc/${slug}/${item.slug}`}>
           <img
@@ -20,13 +22,17 @@ export const NewInfomation = ({ item }: IBlogRelationProps) => {
                 : "/imgs/img-detail-new.png"
             }  `}
             alt=""
-            className="w-full h-[200px] object-fill rounded-lg overflow-hidden"
+            className="w-full h-[200px]"
           />
         </Link>
       </div>
       <Link href={`/tin-tuc/${slug}/${item.slug}`}>
-        <div className="font-semibold mt-3 line-clamp-3">{item.title}</div>
+        <div className="font-semibold ">{item.title}</div>
       </Link>
+      <div className="mt-2">
+        <span className="font-medium">Ngày cập nhật:</span>{" "}
+        {dayjs(item.updateAt).format("DD/MM/YYYY")}
+      </div>
     </div>
   );
 };

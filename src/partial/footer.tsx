@@ -73,11 +73,7 @@ export const Footer = () => {
           <div className="lg:grid grid-cols-12 items-center">
             <div className="lg:col-span-5 col-span-4 py-4 mb-2">
               <Link href="#">
-                <img
-                  src="/imgs/logo-footer.png"
-                  alt=""
-                  className="w-[350px] "
-                />
+                <img src="/imgs/logo-footer.png" alt="" />
               </Link>
             </div>
             <div className="col-span-7">

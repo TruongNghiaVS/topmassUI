@@ -14,6 +14,7 @@ import { IJob } from "@/interface/job";
 import { IBlog } from "@/interface/blog";
 import dayjs from "dayjs";
 import TableOfContents from "@/component/table-content-blog";
+import { NewRelative } from "./new-relatied";
 
 const NewDetail = ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -65,15 +66,15 @@ const NewDetail = ({ params }: { params: { id: string } }) => {
           </div>
           <div className="xl:col-span-4 md:col-span-5 ">
             <TitleCustom
-              title="Top Công việc mới nhất"
-              className="font-normal text-xl	mt-8"
+              title="Bài viết liên quan"
+              className="font-normal text-xl mt-8"
             />
 
             <div>
-              {allJobs?.data.map((item: IJob, idx: number) => {
+              {listBlog?.data.map((item: IBlog, idx: number) => {
                 return (
                   <div className="mt-4" key={idx}>
-                    <InfomationJobLike item={item} mutate={mutateAllJob} />
+                    <NewRelative key={idx} item={item} />
                   </div>
                 );
               })}

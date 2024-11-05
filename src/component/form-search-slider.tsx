@@ -61,7 +61,7 @@ export const SliderForm = () => {
             />
           </div>
 
-          <div className="flex-1 mr-2">
+          <div className="flex-1 sm:mr-2">
             <TmSelect
               icon={<BagBootstrapIcon className="w-4 mr-2" />}
               className="border-0"
