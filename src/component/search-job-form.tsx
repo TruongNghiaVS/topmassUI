@@ -137,7 +137,7 @@ export const SearchJobForm = ({
                 />
                 <button
                   type="button"
-                  className="px-3 py-2 border text-start rounded border-[#DDDDDD] hover:bg-swiperPagin hover:text-white sm:mt-0 mt-2 mr-2"
+                  className="px-3 py-2 border text-start rounded border-[#DDDDDD] hover:bg-colorBase hover:text-white sm:mt-0 mt-2 mr-2"
                 >
                   Tuyển gấp
                 </button>
@@ -193,7 +193,7 @@ export const SearchJobForm = ({
             <button className="font-normal mr-2 ">Sắp xếp theo</button>
             <button
               className={`font-normal mr-2 py-1 px-3 rounded-lg ${
-                modeOderby === -1 && "bg-swiperPagin text-white"
+                modeOderby === -1 && "bg-colorBase text-white"
               } `}
               onClick={() => setModeOderby(-1)}
             >
@@ -201,7 +201,7 @@ export const SearchJobForm = ({
             </button>
             <button
               className={`font-normal mr-2 py-1 px-3 rounded-lg ${
-                modeOderby === 0 && "bg-swiperPagin text-white"
+                modeOderby === 0 && "bg-colorBase text-white"
               } `}
               onClick={() => setModeOderby(0)}
             >
@@ -209,7 +209,7 @@ export const SearchJobForm = ({
             </button>
             <button
               className={`font-normal mr-2 py-1 px-3 rounded-lg ${
-                modeOderby === 2 && "bg-swiperPagin text-white"
+                modeOderby === 2 && "bg-colorBase text-white"
               } `}
               onClick={() => setModeOderby(2)}
             >
@@ -217,7 +217,7 @@ export const SearchJobForm = ({
             </button>
             <button
               className={`font-normal mr-2 py-1 px-3 rounded-lg ${
-                modeOderby === 4 && "bg-swiperPagin text-white"
+                modeOderby === 4 && "bg-colorBase text-white"
               } `}
               onClick={() => setModeOderby(4)}
             >
@@ -225,7 +225,7 @@ export const SearchJobForm = ({
             </button>
             <button
               className={`font-normal mr-2 py-1 px-3 rounded-lg ${
-                modeOderby === 5 && "bg-swiperPagin text-white"
+                modeOderby === 5 && "bg-colorBase text-white"
               } `}
               onClick={() => setModeOderby(5)}
             >

@@ -551,7 +551,7 @@ export default function PersonalIncome() {
         onClose={() => setIsOpenModal(false)}
         title={
           <div>
-            <h4 className="text-swiperPagin font-medium">
+            <h4 className="text-colorBase font-medium">
               Mức lương tối thiểu vùng
             </h4>
             <p>

@@ -22,10 +22,7 @@ export const PrizeView = ({ rewards }: IInfomationRewardProps) => {
               </div>
             </div>
             <div className="mt-4">
-              <div
-                className="mt-2"
-                dangerouslySetInnerHTML={{ __html: item.introduction }}
-              ></div>
+              <div className="mt-2">{item.companyName}</div>
               <div className="mt-4 flex justify-center">
                 {item.linkFile &&
                   item.linkFile.length > 0 &&

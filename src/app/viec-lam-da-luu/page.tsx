@@ -64,6 +64,13 @@ export default function JobSave() {
                   })
                 ) : (
                   <div>
+                    <div className="flex justify-center">
+                      <img
+                        src="/imgs/img-no-save.png"
+                        alt=""
+                        className="w-auto"
+                      />
+                    </div>
                     <div className="font-bold text-xs mt-4">
                       Bạn chưa lưu công việc nào
                     </div>
@@ -72,13 +79,6 @@ export default function JobSave() {
                       lưu lại chúng để
                       <br />
                       chắc chắn rằng bạn không bỏ lỡ điều gì hết nhé!
-                    </div>
-                    <div className="flex justify-center">
-                      <img
-                        src="/imgs/img-no-save.png"
-                        alt=""
-                        className="w-auto"
-                      />
                     </div>
                   </div>
                 )}

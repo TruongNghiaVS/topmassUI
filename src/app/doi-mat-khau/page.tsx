@@ -14,12 +14,25 @@ import { useLoading } from "../context/loading";
 export default function ChangePassword() {
   const { setLoading } = useLoading();
   const schema = yup.object().shape({
+    old_password: yup
+      .string()
+      .required("Bắt buộc nhập password")
+      .min(6, "Tối thiểu 6 ký tự")
+      .max(50, "Tối đa 50 ký tự")
+      .matches(/^(?=.*[A-Z])(?=.*\d)/, "Phải có 1 ký tự in hoa và 1 chữ số"),
     password: yup
       .string()
       .required("Bắt buộc nhập password")
       .min(6, "Tối thiểu 6 ký tự")
       .max(50, "Tối đa 50 ký tự")
       .matches(/^(?=.*[A-Z])(?=.*\d)/, "Phải có 1 ký tự in hoa và 1 chữ số"),
+    confirm_password: yup
+      .string()
+      .oneOf(
+        [yup.ref("password"), undefined],
+        "Nhập lại mật khẩu không chính xác"
+      )
+      .required("Vui lòng nhập xác nhận mật khẩu"),
   });
 
   const { handleSubmit, control, reset } = useForm<IChangePassword>({
@@ -58,12 +71,34 @@ export default function ChangePassword() {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
                   <div>
+                    Mật khẩu củ<span className="text-[#dc2f2f]">*</span>
+                  </div>
+                  <TmInput
+                    control={control}
+                    name="old_password"
+                    placeholder="Mật khẩu củ"
+                    type="password"
+                  />
+                </div>
+                <div className="mb-4">
+                  <div>
                     Mật khẩu <span className="text-[#dc2f2f]">*</span>
                   </div>
                   <TmInput
                     control={control}
                     name="password"
                     placeholder="Mật khẩu"
+                    type="password"
+                  />
+                </div>
+                <div className="mb-4">
+                  <div>
+                    Nhập lại mật khẩu <span className="text-[#dc2f2f]">*</span>
+                  </div>
+                  <TmInput
+                    control={control}
+                    name="confirm_password"
+                    placeholder="Nhập lại mật khẩu"
                     type="password"
                   />
                 </div>

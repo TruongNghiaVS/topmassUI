@@ -29,7 +29,9 @@ export interface IResetpassword {
 }
 
 export interface IChangePassword {
+  old_password: string;
   password: string;
+  confirm_password: string;
 }
 
 export interface IConfirmResetPassword {

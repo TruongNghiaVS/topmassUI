@@ -27,8 +27,8 @@ export const Footer = () => {
       link: "/chinh-sach-bao-mat",
     },
     {
-      title: "Điều khoản dịch vụ",
-      link: "/quy-dinh-nha-tuyen-dung",
+      title: "Quy định ứng viên",
+      link: "/quy-dinh-ung-vien",
     },
   ];
 

@@ -109,8 +109,8 @@ export const getProject = async (data: any) => {
           : dayjs(`${item.fromYear}-${item.fromMonth}-1`).format("MM/YYYY")
       )
       .replace("{customerName}", item.customerName)
-      .replace("{position}", item.position)
-      .replace("{introduction}", item.introduction);
+      .replace("{position}", item.position);
+    // .replace("{introduction}", item.introduction);
   }
   content += "</div>";
   return content;
@@ -193,6 +193,31 @@ export const getSoftSkill = async (data: any) => {
   let htmlContent = await fs.readFile(softskillPath, "utf8");
   let content = `<div style="margin-top: 20px;">
                     <div class="mt-2" style="font-size: 15px">Kỹ năng mềm</div>`;
+  for (const item of data) {
+    let level = "";
+    listLevel.forEach((idx) => {
+      level += idx <= item.level ? starActive : starNotActive;
+    });
+    content += htmlContent
+      .replace("{fullName}", item.fullName)
+      .replace("{level}", level);
+  }
+  content += "</div>";
+  return content;
+};
+
+export const getTools = async (data: any) => {
+  const toolPath = path.join(
+    process.cwd(),
+    "public",
+    "files/properties/tool.html"
+  );
+  if (!data || data?.length === 0) {
+    return "";
+  }
+  let htmlContent = await fs.readFile(toolPath, "utf8");
+  let content = `<div style="margin-top: 20px;">
+                    <div class="mt-2" style="font-size: 15px">Công cụ</div>`;
   for (const item of data) {
     let level = "";
     listLevel.forEach((idx) => {

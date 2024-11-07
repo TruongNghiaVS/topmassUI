@@ -22,7 +22,7 @@ export const SliderDetail = () => {
         pagination={{
           clickable: true,
           bulletClass:
-            "text-swiperPagin bg-white cursor-pointer mx-1 text-swiperPagin",
+            "text-colorBase bg-white cursor-pointer mx-1 text-colorBase",
           bulletActiveClass: "!text-white !bg-[#FF6633]",
           renderBullet: (index, className) => {
             return `<span class="!p-1.5 !inline-block !text-xs !opacity-100 !border !border-1 !border-solid !border-[#F3F5F7] !rounded-full  ${className} " ></span>`;

@@ -269,17 +269,21 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
                     <div className="flex">
                       <MapIcon className="w-6 mr-2" /> Bản đồ
                     </div>
-                    <div className="p-4">
-                      <iframe
-                        className="w-full"
-                        src={`${companyDetail?.mapInfo}`}
-                        style={{ border: 0 }}
-                        allowFullScreen
-                        height={300}
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                      ></iframe>
-                    </div>
+                    {companyDetail?.mapInfo.length > 0 ? (
+                      <div className="p-4">
+                        <iframe
+                          className="w-full"
+                          src={`${companyDetail?.mapInfo}`}
+                          style={{ border: 0 }}
+                          allowFullScreen
+                          height={300}
+                          loading="lazy"
+                          referrerPolicy="no-referrer-when-downgrade"
+                        ></iframe>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 ) : (
                   <div> </div>

@@ -24,6 +24,7 @@ import { getToken, removeToken } from "@/utils/token";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { HOST_RECUMENT } from "@/config-global";
+import { CurrentUser } from "@/module/helper/master-data";
 
 export const MenuMobile = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -34,7 +35,7 @@ export const MenuMobile = () => {
     setIsOpenMenu(true);
   };
   const divRef = useRef<HTMLDivElement | null>(null);
-
+  const { currentUser } = CurrentUser();
   const handleClickOutside = (event: MouseEvent) => {
     if (divRef.current && !divRef.current.contains(event.target as Node)) {
       setIsOpenMenu(false);
@@ -253,7 +254,11 @@ export const MenuMobile = () => {
               </div>
               <div className="p-4 border-b-4 border-white">
                 <div className=" flex justify-center">
-                  <img src="/imgs/no-img-mobile.png" alt="" className="w-24" />
+                  <img
+                    src={currentUser?.avatarLink || "/imgs/no-img-mobile.png"}
+                    alt=""
+                    className="w-24 h-24 rounded-full"
+                  />
                 </div>
                 <div className="mt-2 text-lg font-medium uppercase text-center text-white">
                   Welcome to topmass

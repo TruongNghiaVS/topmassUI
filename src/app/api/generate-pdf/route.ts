@@ -15,6 +15,7 @@ import {
   getReward,
   getSkill,
   getSoftSkill,
+  getTools,
 } from "./func-read-prop-file";
 
 export const dynamic = "force-dynamic";
@@ -55,12 +56,14 @@ export async function GET(request: Request) {
     const project = await getProject(res.data.data.allProjects);
     const reward = await getReward(res.data.data.allReward);
     const skill = await getSkill(res.data.data.allSkill);
+    const tool = await getTools(res.data.data.allTools);
     // const softSkill = await getSoftSkill(res.data.data.allsoftSkill);
     htmlContent = htmlContent
       .replace(`{contact}`, contact)
       .replace("{education}", education)
       // .replace("{soft_skill}", softSkill)
       .replace("{skill}", skill)
+      .replace("{tool}", tool)
       .replace("{reward}", reward)
       .replace("{certificates}", certificate)
       .replace("{introduction}", profileUser.introduction)
@@ -85,7 +88,6 @@ export async function GET(request: Request) {
 
     // // Close the browser
     await browser.close();
-    console.log("____________");
 
     return new NextResponse(pdfBuffer, {
       status: 200,

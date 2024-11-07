@@ -28,17 +28,11 @@ const NewDetail = ({ params }: { params: { id: string } }) => {
     fetcher
   );
 
-  const list = [1, 2, 3, 4];
-
-  const { data: allJobs, mutate: mutateAllJob } = useSWR(
-    `${GET_JOBSEARCH_HOTJOB}`,
-    fetcher
-  );
   return (
     <div className="pt-2">
       <div className="mx-auto container">
         <div className="sm:grid grid-cols-12 gap-4 mt-4 max-1280:px-2">
-          <div className="xl:col-span-8 md:col-span-7">
+          <div className="xl:col-span-8 md:col-span-7 bg-white p-4 rounded-lg">
             <h1>{blogDetail?.title}</h1>
             <div className="flex text-xs">
               <div className="mr-4">Tạo bởi Minh Phạm</div>
@@ -61,7 +55,11 @@ const NewDetail = ({ params }: { params: { id: string } }) => {
               ""
             )}
             <div>
-              <CreateCv />
+              <img
+                src="/imgs/banner-detail-new.png"
+                alt=""
+                className="w-full"
+              />
             </div>
           </div>
           <div className="xl:col-span-4 md:col-span-5 ">

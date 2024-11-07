@@ -103,13 +103,13 @@ export const Menu = () => {
             <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
-        {
-          title: "Góc Thư Giản",
-          slug: "/tin-tuc/goc-thu-gian",
-          icon: (
-            <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
-          ),
-        },
+        // {
+        //   title: "Góc Thư Giản",
+        //   slug: "/tin-tuc/goc-thu-gian",
+        //   icon: (
+        //     <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+        //   ),
+        // },
         {
           title: "Tiện Ích",
           slug: "/tin-tuc/tien-ich",
@@ -117,20 +117,20 @@ export const Menu = () => {
             <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
-        {
-          title: "Góc Báo Chí",
-          slug: "/tin-tuc/goc-bao-chi",
-          icon: (
-            <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
-          ),
-        },
-        {
-          title: "Thị Trường Lương",
-          slug: "/tin-tuc/thi-truong-luong",
-          icon: (
-            <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
-          ),
-        },
+        // {
+        //   title: "Góc Báo Chí",
+        //   slug: "/tin-tuc/goc-bao-chi",
+        //   icon: (
+        //     <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+        //   ),
+        // },
+        // {
+        //   title: "Thị Trường Lương",
+        //   slug: "/tin-tuc/thi-truong-luong",
+        //   icon: (
+        //     <DocumentTextIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+        //   ),
+        // },
         {
           title: "Cẩm Nang Nghề Nghiệp",
           slug: "/tin-tuc/cam-nang-nghe-nghiep",

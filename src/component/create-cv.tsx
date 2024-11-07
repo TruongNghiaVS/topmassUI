@@ -4,7 +4,7 @@ import Link from "next/link";
 export const CreateCv = () => {
   return (
     <>
-      <div className="sm:mt-4 px-2 bg-[url(/imgs/bg-create-cv.png)] bg-no-repeat bg-[length:100%_100%]">
+      <div className="sm:mt-4 lg:block hidden px-2 bg-[url(/imgs/bg-create-cv.png)] bg-no-repeat bg-[length:100%_100%]">
         <div className="container mx-auto">
           <div className="sm:py-[120px] py-10">
             <div className="text-white xl:text-[32px] md:text-2xl text-lg font-bold mb-4">

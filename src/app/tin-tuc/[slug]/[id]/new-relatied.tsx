@@ -12,7 +12,7 @@ export const NewRelative = ({ item }: IBlogRelationProps) => {
   }, [item]);
 
   return (
-    <div className="p-4 rounded-lg bg-white">
+    <div className="p-8 rounded-lg bg-white">
       <div>
         <Link href={`/tin-tuc/${slug}/${item.slug}`}>
           <img
@@ -30,7 +30,7 @@ export const NewRelative = ({ item }: IBlogRelationProps) => {
         <div className="font-semibold ">{item.title}</div>
       </Link>
       <div className="mt-2">
-        <span className="font-medium">Ngày cập nhật:</span>{" "}
+        <span className="font-medium text-lg">Ngày cập nhật:</span>{" "}
         {dayjs(item.updateAt).format("DD/MM/YYYY")}
       </div>
     </div>

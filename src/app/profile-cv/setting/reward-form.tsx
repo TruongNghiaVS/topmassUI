@@ -110,6 +110,8 @@ export const PrizeInfomationCv = ({
 
       const dataUpload = data.rewards.map((item, index) => {
         const dataTemp: any = { ...item };
+        dataTemp.monthExpired = new Date();
+        dataTemp.yearExpired = new Date();
         if (linkUploads[index] && linkUploads[index]?.length > 0) {
           dataTemp.linkFile = linkUploads[index];
         }
