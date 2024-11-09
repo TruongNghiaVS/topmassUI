@@ -71,12 +71,12 @@ export default function ChangePassword() {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
                   <div>
-                    Mật khẩu củ<span className="text-[#dc2f2f]">*</span>
+                    Mật khẩu cũ<span className="text-[#dc2f2f]">*</span>
                   </div>
                   <TmInput
                     control={control}
                     name="old_password"
-                    placeholder="Mật khẩu củ"
+                    placeholder="Mật khẩu cũ"
                     type="password"
                   />
                 </div>

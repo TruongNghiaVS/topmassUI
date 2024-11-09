@@ -70,6 +70,7 @@ export interface IDetailJob {
 
 export interface IHotJobProps extends IScrollFilterProps {
   jobs: IJob[];
+  mutate?: KeyedMutator<any>;
 }
 
 export interface ISearchJobWithTypeFilter extends IHotJobProps {

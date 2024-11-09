@@ -241,7 +241,7 @@ export const CertificateInfomationCv = ({
                         <TmCheckbox
                           control={control}
                           name={`certificates.${index}.isExpired`}
-                          label="Vô hạn"
+                          label="Vô thời hạn"
                         />
                       </div>
                     </div>

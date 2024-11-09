@@ -350,7 +350,7 @@ export default function ProfileCV() {
           {selected === 6 && (
             <SupportToolInfomationCv
               tools={infoTools.data}
-              mutate={mutate}
+              mutate={mutateTools}
               onClose={onClose}
             />
           )}

@@ -129,7 +129,9 @@ export const getReward = async (data: any) => {
   <div class="mt-2" style="font-size:15px;">Giải thưởng</div>`;
   const htmlContent = await fs.readFile(rewardPath, "utf8");
   for (const item of data) {
-    content += htmlContent.replace("{fullName}", item.fullName);
+    content += htmlContent
+      .replace("{fullName}", item.fullName)
+      .replace("{companyName}", item.companyName);
   }
   content += "</div>";
   return content;
@@ -148,9 +150,7 @@ export const getCertificate = async (data: any) => {
   let content = `<div style="margin-top: 20px;">
   <div class="mt-2" style="font-size: 15px">Chứng chỉ</div>`;
   for (const item of data) {
-    content += htmlContent
-      .replace("{companyName}", item.companyName)
-      .replace("{fullName}", item.fullName);
+    content += htmlContent.replace("{fullName}", item.fullName);
   }
   content += "</div>";
   return content;

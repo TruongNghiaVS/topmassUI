@@ -71,14 +71,14 @@ export const InfomationCompany = ({ item }: ICompanyData) => {
             return (
               <div key={index} className="mt-2 p-4 border rounded-lg">
                 <div className="leading-[18px] font-bold line-clamp-1">
-                  <Link href={`/viec-lam/${detail.slug}`}>
+                  <Link href={`/viec-lam/${detail.jobSlug}`}>
                     {detail.positionText}
                   </Link>
                 </div>
                 <div className="flex">
                   <div className="flex mt-2	justify-center sm:justify-start">
-                    <div className="text-xs text-[#FF5500] pr-[0.65em] mr-2 relative after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]">
-                      <Link href={`/viec-lam/${detail.slug}`}>
+                    <div className="text-xs text-[#FF5500] pr-[0.65em] mr-2 whitespace-nowrap relative after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]">
+                      <Link href={`/viec-lam/${detail.jobSlug}`}>
                         {detail.salaryFrom === 0 && detail.salaryTo === 0
                           ? "Thoả thuận"
                           : `${convertToMillionDongFixed(
@@ -97,7 +97,7 @@ export const InfomationCompany = ({ item }: ICompanyData) => {
                       </Link>
                     </div>
                     <div className="text-xs px-[0.65em]">
-                      <Link href={`/viec-lam/${detail.slug}`}>
+                      <Link href={`/viec-lam/${detail.jobSlug}`}>
                         {detail.locationText}
                       </Link>
                     </div>

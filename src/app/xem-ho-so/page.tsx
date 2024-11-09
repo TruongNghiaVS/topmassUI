@@ -85,6 +85,7 @@ export default function EmployeeSeeCv() {
         isModalOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         jobId={slugItem}
+        mutate={mutate}
       />
     </div>
   );

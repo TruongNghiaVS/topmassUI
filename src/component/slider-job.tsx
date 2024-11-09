@@ -4,10 +4,10 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { InfomationJob } from "./infomation-job/infomation-job";
 import { IAllJobsProps, IJob } from "@/interface/job";
+import { InfomationJobLike } from "./infomation-job/infomation-job-like";
 
-export const SliderJob = ({ jobs }: IAllJobsProps) => {
+export const SliderJob = ({ jobs, mutate }: IAllJobsProps) => {
   const arrMap = converArray(jobs, 9);
   return (
     <div id="slider" className="relative max-xl:px-2">
@@ -38,7 +38,9 @@ export const SliderJob = ({ jobs }: IAllJobsProps) => {
             <SwiperSlide key={index} className="bg-primary w-full border-r">
               <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2">
                 {values.map((value, idx) => {
-                  return <InfomationJob key={idx} item={value} />;
+                  return (
+                    <InfomationJobLike key={idx} item={value} mutate={mutate} />
+                  );
                 })}
               </div>
             </SwiperSlide>

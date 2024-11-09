@@ -4,7 +4,7 @@ import { ScrollFilter } from "./scrol-filter";
 import { TitleCustom } from "./custom-title";
 import { IHotJobProps } from "@/interface/job";
 
-export const HotJob = ({ search, setSearch, jobs }: IHotJobProps) => {
+export const HotJob = ({ search, setSearch, jobs, mutate }: IHotJobProps) => {
   return (
     <>
       <div className="bg-white max-1280:px-2">
@@ -21,7 +21,7 @@ export const HotJob = ({ search, setSearch, jobs }: IHotJobProps) => {
             </span>
           </div>
 
-          <SliderJob jobs={jobs} />
+          <SliderJob jobs={jobs} mutate={mutate} />
         </div>
       </div>
     </>

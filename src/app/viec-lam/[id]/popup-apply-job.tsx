@@ -94,7 +94,7 @@ export const PopupApplyJob = ({
         fullName: data.username,
         phone: data.phone_number,
         email: data.email,
-        jobId: jobId ? jobId : 12,
+        JobId: jobId,
       };
       if (file) {
         const response = await axiosInstanceImg.post(UPLOAD_IMG, {
@@ -108,7 +108,7 @@ export const PopupApplyJob = ({
       if (cvValue > 0) {
         dataApply.cvId = cvValue;
       }
-
+      console.log(dataApply);
       const url = cvValue > 0 ? APPLY_CV_WITH_CV : APPLY_CV_WITH_FILE;
       const res = await axiosInstance.post(url, dataApply);
       setCvValue(listCv[0].id);
@@ -131,7 +131,7 @@ export const PopupApplyJob = ({
       <Modal
         isOpen={isModalOpen}
         onClose={onClose}
-        className="md:min-w-[700px] max-h-[60vh] overflow-auto relative"
+        className="md:min-w-[700px] max-h-[60vh] overflow-auto relative text-start"
       >
         <div className="">
           <div className="text-xl font-bold my-2">
@@ -216,7 +216,7 @@ export const PopupApplyJob = ({
               <CupHotFillBootstrapIcon className="w-4 mr-2 text-default " />
               Đôi nét về bản thân
             </div>
-            <div>
+            <div className="text-start">
               Hãy mô tả đôi nét về bản thân của bạn, điều này sẽ giúp cho nhà
               tuyển dụng đánh giá ở bước đầu lọc hồ sơ. Nên nhớ là ngắn ngọn
               thôi nhé!

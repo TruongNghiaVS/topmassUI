@@ -22,7 +22,10 @@ import useSWR from "swr";
 export default function Home() {
   const [search, setSearch] = useState("-1");
   const { data: companys } = useSWR(GET_ALL_COMPANY, fetcher);
-  const { data: allJobs } = useSWR(`${GET_HOT_JOB}?ModeGet=${search}`, fetcher);
+  const { data: allJobs, mutate: mutateAllJobs } = useSWR(
+    `${GET_HOT_JOB}?ModeGet=${search}`,
+    fetcher
+  );
   const { data: suitableJob, mutate: suitableMutate } = useSWR(
     `${GET_SUITABLEJOB}?Limit=9&Page=1`,
     fetcher
@@ -36,7 +39,12 @@ export default function Home() {
   return (
     <div className="bg-white">
       <Slider />
-      <HotJob search={search} setSearch={setSearch} jobs={allJobs?.data} />
+      <HotJob
+        search={search}
+        setSearch={setSearch}
+        jobs={allJobs?.data}
+        mutate={mutateAllJobs}
+      />
       <HotCompany companys={companys?.data} />
       <CreateCv />
       <JobSuggest jobs={suitableJob?.data} mutate={suitableMutate} />

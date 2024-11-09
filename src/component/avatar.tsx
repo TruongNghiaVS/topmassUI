@@ -47,7 +47,7 @@ export const Avatar = ({ avatarLink = "", setAvatarLink }: IAvatarProps) => {
   return (
     <div className="mr-6 relative">
       {avatarLink.length > 0 ? (
-        <img src={avatarLink} alt="" className="w-24 rounded-full" />
+        <img src={avatarLink} alt="" className="w-24 h-24 rounded-full" />
       ) : (
         <img src="/imgs/no-img.png" alt="" className="" />
       )}

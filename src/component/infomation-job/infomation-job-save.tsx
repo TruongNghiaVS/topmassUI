@@ -12,6 +12,7 @@ import { IJobSaveProps } from "@/interface/job";
 
 export const InfomationJobSave = ({ item, mutate }: IJobSaveProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [slugJob, setSlugJob] = useState("");
   const { setLoading } = useLoading();
   const openModal = () => {
     setIsModalOpen(true);
@@ -122,7 +123,10 @@ export const InfomationJobSave = ({ item, mutate }: IJobSaveProps) => {
             <div className="flex justify-center mt-4 sm:mt-0">
               <button
                 className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2"
-                onClick={openModal}
+                onClick={() => {
+                  setSlugJob(item.jobSlug);
+                  openModal();
+                }}
               >
                 Ứng tuyển
               </button>
@@ -138,7 +142,12 @@ export const InfomationJobSave = ({ item, mutate }: IJobSaveProps) => {
           </div>
         </div>
       </div>
-      <PopupApplyJob isModalOpen={isModalOpen} onClose={closeModal} />
+      <PopupApplyJob
+        isModalOpen={isModalOpen}
+        jobId={slugJob}
+        onClose={closeModal}
+        mutate={mutate}
+      />
     </div>
   );
 };
