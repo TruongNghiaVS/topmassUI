@@ -59,6 +59,9 @@ export default function RootLayout({
   useAuth();
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/imgs/favicon.png" type="image/png" />
+      </head>
       <body className={`${roboto.variable} font-roboto`}>
         <LoadingProvider>
           <Suspense>
