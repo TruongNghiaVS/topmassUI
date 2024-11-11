@@ -90,3 +90,7 @@ html {
   }
 
 }
+
+figcaption {
+  text-align: center;
+}

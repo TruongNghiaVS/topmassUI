@@ -205,7 +205,7 @@ export default function PersonalIncome() {
           Áp dụng mức lương tối thiểu vùng mới nhất có hiệu lực từ ngày
           01/07/2023 (theo điều 3 Nghị định 38/2022/NĐ-CP)
         </div>
-        <div className="mx-2 mt-2 p-2 border border-[#F37A20] space-x-10 flex">
+        <div className="mx-2 mt-2 p-2 border border-[#F37A20] space-x-5 flex">
           <div>
             Lương cơ sở: <span className="text-default">2,340,000 VNĐ</span>
           </div>

@@ -144,7 +144,7 @@ export default function PersonalIncome() {
           Chỉ cần nhập dữ liệu, bạn sẽ biết ngay số thuế thu nhập cá nhân cần
           nộp hàng tháng.
         </div>
-        <div className="mx-2 mt-2 p-2 border border-[#F37A20] space-x-10 flex">
+        <div className="mx-2 mt-2 p-2 border border-[#F37A20] space-x-5 flex">
           <div>
             Giảm trừ gia cảnh bản thân{" "}
             <span className="text-default">11,000,000 VNĐ</span>

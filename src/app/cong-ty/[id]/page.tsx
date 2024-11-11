@@ -114,7 +114,7 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
               className="w-full object-cover"
             />
           </div>
-          <div className="relative py-4 lg:px-10 lg:pl-60 bg-[url(/imgs/bg-title-company.png)] bg-no-repeat bg-[length:100%_100%] max-1280:px-2">
+          <div className="relative py-8 lg:px-10 lg:pl-60 bg-[url(/imgs/bg-title-company.png)] bg-no-repeat bg-[length:100%_100%] max-1280:px-2">
             <div className="w-[180px] h-[180px] rounded-full bg-white flex items-center justify-center lg:absolute left-10 top-[-90px] mx-auto lg:mt-0 md:mt-[-90px] overflow-hidden">
               <img
                 src={`${companyDetail?.logoFullLink}`}
@@ -127,8 +127,8 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
                 <div className="font-medium text-white font-lg">
                   {companyDetail?.name}
                 </div>
-                <div className="flex justify-center mt-4">
-                  <div className="text-white flex mr-10">
+                <div className="flex justify-center mt-4 sm:flex-row flex-col">
+                  <div className="text-white flex justify-center sm:mr-10">
                     <GlobeAltIcon className="w-4 mr-2 text-white" />
                     {companyDetail?.website != "" ? (
                       <span>{companyDetail?.website}</span>
@@ -136,22 +136,24 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
                       <span>Chua cập nhật</span>
                     )}
                   </div>
-                  <div className="text-white flex mr-10">
-                    <BuildingOffice2Icon className="w-4 mr-2 text-white" />
-                    {companyDetail?.capacity != "" ? (
-                      <span>{companyDetail?.capacity}</span>
-                    ) : (
-                      <span>Chua cập nhật</span>
-                    )}
-                  </div>
-                  <div className="text-white flex">
-                    <UsersIcon className="w-4 mr-2 text-white" />
+                  <div className="flex items-center justify-center">
+                    <div className="text-white flex mr-10">
+                      <BuildingOffice2Icon className="w-4 mr-2 text-white" />
+                      {companyDetail?.capacity != "" ? (
+                        <span>{companyDetail?.capacity}</span>
+                      ) : (
+                        <span>Chua cập nhật</span>
+                      )}
+                    </div>
+                    <div className="text-white flex">
+                      <UsersIcon className="w-4 mr-2 text-white" />
 
-                    {companyDetail?.countFollow > 0 ? (
-                      <span>{companyDetail?.countFollow} theo dõi</span>
-                    ) : (
-                      <span>Chua cập nhật</span>
-                    )}
+                      {companyDetail?.countFollow > 0 ? (
+                        <span>{companyDetail?.countFollow} theo dõi</span>
+                      ) : (
+                        <span>Chua cập nhật</span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -76,7 +76,7 @@ export const InfomationCompany = ({ item }: ICompanyData) => {
                   </Link>
                 </div>
                 <div className="flex">
-                  <div className="flex mt-2	justify-center sm:justify-start">
+                  <div className="flex mt-2 items-center	justify-center sm:justify-start">
                     <div className="text-xs text-[#FF5500] pr-[0.65em] mr-2 whitespace-nowrap relative after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]">
                       <Link href={`/viec-lam/${detail.jobSlug}`}>
                         {detail.salaryFrom === 0 && detail.salaryTo === 0

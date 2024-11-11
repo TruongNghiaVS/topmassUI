@@ -13,9 +13,9 @@ export const HotJob = ({ search, setSearch, jobs, mutate }: IHotJobProps) => {
             <TitleCustom title="Việc làm hấp dẫn" />
             <ScrollFilter search={search} setSearch={setSearch} />
           </div>
-          <div className="pl-2.5 py-1.5 rounded-md border-[1px] border-solid border-[#8BCAFC] my-5 text-sm flex items-center bg-[#f0f6ff]">
+          <div className="pl-2.5 py-1.5 rounded-md border-[1px] border-solid border-[#8BCAFC] my-5 text-sm flex items-start bg-[#f0f6ff]">
             <img src="/imgs/light-note.png" alt="" className="w-4 mr-2" />
-            Gợi ý:{" "}
+            <div className="whitespace-nowrap mr-1">Gợi ý:</div>
             <span>
               Di chuột vào tiêu đề làm việc để xem thêm thông tin chi tiết
             </span>

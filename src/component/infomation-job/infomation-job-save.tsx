@@ -89,7 +89,7 @@ export const InfomationJobSave = ({ item, mutate }: IJobSaveProps) => {
           <div className="font-medium font-normal mt-2 ">
             <Link href={`/viec-lam/${item.jobSlug}`}>{item.companyName}</Link>
           </div>
-          <div className="flex items-center mt-2 ">
+          <div className="flex items-center mt-2  justify-center sm:justify-start ">
             <div className="text-xs pr-[0.65em] mr-2 relative lg:after:absolute after:right-0 after:top-0 after:bottom-0 after:my-auto after:w-[1px] after:h-[60%] after:bg-[#666666]">
               <Link href={`/viec-lam/${item.jobSlug}`}>
                 {getDay(item.lastUpdate)}
