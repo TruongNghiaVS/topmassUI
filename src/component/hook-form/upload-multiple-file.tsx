@@ -58,7 +58,7 @@ const CustomUploadMulti: React.FC<IUpload> = ({
   };
 
   useEffect(() => {
-    if (link.length > 0) {
+    if (link && link.length > 0) {
       handleLoadFiles(link);
     }
   }, [link]);

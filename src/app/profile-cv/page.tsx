@@ -79,11 +79,11 @@ export default function ProfileCV() {
     fetcher
   );
 
-  const {
-    data: infoSoftSkill,
-    error: errSoftSkill,
-    mutate: mutateSoftSkill,
-  } = useSWR(GET_ALL_SOFT_SKILL, fetcher);
+  // const {
+  //   data: infoSoftSkill,
+  //   error: errSoftSkill,
+  //   mutate: mutateSoftSkill,
+  // } = useSWR(GET_ALL_SOFT_SKILL, fetcher);
 
   const { data: infoTools, error: errTools, mutate: mutateTools } = useSWR(
     GET_ALL_TOOL,

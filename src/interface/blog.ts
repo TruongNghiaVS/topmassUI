@@ -13,6 +13,7 @@ export interface IBlog {
   title: string;
   updateAt: string;
   updatedBy: number;
+  fullSlug: string;
 }
 
 export interface IBlogRelationProps {

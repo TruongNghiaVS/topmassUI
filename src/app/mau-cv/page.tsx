@@ -13,7 +13,7 @@ export default function CreateNewCv() {
 
   const [selectedValue, setSelectedValue] = useState("");
   const { data: listBlog } = useSWR(
-    `${GET_BLOG_REATION}?articleSlug=test`,
+    `${GET_BLOG_REATION}?articleSlug=-1`,
     fetcher
   );
   const options = [

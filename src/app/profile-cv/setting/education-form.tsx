@@ -150,6 +150,8 @@ export const EducationUserCv = ({
         const dataTemp: any = { ...item };
         if (linkUploads[index] && linkUploads[index]?.length > 0) {
           dataTemp.linkFile = linkUploads[index];
+        } else {
+          dataTemp.linkFile = "";
         }
         return dataTemp;
       });

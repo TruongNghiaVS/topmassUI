@@ -29,7 +29,11 @@ export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
 
 export const axiosInstanceNotToken = axios.create({
   baseURL: HOST_API,
-  headers: { "Content-Type": "application/json" },
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  },
 });
 axiosInstanceNotToken.interceptors.response.use((response) => response.data);
 
