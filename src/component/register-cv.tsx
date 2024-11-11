@@ -55,7 +55,7 @@ export const RegisterCV = () => {
                   CV đã tạo trên Topmass
                 </div>
                 <Link
-                  href="/profile-cv"
+                  href="/digital-cv"
                   className="py-2 px-4 text-white bg-gradient-to-r from-[#F89D1B] to-[#F37B20] font-medium rounded-3xl"
                 >
                   + Tạo mới

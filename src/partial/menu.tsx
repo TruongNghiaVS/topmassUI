@@ -25,8 +25,8 @@ export const Menu = () => {
       title: "Tạo CV",
       subMenu: [
         {
-          title: "Profile CV",
-          slug: "/profile-cv",
+          title: "Digital CV",
+          slug: "/digital-cv",
           icon: (
             <PersonBargeBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),

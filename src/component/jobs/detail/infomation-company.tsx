@@ -11,9 +11,7 @@ export const ImfomationCompany = ({ company }: ICompanyDetailJobProps) => {
         <div className="p-1 rounded-full border-[1px] border-solid border-[#EAE9E8] mr-2 text-[#514F4E]">
           <img src={company?.avatarLink} alt="" className="w-20 " />
         </div>
-        <div className="text-lg font-bold line-clamp-2">
-          {company?.companyName}
-        </div>
+        <h2 className="font-bold line-clamp-2">{company?.companyName}</h2>
       </div>
       <div className="flex items-center mb-4">
         <PeopleFillBootstrapIcon className="w-6 mr-2" />

@@ -110,8 +110,8 @@ export const MenuMobile = () => {
       title: "Tạo CV",
       subMenu: [
         {
-          title: "Profile CV",
-          slug: "/profile-cv",
+          title: "Digital CV",
+          slug: "/digital-cv",
           icon: (
             <PersonBargeBootstrapIcon className="text-white mr-2 leading-4 w-6" />
           ),

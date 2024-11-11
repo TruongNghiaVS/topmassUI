@@ -10,7 +10,7 @@ const useAuth = () => {
     "/xem-ho-so",
     "/cai-dat-goi-y-viec-lam",
     "/doi-mat-khau",
-    "/profile-cv",
+    "/digital-cv",
     "/viec-lam-da-ung-tuyen",
     "/viec-lam-da-luu",
     "/quan-ly-cv",

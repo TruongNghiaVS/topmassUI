@@ -35,7 +35,7 @@ export const Footer = () => {
   const cv = [
     {
       title: "Quản lý hồ sơ",
-      link: "/profile-cv",
+      link: "/digital-cv",
     },
     {
       title: "Hướng dẫn viết CV",

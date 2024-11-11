@@ -105,9 +105,7 @@ export default function DetailJob({ params }: { params: { id: any } }) {
           <div className="sm:grid grid-cols-12 gap-4 ">
             <div className="xl:col-span-8 md:col-span-7">
               <div className="bg-white rounded-lg p-8 mb-8">
-                <div className="text-xl font-bold mb-6">
-                  {detail?.dataJob.jobName}
-                </div>
+                <h1 className=" font-bold mb-6">{detail?.dataJob.jobName}</h1>
                 <div className="flex justify-between  mb-6 px-4 whitespace-nowrap flex-wrap">
                   <div className="flex items-center mb-2">
                     <div className="relative mr-4 ">
@@ -212,9 +210,9 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                 <ImfomationBasic infomation={detail?.dataJob.commonData} />
               </div>
               <div className="bg-white p-8 rounded-lg mb-8">
-                <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
+                <h3 className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
                   Mô tả công việc
-                </div>
+                </h3>
                 <div className="mt-2 ml-4">
                   <div
                     dangerouslySetInnerHTML={{
@@ -222,9 +220,9 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                     }}
                   ></div>
                 </div>
-                <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
+                <h3 className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
                   Yêu cầu ứng viên
-                </div>
+                </h3>
                 <div className="mt-2 ml-4">
                   <div
                     dangerouslySetInnerHTML={{
@@ -232,9 +230,9 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                     }}
                   ></div>
                 </div>
-                <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
+                <h3 className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
                   Quyền lợi ứng viên
-                </div>
+                </h3>
                 <div className="mt-2 ml-4">
                   <div
                     dangerouslySetInnerHTML={{
@@ -245,9 +243,9 @@ export default function DetailJob({ params }: { params: { id: any } }) {
 
                 {detail && detail.dataJob.locationsInfoMation ? (
                   <div>
-                    <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
+                    <h3 className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
                       Địa điểm làm việc
-                    </div>
+                    </h3>
                     <div className="mt-2 ml-4">
                       {detail.dataJob.locationsInfoMation.map(
                         (item: any, idx_location: number) => (
@@ -280,9 +278,9 @@ export default function DetailJob({ params }: { params: { id: any } }) {
                 )}
                 {detail && detail.dataJob.time_workings ? (
                   <div>
-                    <div className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
+                    <h3 className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
                       Thời gian làm việc
-                    </div>
+                    </h3>
                     <div className="mt-2 ml-4">
                       {JSON.parse(detail.dataJob.time_workings).map(
                         (item: any, idx_detail: number) => (
