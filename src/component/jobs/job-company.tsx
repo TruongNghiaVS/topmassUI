@@ -52,27 +52,29 @@ export const JobTypePage = ({ companys }: IHotCompanyProps) => {
             >
               {companys?.map((item, index) => {
                 return (
-                  <SwiperSlide key={index}>
-                    <div className="hover:outline hover:outline-[#F37A20] p-4 m-1 rounded-lg">
-                      <div className="flex justify-center">
+                  <SwiperSlide key={index} className="p-2">
+                    <div className="hover:outline outline-[#F37A20] p-4 rounded-lg">
+                      <div className="flex justify-center items-center">
                         <Link href={`/cong-ty/${item.slug}`}>
-                          <img
-                            src={
-                              item.logoFullLink
-                                ? item.logoFullLink
-                                : "/imgs/logo-work.png"
-                            }
-                            alt=""
-                            className="w-auto"
-                          />
+                          <div className="w-[220px] h-[220px] flex justify-center items-center">
+                            <img
+                              src={
+                                item.logoFullLink
+                                  ? item.logoFullLink
+                                  : "/imgs/logo-work.png"
+                              }
+                              alt=""
+                              className="w-full"
+                            />
+                          </div>
                         </Link>
                       </div>
-                      <div className=" uppercase text-center my-5">
-                        <Link href={`/cong-ty/${item.slug}`}>
-                          Công ty cổ phần tập đoàn VietStar
-                        </Link>
-                      </div>
-                      <Link href="/viec-lam">
+                      <Link href={`/cong-ty/${item.slug}`}>
+                        <div className=" uppercase text-center my-5 line-clamp-3 h-[63px]">
+                          {item.fullName}
+                        </div>
+                      </Link>
+                      {/* <Link href="/viec-lam">
                         <div className="flex items-center justify-center">
                           <img
                             src="/imgs/bag.png"
@@ -81,7 +83,7 @@ export const JobTypePage = ({ companys }: IHotCompanyProps) => {
                           />
                           5 vị trí đang tuyển
                         </div>
-                      </Link>
+                      </Link> */}
                     </div>
                   </SwiperSlide>
                 );
