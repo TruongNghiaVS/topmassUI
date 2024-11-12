@@ -16,6 +16,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useTypeStore } from "@/store/useModalStore";
 import Modal from "@/component/modal";
+import TmNumberFormatInput from "@/component/hook-form/custom-input-number";
 
 const options = [
   { value: 1, label: "Vùng 1" },
@@ -230,12 +231,11 @@ export default function PersonalIncome() {
               </div>
               <div className="col-span-3">
                 <div className="inline-flex items-center">
-                  <TmInput
+                  <TmNumberFormatInput
                     control={control}
-                    type="number"
                     name="salary"
                     min={0}
-                    className="p-2 rounded-md w-full focus-visible:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    className="p-2 w-full focus-visible:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     afterIcon={<div>VNĐ</div>}
                   />
                 </div>
@@ -263,9 +263,8 @@ export default function PersonalIncome() {
                     options={[{ label: "Khác", value: 1 }]}
                   />
                   <div className="inline-flex items-center ">
-                    <TmInput
+                    <TmNumberFormatInput
                       control={control}
-                      type="number"
                       name="other_salary"
                       min={0}
                       disabled={isSalary === 0}

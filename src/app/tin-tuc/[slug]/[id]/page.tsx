@@ -1,16 +1,9 @@
 "use client";
-import { CreateCv } from "@/component/create-cv";
-import { InfomationJobLike } from "@/component/infomation-job/infomation-job-like";
 import { NewInfomation } from "../../new-infomation";
 import { TitleCustom } from "@/component/custom-title";
 import useSWR from "swr";
-import {
-  GET_BLOG_DETAIL,
-  GET_BLOG_REATION,
-  GET_JOBSEARCH_HOTJOB,
-} from "@/utils/api-url";
+import { GET_BLOG_DETAIL, GET_BLOG_REATION } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
-import { IJob } from "@/interface/job";
 import { IBlog } from "@/interface/blog";
 import dayjs from "dayjs";
 import TableOfContents from "@/component/table-content-blog";
@@ -80,7 +73,7 @@ const NewDetail = ({ params }: { params: { id: string } }) => {
           </div>
         </div>
       </div>
-      <div className="mt-4 py-4 bg-[#E0E0E0] max-1280:px-2">
+      <div className="mt-4 py-4 bg-[#E0E0E0] max-1280:px-2 bg-white">
         <div className="container mx-auto">
           <TitleCustom title="Cùng chuyên mục" />
           <div className="grid xl:grid-cols-4 gap-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-4">

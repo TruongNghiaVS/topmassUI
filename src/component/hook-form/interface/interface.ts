@@ -9,8 +9,6 @@ export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
   afterIcon?: any;
   placeholder?: string;
   type?: string;
-  min?: number;
-  max?: number;
 }
 
 export interface ITmInputProgress extends ITmInput {

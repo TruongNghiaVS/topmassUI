@@ -30,7 +30,7 @@ export const NewRelative = ({ item }: IBlogRelationProps) => {
         <div className="font-semibold ">{item.title}</div>
       </Link>
       <div className="mt-2">
-        <span className="font-medium text-lg">Ngày cập nhật:</span>{" "}
+        <span className="font-medium">Ngày cập nhật:</span>{" "}
         {dayjs(item.updateAt).format("DD/MM/YYYY")}
       </div>
     </div>
