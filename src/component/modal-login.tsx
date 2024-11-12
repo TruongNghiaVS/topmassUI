@@ -13,11 +13,12 @@ import TmInput from "@/component/hook-form/input";
 import Link from "next/link";
 import { useModalStore } from "@/store/useModalStore";
 import { reset } from "numeral";
+import { useRouter } from "next/navigation";
 
 export const ModalLogin = () => {
   const { setLoading } = useLoading();
   const { isOpen, closeModal } = useModalStore();
-
+  const router = useRouter();
   const schema = yup.object().shape({
     userName: yup
       .string()
@@ -71,6 +72,13 @@ export const ModalLogin = () => {
     }
   };
 
+  const handleCloseMenu = (link: string | undefined) => {
+    if (link) {
+      router.push(link);
+      closeModal();
+    }
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -121,8 +129,13 @@ export const ModalLogin = () => {
         </form>
         <div className="text-[#8E8D8D] font-normal text-base mt-8 text-center pb-4 ">
           Bạn chưa có tài khoản?{" "}
-          <Link href="/dang-ky" className="text-[#F37A20]">
-            Đăng ký
+          <Link href="/dang-ky" legacyBehavior>
+            <a
+              className="text-[#F37A20]"
+              onClick={() => handleCloseMenu("/dang-ky")}
+            >
+              Đăng ký
+            </a>
           </Link>{" "}
           ngay
         </div>
