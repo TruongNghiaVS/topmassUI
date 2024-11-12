@@ -118,7 +118,14 @@ export const ModalLogin = () => {
             />
           </div>
           <div className="font-normal text-base text-right mb-4 text-[#F37A20]">
-            <Link href="/quen-mat-khau">Quên mật khẩu</Link>
+            <Link href="/quen-mat-khau" legacyBehavior>
+              <a
+                className="text-[#F37A20]"
+                onClick={() => handleCloseMenu("/quen-mat-khau")}
+              >
+                Quên mật khẩu
+              </a>
+            </Link>
           </div>
           <button
             type="submit"
