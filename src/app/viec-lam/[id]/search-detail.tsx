@@ -21,7 +21,7 @@ export const SearchDetail = () => {
         <div className="lg:px-[136px] md:px-16 px-2 pt-5 pb-12 relative z-[2]">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex items-stretch bg-white rounded-3xl py-2 px-4 shadow-[0px_-8px_0_rgb(248,158,27)] flex-wrap	sm:flex-row flex-col	"
+            className="flex items-stretch bg-white rounded-3xl py-2 px-4 shadow-[0px_-8px_0_rgb(248,158,27)] flex-wrap	sm:flex-row flex-col space-y-1 sm:space-y-0"
           >
             <div className="flex-1">
               <TmInput
