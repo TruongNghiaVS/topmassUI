@@ -93,7 +93,7 @@ export const SearchJobForm = ({
     <div className="xl:px-44 lg:px-40 px-2">
       <div className="w-full mt-4 relative ">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex items-stretch bg-white rounded-3xl py-2 px-4 shadow-[0px_-8px_0_rgb(248,158,27)] flex-wrap	">
+          <div className="flex items-stretch bg-white rounded-3xl py-2 px-4 shadow-[0px_-8px_0_rgb(248,158,27)] flex-wrap	sm:flex-row flex-col	">
             <div className="flex-1 ">
               <TmInput
                 control={control}
@@ -106,7 +106,7 @@ export const SearchJobForm = ({
               <TmSelect
                 icon={<MapPinIcon className="w-6 mr-2" />}
                 name="Location"
-                className="border-0 !rounded-3xl bg-[#DDDDDD] mr-2"
+                className="border-0 !rounded-3xl bg-[#DDDDDD] sm:mr-2"
                 placeholder="Địa điểm làm việc"
                 control={control}
                 options={listProvinces}

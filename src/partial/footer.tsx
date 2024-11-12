@@ -41,10 +41,10 @@ export const Footer = () => {
       title: "Hướng dẫn viết CV",
       link: "#",
     },
-    {
-      title: "Thư viện CV mẫu",
-      link: "/mau-cv",
-    },
+    // {
+    //   title: "Thư viện CV mẫu",
+    //   link: "/mau-cv",
+    // },
   ];
 
   const blog = [

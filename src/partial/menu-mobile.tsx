@@ -71,6 +71,13 @@ export const MenuMobile = () => {
     };
   }, [token, isOpenMenu]);
 
+  const handleCloseMenu = (link: string | undefined) => {
+    if (link) {
+      router.push(link);
+      setIsOpenMenu(false);
+    }
+  };
+
   const navItems = [
     {
       title: "Việc Làm",
@@ -123,13 +130,13 @@ export const MenuMobile = () => {
             <PersonBargeBootstrapIcon className="text-white mr-2 leading-4 w-6" />
           ),
         },
-        {
-          title: "Mẫu CV",
-          slug: "/mau-cv",
-          icon: (
-            <PersonBargeBootstrapIcon className="text-white mr-2 leading-4 w-6" />
-          ),
-        },
+        // {
+        //   title: "Mẫu CV",
+        //   slug: "/mau-cv",
+        //   icon: (
+        //     <PersonBargeBootstrapIcon className="text-white mr-2 leading-4 w-6" />
+        //   ),
+        // },
       ],
     },
 
@@ -280,11 +287,19 @@ export const MenuMobile = () => {
                               <div key={index}>
                                 <Link
                                   href={subItem.slug}
-                                  className={`font-medium text-[#3B4358] no-underline text-white px-[15px] py-1 flex items-center 
-                              `}
+                                  className={`font-medium text-[#3B4358] no-underline 
+                                  `}
+                                  legacyBehavior
                                 >
-                                  {subItem.icon}
-                                  {subItem.title}
+                                  <a
+                                    onClick={(e) =>
+                                      handleCloseMenu(subItem.slug)
+                                    }
+                                    className=" flex items-center text-white px-[15px] py-1 "
+                                  >
+                                    {subItem.icon}
+                                    {subItem.title}
+                                  </a>
                                 </Link>
                               </div>
                             );
@@ -294,9 +309,11 @@ export const MenuMobile = () => {
                     </div>
                   ) : (
                     <div className="text-white">
-                      <Link href={item.slug ? item.slug : "#"}>
+                      <Link href={item.slug ? item.slug : "#"} legacyBehavior>
                         <div className="text-base font-medium mt-2">
-                          {item.title}
+                          <a onClick={() => handleCloseMenu(item.slug)}>
+                            {item.title}
+                          </a>
                         </div>
                       </Link>
                     </div>

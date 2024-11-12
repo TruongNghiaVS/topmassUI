@@ -38,13 +38,13 @@ export const Menu = () => {
             <PersonBargeBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
           ),
         },
-        {
-          title: "Mẫu CV",
-          slug: "/mau-cv",
-          icon: (
-            <PersonBargeBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
-          ),
-        },
+        // {
+        //   title: "Mẫu CV",
+        //   slug: "/mau-cv",
+        //   icon: (
+        //     <PersonBargeBootstrapIcon className="text-default mr-2 text-[15px] leading-4 w-6" />
+        //   ),
+        // },
       ],
       link: "#",
       isShow: true,
