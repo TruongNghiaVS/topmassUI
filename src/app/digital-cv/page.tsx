@@ -40,6 +40,8 @@ import { SkillInfomationCv } from "./setting/skill-form";
 import { AvatarCv } from "@/component/avatar-cv";
 import { useLoading } from "../context/loading";
 import { toast } from "react-toastify";
+import Link from "next/link";
+import { CurrentUser } from "@/module/helper/master-data";
 
 type IProps = {
   title: string;
@@ -56,6 +58,8 @@ export default function ProfileCV() {
   const searchParams = useSearchParams();
   const [avatarCv, setAvatarCv] = useState("");
   const { setLoading } = useLoading();
+  const { currentUser } = CurrentUser();
+
   const {
     data: infoEducation,
     error: errEducation,
@@ -241,10 +245,20 @@ export default function ProfileCV() {
                         <div>Thông tin giới thiệu</div>
                         <PencilSquareIcon className="w-4" />
                       </div>
-                      {/* <div className="flex space-x-2 items-center bg-[#F37A20] py-1 px-3 rounded-lg text-white">
-                        <div className=" ">Chia sẻ trang cá nhân</div>
-                        <LinkIcon className="w-4" />
-                      </div> */}
+                      <div>
+                        <Link
+                          href={`/share-link/${
+                            currentUser?.email
+                              ? currentUser?.email.split("@")[0]
+                              : ""
+                          }`}
+                        >
+                          <div className="flex space-x-2 items-center bg-[#F37A20] py-1 px-3 rounded-lg text-white">
+                            <div className=" ">Chia sẻ trang cá nhân</div>
+                            <LinkIcon className="w-4" />
+                          </div>
+                        </Link>
+                      </div>
                       <div
                         className="flex space-x-2 items-center bg-[#F37A20] cursor-pointer py-1 px-3 rounded-lg text-white"
                         onClick={downloadPDF}

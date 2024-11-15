@@ -30,6 +30,7 @@ export const GET_JOB_APPLY = "/api/User/GetAllCVApply";
 export const GET_JOB_SAVE = "/api/User/GetAllJobSave";
 export const SAVE_JOB_SETTING = "/api/UserSetting/SaveJobSetting";
 export const GET_JOB_SETTING = "/api/UserSetting/GetJobSetting";
+export const GET_PROFILE_SHARE_LINK = "/api/GateWeb/GetInfoCandidate";
 
 //------------ Company ------------//
 export const GET_ALL_COMPANY = "/api/Company/GetAllCompany";

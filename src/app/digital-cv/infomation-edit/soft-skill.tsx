@@ -24,7 +24,9 @@ export const SoftSkillView = ({ skills }: IInfomationSkillViewProps) => {
           <div key={idx} className="mt-4">
             <div className="mt-4">
               <div className="grid grid-cols-3 text-xs mt-2">
-                <div className="col-span-1">{item.fullName}</div>
+                <div className="col-span-1" id={item.fullName}>
+                  {item.fullName}
+                </div>
                 <div className="col-span-2">
                   <div className="flex space-x-2">
                     {counts.map((value, index) => {

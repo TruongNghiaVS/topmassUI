@@ -1,4 +1,5 @@
 import { IInfomationSkillViewProps } from "@/interface/interface";
+import { slugify } from "@/utils/business/custom-hook";
 import { StarIcon } from "@heroicons/react/16/solid";
 
 export const SkillView = ({ skills }: IInfomationSkillViewProps) => {
@@ -13,7 +14,9 @@ export const SkillView = ({ skills }: IInfomationSkillViewProps) => {
           <div key={index} className="mt-4">
             <div className="mt-4">
               <div className="grid grid-cols-3 text-xs mt-2">
-                <div className="col-span-1">{item.fullName}</div>
+                <div className="col-span-1" id={slugify(item.fullName)}>
+                  {item.fullName}
+                </div>
                 <div className="col-span-2">
                   <div className="flex space-x-2">
                     {counts.map((value, idx) => {

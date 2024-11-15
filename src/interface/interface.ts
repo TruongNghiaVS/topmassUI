@@ -529,3 +529,19 @@ export interface IButtonLogin {
   onClick: () => void;
   children: ReactNode;
 }
+
+export interface IShareLinkProps {
+  title: string;
+  component?: JSX.Element;
+}
+
+export interface IDetailShareLink {
+  title: string;
+  id: string;
+}
+
+export interface ITOCShareLink {
+  title: string;
+  icon: JSX.Element;
+  details: IDetailShareLink[];
+}

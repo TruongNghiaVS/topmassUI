@@ -1,4 +1,5 @@
 import { IInfomationProjectProps } from "@/interface/interface";
+import { slugify } from "@/utils/business/custom-hook";
 import { BeakerIcon } from "@heroicons/react/16/solid";
 import dayjs from "dayjs";
 
@@ -11,7 +12,7 @@ export const ProjectView = ({ projects }: IInfomationProjectProps) => {
             <div className="flex justify-between">
               <div className="flex  text-default">
                 <BeakerIcon className="w-4 mr-2" />
-                <div>{item.projectName}</div>
+                <div id={slugify(item.projectName)}>{item.projectName}</div>
               </div>
               <div className="flex space-x-2">
                 <div>

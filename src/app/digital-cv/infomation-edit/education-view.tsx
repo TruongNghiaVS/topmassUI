@@ -1,4 +1,5 @@
 import { IInfoEducationProps } from "@/interface/interface";
+import { slugify } from "@/utils/business/custom-hook";
 import { AcademicCapIcon } from "@heroicons/react/16/solid";
 import dayjs from "dayjs";
 
@@ -10,9 +11,8 @@ export const EducationView = ({ educations }: IInfoEducationProps) => {
           <div key={idx} className="mt-4">
             <div className="flex justify-between">
               <div className="flex  text-default">
-                <div></div>
                 <AcademicCapIcon className="w-4 mr-2" />
-                <div>{item.schoolName}</div>
+                <div id={slugify(item.schoolName)}>{item.schoolName}</div>
               </div>
               <div className="flex space-x-2">
                 <div>

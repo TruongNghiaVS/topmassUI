@@ -9,11 +9,13 @@ interface IInfomationViewEdit {
   title: string;
   isOpenModal: () => void;
   children: ReactNode;
+  edit?: boolean;
 }
 
 export const InfomationViewEdit = ({
   title,
   isOpenModal,
+  edit = true,
   children,
 }: IInfomationViewEdit) => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
@@ -33,9 +35,13 @@ export const InfomationViewEdit = ({
       <div className="flex justify-between py-1 items-center">
         <div className="flex items-center">
           <div className="font-medium">{title}</div>
-          <button onClick={() => isOpenModal()}>
-            <PencilSquareIcon className="w-4 text-default ml-2" />
-          </button>
+          {edit ? (
+            <button onClick={() => isOpenModal()}>
+              <PencilSquareIcon className="w-4 text-default ml-2" />
+            </button>
+          ) : (
+            ""
+          )}
         </div>
         {isOpen ? (
           <button

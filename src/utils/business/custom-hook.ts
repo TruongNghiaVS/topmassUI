@@ -1,3 +1,4 @@
+import { IDetailShareLink } from "@/interface/interface";
 import numeral from "numeral";
 
 export const convertParams = (params: any) => {
@@ -55,4 +56,43 @@ export const getCategorySlug = (categoryName: string) => {
       break;
   }
   return slug;
+};
+
+export const slugify = (title: string): string => {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "") // Remove special characters
+    .replace(/\s+/g, "-") // Replace spaces with hyphens
+    .replace(/-+/g, "-"); // Replace multiple hyphens with a single one
+};
+
+export const convertTocShareLink = (
+  data: any,
+  key: string,
+  title: string,
+  icon: JSX.Element
+) => {
+  const arrItem: IDetailShareLink[] = data?.map((item: any) => ({
+    title: item[key],
+    id: slugify(item[key]),
+  }));
+
+  return {
+    title,
+    icon,
+    details: arrItem,
+  };
+};
+
+export const scrollToId = (id: string, offset = 80) => {
+  const element = document.getElementById(id);
+  if (element) {
+    const yOffset = -offset; // Adjust as needed
+    const y =
+      element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    console.log(yOffset);
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
 };

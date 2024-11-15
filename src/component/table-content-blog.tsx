@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import * as cheerio from "cheerio";
+import { scrollToId } from "@/utils/business/custom-hook";
 
 interface TableOfContentsProps {
   content: string;
@@ -28,16 +29,6 @@ const addTOCInContent = (tocItems: TocItem[]) => {
   return content;
 };
 
-const scrollToId = (id: string, offset = 80) => {
-  const element = document.getElementById(id);
-  if (element) {
-    const yOffset = -offset; // Adjust as needed
-    const y =
-      element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-    window.scrollTo({ top: y, behavior: "smooth" });
-  }
-};
-
 const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
   useEffect(() => {
     const handleLinkClick = (event: MouseEvent) => {
@@ -48,7 +39,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
       ) {
         event.preventDefault(); // Prevent the default anchor behavior
         const id = target.getAttribute("href")?.substring(1);
-        if (id) scrollToId(id, 100); // Adjust offset as needed
+        if (id) scrollToId(id, 200); // Adjust offset as needed
       }
     };
 
