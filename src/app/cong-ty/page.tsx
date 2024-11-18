@@ -72,7 +72,7 @@ export default function CompanyPage() {
         </div>
       </div>
       <div className="max-1280:px-2">
-        <div className="mx-auto container">
+        <div className="mx-auto container p-4 rounded bg-white">
           {DatallCompany?.data.length > 0 ? (
             <>
               <TitleCustom title="Danh Sách công ty" className="mb-8" />

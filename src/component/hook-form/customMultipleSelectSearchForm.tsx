@@ -22,6 +22,7 @@ const CustomMultipleSelectSearchForm: React.FC<SearchSelectProps> = ({
   });
 
   const handleSelect = (option: Option) => {
+    setSearch("");
     if (!value.includes(option.value)) {
       onChange([...value, option.value]);
     } else {

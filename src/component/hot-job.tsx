@@ -7,8 +7,8 @@ import { IHotJobProps } from "@/interface/job";
 export const HotJob = ({ search, setSearch, jobs, mutate }: IHotJobProps) => {
   return (
     <>
-      <div className="bg-white max-1280:px-2">
-        <div className="container mx-auto">
+      <div className="bg-[#DBDBDB] max-1280:px-2">
+        <div className="container mx-auto bg-white p-2">
           <div className="lg:flex items-center justyfy-between whitespace-nowrap py-2">
             <TitleCustom title="Việc làm hấp dẫn" />
             <ScrollFilter search={search} setSearch={setSearch} />
