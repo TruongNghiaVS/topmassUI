@@ -21,6 +21,8 @@ import CustomSelectSearchForm from "@/component/hook-form/customSelectSearchForm
 import { useLoading } from "../context/loading";
 import { toast } from "react-toastify";
 import useSWR from "swr";
+import TmSelect from "@/component/hook-form/select";
+import { Experiences } from "@/module/helper/master-data";
 
 const gender = [
   {
@@ -85,6 +87,7 @@ export default function SettingSuggestJob() {
     gender: -1,
   });
 
+  const { listExperiences } = Experiences();
   const { setLoading } = useLoading();
 
   const { data: dataSetting, mutate } = useSWR(GET_JOB_SETTING, fetcher);
@@ -254,10 +257,12 @@ export default function SettingSuggestJob() {
                   <div>
                     Kinh nghiệm <span className="text-[#dc2f2f]">*</span>
                   </div>
-                  <TmInput
+                  <TmSelect
                     name="experience"
                     control={control}
-                    placeholder="Chọn kinh nghiệm làm việc"
+                    className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
+                    placeholder="Tất cả kinh nghiệm"
+                    options={listExperiences}
                   />
                 </div>
                 <div className="mb-4">

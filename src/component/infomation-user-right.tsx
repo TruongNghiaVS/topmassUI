@@ -75,7 +75,7 @@ export const InfomationUser = () => {
             />
             <div className="relative w-11 h-6 bg-[#9A9A9B] peer-focus:outline-none min-w-11 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all after:duration-500 peer-checked:bg-gradient-to-r peer-checked:from-[#F89E1B] peer-checked:to-[#F37A20]"></div>
             <span className="ms-3 text-sm font-medium text-[#555555]">
-              Đang tắt tìm việc
+              {mode.workMode ? "Đang bật tìm việc" : "Đang tắt tìm việc"}
             </span>
           </label>
         </div>
@@ -97,7 +97,9 @@ export const InfomationUser = () => {
             />
             <div className="relative w-11 h-6 bg-[#9A9A9B] peer-focus:outline-none min-w-11 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all after:duration-500 peer-checked:bg-gradient-to-r peer-checked:from-[#F89E1B] peer-checked:to-[#F37A20]"></div>
             <span className="ms-3 text-sm font-medium text-[#555555]">
-              Cho phép nhà tuyển dụng tìm kiếm hồ sơ
+              {mode.searchMode
+                ? "Cho phép NTD tìm kiếm hồ sơ"
+                : "Chưa cho phép NTD tìm kiếm hồ sơ"}
             </span>
           </label>
         </div>
