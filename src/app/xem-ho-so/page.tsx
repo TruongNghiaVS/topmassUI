@@ -23,35 +23,45 @@ export default function EmployeeSeeCv() {
         <div className="sm:grid grid-cols-12 gap-6 py-8">
           <div className="xl:col-span-8 md:col-span-7">
             <div className="p-4 bg-white rounded-lg">
-              <div className="text-center font-normal text-xl">
-                Chưa có nhà tuyển dụng nào xem hồ sơ của bạn
-              </div>
-              <div className="mt-4 text-center font-normal">
-                Để dễ dàng kết nối với nhà tuyển dụng, hãy{" "}
-                <span className="text-default">tạo CV</span> thật ấn tượng và{" "}
-                <span className="text-default">cài đặt gợi ý việc làm</span>
-              </div>
-              <div className="text-center mt-8">
-                <Link
-                  href="/quan-ly-cv"
-                  className="mr-2 px-4 py-2 text-white bg-[#F37A20] rounded"
-                >
-                  Tạo CV
-                </Link>
-                <Link
-                  href="/viec-lam"
-                  className="mr-2 px-4 py-2 text-white bg-[#F37A20] rounded"
-                >
-                  Gợi ý tìm việc làm
-                </Link>
-              </div>
-              {recruiterCv?.map((item: ICompanySeeCandidate, idx: number) => {
-                return (
-                  <div className="mt-4" key={idx}>
-                    <CompanySeenCV item={item} />
+              {recruiterCv?.length > 0 ? (
+                <div>
+                  {recruiterCv?.map(
+                    (item: ICompanySeeCandidate, idx: number) => {
+                      return (
+                        <div className="mt-4" key={idx}>
+                          <CompanySeenCV item={item} />
+                        </div>
+                      );
+                    }
+                  )}
+                </div>
+              ) : (
+                <div>
+                  <div className="text-center font-normal text-xl">
+                    Chưa có nhà tuyển dụng nào xem hồ sơ của bạn
                   </div>
-                );
-              })}
+                  <div className="mt-4 text-center font-normal">
+                    Để dễ dàng kết nối với nhà tuyển dụng, hãy{" "}
+                    <span className="text-default">tạo CV</span> thật ấn tượng
+                    và{" "}
+                    <span className="text-default">cài đặt gợi ý việc làm</span>
+                  </div>
+                  <div className="text-center mt-8">
+                    <Link
+                      href="/quan-ly-cv"
+                      className="mr-2 px-4 py-2 text-white bg-[#F37A20] rounded"
+                    >
+                      Tạo CV
+                    </Link>
+                    <Link
+                      href="/viec-lam"
+                      className="mr-2 px-4 py-2 text-white bg-[#F37A20] rounded"
+                    >
+                      Gợi ý tìm việc làm
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
             <div className="p-4 rounded-lg mt-8 bg-white">
               {jobs?.data.map((item: IJob, index: number) => {

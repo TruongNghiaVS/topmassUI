@@ -211,14 +211,14 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
                   </div>
                 </div>
               </div>
-              <div className="mt-8 text-center text-colorBase font-bold text-xl">
+              <div className="mt-4 text-center text-colorBase font-bold text-xl">
                 {data?.profileCv.fullName}
               </div>
               <div className="mt-4 text-center font-meidum uppercase text-3xl">
                 {data?.profileCv.position}
               </div>
               <div
-                className="mt-4 text-center px-32 "
+                className="mt-4 text-center px-24 "
                 dangerouslySetInnerHTML={{
                   __html: data?.profileCv.introduction,
                 }}
@@ -252,11 +252,17 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
               mọi nơi.
             </div>
             <div className="mt-4 flex space-x-4">
-              <button className="py-2 w-full bg-colorBase rounded text-white flex justify-center items-center space-x-2 font-medium">
+              <button
+                className="py-2 w-full bg-colorBase rounded text-white flex justify-center items-center space-x-2 font-medium"
+                disabled
+              >
                 <PrinterIcon className="w-4 " />
                 <span>Lưu hồ sơ</span>
               </button>
-              <button className="py-2 w-full bg-colorBase rounded text-white flex justify-center items-center space-x-2 font-medium">
+              <button
+                className="py-2 w-full bg-colorBase rounded text-white flex justify-center items-center space-x-2 font-medium"
+                disabled
+              >
                 <PrinterIcon className="w-4 " />
                 <span>Xuất (in) PDF</span>
               </button>

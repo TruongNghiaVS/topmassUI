@@ -107,7 +107,7 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
     <div className="bg-[#F4F5F5]">
       <div className="container mx-auto mt-2">
         <div className="rounded-lg overflow-hidden">
-          <div className="max-h-60 ">
+          <div className="max-h-60 min-h-60 bg-white ">
             <img
               src={`${companyDetail?.coverFullLink}`}
               alt=""

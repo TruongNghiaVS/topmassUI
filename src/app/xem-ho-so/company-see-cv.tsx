@@ -19,7 +19,7 @@ export const CompanySeenCV = ({ item }: ICompanySeeCandidateProps) => {
           <div>
             <span className="text-default">{item.name}</span> giám đốc
             <div>
-              <Link href="/cong-ty/abc">{item.companyName}</Link>
+              <Link href={"/cong-ty/" + item.slug}>{item.companyName}</Link>
             </div>
           </div>
         </div>

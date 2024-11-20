@@ -46,7 +46,7 @@ export const TocShareLink = ({ data }: ITOCShareLinkProps) => {
         <div className="pl-6">
           {data.details.map((item, idx) => (
             <div key={idx}>
-              <a className="text-colorBase" href={"#" + item.id}>
+              <a className="hover:text-colorBase" href={"#" + item.id}>
                 {item.title}
               </a>
             </div>

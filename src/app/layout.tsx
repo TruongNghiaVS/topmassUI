@@ -54,6 +54,7 @@ export default function RootLayout({
     "/dang-nhap",
     "/quen-mat-khau",
     "/khoi-tao-mat-khau",
+    "/share-link",
   ];
 
   useAuth();
@@ -71,7 +72,7 @@ export default function RootLayout({
               }}
             >
               <GlobalLoadingIndicator />
-              {!pathValidated.includes(path) && (
+              {!pathValidated.some((link) => path.includes(link)) && (
                 <div className="relative z-[10]">
                   <Header />
                 </div>

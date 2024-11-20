@@ -34,7 +34,7 @@ export const InfomationViewEdit = ({
     <div className="p-4 rounded-lg bg-white mt-4">
       <div className="flex justify-between py-1 items-center">
         <div className="flex items-center">
-          <div className="font-medium">{title}</div>
+          <div className="font-medium text-lg">{title}</div>
           {edit ? (
             <button onClick={() => isOpenModal()}>
               <PencilSquareIcon className="w-4 text-default ml-2" />
