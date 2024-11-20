@@ -3,19 +3,20 @@ import Link from "next/link";
 import { CompanySeenCV } from "./company-see-cv";
 import { InfomationJobSee } from "@/component/infomation-job/infomation-job-see";
 import { InfomationUser } from "@/component/infomation-user-right";
-import { GET_SUITABLEJOB } from "@/utils/api-url";
+import { GET_ALL_RECRUITER_SEEN_CV, GET_SUITABLEJOB } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
 import useSWR from "swr";
 import { IJob } from "@/interface/job";
 import { PopupApplyJob } from "../viec-lam/[id]/popup-apply-job";
 import { useState } from "react";
+import { ICompanySeeCandidate } from "@/interface/interface";
 
 export default function EmployeeSeeCv() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [slugItem, setSlugItem] = useState("");
-
+  const { data: recruiterCv } = useSWR(GET_ALL_RECRUITER_SEEN_CV, fetcher);
   const { data: jobs, mutate } = useSWR(GET_SUITABLEJOB, fetcher);
-  const list = [1, 2, 3, 4];
+
   return (
     <div className="bg-[#F4F5F5] max-1280:px-2">
       <div className="container mx-auto">
@@ -44,10 +45,10 @@ export default function EmployeeSeeCv() {
                   Gợi ý tìm việc làm
                 </Link>
               </div>
-              {list.map((value) => {
+              {recruiterCv?.map((item: ICompanySeeCandidate, idx: number) => {
                 return (
-                  <div className="mt-4" key={value}>
-                    <CompanySeenCV />
+                  <div className="mt-4" key={idx}>
+                    <CompanySeenCV item={item} />
                   </div>
                 );
               })}

@@ -70,6 +70,7 @@ export const ADD_OR_UPDATE_CERTIFY = "/api/CertifyUser/SaveCertifyUsers";
 export const SAVE_USER_CV = "/api/User/SaveProfileCv";
 export const GET_INFOMATION_USER_CV = "/api/User/GetProfileUserCV";
 export const GET_FULL_PROFILE_USER_CV = "/api/User/GetFullProfileUser";
+export const GET_ALL_RECRUITER_SEEN_CV = "/api/User/GetAllNTD";
 
 //------------- JobSearch -----------------//
 export const GET_JOBSEARCH_HOTJOB = "/api/JobSearch/GetAllBestJobOptimization";

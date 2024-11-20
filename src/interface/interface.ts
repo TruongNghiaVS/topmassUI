@@ -545,3 +545,16 @@ export interface ITOCShareLink {
   icon: JSX.Element;
   details: IDetailShareLink[];
 }
+
+export interface ICompanySeeCandidate {
+  companyName: string;
+  fullLinkAvatar: string;
+  name: string;
+  slug: string;
+  url: string;
+  createAt: string;
+}
+
+export interface ICompanySeeCandidateProps {
+  item: ICompanySeeCandidate;
+}

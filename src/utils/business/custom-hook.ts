@@ -1,4 +1,5 @@
 import { IDetailShareLink } from "@/interface/interface";
+import dayjs from "dayjs";
 import numeral from "numeral";
 
 export const convertParams = (params: any) => {
@@ -95,4 +96,26 @@ export const scrollToId = (id: string, offset = 80) => {
     console.log(yOffset);
     window.scrollTo({ top: y, behavior: "smooth" });
   }
+};
+
+export const formatDateDifference = (date: string): string => {
+  const now = dayjs(); // Current date
+  const inputDate = dayjs(date); // Input date
+  const diffInDays = now.diff(inputDate, "day");
+
+  if (diffInDays === 0) {
+    return "Vừa xem";
+  }
+
+  if (diffInDays < 30) {
+    return `${diffInDays} ngày trước`;
+  }
+
+  if (diffInDays < 365) {
+    const diffInMonths = now.diff(inputDate, "month");
+    return `${diffInMonths} tháng trước`;
+  }
+
+  const diffInYears = now.diff(inputDate, "year");
+  return `${diffInYears} năm trước`;
 };

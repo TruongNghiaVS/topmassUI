@@ -141,13 +141,13 @@ export const Header = () => {
                   1
                 </div>
               </div>
-              <Link href="/nhan-tin">
+              {/* <Link href="/nhan-tin">
                 <img
                   src="/imgs/messenger.svg"
                   alt=""
                   className="w-6 h-auto mr-3"
                 />
-              </Link>
+              </Link> */}
               <div className="flex items-center relative group/title ">
                 <div className="inline-block p-[2] rounded-full bg-[#F37A20] mr-1">
                   <UserIcon className="text-white w-6" />

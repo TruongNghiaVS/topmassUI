@@ -1,19 +1,29 @@
+import { ICompanySeeCandidateProps } from "@/interface/interface";
+import { formatDateDifference } from "@/utils/business/custom-hook";
 import Link from "next/link";
 
-export const CompanySeenCV = () => {
+export const CompanySeenCV = ({ item }: ICompanySeeCandidateProps) => {
   return (
     <div className="rounded border p-4">
       <div className="flex justify-between">
         <div className="flex items-center">
-          <img src="/imgs/logo-work.png" alt="" className="w-20 mr-4" />
+          <img
+            src={
+              item.fullLinkAvatar.length > 0
+                ? item.fullLinkAvatar
+                : "/imgs/logo-work.png"
+            }
+            alt=""
+            className="w-20 mr-4 rounded-full"
+          />
           <div>
-            <span className="text-default">Nguyễn Việt Hùng</span> giám đốc
+            <span className="text-default">{item.name}</span> giám đốc
             <div>
-              <Link href="/cong-ty/abc">Tập đoàn cổ phần VietStar Group</Link>
+              <Link href="/cong-ty/abc">{item.companyName}</Link>
             </div>
           </div>
         </div>
-        <div>2 tháng trước</div>
+        <div>{formatDateDifference(item.createAt)}</div>
       </div>
     </div>
   );
