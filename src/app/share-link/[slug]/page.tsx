@@ -162,8 +162,8 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
   return (
     <div>
       <div className="container mx-auto max-1280:px-2 py-6">
-        <div className="grid grid-cols-3 gap-4">
-          <div className="col-span-2">
+        <div className="grid grid-cols-3 gap-4 modal-overlay">
+          <div className="col-span-2 max-h-[100vh] overflow-scroll">
             <div className="relative pt-24 bg-white rounded-t-[120px] pb-4">
               <div className="absolute left-0 right-0 top-0 z-1">
                 <img
@@ -238,7 +238,7 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
               </InfomationViewEdit>
             ))}
           </div>
-          <div className="col-span-1 bg-white rounded p-4">
+          <div className="col-span-1 bg-white rounded p-4 max-h-[100vh] overflow-scroll">
             <div className="mx-auto flex justify-center">
               <img src="/imgs/logo-contact.png" className="w-[60%]" alt="" />
             </div>
