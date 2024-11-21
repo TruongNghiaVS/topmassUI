@@ -162,8 +162,8 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
   return (
     <div>
       <div className="container mx-auto max-1280:px-2 py-6">
-        <div className="grid grid-cols-3 gap-4 modal-overlay">
-          <div className="col-span-2 max-h-[100vh] overflow-scroll">
+        <div className="grid grid-cols-3 gap-4">
+          <div className="col-span-2">
             <div className="relative pt-24 bg-white rounded-t-[120px] pb-4">
               <div className="absolute left-0 right-0 top-0 z-1">
                 <img
@@ -238,52 +238,63 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
               </InfomationViewEdit>
             ))}
           </div>
-          <div className="col-span-1 bg-white rounded p-4 max-h-[100vh] overflow-scroll">
-            <div className="mx-auto flex justify-center">
-              <img src="/imgs/logo-contact.png" className="w-[60%]" alt="" />
-            </div>
-            <div className="mt-4 px-4 text-xs text-center">
-              Truy cập{" "}
-              <Link className="hover:text-colorBase" href="https://topmass.vn">
-                Topmass.vn
-              </Link>{" "}
-              và tạo Trang Thông tin cá nhân. Chia sẻ hồ sơ năng lực của bạn dễ
-              dàng chỉ với một đường link duy nhất, giúp bạn ứng tuyển mọi lúc,
-              mọi nơi.
-            </div>
-            <div className="mt-4 flex space-x-4">
-              <button
-                className="py-2 w-full bg-colorBase rounded text-white flex justify-center items-center space-x-2 font-medium"
-                disabled
-              >
-                <PrinterIcon className="w-4 " />
-                <span>Lưu hồ sơ</span>
-              </button>
-              <button
-                className="py-2 w-full bg-colorBase rounded text-white flex justify-center items-center space-x-2 font-medium"
-                disabled
-              >
-                <PrinterIcon className="w-4 " />
-                <span>Xuất (in) PDF</span>
-              </button>
-            </div>
-            <div className="mt-4">
-              <div className="font-medium">Mục lục</div>
-              {tocShareLink.map((item, idx) => (
-                <TocShareLink data={item} key={idx} />
-              ))}
-            </div>
-            <div className="mt-6 flex justify-center">
-              <img src="/imgs/qr-zalo.png" alt="" />
-            </div>
-            <div className="text-xs text-center mt-4">
-              Hỗ trợ đăng tin tuyển dụng trên Topmass
-              <br />
-              và dịch vụ Mass headhunt
-            </div>
-            <div className="mt-4 flex space-x-1 justify-center">
-              <HeadSetBootstrapIcon className="w-4" />
-              <div>1900 255 836</div>
+          <div className="col-span-1 ">
+            <div className="sticky top-0 w-[390px] modal-overlay bg-white rounded">
+              <div className="p-4 pb-8 h-screen overflow-y-scroll">
+                <div className="mx-auto flex justify-center">
+                  <img
+                    src="/imgs/logo-contact.png"
+                    className="w-[60%]"
+                    alt=""
+                  />
+                </div>
+                <div className="mt-4 px-4 text-xs text-center">
+                  Truy cập{" "}
+                  <Link
+                    className="hover:text-colorBase"
+                    href="https://topmass.vn"
+                  >
+                    Topmass.vn
+                  </Link>{" "}
+                  và tạo Trang Thông tin cá nhân. Chia sẻ hồ sơ năng lực của bạn
+                  dễ dàng chỉ với một đường link duy nhất, giúp bạn ứng tuyển
+                  mọi lúc, mọi nơi.
+                </div>
+                <div className="mt-4 flex space-x-4">
+                  <button
+                    className="py-2 w-full bg-colorBase rounded text-white flex justify-center items-center space-x-2 font-medium"
+                    disabled
+                  >
+                    <PrinterIcon className="w-4 " />
+                    <span>Lưu hồ sơ</span>
+                  </button>
+                  <button
+                    className="py-2 w-full bg-colorBase rounded text-white flex justify-center items-center space-x-2 font-medium"
+                    disabled
+                  >
+                    <PrinterIcon className="w-4 " />
+                    <span>Xuất (in) PDF</span>
+                  </button>
+                </div>
+                <div className="mt-4">
+                  <div className="font-medium">Mục lục</div>
+                  {tocShareLink.map((item, idx) => (
+                    <TocShareLink data={item} key={idx} />
+                  ))}
+                </div>
+                <div className="mt-6 flex justify-center">
+                  <img src="/imgs/qr-zalo.png" alt="" />
+                </div>
+                <div className="text-xs text-center mt-4">
+                  Hỗ trợ đăng tin tuyển dụng trên Topmass
+                  <br />
+                  và dịch vụ Mass headhunt
+                </div>
+                <div className="mt-4 flex space-x-1 justify-center">
+                  <HeadSetBootstrapIcon className="w-4" />
+                  <div>1900 255 836</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
