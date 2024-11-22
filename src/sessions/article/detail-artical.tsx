@@ -8,7 +8,8 @@ import dayjs from "dayjs";
 import TableOfContents from "@/component/table-content-blog";
 import { NewInfomation } from "@/app/tin-tuc/new-infomation";
 import { NewRelative } from "@/app/(tin-tuc)/([slug])/[id]/new-relatied";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
+import GlobalLoadingIndicator from "@/component/loading-componet";
 
 const ArticalDetail = ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -23,6 +24,10 @@ const ArticalDetail = ({ params }: { params: { id: string } }) => {
     `${GET_BLOG_REATION}?articleSlug=${id}`,
     fetcher
   );
+
+  if (isLoading) return <GlobalLoadingIndicator />;
+
+  if (!isLoading && !blogDetail) return notFound();
 
   return (
     <div className="pt-2">

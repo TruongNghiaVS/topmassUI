@@ -28,9 +28,7 @@ export default function News() {
                           <div key={index}>
                             <div className="rounded-lg bg-white overflow-hidden ">
                               <div className="w-full h-[200px] object-fill">
-                                <Link
-                                  href={`/tin-tuc/${item.slug}/${detail.slug}`}
-                                >
+                                <Link href={`/${detail.slug}`}>
                                   <img
                                     src={`${detail.coverFullLink}`}
                                     alt=""
@@ -38,9 +36,7 @@ export default function News() {
                                   />
                                 </Link>
                               </div>
-                              <Link
-                                href={`/tin-tuc/${item.slug}/${detail.slug}`}
-                              >
+                              <Link href={`/${detail.slug}`}>
                                 <div className="m-5 font-semibold line-clamp-3 h-[84px]">
                                   {detail.title}
                                 </div>
