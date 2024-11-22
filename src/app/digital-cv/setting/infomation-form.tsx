@@ -45,7 +45,7 @@ export const InfomationUserCv = ({
     level: yup.string().required("Vui lòng nhập cấp bậc"),
     addressInfo: yup.string().required("Vui lòng nhập Địa chỉ"),
     dateOfBirth: yup.string().required("Vui lòng nhập ngày sinh"),
-    ProvinceCode: yup.string().required("Vui lòng chọn tỉnh thành tìm kiếm"),
+    provinceCode: yup.string().required("Vui lòng chọn tỉnh thành tìm kiếm"),
     gender: yup
       .number()
       .required("Vui lòng chọn giới tính")
@@ -81,7 +81,7 @@ export const InfomationUserCv = ({
           phoneNumber: "",
           introduction: "",
           addressInfo: "",
-          ProvinceCode: "",
+          provinceCode: "",
         },
   });
 
@@ -165,7 +165,7 @@ export const InfomationUserCv = ({
             <div>
               <TmSelect
                 control={control}
-                name="ProvinceCode"
+                name="provinceCode"
                 placeholder="Tìm kiếm"
                 options={provinces}
               />
