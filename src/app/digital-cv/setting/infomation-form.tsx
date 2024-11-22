@@ -13,7 +13,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import TmSelect from "@/component/hook-form/select";
-import { Rank } from "@/module/helper/master-data";
+import { Provinces, Rank } from "@/module/helper/master-data";
 const CustomCKEditor = dynamic(
   () => {
     return import("../../../component/hook-form/ck-editor");
@@ -37,12 +37,15 @@ export const InfomationUserCv = ({
   mutate,
   onClose,
 }: IInfoamtionFormUserCv) => {
+  const { provinces } = Provinces();
+
   const schema = yup.object().shape({
     fullName: yup.string().required("Vui lòng nhập họ và tên"),
     position: yup.string().required("Vui lòng nhập vị trí"),
     level: yup.string().required("Vui lòng nhập cấp bậc"),
     addressInfo: yup.string().required("Vui lòng nhập Địa chỉ"),
     dateOfBirth: yup.string().required("Vui lòng nhập ngày sinh"),
+    ProvinceCode: yup.string().required("Vui lòng chọn tỉnh thành tìm kiếm"),
     gender: yup
       .number()
       .required("Vui lòng chọn giới tính")
@@ -78,6 +81,7 @@ export const InfomationUserCv = ({
           phoneNumber: "",
           introduction: "",
           addressInfo: "",
+          ProvinceCode: "",
         },
   });
 
@@ -151,6 +155,19 @@ export const InfomationUserCv = ({
                 control={control}
                 options={gender}
                 classNameCustom="flex space-x-2"
+              />
+            </div>
+          </div>
+          <div className="mt-4">
+            <div className="font-medium">
+              Địa chỉ tìm kiếm <span className="text-[#dc2f2f]">*</span>
+            </div>
+            <div>
+              <TmSelect
+                control={control}
+                name="ProvinceCode"
+                placeholder="Tìm kiếm"
+                options={provinces}
               />
             </div>
           </div>

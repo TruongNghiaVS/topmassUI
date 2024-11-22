@@ -456,6 +456,7 @@ export interface IInfomationUserCv {
   introduction?: string;
   linkFile?: string;
   addressInfo: string;
+  ProvinceCode: string;
 }
 
 export interface IInfoamtionFormUserCv {

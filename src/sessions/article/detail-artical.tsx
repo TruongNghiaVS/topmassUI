@@ -6,20 +6,41 @@ import { fetcher } from "@/utils/axios";
 import { IBlog } from "@/interface/blog";
 import dayjs from "dayjs";
 import TableOfContents from "@/component/table-content-blog";
-import { NewRelative } from "@/app/tin-tuc/[slug]/[id]/new-relatied";
 import { NewInfomation } from "@/app/tin-tuc/new-infomation";
+import { NewRelative } from "@/app/(tin-tuc)/([slug])/[id]/new-relatied";
+import { notFound, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useLoading } from "@/app/context/loading";
 
 const ArticalDetail = ({ params }: { params: { id: string } }) => {
   const { id } = params;
-  const { data: blogDetail } = useSWR(
+  const { data: blogDetail, isLoading } = useSWR(
     `${GET_BLOG_DETAIL}?articleSlug=${id}`,
     fetcher
   );
+
+  const { setLoading } = useLoading();
+  const router = useRouter();
+
+  if (!blogDetail) {
+    // Redirect to 404 if data is null or an error occurs
+    notFound();
+    return null;
+  } else {
+    // Redirect to detail page when data exists
+    router.push(`/${blogDetail.slug}`);
+  }
+
+  console.log(id);
 
   const { data: listBlog } = useSWR(
     `${GET_BLOG_REATION}?articleSlug=${id}`,
     fetcher
   );
+
+  if (!blogDetail) {
+    return null; // Required because `notFound` interrupts rendering
+  }
 
   return (
     <div className="pt-2">
