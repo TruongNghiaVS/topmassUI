@@ -65,7 +65,7 @@ export const ProjectView = ({ projects }: IInfomationProjectProps) => {
                           key={index}
                           src={link}
                           alt=""
-                          className="w-full mt-2"
+                          className="w-[400px] mt-2"
                         />
                       );
                     })}

@@ -23,7 +23,7 @@ import { CertificateView } from "./infomation-edit/certificate-view";
 import Modal from "@/component/modal";
 import { useSearchParams } from "next/navigation";
 import useSWR, { mutate } from "swr";
-import { fetcher } from "@/utils/axios";
+import axiosInstance, { fetcher } from "@/utils/axios";
 import { SkillView } from "./infomation-edit/skill-view";
 import {
   GET_ALL_EDUCATION,
@@ -35,6 +35,8 @@ import {
   GET_ALL_REWARD,
   GET_ALL_CERTIFI,
   GET_INFOMATION_USER_CV,
+  CHECK_CREATE_CV,
+  CREATE_OR_UPDATE_TEMPLATE_CV,
 } from "@/utils/api-url";
 import { SkillInfomationCv } from "./setting/skill-form";
 import { AvatarCv } from "@/component/avatar-cv";
@@ -183,26 +185,41 @@ export default function ProfileCV() {
   const downloadPDF = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/generate-pdf", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const resCheck = await axiosInstance.post(CHECK_CREATE_CV);
+      let url = "";
+      if (resCheck.data.isCreateNewFile) {
+        const response = await fetch("/api/generate-pdf", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-      if (response.ok) {
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.target = "_blank";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        if (response.ok) {
+          const blob = await response.blob();
+          const file = new File([blob], "cv.pdf", { type: blob.type });
+
+          const resCv = await axiosInstance.post(
+            CREATE_OR_UPDATE_TEMPLATE_CV,
+            {
+              TemplateID: 1,
+              FileCV: file,
+            },
+            {
+              headers: { "Content-Type": "multipart/form-data" },
+            }
+          );
+          url = resCv.data.data.linkFile;
+        }
       } else {
-        console.error("Failed to generate PDF");
-        toast.error("Tạo cv mẫu thất bại");
+        url = resCheck.data.linkFile;
       }
+      const a = document.createElement("a");
+      a.href = url;
+      a.target = "_blank";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     } catch (error) {
       toast.error("Tạo cv mẫu thất bại");
     } finally {

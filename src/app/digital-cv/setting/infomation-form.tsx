@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import TmSelect from "@/component/hook-form/select";
 import { Provinces, Rank } from "@/module/helper/master-data";
+import CustomSelectSearchForm from "@/component/hook-form/customSelectSearchForm";
 const CustomCKEditor = dynamic(
   () => {
     return import("../../../component/hook-form/ck-editor");
@@ -163,7 +164,7 @@ export const InfomationUserCv = ({
               Địa chỉ tìm kiếm <span className="text-[#dc2f2f]">*</span>
             </div>
             <div>
-              <TmSelect
+              <CustomSelectSearchForm
                 control={control}
                 name="provinceCode"
                 placeholder="Tìm kiếm"

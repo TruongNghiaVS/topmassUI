@@ -57,7 +57,7 @@ export const getExperience = async (data: any) => {
   }
   const htmlContent = await fs.readFile(experiencePath, "utf8");
   let content = `<div>
-  <div class="title-cv" style="margin-top: 10px; font-size: 15px">
+  <div class="title-cv font-semibold" style="margin-top: 10px; font-size: 15px">
     Kinh nghiệm làm việc
   </div>`;
   for (const item of data) {
@@ -91,7 +91,7 @@ export const getProject = async (data: any) => {
     return "";
   }
   let content = `<div>
-  <div class="title-cv" style="margin-top: 10px; font-size:15px">
+  <div class="title-cv font-semibold" style="margin-top: 10px; font-size:15px">
     Dự án
   </div>`;
   const htmlContent = await fs.readFile(projectPath, "utf8");

@@ -109,9 +109,12 @@ export const PopupApplyJob = ({
         dataApply.cvId = cvValue;
       }
       console.log(dataApply);
+      debugger;
       const url = cvValue > 0 ? APPLY_CV_WITH_CV : APPLY_CV_WITH_FILE;
       const res = await axiosInstance.post(url, dataApply);
-      setCvValue(listCv[0].id);
+      if (listCv.length > 0) {
+        setCvValue(listCv[0].id);
+      }
       setFile(null);
       if (mutate) {
         mutate();

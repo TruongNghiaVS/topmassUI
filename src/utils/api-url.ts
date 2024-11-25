@@ -92,3 +92,8 @@ export const GET_MASTERDATA_RANK = "/api/MasterData/GetAllRankCandidate";
 export const GET_EDUCATION_LEVEL = "/api/MasterData/AllEducationLevel";
 export const GET_PROVINCES_TO_FIL_JOB = "/api/Location/GetAllProvinces";
 export const GET_JOB_TYPE = "/api/MasterData/GetAllJobType";
+
+//--------------- Digital --------------------//
+export const CHECK_CREATE_CV = "/api/DigitalCV/CheckGenFileCV";
+export const CREATE_OR_UPDATE_TEMPLATE_CV =
+  "/api/DigitalCV/CreateOrUpdateCVWithTemplate";

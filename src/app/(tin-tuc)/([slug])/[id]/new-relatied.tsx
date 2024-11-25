@@ -14,7 +14,7 @@ export const NewRelative = ({ item }: IBlogRelationProps) => {
   return (
     <div className="p-8 rounded-lg bg-white">
       <div>
-        <Link href={`/tin-tuc/${slug}/${item.slug}`}>
+        <Link href={`/${item.slug}`}>
           <img
             src={`${
               item.coverFullLink.length > 0
@@ -26,7 +26,7 @@ export const NewRelative = ({ item }: IBlogRelationProps) => {
           />
         </Link>
       </div>
-      <Link href={`/tin-tuc/${slug}/${item.slug}`}>
+      <Link href={`/${item.slug}`}>
         <div className="font-semibold ">{item.title}</div>
       </Link>
       <div className="mt-2">
