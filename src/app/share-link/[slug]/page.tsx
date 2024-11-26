@@ -218,7 +218,7 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
                 {data?.profileCv.position}
               </div>
               <div
-                className="mt-4 text-center px-24 "
+                className="mt-4 text-center px-4 text-xs "
                 dangerouslySetInnerHTML={{
                   __html: data?.profileCv.introduction,
                 }}
@@ -241,12 +241,14 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
           <div className="col-span-1 ">
             <div className="sticky top-0 w-[390px] modal-overlay bg-white rounded">
               <div className="p-4 pb-8 h-screen overflow-y-scroll">
-                <div className="mx-auto flex justify-center">
-                  <img
-                    src="/imgs/logo-contact.png"
-                    className="w-[60%]"
-                    alt=""
-                  />
+                <div className="mx-auto ">
+                  <Link href="/" className="flex justify-center">
+                    <img
+                      src="/imgs/logo-contact.png"
+                      className="w-[60%]"
+                      alt=""
+                    />
+                  </Link>
                 </div>
                 <div className="mt-4 px-4 text-xs text-center">
                   Truy cập{" "}

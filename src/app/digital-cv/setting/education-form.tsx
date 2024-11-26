@@ -70,31 +70,31 @@ export const EducationUserCv = ({
               : schema;
           }),
           introduction: yup.string(),
-          files: yup
-            .mixed<FileList>()
-            .test("fileType", "Chỉ upload file JPEG,JPG,PNG,PDF ", (value) => {
-              if (value && value.length > 0) {
-                const allowedFormats = [
-                  "image/jpeg",
-                  "image/jpg",
-                  "image/png",
-                  "application/pdf",
-                ];
-                return Array.from(value).every((file: File) =>
-                  allowedFormats.includes(file.type)
-                );
-              }
-              return true;
-            })
-            .test("fileSize", "Chỉ được upload tối đa 5MB/File", (value) => {
-              const maxSize = 5 * 1024 * 1024; // 5MB
-              if (value && value.length > 0) {
-                return Array.from(value).every(
-                  (file: File) => file.size <= maxSize
-                );
-              }
-              return true;
-            }),
+          // files: yup
+          //   .mixed<FileList>()
+          //   .test("fileType", "Chỉ upload file JPEG,JPG,PNG,PDF ", (value) => {
+          //     if (value && value.length > 0) {
+          //       const allowedFormats = [
+          //         "image/jpeg",
+          //         "image/jpg",
+          //         "image/png",
+          //         "application/pdf",
+          //       ];
+          //       return Array.from(value).every((file: File) =>
+          //         allowedFormats.includes(file.type)
+          //       );
+          //     }
+          //     return true;
+          //   })
+          //   .test("fileSize", "Chỉ được upload tối đa 5MB/File", (value) => {
+          //     const maxSize = 5 * 1024 * 1024; // 5MB
+          //     if (value && value.length > 0) {
+          //       return Array.from(value).every(
+          //         (file: File) => file.size <= maxSize
+          //       );
+          //     }
+          //     return true;
+          //   }),
         })
       )
       .min(1, "Phải có ít nhất 1 trường học")
@@ -136,23 +136,23 @@ export const EducationUserCv = ({
   const onSubmit: SubmitHandler<IInfomationSchoolCv> = async (data) => {
     setLoading(true);
     try {
-      const listFiles = data.educations.map((item) => {
-        return item.files;
-      });
-      const linkUploads = await Promise.all(
-        listFiles.map(async (item: FileList | undefined, index) => {
-          const link = await getFileUpload(item, educations[index]?.linkFile);
-          return link;
-        })
-      );
+      // const listFiles = data.educations.map((item) => {
+      //   return item.files;
+      // });
+      // const linkUploads = await Promise.all(
+      //   listFiles.map(async (item: FileList | undefined, index) => {
+      //     const link = await getFileUpload(item, educations[index]?.linkFile);
+      //     return link;
+      //   })
+      // );
 
       const dataUpload = data.educations.map((item, index) => {
         const dataTemp: any = { ...item };
-        if (linkUploads[index] && linkUploads[index]?.length > 0) {
-          dataTemp.linkFile = linkUploads[index];
-        } else {
-          dataTemp.linkFile = "";
-        }
+        // if (linkUploads[index] && linkUploads[index]?.length > 0) {
+        //   dataTemp.linkFile = linkUploads[index];
+        // } else {
+        //   dataTemp.linkFile = "";
+        // }
         return dataTemp;
       });
 
@@ -312,7 +312,7 @@ export const EducationUserCv = ({
                   />
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <CustomUploadMulti
                   name={`educations.${index}.files`}
                   title="Tải tệp hoặc File từ máy tính"
@@ -320,7 +320,7 @@ export const EducationUserCv = ({
                   acceptFile=".jpeg, .jpg, .png"
                   link={educations[index] && educations[index].linkFile}
                 />
-              </div>
+              </div> */}
             </div>
           ))}
           {errors && errors.educations && (

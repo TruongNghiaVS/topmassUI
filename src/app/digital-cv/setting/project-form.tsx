@@ -59,26 +59,26 @@ export const ProjectUserCv = ({
               : schema;
           }),
           introduction: yup.string(),
-          files: yup
-            .mixed<FileList>()
-            .test("fileType", "Chỉ upload file JPEG,JPG,PNG,PDF ", (value) => {
-              if (value && value.length > 0) {
-                const allowedFormats = ["image/jpeg", "image/jpg", "image/png"];
-                return Array.from(value).every((file: File) =>
-                  allowedFormats.includes(file.type)
-                );
-              }
-              return true;
-            })
-            .test("fileSize", "Chỉ được upload tối đa 5MB/File", (value) => {
-              const maxSize = 5 * 1024 * 1024; // 5MB
-              if (value && value.length > 0) {
-                return Array.from(value).every(
-                  (file: File) => file.size <= maxSize
-                );
-              }
-              return true;
-            }),
+          // files: yup
+          //   .mixed<FileList>()
+          //   .test("fileType", "Chỉ upload file JPEG,JPG,PNG,PDF ", (value) => {
+          //     if (value && value.length > 0) {
+          //       const allowedFormats = ["image/jpeg", "image/jpg", "image/png"];
+          //       return Array.from(value).every((file: File) =>
+          //         allowedFormats.includes(file.type)
+          //       );
+          //     }
+          //     return true;
+          //   })
+          //   .test("fileSize", "Chỉ được upload tối đa 5MB/File", (value) => {
+          //     const maxSize = 5 * 1024 * 1024; // 5MB
+          //     if (value && value.length > 0) {
+          //       return Array.from(value).every(
+          //         (file: File) => file.size <= maxSize
+          //       );
+          //     }
+          //     return true;
+          //   }),
         })
       )
       .min(1, "Phải có ít nhất 1 dự án")
@@ -119,20 +119,20 @@ export const ProjectUserCv = ({
   const onSubmit: SubmitHandler<IProjectCv> = async (data) => {
     setLoading(true);
     try {
-      const listFiles = data.projects.map((item) => {
-        return item.files;
-      });
-      const linkUploads = await Promise.all(
-        listFiles.map(async (item: FileList | undefined, index) => {
-          const link = await getFileUpload(item, projects[index]?.linkFile);
-          return link;
-        })
-      );
+      // const listFiles = data.projects.map((item) => {
+      //   return item.files;
+      // });
+      // const linkUploads = await Promise.all(
+      //   listFiles.map(async (item: FileList | undefined, index) => {
+      //     const link = await getFileUpload(item, projects[index]?.linkFile);
+      //     return link;
+      //   })
+      // );
 
       const dataUpload = data.projects.map((item, index) => {
         const dataTemp: any = { ...item };
         dataTemp.numOfMember = dataTemp.numOfMember.toString();
-        dataTemp.linkFile = linkUploads[index];
+        // dataTemp.linkFile = linkUploads[index];
         return dataTemp;
       });
       const res = await axiosInstance.post(ADD_OR_UPDATE_PROJECT, dataUpload);
@@ -302,7 +302,7 @@ export const ProjectUserCv = ({
                   />
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <CustomUploadMulti
                   name={`projects.${index}.files`}
                   title="Tải tệp hoặc File từ máy tính"
@@ -310,7 +310,7 @@ export const ProjectUserCv = ({
                   acceptFile=".jpeg, .jpg, .png"
                   link={projects[index] && projects[index].linkFile}
                 />
-              </div>
+              </div> */}
             </div>
           ))}
           {errors && errors.projects && (

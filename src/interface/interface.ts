@@ -257,7 +257,7 @@ export interface IInfomationSchoolCv {
     isEnd?: boolean;
     rank?: string;
     introduction?: string;
-    files?: FileList;
+    // files?: FileList;
     linkFile?: string;
   }[];
 }
@@ -273,7 +273,7 @@ export interface IInfomationExperience {
     toYear?: string;
     isEnd?: boolean;
     introduction?: string;
-    files?: FileList;
+    // files?: FileList;
   }[];
 }
 
@@ -311,7 +311,7 @@ export interface IProjectCv {
     toYear?: string;
     isEnd?: boolean;
     introduction?: string;
-    files?: FileList;
+    // files?: FileList;
   }[];
 }
 

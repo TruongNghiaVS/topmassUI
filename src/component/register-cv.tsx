@@ -26,7 +26,11 @@ export const RegisterCV = () => {
 
   useEffect(() => {
     if (listCv) {
-      setCvCreate(listCv.filter((item: ICvCreate) => item.typeData === 1));
+      setCvCreate(
+        listCv.filter(
+          (item: ICvCreate) => item.typeData === 1 || item.typeData === 5
+        )
+      );
       setCvUpdate(listCv.filter((item: ICvCreate) => item.typeData === 2));
     }
   }, [listCv]);

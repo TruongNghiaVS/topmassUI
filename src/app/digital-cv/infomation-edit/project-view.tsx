@@ -54,7 +54,7 @@ export const ProjectView = ({ projects }: IInfomationProjectProps) => {
                   dangerouslySetInnerHTML={{ __html: item.introduction }}
                 ></div>
               </div>
-              <div className="grid grid-cols-3 text-xs mt-2">
+              {/* <div className="grid grid-cols-3 text-xs mt-2">
                 <div className="col-span-1">Hình ảnh:</div>
                 <div className="col-span-2">
                   {item.linkFile &&
@@ -70,7 +70,7 @@ export const ProjectView = ({ projects }: IInfomationProjectProps) => {
                       );
                     })}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         );

@@ -63,31 +63,31 @@ export const ExperienceUserCv = ({
               : schema;
           }),
           introduction: yup.string(),
-          files: yup
-            .mixed<FileList>()
-            .test("fileType", "Chỉ upload file JPEG,JPG,PNG,PDF ", (value) => {
-              if (value && value.length > 0) {
-                const allowedFormats = [
-                  "image/jpeg",
-                  "image/jpg",
-                  "image/png",
-                  "application/pdf",
-                ];
-                return Array.from(value).every((file: File) =>
-                  allowedFormats.includes(file.type)
-                );
-              }
-              return true;
-            })
-            .test("fileSize", "Chỉ được upload tối đa 5MB/File", (value) => {
-              const maxSize = 5 * 1024 * 1024; // 5MB
-              if (value && value.length > 0) {
-                return Array.from(value).every(
-                  (file: File) => file.size <= maxSize
-                );
-              }
-              return true;
-            }),
+          // files: yup
+          //   .mixed<FileList>()
+          //   .test("fileType", "Chỉ upload file JPEG,JPG,PNG,PDF ", (value) => {
+          //     if (value && value.length > 0) {
+          //       const allowedFormats = [
+          //         "image/jpeg",
+          //         "image/jpg",
+          //         "image/png",
+          //         "application/pdf",
+          //       ];
+          //       return Array.from(value).every((file: File) =>
+          //         allowedFormats.includes(file.type)
+          //       );
+          //     }
+          //     return true;
+          //   })
+          //   .test("fileSize", "Chỉ được upload tối đa 5MB/File", (value) => {
+          //     const maxSize = 5 * 1024 * 1024; // 5MB
+          //     if (value && value.length > 0) {
+          //       return Array.from(value).every(
+          //         (file: File) => file.size <= maxSize
+          //       );
+          //     }
+          //     return true;
+          //   }),
         })
       )
       .min(1, "Phải có ít nhất 1 kinh nghiệm làm việc")
@@ -126,19 +126,19 @@ export const ExperienceUserCv = ({
   const onSubmit: SubmitHandler<IInfomationExperience> = async (data) => {
     setLoading(true);
     try {
-      const listFiles = data.experiences.map((item) => {
-        return item.files;
-      });
-      const linkUploads = await Promise.all(
-        listFiles.map(async (item: FileList | undefined, index) => {
-          const link = await getFileUpload(item, experiences[index]?.linkFile);
-          return link;
-        })
-      );
+      // const listFiles = data.experiences.map((item) => {
+      //   return item.files;
+      // });
+      // const linkUploads = await Promise.all(
+      //   listFiles.map(async (item: FileList | undefined, index) => {
+      //     const link = await getFileUpload(item, experiences[index]?.linkFile);
+      //     return link;
+      //   })
+      // );
 
       const dataUpload = data.experiences.map((item, index) => {
         const dataTemp: any = { ...item };
-        dataTemp.linkFile = linkUploads[index];
+        // dataTemp.linkFile = linkUploads[index];
         return dataTemp;
       });
       const res = await axiosInstance.post(
@@ -274,7 +274,7 @@ export const ExperienceUserCv = ({
                   />
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <CustomUploadMulti
                   name={`experiences.${index}.files`}
                   acceptFile=".jpeg, .jpg, .png"
@@ -282,7 +282,7 @@ export const ExperienceUserCv = ({
                   control={control}
                   link={experiences[index] && experiences[index].linkFile}
                 />
-              </div>
+              </div> */}
             </div>
           ))}
           {errors && errors.experiences && (

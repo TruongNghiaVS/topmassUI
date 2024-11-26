@@ -8,7 +8,7 @@ interface ITOCShareLinkProps {
 }
 
 export const TocShareLink = ({ data }: ITOCShareLinkProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<string>("0px");
 
