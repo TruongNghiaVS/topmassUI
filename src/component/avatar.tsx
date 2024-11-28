@@ -22,7 +22,6 @@ export const Avatar = ({ avatarLink = "", setAvatarLink }: IAvatarProps) => {
   ) => {
     if (event.target.files && event.target.files?.length > 0) {
       const selectedFiles = event.target.files[0];
-      console.log(selectedFiles);
       setLoading(true);
       try {
         const response = await axiosInstanceImg.post(UPLOAD_IMG, {

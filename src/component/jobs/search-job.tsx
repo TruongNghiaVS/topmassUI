@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { ScrollFilterJob } from "./scroll-filter-job";
 import { prices } from "@/mockup-data/data";
 import { HotJobs } from "./hot-jobs";
-import { Career, Experiences, Provinces } from "@/module/helper/master-data";
+import { Career, Experiences, Provinces } from "@/modules/helper/master-data";
 import { ISearchJobWithTypeFilter } from "@/interface/job";
 
 export const SearchJobs = ({

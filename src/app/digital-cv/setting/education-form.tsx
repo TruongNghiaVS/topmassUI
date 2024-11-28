@@ -21,7 +21,7 @@ import dynamic from "next/dynamic";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
-import { EducationLevel } from "@/module/helper/master-data";
+import { EducationLevel } from "@/modules/helper/master-data";
 const CustomCKEditor = dynamic(
   () => {
     return import("../../../component/hook-form/ck-editor");

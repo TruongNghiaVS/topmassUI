@@ -93,7 +93,6 @@ export const scrollToId = (id: string, offset = 80) => {
     const y =
       element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-    console.log(yOffset);
     window.scrollTo({ top: y, behavior: "smooth" });
   }
 };

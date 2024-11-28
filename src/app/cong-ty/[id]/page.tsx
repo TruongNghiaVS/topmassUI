@@ -30,7 +30,7 @@ import {
 import { IFormCompany } from "@/interface/search-job";
 import { IJob } from "@/interface/job";
 import { WrapButtonLogin } from "@/component/button-modal-login";
-import { PopupApplyJob } from "@/app/viec-lam/[id]/popup-apply-job";
+import { PopupApplyJob } from "@/modules/detail-jobs/popup-apply-job";
 
 export default function CompanyDetail({ params }: { params: { id: string } }) {
   const schema = yup.object().shape({

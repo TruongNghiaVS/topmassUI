@@ -48,7 +48,6 @@ export const PopupUploadCv = ({
     } finally {
       setLoading(false);
     }
-    console.log(data);
   };
 
   return (

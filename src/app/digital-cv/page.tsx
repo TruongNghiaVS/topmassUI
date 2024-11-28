@@ -43,7 +43,7 @@ import { AvatarCv } from "@/component/avatar-cv";
 import { useLoading } from "../context/loading";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import { CurrentUser } from "@/module/helper/master-data";
+import { CurrentUser } from "@/modules/helper/master-data";
 
 type IProps = {
   title: string;

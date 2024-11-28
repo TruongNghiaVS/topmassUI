@@ -22,7 +22,7 @@ import { useLoading } from "../context/loading";
 import { toast } from "react-toastify";
 import useSWR from "swr";
 import TmSelect from "@/component/hook-form/select";
-import { Experiences } from "@/module/helper/master-data";
+import { Experiences } from "@/modules/helper/master-data";
 
 const gender = [
   {

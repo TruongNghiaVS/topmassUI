@@ -8,7 +8,7 @@ import TmInput from "./hook-form/input";
 import TmSelect from "./hook-form/select";
 import { MagnifyingGlassIcon, MapPinIcon } from "@heroicons/react/16/solid";
 import { BagBootstrapIcon } from "@/theme/icons/bagBootstrapIcon";
-import { Career, Provinces } from "@/module/helper/master-data";
+import { Career, Provinces } from "@/modules/helper/master-data";
 import { IFormSlider } from "@/interface/search-job";
 
 export const SliderForm = () => {

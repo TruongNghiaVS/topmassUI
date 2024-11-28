@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { SearchDetail } from "./search-detail";
+import { SearchDetail } from "../../../modules/detail-jobs/search-detail";
 
 interface JobsDetailtLayoutProps {
   children: ReactNode;

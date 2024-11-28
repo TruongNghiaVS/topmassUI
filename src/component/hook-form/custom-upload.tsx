@@ -35,7 +35,6 @@ const UploadFile = ({ file, setFile, setCvValue, cvValue }: IUploadFile) => {
         setFile(selectedFile);
         setCvValue(0);
         setError(null);
-        console.log("Selected file:", selectedFile);
       } else {
         setError("Please upload a PDF or DOCX file");
       }
@@ -72,7 +71,6 @@ const UploadFile = ({ file, setFile, setCvValue, cvValue }: IUploadFile) => {
         setFile(droppedFile);
         setCvValue(0);
         setError(null);
-        console.log("Dropped file:", droppedFile);
       } else {
         setError("Please upload a PDF or DOCX file");
       }

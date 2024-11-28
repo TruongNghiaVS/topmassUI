@@ -1,7 +1,7 @@
 "use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { IFormSearchDetail } from "../viec-lam/[id]/search-detail";
+import { IFormSearchDetail } from "../../modules/detail-jobs/search-detail";
 import TmInput from "@/component/hook-form/input";
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { InfomationCompany } from "./infomation-company";

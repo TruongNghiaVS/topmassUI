@@ -25,7 +25,6 @@ export default function CreateNewCv() {
 
   const handleSelectChange = (value: string) => {
     setSelectedValue(value);
-    console.log("Selected value:", value);
   };
 
   return (

@@ -1,5 +1,5 @@
 import { useLoading } from "@/app/context/loading";
-import { PopupApplyJob } from "@/app/viec-lam/[id]/popup-apply-job";
+import { PopupApplyJob } from "@/modules/detail-jobs/popup-apply-job";
 import { REMOVE_SAVE_JOB } from "@/utils/api-url";
 import axiosInstance from "@/utils/axios";
 import { TrashIcon } from "@heroicons/react/16/solid";

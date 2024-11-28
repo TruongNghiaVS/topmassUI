@@ -24,7 +24,7 @@ import { getToken, removeToken } from "@/utils/token";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { HOST_RECUMENT } from "@/config-global";
-import { CurrentUser } from "@/module/helper/master-data";
+import { CurrentUser } from "@/modules/helper/master-data";
 
 export const MenuMobile = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -50,7 +50,6 @@ export const MenuMobile = () => {
     }
     const handleScroll = () => {
       const scrollTop = divRef.current?.scrollTop ?? 0;
-      console.log("Container scrolled. Current scroll position:", scrollTop);
     };
 
     const container = divRef.current;

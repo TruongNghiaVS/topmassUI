@@ -13,7 +13,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import TmSelect from "@/component/hook-form/select";
-import { Provinces, Rank } from "@/module/helper/master-data";
+import { Provinces, Rank } from "@/modules/helper/master-data";
 import CustomSelectSearchForm from "@/component/hook-form/customSelectSearchForm";
 const CustomCKEditor = dynamic(
   () => {

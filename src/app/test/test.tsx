@@ -7,7 +7,6 @@ interface Props {
 }
 
 const MyPage: React.FC<Props> = ({ htmlContent }) => {
-  console.log(htmlContent);
   return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
 };
 

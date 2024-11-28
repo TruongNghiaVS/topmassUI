@@ -21,7 +21,7 @@ import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
-import { CurrentUser } from "@/module/helper/master-data";
+import { CurrentUser } from "@/modules/helper/master-data";
 
 export const PopupApplyJob = ({
   isModalOpen,
@@ -108,7 +108,6 @@ export const PopupApplyJob = ({
       if (cvValue > 0) {
         dataApply.cvId = cvValue;
       }
-      console.log(dataApply);
       debugger;
       const url = cvValue > 0 ? APPLY_CV_WITH_CV : APPLY_CV_WITH_FILE;
       const res = await axiosInstance.post(url, dataApply);

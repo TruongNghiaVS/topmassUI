@@ -12,7 +12,7 @@ import { ICvCreate } from "@/interface/interface";
 import { useEffect, useState } from "react";
 import { PopupUploadCv } from "./popup-upload-cv";
 import { IJob } from "@/interface/job";
-import { PopupApplyJob } from "@/app/viec-lam/[id]/popup-apply-job";
+import { PopupApplyJob } from "@/modules/detail-jobs/popup-apply-job";
 
 export const RegisterCV = () => {
   const [cvCreate, setCvCreate] = useState<ICvCreate[]>([]);

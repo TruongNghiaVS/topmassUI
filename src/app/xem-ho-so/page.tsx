@@ -7,7 +7,7 @@ import { GET_ALL_RECRUITER_SEEN_CV, GET_SUITABLEJOB } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
 import useSWR from "swr";
 import { IJob } from "@/interface/job";
-import { PopupApplyJob } from "../viec-lam/[id]/popup-apply-job";
+import { PopupApplyJob } from "../../modules/detail-jobs/popup-apply-job";
 import { useState } from "react";
 import { ICompanySeeCandidate } from "@/interface/interface";
 

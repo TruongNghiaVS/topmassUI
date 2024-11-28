@@ -14,7 +14,7 @@ import {
   JobType,
   Provinces,
   Rank,
-} from "@/module/helper/master-data";
+} from "@/modules/helper/master-data";
 import { IFormSearchJob, ISearchJobProps } from "@/interface/search-job";
 import { useEffect, useState } from "react";
 import { genderFilter, rankSalary } from "@/mockup-data/data";

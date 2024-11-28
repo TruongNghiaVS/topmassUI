@@ -17,9 +17,10 @@ export const CompanySeenCV = ({ item }: ICompanySeeCandidateProps) => {
             className="w-20 mr-4 rounded-full"
           />
           <div>
-            <span className="text-default">{item.name}</span> giám đốc
             <div>
-              <Link href={"/cong-ty/" + item.slug}>{item.companyName}</Link>
+              <Link href={"/cong-ty/" + item.slug}>
+                {item.companyName} đã xem hồ sơ
+              </Link>
             </div>
           </div>
         </div>

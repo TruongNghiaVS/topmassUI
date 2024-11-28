@@ -97,3 +97,7 @@ export const GET_JOB_TYPE = "/api/MasterData/GetAllJobType";
 export const CHECK_CREATE_CV = "/api/DigitalCV/CheckGenFileCV";
 export const CREATE_OR_UPDATE_TEMPLATE_CV =
   "/api/DigitalCV/CreateOrUpdateCVWithTemplate";
+
+//----------------- METADATA ---------------//
+export const GET_METADATA = "/api/GateWeb/GetInfoMetadata";
+export const GET_DETAIL_METADATA_JOB = "/api/JobWeb/GetDetailMetadata";

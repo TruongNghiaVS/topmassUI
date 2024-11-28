@@ -56,7 +56,6 @@ export const CertificateInfomationCv = ({
           monthExpired: yup
             .string()
             .when("isExpired", ([isExpired], schema) => {
-              console.log(isExpired);
               return isExpired === false
                 ? schema.required("Vui lòng chọn tháng kết thúc")
                 : schema;
