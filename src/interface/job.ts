@@ -79,10 +79,12 @@ export interface ISearchJobWithTypeFilter extends IHotJobProps, IPaging {
   setSelectedValue: Dispatch<SetStateAction<string>>;
 }
 
-export interface IAllJobsProps extends IPaging {
+export interface IAllJobsProps {
   jobs: IJob[];
   mutate?: KeyedMutator<any>;
 }
+
+export interface IJobsPaging extends IAllJobsProps, IPaging {}
 
 export interface IInfomationJobProps {
   item: IJob;

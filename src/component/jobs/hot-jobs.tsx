@@ -1,14 +1,14 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { InfomationJob } from "../infomation-job/infomation-job";
 import { useEffect, useState } from "react";
-import { IAllJobsProps } from "@/interface/job";
+import { IJobsPaging } from "@/interface/job";
 
 export const HotJobs = ({
   jobs,
   currentPage,
   setCurrentPage,
   lengthData,
-}: IAllJobsProps) => {
+}: IJobsPaging) => {
   const [totalPage, setTotalPage] = useState<number>();
 
   useEffect(() => {
