@@ -1,6 +1,7 @@
 import { Option } from "@/component/hook-form/interface/interface";
 import { Dispatch, SetStateAction } from "react";
 import { KeyedMutator } from "swr";
+import { IPaging } from "./interface";
 
 export interface IScrollFilterProps {
   setSearch: Dispatch<SetStateAction<string>>;
@@ -73,12 +74,12 @@ export interface IHotJobProps extends IScrollFilterProps {
   mutate?: KeyedMutator<any>;
 }
 
-export interface ISearchJobWithTypeFilter extends IHotJobProps {
+export interface ISearchJobWithTypeFilter extends IHotJobProps, IPaging {
   selectedValue: string;
   setSelectedValue: Dispatch<SetStateAction<string>>;
 }
 
-export interface IAllJobsProps {
+export interface IAllJobsProps extends IPaging {
   jobs: IJob[];
   mutate?: KeyedMutator<any>;
 }

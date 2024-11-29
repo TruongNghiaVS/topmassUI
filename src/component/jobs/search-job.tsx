@@ -15,6 +15,9 @@ export const SearchJobs = ({
   setSearch,
   selectedValue,
   setSelectedValue,
+  setCurrentPage,
+  currentPage,
+  lengthData,
 }: ISearchJobWithTypeFilter) => {
   const { control } = useForm();
 
@@ -91,7 +94,12 @@ export const SearchJobs = ({
             </span>
           </div>
         </div>
-        <HotJobs jobs={jobs} />
+        <HotJobs
+          jobs={jobs}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+          lengthData={lengthData}
+        />
       </div>
     </div>
   );

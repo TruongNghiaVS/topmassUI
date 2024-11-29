@@ -12,8 +12,9 @@ import { fetcher } from "@/utils/axios";
 const JobsPage = () => {
   const [selectedValue, setSelectedValue] = useState("0");
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const { data: allJobs } = useSWR(
-    `${GET_JOBSEARCH_HOTJOB}?TypeSearch=${selectedValue}&ValueType=${search}`,
+    `${GET_JOBSEARCH_HOTJOB}?TypeSearch=${selectedValue}&ValueType=${search}&Page=${currentPage}&Limit=9`,
     fetcher
   );
   const { data: companys } = useSWR(GET_ALL_COMPANY, fetcher);
@@ -27,6 +28,9 @@ const JobsPage = () => {
         setSearch={setSearch}
         selectedValue={selectedValue}
         setSelectedValue={setSelectedValue}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        lengthData={allJobs?.data.length}
       />
       <Image />
       <JobType />

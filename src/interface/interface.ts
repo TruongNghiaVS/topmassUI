@@ -559,3 +559,9 @@ export interface ICompanySeeCandidate {
 export interface ICompanySeeCandidateProps {
   item: ICompanySeeCandidate;
 }
+
+export interface IPaging {
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  lengthData: number;
+  currentPage: number;
+}

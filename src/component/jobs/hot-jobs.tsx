@@ -1,11 +1,22 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { InfomationJob } from "../infomation-job/infomation-job";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IAllJobsProps } from "@/interface/job";
 
-export const HotJobs = ({ jobs }: IAllJobsProps) => {
-  const [page, setPage] = useState(jobs ? jobs.length : 1);
-  const [currentPage, setCurrentPage] = useState(1);
+export const HotJobs = ({
+  jobs,
+  currentPage,
+  setCurrentPage,
+  lengthData,
+}: IAllJobsProps) => {
+  const [totalPage, setTotalPage] = useState<number>();
+
+  useEffect(() => {
+    const length = Math.ceil(lengthData / 10);
+    console.log(length);
+    setTotalPage(length);
+  }, [lengthData]);
+
   return (
     <div>
       <div className="container mx-auto">
@@ -23,11 +34,11 @@ export const HotJobs = ({ jobs }: IAllJobsProps) => {
             <ChevronLeftIcon className="text-[#F37A20] w-4" />
           </button>
           <div className="mx-2">
-            {currentPage}/{page} Trang
+            {currentPage}/{totalPage} Trang
           </div>
           <button
             className="border border-[#F37A20] rounded-full border-[2px] p-1 border-solid min-w-[auto] "
-            disabled={currentPage === page}
+            disabled={currentPage === totalPage}
             onClick={() => setCurrentPage(currentPage + 1)}
           >
             <ChevronRightIcon className="text-[#F37A20] w-4" />
