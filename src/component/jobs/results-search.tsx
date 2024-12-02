@@ -1,19 +1,9 @@
 import { IJob, IJobSameProps } from "@/interface/job";
 import { InfomationJobSame } from "../infomation-job/infomation-job-same";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 
-export const ResutlSearchJob = ({
-  jobs,
-  currentPage,
-  setCurrentPage,
-  mutate,
-}: IJobSameProps) => {
-  const length = Math.ceil(jobs?.length / 10);
-  const arrLength = Array.from({ length: length }, (_, i) => {
-    return i + 1;
-  }).filter((i) => i > 0);
+export const ResutlSearchJob = ({ jobs, mutate }: IJobSameProps) => {
   return (
-    <div className=" mb-8">
+    <div className=" mb-4">
       {jobs?.map((value: IJob, idx: number) => {
         return (
           <div className="mt-4" key={idx}>
@@ -21,42 +11,6 @@ export const ResutlSearchJob = ({
           </div>
         );
       })}
-      <div className="text-center mx-auto flex justify-center mt-4">
-        <button
-          id="prev-hot-job"
-          className="border border-[#F37A20] rounded-full border-[1px] p-1 mr-2"
-          onClick={() => {
-            setCurrentPage(currentPage - 1);
-          }}
-          disabled={currentPage === 1}
-        >
-          <ChevronLeftIcon className="text-[#F37A20] w-4" />
-        </button>
-        {arrLength.map((item) => {
-          return (
-            <button
-              key={item}
-              className={`min-w-[26px] mr-1 border border-[#F37A20] ${
-                currentPage === item
-                  ? "bg-[#F37A20] text-white"
-                  : "text-[#F37A20]"
-              } rounded-full border-[1px] px-2 py-1 text-xs`}
-            >
-              {item}
-            </button>
-          );
-        })}
-        <button
-          id="next-hot-job"
-          className="border border-[#F37A20] rounded-full border-[1px] p-1 ml-2"
-          onClick={() => {
-            setCurrentPage(currentPage + 1);
-          }}
-          disabled={currentPage === length}
-        >
-          <ChevronRightIcon className="text-[#F37A20] w-4" />
-        </button>
-      </div>
     </div>
   );
 };

@@ -30,7 +30,7 @@ const JobsPage = () => {
         setSelectedValue={setSelectedValue}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        lengthData={allJobs?.data.length}
+        lengthData={allJobs?.totalRecord}
       />
       <Image />
       <JobType />

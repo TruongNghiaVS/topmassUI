@@ -96,8 +96,6 @@ export interface IInfomationJobLikeProps extends IInfomationJobProps {
 
 export interface IJobSameProps {
   jobs: IJob[];
-  currentPage: number;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
   mutate: KeyedMutator<any>;
 }
 

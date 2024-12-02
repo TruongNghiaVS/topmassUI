@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { IFormSearchJob } from "@/interface/search-job";
 import useSWR from "swr";
 import { convertParams } from "@/utils/business/custom-hook";
+import { Paging } from "@/component/paging";
 
 export default function SearchJob() {
   const [search, setSearch] = useState<IFormSearchJob>({
@@ -69,15 +70,16 @@ export default function SearchJob() {
       <div className="max-1280:px-2">
         <div className="mx-auto container">
           <div className="sm:grid grid-cols-12 gap-4 ">
-            <div className="xl:col-span-8 md:col-span-7">
-              <ResutlSearchJob
-                jobs={dataSearch?.data}
+            <div className="xl:col-span-8 md:col-span-7 mb-4">
+              <ResutlSearchJob jobs={dataSearch?.data} mutate={mutate} />
+              <Paging
+                lengthData={dataSearch?.totalRecord}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                mutate={mutate}
               />
             </div>
-            <div className="xl:col-span-4 md:col-span-5 pb-4 ">
+
+            <div className="xl:col-span-4 md:col-span-5 pb-4 mt-4">
               <div>
                 {list.map((value) => {
                   return (

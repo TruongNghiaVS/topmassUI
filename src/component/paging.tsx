@@ -51,7 +51,7 @@ export const Paging = ({
           onClick={() => {
             setCurrentPage(currentPage + 1);
           }}
-          disabled={currentPage === length}
+          disabled={currentPage === arrPage.length}
         >
           <ChevronRightIcon className="text-[#F37A20] w-4" />
         </button>

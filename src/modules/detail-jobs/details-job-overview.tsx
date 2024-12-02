@@ -30,6 +30,7 @@ import { WrapButtonLogin } from "@/component/button-modal-login";
 import { toast } from "react-toastify";
 import { convertToMillionDongFixed } from "@/utils/business/custom-hook";
 import { PopupApplyJob } from "./popup-apply-job";
+import dayjs from "dayjs";
 
 export default function DetailJobOverview(params: { id: string }) {
   const { id } = params;
@@ -155,7 +156,8 @@ export default function DetailJobOverview(params: { id: string }) {
                 <div className="inline-flex px-4 py-2 bg-[#E2E2E2] rounded mb-6 ml-4">
                   <ClockIcon className="w-4 mr-2" />
                   <div className="text-xs font-normal">
-                    Hạn nộp hồ sơ: 30/07/2024
+                    Hạn nộp hồ sơ:{" "}
+                    {dayjs(detail?.dataJob.expired_date).format("DD-MM-YYYY")}
                   </div>
                 </div>
                 <div className="flex items-center justify-between px-4 ">
