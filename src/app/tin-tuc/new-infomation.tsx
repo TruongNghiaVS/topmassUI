@@ -12,7 +12,7 @@ export const NewInfomation = ({ item }: IBlogRelationProps) => {
   return (
     <div>
       <div>
-        <Link href={`/tin-tuc/${slug}/${item.slug}`}>
+        <Link href={`/${item.slug}`}>
           <img
             src={`${
               item.coverFullLink.length > 0
@@ -24,7 +24,7 @@ export const NewInfomation = ({ item }: IBlogRelationProps) => {
           />
         </Link>
       </div>
-      <Link href={`/tin-tuc/${slug}/${item.slug}`}>
+      <Link href={`/${item.slug}`}>
         <div className="font-semibold mt-3 line-clamp-3">{item.title}</div>
       </Link>
     </div>

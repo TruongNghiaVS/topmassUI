@@ -58,7 +58,8 @@ export const InfomationUserCv = ({
     phoneNumber: yup
       .string()
       .required("Vui lòng nhập số điện thoại")
-      .matches(/^[0-9]{10}$/, "Số điện thoại phải là 10 ký tự"),
+      .matches(/^[0-9]{10}$/, "Số điện thoại phải là 10 ký tự")
+      .matches(/^0\d*$/, "Số điện thoại phải bắt đầu bằng số 0"),
     introduction: yup.string(),
   });
 
