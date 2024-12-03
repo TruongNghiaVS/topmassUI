@@ -24,7 +24,7 @@ export const Paging = ({
           id="prev-hot-job"
           className="border min-w-[34px] min-h-[34px] border-[#F37A20] rounded-full border-[1px]  px-2"
           onClick={() => {
-            setCurrentPage(currentPage);
+            setCurrentPage(currentPage - 1);
           }}
           disabled={currentPage === 1}
         >
