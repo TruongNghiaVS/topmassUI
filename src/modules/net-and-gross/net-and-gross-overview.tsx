@@ -190,6 +190,27 @@ export default function NetAndGrossOverivew() {
     setValue("other_salary", 0);
   };
 
+  const calcuSalaryForExportTax = (
+    fromSalary: number,
+    toSalary: number,
+    tax: number,
+    salary: number
+  ) => {
+    let lastSalary = 0;
+
+    if (salary > fromSalary && salary <= toSalary) {
+      lastSalary = (salary - fromSalary) * tax;
+    } else if (salary > toSalary) {
+      lastSalary = (toSalary - fromSalary) * tax;
+    }
+
+    if (salary > 80000000 && fromSalary === 80000000) {
+      lastSalary = (salary - fromSalary) * tax;
+    }
+
+    return numeral(lastSalary).format("0,0");
+  };
+
   return (
     <div>
       <div className="p-4 bg-white rounded">
@@ -507,36 +528,93 @@ export default function NetAndGrossOverivew() {
                 <tr>
                   <th className="p-4  font-medium">Mức chịu thuế</th>
                   <th className="p-4  font-medium text-right">Thuế xuất</th>
+                  <th className="p-4  font-medium text-right">Tiền nộp</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 <tr>
                   <td className="p-4">Đến 5 triệu VNĐ</td>
                   <td className="text-right p-4">5%</td>
+                  <td className="text-right p-4">
+                    {calcuSalaryForExportTax(
+                      0,
+                      5000000,
+                      0.05,
+                      getTaxableIncome(defaultValues)
+                    )}
+                  </td>
                 </tr>
                 <tr>
                   <td className="p-4">Trên 5 triệu VNĐ đến 10 triệu VNĐ</td>
                   <td className="text-right p-4">10%</td>
+                  <td className="text-right p-4">
+                    {calcuSalaryForExportTax(
+                      5000000,
+                      10000000,
+                      0.1,
+                      getTaxableIncome(defaultValues)
+                    )}
+                  </td>
                 </tr>
                 <tr>
                   <td className="p-4">Trên 10 triệu VNĐ đến 18 triệu VNĐ</td>
                   <td className="text-right p-4">15%</td>
+                  <td className="text-right p-4">
+                    {calcuSalaryForExportTax(
+                      10000000,
+                      18000000,
+                      0.15,
+                      getTaxableIncome(defaultValues)
+                    )}
+                  </td>
                 </tr>
                 <tr>
                   <td className="p-4">Trên 18 triệu VNĐ đến 32 triệu VNĐ</td>
                   <td className="text-right p-4">20%</td>
+                  <td className="text-right p-4">
+                    {calcuSalaryForExportTax(
+                      18000000,
+                      32000000,
+                      0.2,
+                      getTaxableIncome(defaultValues)
+                    )}
+                  </td>
                 </tr>
                 <tr>
                   <td className="p-4">Trên 32 triệu VNĐ đến 52 triệu VNĐ</td>
                   <td className="text-right p-4">25%</td>
+                  <td className="text-right p-4">
+                    {calcuSalaryForExportTax(
+                      32000000,
+                      52000000,
+                      0.25,
+                      getTaxableIncome(defaultValues)
+                    )}
+                  </td>
                 </tr>
                 <tr>
                   <td className="p-4">Trên 52 triệu VNĐ đến 80 triệu VNĐ</td>
                   <td className="text-right p-4">30%</td>
+                  <td className="text-right p-4">
+                    {calcuSalaryForExportTax(
+                      52000000,
+                      80000000,
+                      0.3,
+                      getTaxableIncome(defaultValues)
+                    )}
+                  </td>
                 </tr>
                 <tr>
                   <td className="p-4">Trên 80 triệu VNĐ</td>
                   <td className="text-right p-4">35%</td>
+                  <td className="text-right p-4">
+                    {calcuSalaryForExportTax(
+                      80000000,
+                      0,
+                      0.35,
+                      getTaxableIncome(defaultValues)
+                    )}
+                  </td>
                 </tr>
               </tbody>
             </table>
