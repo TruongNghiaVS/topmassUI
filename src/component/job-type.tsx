@@ -67,7 +67,7 @@ export const JobType = () => {
   ];
   return (
     <div className=" max-1280:px-2">
-      <div className="container mx-auto mt-4">
+      <div className="container mx-auto mt-4 px-1 bg-white">
         <TitleCustom title="Ngành nghề nổi bật" className="mb-4" />
         <div>
           Xem danh sách việc làm theo ngành nghề{" "}

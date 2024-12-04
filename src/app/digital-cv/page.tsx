@@ -214,6 +214,8 @@ export default function ProfileCV() {
       } else {
         url = resCheck.data.linkFile;
       }
+      // url = URL.createObjectURL(blob);
+
       const a = document.createElement("a");
       a.href = url;
       a.target = "_blank";

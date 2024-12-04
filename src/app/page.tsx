@@ -6,7 +6,6 @@ export async function generateMetadata(): Promise<Metadata> {
   // Fetch dữ liệu từ server hoặc API (nếu cần thiết)
 
   const data = await getMetadataToScreen("homePage");
-
   return {
     title: data?.metaTitle || "Default Title",
     description: data?.metaDes || "Default Description",

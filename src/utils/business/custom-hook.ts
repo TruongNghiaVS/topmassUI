@@ -118,3 +118,31 @@ export const formatDateDifference = (date: string): string => {
   const diffInYears = now.diff(inputDate, "year");
   return `${diffInYears} năm trước`;
 };
+
+export const dateDiff = (date: string, title: string): string => {
+  const now = dayjs(); // Current date
+  const inputDate = dayjs(date); // Input date
+  const diffInDays = now.diff(inputDate, "day");
+  let dayView = "";
+
+  if (diffInDays === 0) {
+    return "Vừa cập nhật";
+  }
+
+  if (diffInDays < 30) {
+    dayView = `${diffInDays} ngày trước`;
+  }
+
+  if (diffInDays < 365 && diffInDays >= 30) {
+    const diffInMonths = now.diff(inputDate, "month");
+    dayView = `${diffInMonths} tháng trước`;
+  }
+
+  if (diffInDays > 365) {
+    const diffInYears = now.diff(inputDate, "year");
+    dayView = `${diffInYears} năm trước`;
+  }
+
+  title = title.replace("{title}", dayView);
+  return title;
+};

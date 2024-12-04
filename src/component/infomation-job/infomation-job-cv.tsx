@@ -6,6 +6,7 @@ import { WrapButtonLogin } from "../button-modal-login";
 import { ADD_SAVE_JOB, REMOVE_SAVE_JOB } from "@/utils/api-url";
 import axiosInstance from "@/utils/axios";
 import { toast } from "react-toastify";
+import { dateDiff } from "@/utils/business/custom-hook";
 
 export const InfomationJobCV = ({
   item,
@@ -72,17 +73,17 @@ export const InfomationJobCV = ({
                 ngày để ứng tuyển
               </div>
               <div className="inline-block rounded-[3px] bg-[#E2E2E2] inline-block py-[0.35em] px-[0.65em] mr-2 mt-2">
-                Cập nhật 50 phút trước
+                {dateDiff(item.lastUpdate, "Cập nhật {title}")}
               </div>
             </div>
             <div className="flex justify-center mt-4 sm:mt-0">
               {item.isApply == true ? (
-                <button className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2">
+                <button className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2 whitespace-nowrap">
                   Đã ứng tuyển
                 </button>
               ) : (
                 <WrapButtonLogin
-                  className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2"
+                  className="bg-[#F37A20] py-1 px-2 text-white rounded mr-2 whitespace-nowrap "
                   onClick={() => {
                     setSlugItem(item.jobSlug);
                     onOpen();

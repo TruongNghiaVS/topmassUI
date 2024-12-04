@@ -28,19 +28,19 @@ export const JobTypePage = ({ companys }: IHotCompanyProps) => {
               breakpoints={{
                 320: {
                   slidesPerView: 1,
-                  spaceBetween: 20,
+                  spaceBetween: 10,
                 },
                 768: {
                   slidesPerView: 2,
-                  spaceBetween: 40,
+                  spaceBetween: 20,
                 },
                 1024: {
                   slidesPerView: 3,
-                  spaceBetween: 50,
+                  spaceBetween: 30,
                 },
                 1200: {
                   slidesPerView: 4,
-                  spaceBetween: 50,
+                  spaceBetween: 30,
                 },
               }}
               navigation={{
@@ -52,8 +52,8 @@ export const JobTypePage = ({ companys }: IHotCompanyProps) => {
             >
               {companys?.map((item, index) => {
                 return (
-                  <SwiperSlide key={index} className="p-2">
-                    <div className="hover:outline outline-[#F37A20] p-4 rounded-lg">
+                  <SwiperSlide key={index} className="p-1">
+                    <div className="hover:outline outline-[#F37A20] p-4 rounded-lg bg-white">
                       <div className="flex justify-center items-center">
                         <Link href={`/cong-ty/${item.slug}`}>
                           <div className="w-[220px] h-[220px] flex justify-center items-center">

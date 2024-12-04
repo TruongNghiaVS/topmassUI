@@ -44,9 +44,9 @@ export const InfomationUserCv = ({
     fullName: yup.string().required("Vui lòng nhập họ và tên"),
     position: yup.string().required("Vui lòng nhập vị trí"),
     level: yup.string().required("Vui lòng nhập cấp bậc"),
-    addressInfo: yup.string().required("Vui lòng nhập Địa chỉ"),
+    addressInfo: yup.string().required("Vui lòng nhập địa chỉ chi tiết"),
     dateOfBirth: yup.string().required("Vui lòng nhập ngày sinh"),
-    provinceCode: yup.string().required("Vui lòng chọn tỉnh thành tìm kiếm"),
+    provinceCode: yup.string().required("Vui lòng chọn tỉnh thành phố"),
     gender: yup
       .number()
       .required("Vui lòng chọn giới tính")
@@ -162,7 +162,7 @@ export const InfomationUserCv = ({
           </div>
           <div className="mt-4">
             <div className="font-medium">
-              Địa chỉ tìm kiếm <span className="text-[#dc2f2f]">*</span>
+              Tỉnh/TP <span className="text-[#dc2f2f]">*</span>
             </div>
             <div>
               <CustomSelectSearchForm
@@ -175,13 +175,13 @@ export const InfomationUserCv = ({
           </div>
           <div className="mt-4">
             <div className="font-medium">
-              Địa chỉ hiện tại <span className="text-[#dc2f2f]">*</span>
+              Địa chỉ chi tiết <span className="text-[#dc2f2f]">*</span>
             </div>
             <div>
               <TmInput
                 control={control}
                 name="addressInfo"
-                placeholder="Địa chỉ"
+                placeholder="Nhập số nhà, tên đường, Phường/Xã, Quận/Huyện"
               />
             </div>
           </div>
