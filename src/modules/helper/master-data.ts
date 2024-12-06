@@ -2,6 +2,7 @@ import { IProfileInfomation } from "@/interface/interface";
 import {
   CURRENT_USER,
   GET_EDUCATION_LEVEL,
+  GET_JOB_SETTING,
   GET_JOB_TYPE,
   GET_MASTER_DATA_CAREER,
   GET_MASTERDATA_EXPERIENCE,
@@ -11,6 +12,7 @@ import {
   GET_PROVINCES_TO_FIL_JOB,
 } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
+import { getToken } from "@/utils/token";
 import useSWR from "swr";
 
 export const Provinces = () => {
@@ -44,7 +46,8 @@ export const ProvincesFilterJob = () => {
     GET_PROVINCES_TO_FIL_JOB,
     fetcher
   );
-  const provincesFilterJob = data
+
+  let provincesFilterJob = data
     ? data?.data
         .filter((item: any) => item.countJob > 0)
         .map((item: any) => {
@@ -61,6 +64,15 @@ export const ProvincesFilterJob = () => {
     },
     ...provincesFilterJob,
   ];
+
+  const token = getToken();
+  if (token) {
+    const { data: dataSetting } = useSWR(GET_JOB_SETTING, fetcher);
+    provincesFilterJob = provincesFilterJob.filter((item: any) =>
+      dataSetting?.data.locationAddress.includes(item.value)
+    );
+  }
+
   return {
     error,
     isLoading,

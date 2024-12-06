@@ -95,6 +95,7 @@ export const PopupApplyJob = ({
         phone: data.phone_number,
         email: data.email,
         JobId: jobId,
+        introduction: data.description,
       };
       if (file) {
         const response = await axiosInstanceImg.post(UPLOAD_IMG, {

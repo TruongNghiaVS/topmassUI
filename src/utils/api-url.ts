@@ -81,6 +81,7 @@ export const GET_ALLBLOGS_BYCATEGORY = "/api/Web/GetAllArticle";
 export const GET_BLOG_DETAIL = "/api/Web/GetArticle";
 export const GET_BLOG_REATION = "/api/Web/GetAllArticleRelationship";
 export const GET_ALL_BLOG_WITH_CATEGORY = "/api/Web/GetAllCategoryWithBlogs";
+export const GET_ARTICLE_FOR_TOOL = "/api/Web/GetArticleForTool";
 
 //---------------- Master data ------------------//
 export const GET_PROVINCE = "/api/Location/GetAllProvinces";

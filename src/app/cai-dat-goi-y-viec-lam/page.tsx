@@ -77,16 +77,6 @@ const salaryOptions = [
 export default function SettingSuggestJob() {
   const [provinces, setProvinces] = useState<Option[]>([]);
   const [careers, setCareers] = useState<Option[]>([]);
-  const [settingJob, setSettingJob] = useState<SettingJobState>({
-    position: "",
-    field: [],
-    skill: "",
-    salary: "",
-    locationAddress: [],
-    experience: "",
-    gender: -1,
-  });
-
   const { listExperiences } = Experiences();
   const { setLoading } = useLoading();
 

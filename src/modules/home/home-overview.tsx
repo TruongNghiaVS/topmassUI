@@ -37,7 +37,7 @@ export default function HomeOverview() {
   );
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#f3f5f7]">
       <Slider />
       <HotJob
         search={search}

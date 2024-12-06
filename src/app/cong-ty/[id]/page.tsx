@@ -15,7 +15,6 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { getToken } from "@/utils/token";
 import { useLoading } from "@/app/context/loading";
 import axiosInstance, { fetcher } from "@/utils/axios";
 import useSWR from "swr";
@@ -266,23 +265,18 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
                   </div>
                 </div>
 
-                {companyDetail?.mapInfo != "" ? (
+                {companyDetail?.iframeEmbeddedMap ? (
                   <div className="mt-4">
                     <div className="flex">
                       <MapIcon className="w-6 mr-2" /> Bản đồ
                     </div>
-                    {companyDetail?.mapInfo.length > 0 ? (
-                      <div className="p-4">
-                        <iframe
-                          className="w-full"
-                          src={`${companyDetail?.mapInfo}`}
-                          style={{ border: 0 }}
-                          allowFullScreen
-                          height={300}
-                          loading="lazy"
-                          referrerPolicy="no-referrer-when-downgrade"
-                        ></iframe>
-                      </div>
+                    {companyDetail?.iframeEmbeddedMap.length > 0 ? (
+                      <div
+                        className="mt-2 p-2 iframeContainer"
+                        dangerouslySetInnerHTML={{
+                          __html: companyDetail?.iframeEmbeddedMap,
+                        }}
+                      />
                     ) : (
                       ""
                     )}
