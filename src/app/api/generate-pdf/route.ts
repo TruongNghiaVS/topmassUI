@@ -5,7 +5,7 @@ import { promises as fs } from "fs";
 import { GET_FULL_PROFILE_USER_CV } from "@/utils/api-url";
 import { cookies } from "next/headers";
 import axios from "axios";
-import { HOST_API } from "@/config-global";
+import { HOST_API_IP } from "@/config-global";
 import {
   getCertificate,
   getContact,
@@ -25,7 +25,7 @@ export async function GET(request: Request) {
     const cookieStore = cookies();
     const token = cookieStore.get("token");
 
-    const url = HOST_API + GET_FULL_PROFILE_USER_CV;
+    const url = HOST_API_IP + GET_FULL_PROFILE_USER_CV;
     const res = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${token?.value}`,
