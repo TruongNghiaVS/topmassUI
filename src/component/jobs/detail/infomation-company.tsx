@@ -8,7 +8,7 @@ export const ImfomationCompany = ({ company }: ICompanyDetailJobProps) => {
   return (
     <div className="bg-white rounded-lg p-8 mb-8">
       <div className="flex mb-4">
-        <div className="p-1 rounded-full border-[1px] border-solid border-[#EAE9E8] mr-2 text-[#514F4E] flex items-center justify-center">
+        <div className="rounded-full border-[1px] border-solid border-[#EAE9E8] mr-2 text-[#514F4E] flex items-center justify-center overflow-hidden">
           <img src={company?.avatarLink} alt="" className="w-20 " />
         </div>
         <h2 className="font-bold line-clamp-2">{company?.companyName}</h2>

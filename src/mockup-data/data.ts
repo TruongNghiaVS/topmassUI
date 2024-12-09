@@ -343,6 +343,7 @@ export const certificateViews = [
 ];
 
 export const rankSalary = [
+  { label: "Tất cả", value: -1 },
   { label: "1 - 3 triệu", value: 1 },
   { label: "3 - 5 triệu", value: 2 },
   { label: "5 - 10 triệu", value: 3 },

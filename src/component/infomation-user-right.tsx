@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useSWR from "swr";
 import { Avatar } from "./avatar";
+import { AxiosError } from "axios";
 
 export const InfomationUser = () => {
   const { setLoading } = useLoading();
@@ -26,14 +27,20 @@ export const InfomationUser = () => {
   }, [currentUser]);
 
   const updateMode = async (value: number, checked: boolean) => {
-    const newValue = { workMode: false, searchMode: false };
+    const newValue = {
+      workMode: false,
+      searchMode: false,
+      isSwichSearchMode: false,
+    };
     if (value === 1) {
       newValue.workMode = checked;
       newValue.searchMode = mode.searchMode;
+      newValue.isSwichSearchMode = false;
     }
     if (value === 2) {
       newValue.workMode = mode.workMode;
       newValue.searchMode = checked;
+      newValue.isSwichSearchMode = true;
     }
     setLoading(true);
     try {
@@ -43,7 +50,9 @@ export const InfomationUser = () => {
         mutate();
       }
     } catch (error) {
-      toast.error("Chuyển trạng thái không thành công");
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message);
+      }
     } finally {
       setLoading(false);
     }

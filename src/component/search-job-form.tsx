@@ -44,6 +44,10 @@ export const SearchJobForm = ({
   const getRangeSalary = (data: IFormSearchJob) => {
     if (data.Salary) {
       switch (+data.Salary) {
+        case -1:
+          data.SalaryFrom = -1;
+          data.SalaryTo = -1;
+          break;
         case 1:
           data.SalaryFrom = 1;
           data.SalaryTo = 3;
@@ -164,7 +168,6 @@ export const SearchJobForm = ({
                     name="Salary"
                     control={control}
                     className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
-                    placeholder="Mức lương"
                     options={rankSalary}
                   />
                   <TmSelect
