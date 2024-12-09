@@ -1,4 +1,5 @@
 import { IProfileInfomation } from "@/interface/interface";
+import useSWR from "swr";
 import {
   CURRENT_USER,
   GET_EDUCATION_LEVEL,
@@ -11,9 +12,8 @@ import {
   GET_PROVINCE,
   GET_PROVINCES_TO_FIL_JOB,
 } from "@/utils/api-url";
-import { fetcher } from "@/utils/axios";
+import axiosInstance, { fetcher } from "@/utils/axios";
 import { getToken } from "@/utils/token";
-import useSWR from "swr";
 
 export const Provinces = () => {
   const { data, error, mutate, isLoading } = useSWR(GET_PROVINCE, fetcher);
@@ -67,10 +67,11 @@ export const ProvincesFilterJob = () => {
 
   const token = getToken();
   if (token) {
-    const { data: dataSetting } = useSWR(GET_JOB_SETTING, fetcher);
-    provincesFilterJob = provincesFilterJob.filter((item: any) =>
-      dataSetting?.data.locationAddress.includes(item.value)
-    );
+    axiosInstance.get(GET_JOB_SETTING).then((response) => {
+      provincesFilterJob = provincesFilterJob.filter((item: any) =>
+        response.data.data.locationAddress.includes(item.value)
+      );
+    });
   }
 
   return {
