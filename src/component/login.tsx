@@ -55,7 +55,7 @@ export const LoginForm = ({ onClose }: ILoginForm) => {
       router.push("/");
     } catch (error) {
       if (error instanceof AxiosError) {
-        toast.error("Đang nhập thất bại. Vui lòng kiểm tra lại thông tin");
+        toast.error(error.response?.data.message);
       }
     } finally {
       setLoading(false);

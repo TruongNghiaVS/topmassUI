@@ -68,9 +68,11 @@ export const ProvincesFilterJob = () => {
   const token = getToken();
   if (token) {
     axiosInstance.get(GET_JOB_SETTING).then((response) => {
-      provincesFilterJob = provincesFilterJob.filter((item: any) =>
-        response.data.data.locationAddress.includes(item.value)
-      );
+      if (response.data.data.locationAddress) {
+        provincesFilterJob = provincesFilterJob.filter((item: any) =>
+          response.data.data.locationAddress.includes(item.value)
+        );
+      }
     });
   }
 
