@@ -71,7 +71,7 @@ export default function CompanyPage() {
           </div>
         </div>
       </div>
-      <div className="max-1280:px-2">
+      <div className="max-1280:px-2 pb-6">
         <div className="mx-auto container p-4 rounded bg-white">
           {DatallCompany?.data.length > 0 ? (
             <>

@@ -15,9 +15,11 @@ import { useLoading } from "@/app/context/loading";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import { EyeIcon } from "@heroicons/react/16/solid";
+import { ProvincesFilterJob } from "@/modules/helper/master-data";
 
 export const LoginForm = ({ onClose }: ILoginForm) => {
   const { setLoading } = useLoading();
+  const { mutate } = ProvincesFilterJob();
   const [showPassword, setShowPassword] = useState(false);
   const schema = yup.object().shape({
     userName: yup
@@ -52,6 +54,7 @@ export const LoginForm = ({ onClose }: ILoginForm) => {
       if (onClose) {
         onClose();
       }
+      mutate();
       router.push("/");
     } catch (error) {
       if (error instanceof AxiosError) {

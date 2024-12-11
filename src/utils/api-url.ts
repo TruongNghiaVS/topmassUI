@@ -91,8 +91,8 @@ export const GET_MASTERDATA_EXPERIENCE = "/api/MasterData/GetAllExperience";
 export const GET_MASTER_DATA_CAREER = "/api/MasterData/GetAllCareer";
 export const GET_MASTERDATA_RANK = "/api/MasterData/GetAllRankCandidate";
 export const GET_EDUCATION_LEVEL = "/api/MasterData/AllEducationLevel";
-export const GET_PROVINCES_TO_FIL_JOB = "/api/Location/GetAllProvinces";
 export const GET_JOB_TYPE = "/api/MasterData/GetAllJobType";
+export const GET_PROVINCE_SEARCH = "/api/GateWeb/GetRegionalSearch";
 
 //--------------- Digital --------------------//
 export const CHECK_CREATE_CV = "/api/DigitalCV/CheckGenFileCV";

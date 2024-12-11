@@ -19,12 +19,12 @@ export default function SearchJob() {
     Field: "",
     RankLevel: "",
     TypeOfWork: "",
-    ExperienceId: "-1",
+    ExperienceId: -1,
     SalaryFrom: -1,
     SalaryTo: -1,
     Salary: -1,
     JobType: "",
-    Gender: "0",
+    Gender: -1,
   });
   const [modeOrderBy, setModeOderBy] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);

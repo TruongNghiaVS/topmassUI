@@ -22,6 +22,7 @@ import { IDropdownMenu } from "@/interface/interface";
 import { usePathname, useRouter } from "next/navigation";
 import { MenuMobile } from "./menu-mobile";
 import { HOST_RECUMENT } from "@/config-global";
+import { ProvincesFilterJob } from "@/modules/helper/master-data";
 
 export const Header = () => {
   const headerRef = useRef<HTMLDivElement | null>(null);
@@ -197,6 +198,7 @@ export const Header = () => {
 
 const DropdownUser = ({ subMenu, pathCheck, setIsLogin }: IDropdownMenu) => {
   const path = usePathname();
+  const { mutate: mutateFIlterJob } = ProvincesFilterJob();
   const router = useRouter();
   return (
     <ul className="p-2 rounded-lg group/subMenu overflow-hidden border-[#d9dbe9] h-0 transition-all ease-in-out duration-300 text-sm leading-[19px] absolute top-[calc(100%+20px)] right-0 bg-white min-w-[250px] py-[5px] z-[-1] group-hover/title:z-[11] group-hover/title:h-auto shadow-md opacity-0 group-hover/title:opacity-100 group-hover/title:top-full">
@@ -223,6 +225,7 @@ const DropdownUser = ({ subMenu, pathCheck, setIsLogin }: IDropdownMenu) => {
         onClick={() => {
           removeToken();
           setIsLogin(false);
+          mutateFIlterJob();
           toast.success("Đăng xuất thành công");
           router.push("/");
         }}

@@ -178,7 +178,7 @@ export const PopupApplyJob = ({
             <div className=" mb-6">
               <Link
                 className="px-4 py-2 rounded-lg text-white bg-[#F37A20]"
-                href="/profile-cv?status=true"
+                href="/digital-cv?status=true"
               >
                 Vui lòng tạo CV
               </Link>

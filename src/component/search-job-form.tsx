@@ -136,7 +136,7 @@ export const SearchJobForm = ({
                   name="RankLevel"
                   control={control}
                   className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
-                  placeholder="Tất cả cấp bậc"
+                  placeholder="cấp bậc"
                   options={listRanks}
                 />
                 <button
@@ -161,13 +161,14 @@ export const SearchJobForm = ({
                     name="ExperienceId"
                     control={control}
                     className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
-                    placeholder="Tất cả kinh nghiệm"
+                    placeholder="Kinh nghiệm"
                     options={listExperiences}
                   />
                   <TmSelect
                     name="Salary"
                     control={control}
                     className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
+                    placeholder="Mức lương"
                     options={rankSalary}
                   />
                   <TmSelect

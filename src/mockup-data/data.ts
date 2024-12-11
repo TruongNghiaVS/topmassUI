@@ -356,7 +356,7 @@ export const rankSalary = [
 ];
 
 export const genderFilter = [
-  { label: "Không yêu cầu", value: 0 },
+  { label: "Không yêu cầu", value: -1 },
   { label: "Nam", value: 1 },
   { label: "Nữ", value: 2 },
 ];

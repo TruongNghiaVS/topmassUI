@@ -1,12 +1,15 @@
 import { useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { Option } from "./hook-form/interface/interface";
-import { ProvincesFilterJob } from "@/modules/helper/master-data";
 import { IScrollFilterProps } from "@/interface/job";
+import useSWR from "swr";
+import { fetcher } from "@/utils/axios";
+import { GET_PROVINCE_SEARCH } from "@/utils/api-url";
+import { ProvincesFilterJob } from "@/modules/helper/master-data";
 
 export const ScrollFilter = ({ search, setSearch }: IScrollFilterProps) => {
-  const { provincesFilterJob } = ProvincesFilterJob();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const { provincesFilterJob } = ProvincesFilterJob();
 
   const scrollHorizontally = (distance: number) => {
     if (scrollContainerRef.current) {

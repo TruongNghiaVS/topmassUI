@@ -3,17 +3,15 @@ import useSWR from "swr";
 import {
   CURRENT_USER,
   GET_EDUCATION_LEVEL,
-  GET_JOB_SETTING,
   GET_JOB_TYPE,
   GET_MASTER_DATA_CAREER,
   GET_MASTERDATA_EXPERIENCE,
   GET_MASTERDATA_RANK,
   GET_MASTERDATA_REALMS,
   GET_PROVINCE,
-  GET_PROVINCES_TO_FIL_JOB,
+  GET_PROVINCE_SEARCH,
 } from "@/utils/api-url";
-import axiosInstance, { fetcher } from "@/utils/axios";
-import { getToken } from "@/utils/token";
+import { fetcher } from "@/utils/axios";
 
 export const Provinces = () => {
   const { data, error, mutate, isLoading } = useSWR(GET_PROVINCE, fetcher);
@@ -43,19 +41,17 @@ export const Provinces = () => {
 
 export const ProvincesFilterJob = () => {
   const { data, error, mutate, isLoading } = useSWR(
-    GET_PROVINCES_TO_FIL_JOB,
+    GET_PROVINCE_SEARCH,
     fetcher
   );
 
   let provincesFilterJob = data
-    ? data?.data
-        .filter((item: any) => item.countJob > 0)
-        .map((item: any) => {
-          return {
-            value: item.code,
-            label: item.name,
-          };
-        })
+    ? data.map((item: any) => {
+        return {
+          value: item.code,
+          label: item.name,
+        };
+      })
     : [];
   const listProvincesFilterJob = [
     {
@@ -64,17 +60,6 @@ export const ProvincesFilterJob = () => {
     },
     ...provincesFilterJob,
   ];
-
-  const token = getToken();
-  if (token) {
-    axiosInstance.get(GET_JOB_SETTING).then((response) => {
-      if (response.data.data.locationAddress) {
-        provincesFilterJob = provincesFilterJob.filter((item: any) =>
-          response.data.data.locationAddress.includes(item.value)
-        );
-      }
-    });
-  }
 
   return {
     error,
