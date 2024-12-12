@@ -31,32 +31,32 @@ export const ProjectView = ({ projects }: IInfomationProjectProps) => {
               </div>
             </div>
             <div className="mt-4">
-              <div className="grid grid-cols-3 text-xs mt-2">
+              <div className="grid grid-cols-4 mt-2">
                 <div className="col-span-1">Khách hàng:</div>
-                <div className="col-span-2">{item.customerName}</div>
+                <div className="col-span-3">{item.customerName}</div>
               </div>
-              <div className="grid grid-cols-3 text-xs mt-2">
+              <div className="grid grid-cols-4 mt-2">
                 <div className="col-span-1">Số thành viên:</div>
-                <div className="col-span-2">{item.numOfMember}</div>
+                <div className="col-span-3">{item.numOfMember}</div>
               </div>
-              <div className="grid grid-cols-3 text-xs mt-2">
+              <div className="grid grid-cols-4 mt-2">
                 <div className="col-span-1">Vị trí:</div>
-                <div className="col-span-2">{item.position}</div>
+                <div className="col-span-3">{item.position}</div>
               </div>
-              <div className="grid grid-cols-3 text-xs mt-2">
+              <div className="grid grid-cols-4 mt-2">
                 <div className="col-span-1">Công cụ:</div>
-                <div className="col-span-2">{item.technology}</div>
+                <div className="col-span-3">{item.technology}</div>
               </div>
-              <div className="grid grid-cols-3 text-xs mt-2">
+              <div className="grid grid-cols-4 mt-2">
                 <div className="col-span-1">Mô tả:</div>
                 <div
-                  className="col-span-2"
+                  className="col-span-3"
                   dangerouslySetInnerHTML={{ __html: item.introduction }}
                 ></div>
               </div>
               {/* <div className="grid grid-cols-3 text-xs mt-2">
                 <div className="col-span-1">Hình ảnh:</div>
-                <div className="col-span-2">
+                <div className="col-span-3">
                   {item.linkFile &&
                     item.linkFile.length > 0 &&
                     item.linkFile.split(",").map((link, index) => {

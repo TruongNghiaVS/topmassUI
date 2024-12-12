@@ -10,7 +10,7 @@ export const EducationView = ({ educations }: IInfoEducationProps) => {
         return (
           <div key={idx} className="mt-4">
             <div className="flex justify-between">
-              <div className="flex  text-default">
+              <div className="flex text-default">
                 <AcademicCapIcon className="w-4 mr-2" />
                 <div id={slugify(item.schoolName)}>{item.schoolName}</div>
               </div>
@@ -31,22 +31,22 @@ export const EducationView = ({ educations }: IInfoEducationProps) => {
               </div>
             </div>
             <div className="mt-4">
-              <div className="grid grid-cols-3 text-xs mt-2">
+              <div className="grid grid-cols-4 mt-2">
                 <div className="col-span-1">Chuyên ngành:</div>
-                <div className="col-span-2">{item.major}</div>
+                <div className="col-span-3">{item.major}</div>
               </div>
-              <div className="grid grid-cols-3 text-xs mt-2">
+              <div className="grid grid-cols-4 mt-2">
                 <div className="col-span-1">Trình độ:</div>
-                <div className="col-span-2">{item.positionText}</div>
+                <div className="col-span-3">{item.positionText}</div>
               </div>
-              <div className="grid grid-cols-3 text-xs mt-2">
+              <div className="grid grid-cols-4 mt-2">
                 <div className="col-span-1">Xếp loại:</div>
-                <div className="col-span-2">{item.rank}</div>
+                <div className="col-span-3">{item.rank}</div>
               </div>
-              <div className="grid grid-cols-3 text-xs mt-2">
+              <div className="grid grid-cols-4 mt-2">
                 <div className="col-span-1">Mô tả:</div>
                 <div
-                  className="col-span-2"
+                  className="col-span-3"
                   dangerouslySetInnerHTML={{ __html: item.introduction }}
                 ></div>
               </div>

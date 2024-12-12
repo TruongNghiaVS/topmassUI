@@ -164,15 +164,15 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
       <div className="container mx-auto max-1280:px-2 py-6">
         <div className="grid grid-cols-3 gap-4">
           <div className="col-span-2">
-            <div className="relative pt-24 bg-white rounded-t-[120px] pb-4">
+            <div className="relative pt-4 bg-white rounded-t-[120px]  pb-4">
               <div className="absolute left-0 right-0 top-0 z-1">
                 <img
                   src="/imgs/top-share-link.png"
-                  className="w-full rounded-t-lg"
+                  className="w-full rounded-t-lg h-[100px]"
                   alt=""
                 />
               </div>
-              <div className="grid grid-cols-3 relative z-2 ">
+              <div className="grid grid-cols-3 relative z-2 px-4">
                 <div className="flex flex-col items-end justify-end">
                   <div className="flex space-x-2">
                     <div>
@@ -183,7 +183,11 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
                     </div>
                   </div>
                   <div className="flex space-x-2 mt-2">
-                    <div>{data?.profileCv.addressInfo}</div>
+                    <div>
+                      {data?.profileCv.addressInfo +
+                        "," +
+                        data?.profileCv.addressInfo}
+                    </div>
                     <div>
                       <MapPinIcon className="w-4" />
                     </div>
@@ -193,7 +197,7 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
                   <img
                     src={data?.profileCv.avatarLink}
                     alt=""
-                    className="rounded-full w-52 h-52"
+                    className="rounded-full w-48 h-48"
                   />
                 </div>
                 <div className="flex flex-col items-start justify-end">
@@ -214,7 +218,7 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
               <div className="mt-4 text-center text-colorBase font-bold text-xl">
                 {data?.profileCv.fullName}
               </div>
-              <div className="mt-4 text-center font-meidum uppercase text-3xl">
+              <div className="mt-4 text-center font-meidum uppercase text-2xl">
                 {data?.profileCv.position}
               </div>
               <div

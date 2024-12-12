@@ -32,10 +32,10 @@ export const ExperienceView = ({ experiences }: IInfomationExperienceProps) => {
             </div>
             <div className="mt-2">{item.companyName}</div>
             <div className="mt-2">
-              <div className="grid grid-cols-3 text-xs">
+              <div className="grid grid-cols-4">
                 <div className="col-span-1">Mô tả công việc:</div>
                 <div
-                  className="col-span-2"
+                  className="col-span-3"
                   dangerouslySetInnerHTML={{ __html: item.introduction }}
                 ></div>
               </div>

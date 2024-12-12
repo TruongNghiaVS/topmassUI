@@ -12,7 +12,7 @@ export const CertificateView = ({
         return (
           <div key={index} className="mt-4">
             <div className="flex justify-between">
-              <div className="flex  text-default">
+              <div className="flex text-default">
                 <AcademicCapIcon className="w-4 mr-2" />
                 <div id={slugify(item.fullName)}>{item.fullName}</div>
               </div>

@@ -136,7 +136,7 @@ export const SearchJobForm = ({
                   name="RankLevel"
                   control={control}
                   className="border rounded border-[#DDDDDD] mr-2 !px-2 sm:mt-0 mt-2"
-                  placeholder="cấp bậc"
+                  placeholder="Cấp bậc"
                   options={listRanks}
                 />
                 <button

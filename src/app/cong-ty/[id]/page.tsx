@@ -232,18 +232,22 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
                   </div>
                 </form>
                 <div className="mt-4">
-                  {allJobs?.map((value: IJob, index: number) => {
-                    return (
-                      <div key={index.toString()} className="mt-4">
-                        <InfomationJobCompany
-                          item={value}
-                          onOpen={() => setIsModalOpen(true)}
-                          setSlugItem={setSlugItem}
-                          mutate={mutateAllJobs}
-                        />
-                      </div>
-                    );
-                  })}
+                  {allJobs?.length > 0 ? (
+                    allJobs?.map((value: IJob, index: number) => {
+                      return (
+                        <div key={index.toString()} className="mt-4">
+                          <InfomationJobCompany
+                            item={value}
+                            onOpen={() => setIsModalOpen(true)}
+                            setSlugItem={setSlugItem}
+                            mutate={mutateAllJobs}
+                          />
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div>Không có kết quả phù hợp</div>
+                  )}
                 </div>
               </div>
             </div>

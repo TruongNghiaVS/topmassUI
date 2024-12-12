@@ -13,11 +13,11 @@ export const SkillView = ({ skills }: IInfomationSkillViewProps) => {
         return (
           <div key={index} className="mt-4">
             <div className="mt-4">
-              <div className="grid grid-cols-3 text-xs mt-2">
+              <div className="grid grid-cols-4 text-xs mt-2">
                 <div className="col-span-1" id={slugify(item.fullName)}>
                   {item.fullName}
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-3">
                   <div className="flex space-x-2">
                     {counts.map((value, idx) => {
                       return (
