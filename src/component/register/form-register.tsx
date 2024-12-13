@@ -8,11 +8,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
-import { REGISTER } from "@/utils/api-url";
+import { REGISTER, REVALIDATE_ACCOUNT } from "@/utils/api-url";
 import { axiosInstanceNotToken } from "@/utils/axios";
 import { useLoading } from "@/app/context/loading";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EyeIcon } from "@heroicons/react/16/solid";
 
 const schema = yup.object().shape({
@@ -52,7 +52,6 @@ export const FormRegister = () => {
     confirm_password: false,
   });
   const { setLoading } = useLoading();
-  const router = useRouter();
   const { handleSubmit, control } = useForm<IRegister>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -65,10 +64,47 @@ export const FormRegister = () => {
       // is_used: false,
     },
   });
+  const [email, setEmail] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [timer, setTimer] = useState(30);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (isDisabled && isRegister) {
+      interval = setInterval(() => {
+        setTimer((prev) => {
+          if (prev <= 1) {
+            setIsDisabled(false);
+            return 30; // Reset timer for next cycle
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isDisabled, isRegister]);
+
+  const handleClick = async () => {
+    try {
+      setLoading(true);
+      await axiosInstanceNotToken.post(REVALIDATE_ACCOUNT, { email });
+      toast.success("Yêu cầu gửi email thành công");
+    } catch (error) {
+      toast.success("Yêu cầu gửi email thất bại");
+    } finally {
+      setLoading(false);
+      setIsDisabled(true);
+    }
+  };
 
   const onSubmit: SubmitHandler<IRegister> = async (data) => {
     setLoading(true);
     try {
+      setEmail(data.email);
       const response = await axiosInstanceNotToken.post(REGISTER, data);
       if (response) {
         toast.success("Đăng ký thành công");
@@ -224,12 +260,24 @@ export const FormRegister = () => {
           </div>
         </div>
       ) : (
-        <div className="font-medium">
-          Đăng ký thành công. Vui lòng bấm vào{" "}
-          <Link href="/dang-nhap" className="text-[#F37A20]">
-            đây
-          </Link>{" "}
-          để đăng nhập
+        <div>
+          <div className="font-medium">
+            Bạn đã đăng ký thành công. Vui lòng kiểm tra email để xác thực tài
+            khoản
+          </div>
+          {isDisabled ? (
+            <div className="font-medium text-colorBase">
+              (Vui lòng đợi {timer}s để yêu cầu gửi lại email)
+            </div>
+          ) : (
+            <div className="font-medium">
+              Nếu chưa nhận được email. Vui lòng bấm vào{" "}
+              <button onClick={handleClick} className="text-colorBase">
+                đây
+              </button>{" "}
+              sau để nhận lại email
+            </div>
+          )}
         </div>
       )}
     </div>

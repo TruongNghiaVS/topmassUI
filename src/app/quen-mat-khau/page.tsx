@@ -10,9 +10,13 @@ import * as yup from "yup";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { HOST_API } from "@/config-global";
-import { FORGOT_PASSWORD } from "@/utils/api-url";
+import {
+  FORGOT_PASSWORD,
+  REQUEST_RESENDMAIL_CHANGPASSWORD,
+} from "@/utils/api-url";
 import { useLoading } from "../context/loading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { axiosInstanceNotToken } from "@/utils/axios";
 
 export default function Login() {
   const { setLoading } = useLoading();
@@ -24,6 +28,45 @@ export default function Login() {
       .email("Sai format email "),
   });
 
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [timer, setTimer] = useState(30);
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (isDisabled && isSuccess) {
+      interval = setInterval(() => {
+        setTimer((prev) => {
+          if (prev <= 1) {
+            setIsDisabled(false);
+            return 30; // Reset timer for next cycle
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isDisabled, isSuccess]);
+
+  const handleClick = async () => {
+    try {
+      setLoading(true);
+      await axiosInstanceNotToken.post(REQUEST_RESENDMAIL_CHANGPASSWORD, {
+        email,
+      });
+      toast.success("Yêu cầu gửi email thành công");
+    } catch (error) {
+      toast.error("Yêu cầu gửi email thất bại");
+    } finally {
+      setLoading(false);
+      setIsDisabled(true);
+    }
+  };
+
   const { handleSubmit, control } = useForm<IResetpassword>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -33,6 +76,7 @@ export default function Login() {
 
   const onSubmit: SubmitHandler<IResetpassword> = async (data) => {
     try {
+      setEmail(data.email);
       setLoading(true);
       const axiosInstance = axios.create({
         baseURL: HOST_API,
@@ -80,9 +124,24 @@ export default function Login() {
               </button>
             </form>
           ) : (
-            <div className="font-medium">
-              Gửi thông tin thành công. Bạn vui lòng kiểm tra email của mình để
-              lấy lại mật khẩu
+            <div>
+              <div className="font-medium">
+                Gửi thông tin thành công. Bạn vui lòng kiểm tra email của mình
+                để lấy lại mật khẩu
+              </div>
+              {isDisabled ? (
+                <div className="font-medium text-colorBase">
+                  (Vui lòng đợi {timer}s để yêu cầu gửi lại email)
+                </div>
+              ) : (
+                <div className="font-medium">
+                  Nếu chưa nhận được email. Vui lòng bấm vào{" "}
+                  <button onClick={handleClick} className="text-colorBase">
+                    đây
+                  </button>{" "}
+                  sau để nhận lại email
+                </div>
+              )}
             </div>
           )}
 

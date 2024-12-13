@@ -8,6 +8,10 @@ export const UPDATE_BASIC_INFO = "/api/Profile/UpdateBasicInfo";
 export const CURRENT_USER = "/api/Authen/GetUserCurrent";
 export const UPDATE_MODE = "/api/Profile/UpdateMode";
 export const UPLOAD_IMG = "/Media/UploadAvatar";
+export const VALIDATE_ACCOUNT = "/api/Authen/ValidAccount";
+export const REVALIDATE_ACCOUNT = "/api/Email/RequestMailValidAccount";
+export const REQUEST_RESENDMAIL_CHANGPASSWORD =
+  "/api/Email/RequestSendMailChangePassword";
 
 //----------------- Job -------------------//
 export const APPLY_CV_WITH_FILE = "/api/Job/ApplyJobWithCreateCV";

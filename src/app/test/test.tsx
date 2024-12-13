@@ -1,24 +1,44 @@
-import { GetStaticProps } from "next";
-import fs from "fs";
-import path from "path";
+// app/page.tsx
+"use client";
 
-interface Props {
-  htmlContent: string;
-}
+import React, { useState, useEffect } from "react";
 
-const MyPage: React.FC<Props> = ({ htmlContent }) => {
-  return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
-};
+const TimerButton = () => {
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [timer, setTimer] = useState(60);
 
-export const getStaticProps: GetStaticProps = async () => {
-  const filePath = path.join(process.cwd(), "public", "files/cv.html");
-  const htmlContent = fs.readFileSync(filePath, "utf8");
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
 
-  return {
-    props: {
-      htmlContent,
-    },
+    if (isDisabled) {
+      interval = setInterval(() => {
+        setTimer((prev) => {
+          if (prev <= 1) {
+            setIsDisabled(false);
+            return 60; // Reset timer for next cycle
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isDisabled]);
+
+  const handleClick = () => {
+    alert("Button clicked!");
+    setIsDisabled(true); // Disable the button after click
   };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "20px" }}>
+      <button onClick={handleClick} disabled={isDisabled}>
+        {isDisabled ? `Wait ${timer}s` : "Click Me"}
+      </button>
+    </div>
+  );
 };
 
-export default MyPage;
+export default TimerButton;
