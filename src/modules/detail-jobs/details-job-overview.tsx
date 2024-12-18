@@ -255,21 +255,27 @@ export default function DetailJobOverview(params: { id: string }) {
                             key={idx_location}
                             className="flex space-x-2 mb-4"
                           >
-                            <div className="whitespace-nowrap">
-                              {item.locationText}:
-                            </div>
-                            <div>
-                              <ul>
-                                {item.districts.map(
-                                  (district: any, idx_district: number) => (
-                                    <li key={idx_district}>
-                                      {district.detail_location},{" "}
-                                      {district.districtText}
-                                    </li>
-                                  )
-                                )}
-                              </ul>
-                            </div>
+                            {item.location === "-1" ? (
+                              <div>{item.locationText}</div>
+                            ) : (
+                              <div>
+                                <div className="whitespace-nowrap">
+                                  {item.locationText}:
+                                </div>
+                                <div>
+                                  <ul>
+                                    {item.districts.map(
+                                      (district: any, idx_district: number) => (
+                                        <li key={idx_district}>
+                                          {district.detail_location},{" "}
+                                          {district.districtText}
+                                        </li>
+                                      )
+                                    )}
+                                  </ul>
+                                </div>
+                              </div>
+                            )}
                           </div>
                         )
                       )}

@@ -186,7 +186,7 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
                     <div>
                       {data?.profileCv.addressInfo +
                         "," +
-                        data?.profileCv.addressInfo}
+                        data?.profileCv.provinceName}
                     </div>
                     <div>
                       <MapPinIcon className="w-4" />
