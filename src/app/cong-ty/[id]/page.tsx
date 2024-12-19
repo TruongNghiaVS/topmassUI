@@ -109,8 +109,8 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
           <div className="rounded-xl overflow-hidden">
             <div className="max-h-60 min-h-60 bg-white ">
               <img
-                src={`${companyDetail?.coverFullLink}`}
                 alt=""
+                src="/imgs/bg-company.png"
                 className="w-full object-cover"
               />
             </div>
@@ -140,7 +140,7 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
                       <div className="text-white flex mr-10">
                         <BuildingOffice2Icon className="w-4 mr-2 text-white" />
                         {companyDetail?.capacity != "" ? (
-                          <span>{companyDetail?.capacity}</span>
+                          <span>{companyDetail?.capacity} nhân viên</span>
                         ) : (
                           <span>Chua cập nhật</span>
                         )}

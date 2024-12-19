@@ -12,7 +12,7 @@ import { IJob } from "@/interface/job";
 
 export default function JobApply() {
   const [selectedValue, setSelectedValue] = useState(-1);
-  const { data: jobSame, error: errorJobSame } = useSWR(
+  const { data: jobSame, error: errorJobSame, mutate } = useSWR(
     `${RELATION_JOB}?JobId=12`,
     fetcher
   );
@@ -26,7 +26,7 @@ export default function JobApply() {
     { value: -1, label: "Đã ứng tuyển" },
     { value: -2, label: "NTD đã xem hồ sơ" },
     { value: 17, label: "Hồ sơ phù hợp" },
-    { value: -2, label: "Hồ sơ chưa phù hợp" },
+    { value: 3, label: "Hồ sơ chưa phù hợp" },
   ];
 
   const handleSelectChange = (value: string) => {
@@ -90,7 +90,7 @@ export default function JobApply() {
               <InfomationUser />
             </div>
             <div className="bg-white p-4 rounded mt-8">
-              <JobSame jobs={jobSame?.data} />
+              <JobSame jobs={jobSame?.data} mutate={mutate} />
             </div>
           </div>
           <div className="xl:col-span-4 md:col-span-5">

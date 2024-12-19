@@ -1,5 +1,5 @@
 import React from "react";
-import { useController, Control } from "react-hook-form";
+import { useController } from "react-hook-form";
 import { ITmInput } from "./interface/interface";
 
 const TmInput: React.FC<ITmInput> = ({
@@ -10,12 +10,11 @@ const TmInput: React.FC<ITmInput> = ({
   placeholder = "",
   type = "text",
   className,
-  min,
-  max,
-  disabled = false,
+  classNameCustom,
+  ...rest
 }) => {
   const {
-    field: { value, onChange, onBlur },
+    field,
     fieldState: { error },
   } = useController({
     name,
@@ -23,23 +22,19 @@ const TmInput: React.FC<ITmInput> = ({
   });
 
   return (
-    <div>
+    <div className={classNameCustom}>
       <div className="relative flex items-center">
         {icon && <div className="absolute left-3">{icon}</div>}
         <input
           type={type}
-          value={value}
-          onChange={onChange}
-          onBlur={onBlur}
+          {...field}
+          {...rest}
           placeholder={placeholder}
-          disabled={disabled}
-          min={type === "number" ? min : undefined}
-          max={type === "number" ? max : undefined}
-          className={`p-2 border rounded-md w-full focus-visible:outline-none ${className} ${
+          className={`px-2 py-[9px] border rounded-md w-full focus-visible:outline-none ${className} ${
             icon && "pl-10"
           } ${error ? "border-red-500" : "border-gray-300"}`}
         />
-        {afterIcon && <div className="absolute right-1">{afterIcon}</div>}
+        {afterIcon && <div className="absolute right-2">{afterIcon}</div>}
       </div>
       {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
     </div>

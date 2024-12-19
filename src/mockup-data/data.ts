@@ -126,10 +126,6 @@ export const optionsType = [
 ];
 export const fields = [{ value: "test", label: "test" }];
 
-export const ranks = [
-  { value: "1", label: "Cấp bậc 1" },
-  { value: "2", label: "Cấp bậc 2" },
-];
 export const news = [
   {
     img: "nhung-cong-viec-lam-tai-nha-anh-dai-dien_626.png",

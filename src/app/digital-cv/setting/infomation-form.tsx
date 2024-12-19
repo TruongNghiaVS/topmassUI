@@ -64,14 +64,16 @@ export const InfomationUserCv = ({
   });
 
   const { ranks } = Rank();
-
   const { setLoading } = useLoading();
   const { control, handleSubmit } = useForm<IInfomationUserCv>({
     resolver: yupResolver(schema),
     defaultValues: user
       ? {
           ...user,
-          dateOfBirth: user.dateOfBirth ? user.dateOfBirth.split("T")[0] : "",
+          dateOfBirth:
+            user.dateOfBirth !== null ? user.dateOfBirth.split("T")[0] : "",
+          provinceCode: user.provinceCode !== null ? user.provinceCode : "",
+          addressInfo: user?.addressInfo !== null ? user.addressInfo : "",
         }
       : {
           fullName: "",
@@ -101,6 +103,9 @@ export const InfomationUserCv = ({
       setLoading(false);
     }
   };
+
+  const date = new Date(1900, 1, 1).toISOString().split("T")[0];
+  const toDate = new Date().toISOString().split("T")[0];
 
   return (
     <div>
@@ -144,7 +149,13 @@ export const InfomationUserCv = ({
               Ngày sinh <span className="text-[#dc2f2f]">*</span>
             </div>
             <div>
-              <TmInput name="dateOfBirth" control={control} type="date" />
+              <TmInput
+                name="dateOfBirth"
+                control={control}
+                type="date"
+                min={date}
+                max={toDate}
+              />
             </div>
           </div>
           <div className="mt-4">

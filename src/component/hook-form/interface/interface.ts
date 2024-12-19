@@ -1,5 +1,5 @@
 import { InputHTMLAttributes } from "react";
-import { Control, FieldError, UseFormRegister } from "react-hook-form";
+import { Control } from "react-hook-form";
 
 export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -9,6 +9,7 @@ export interface ITmInput extends InputHTMLAttributes<HTMLInputElement> {
   afterIcon?: any;
   placeholder?: string;
   type?: string;
+  classNameCustom?: string;
 }
 
 export interface ITmInputProgress extends ITmInput {
