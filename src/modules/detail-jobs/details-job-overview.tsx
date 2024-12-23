@@ -284,13 +284,18 @@ export default function DetailJobOverview(params: { id: string }) {
                 ) : (
                   ""
                 )}
-                {detail && detail.dataJob.time_workings ? (
+                {detail && detail.dataJob.time_WorkingText ? (
                   <div>
                     <h3 className="text-lg font-bold pl-4 relative after:absolute after:left-0 after:top-0 after:bottom-0 after:w-1 after:h-[70%] after:my-auto after:bg-[#F37A20] mt-4">
                       Thời gian làm việc
                     </h3>
                     <div className="mt-2 ml-4">
-                      {JSON.parse(detail.dataJob.time_workings).map(
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: detail.dataJob.time_WorkingText,
+                        }}
+                      ></div>
+                      {/* {JSON.parse(detail.dataJob.time_workings).map(
                         (item: any, idx_detail: number) => (
                           <div key={idx_detail}>
                             <div className="mb-4">
@@ -299,7 +304,7 @@ export default function DetailJobOverview(params: { id: string }) {
                             </div>
                           </div>
                         )
-                      )}
+                      )} */}
                     </div>
                   </div>
                 ) : (
