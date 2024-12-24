@@ -108,6 +108,7 @@ export interface IAvatarProps {
 
 export interface IAvatarCvProps extends IAvatarProps {
   user: IInfomationUserCv;
+  mutate: KeyedMutator<any>;
 }
 
 export interface IApplyModal {

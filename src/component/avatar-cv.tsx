@@ -11,6 +11,7 @@ export const AvatarCv = ({
   avatarLink = "",
   setAvatarLink,
   user,
+  mutate,
 }: IAvatarCvProps) => {
   const { setLoading } = useLoading();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -37,7 +38,7 @@ export const AvatarCv = ({
             ...user,
             avatarLink: response.data.fullLink,
           });
-
+          mutate();
           toast.success("Cập nhật ảnh đại diện cv thành công");
         }
       } catch (error) {

@@ -246,6 +246,7 @@ export default function ProfileCV() {
                     avatarLink={avatarCv}
                     setAvatarLink={setAvatarCv}
                     user={infoUser}
+                    mutate={mutateUser}
                   />
                   <div className="relative top-[12px]">
                     <div className="text-white uppercase text-base font-bold min-h-6">

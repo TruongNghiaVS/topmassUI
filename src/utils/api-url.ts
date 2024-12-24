@@ -106,3 +106,4 @@ export const CREATE_OR_UPDATE_TEMPLATE_CV =
 //----------------- METADATA ---------------//
 export const GET_METADATA = "/api/GateWeb/GetInfoMetadata";
 export const GET_DETAIL_METADATA_JOB = "/api/JobWeb/GetDetailMetadata";
+export const GET_DINAMYC_SLUG_URL = "/api/GateWeb/GetInfomationAllSlugWeb";

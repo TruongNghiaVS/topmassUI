@@ -29,7 +29,7 @@ const CustomCKEditor = dynamic(
   { ssr: false }
 );
 
-const years = Array.from({ length: 100 }, (_, i) => {
+const years = Array.from({ length: 60 }, (_, i) => {
   const item = {
     label: `${new Date().getFullYear() - i}`,
     value: new Date().getFullYear() - i,

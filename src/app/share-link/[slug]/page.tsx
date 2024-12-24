@@ -216,7 +216,7 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
                   />
                 </div>
               </div>
-              <div className="mt-4 text-center text-colorBase font-bold text-xl mt-8">
+              <div className="text-center text-colorBase font-bold text-xl mt-10">
                 {data?.profileCv.fullName}
               </div>
               <div className="mt-4 text-center font-meidum uppercase text-2xl">
