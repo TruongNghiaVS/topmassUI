@@ -267,8 +267,10 @@ export default function DetailJobOverview(params: { id: string }) {
                                     {item.districts.map(
                                       (district: any, idx_district: number) => (
                                         <li key={idx_district}>
-                                          {district.detail_location},{" "}
-                                          {district.districtText}
+                                          {district.detail_location}{" "}
+                                          {district.districtText.length > 0
+                                            ? "," + district.districtText
+                                            : ""}
                                         </li>
                                       )
                                     )}
