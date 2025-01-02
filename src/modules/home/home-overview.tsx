@@ -7,6 +7,7 @@ import { HotCompany } from "@/component/hot-company";
 import { HotJob } from "@/component/hot-job";
 import { JobSuggest } from "@/component/job-suggest";
 import { JobType } from "@/component/job-type";
+import Modal from "@/component/modal";
 import { Slider } from "@/component/slider";
 import { Ultil } from "@/component/ultil";
 import {
@@ -16,11 +17,13 @@ import {
   GET_SUITABLEJOB,
 } from "@/utils/api-url";
 import { fetcher } from "@/utils/axios";
+import Link from "next/link";
 import { useState } from "react";
 import useSWR from "swr";
 
 export default function HomeOverview() {
   const [search, setSearch] = useState("-1");
+  const [isOpenPopup, setIsOpenPopup] = useState(true);
   const { data: companys } = useSWR(GET_ALL_COMPANY, fetcher);
   const { data: allJobs, mutate: mutateAllJobs } = useSWR(
     `${GET_HOT_JOB}?ModeGet=${search}`,
@@ -52,6 +55,17 @@ export default function HomeOverview() {
       <Career blogs={blogs?.data} />
       <Ultil />
       {/* <Description /> */}
+      <Modal
+        isOpen={isOpenPopup}
+        onClose={() => setIsOpenPopup(false)}
+        className="max-h-[90vh]"
+      >
+        <div className="flex items-center justify-center">
+          <Link href="/digital-cv/">
+            <img src="/imgs/img-popup-homepage.png" alt="" />
+          </Link>
+        </div>
+      </Modal>
     </div>
   );
 }
