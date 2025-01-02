@@ -1,22 +1,55 @@
-import { IInsuranceOneTime } from "@/interface/interface";
+import TmNumberFormatInput from "@/component/hook-form/custom-input-number";
+import TmSelect from "@/component/hook-form/select";
+import { IInsuranceSecurity } from "@/interface/interface";
 import { months } from "@/mockup-data/data";
 import { TrashIcon } from "@heroicons/react/16/solid";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import * as yup from "yup";
 
 export const InsuranceSecurity = () => {
-  const [arrData, setArrData] = useState<IInsuranceOneTime[]>([
-    {
-      month_from: "",
-      year_from: "",
-      month_to: "",
-      year_to: "",
-      salary: 0,
-      status: 0,
-    },
-  ]);
+  const schema = yup.object().shape({
+    datas: yup
+      .array()
+      .of(
+        yup.object().shape({
+          month_from: yup.number(),
+          year_from: yup.number(),
+          month_to: yup.number(),
+          year_to: yup.number(),
+          salary: yup.number(),
+          status: yup.number(),
+        })
+      )
+      .min(1, "Phải có ít nhất đoạn thời gian")
+      .required("Phải có ít nhất đoạn thời gian"),
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const { control, handleSubmit, getValues } = useForm<IInsuranceSecurity>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      datas: [
+        {
+          month_from: 1,
+          year_from: new Date().getFullYear(),
+          month_to: 1,
+          year_to: new Date().getFullYear(),
+          salary: 0,
+          status: 0,
+        },
+      ],
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "datas",
+  });
+
+  const onSubmit: SubmitHandler<IInsuranceSecurity> = (data) => {
+    console.log(data);
   };
 
   const years = Array.from({ length: 100 }, (_, i) => {
@@ -28,27 +61,32 @@ export const InsuranceSecurity = () => {
   });
 
   const addStage = (value: number) => {
-    setArrData([
-      ...arrData,
-      {
-        month_from: "",
-        year_from: "",
-        month_to: "",
-        year_to: "",
+    const datas = getValues("datas");
+    if (
+      datas &&
+      datas.length > 0 &&
+      datas[datas.length - 1].status === 1 &&
+      value === 1
+    ) {
+      toast.error(
+        "Quý khách vui lòng thêm giai đoạn nộp BHXH trước giai đoạn thai sản."
+      );
+    } else {
+      append({
+        month_from: 1,
+        year_from: new Date().getFullYear(),
+        month_to: 1,
+        year_to: new Date().getFullYear(),
         salary: 0,
         status: value,
-      },
-    ]);
-  };
-
-  const removeStage = (value: number) => {
-    setArrData(arrData.filter((item, index) => index !== value));
+      });
+    }
   };
 
   return (
     <div>
       <div className="mt-4 p-2">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="overflow-x-auto col-span-2 mt-4">
             <table className="min-w-full text- border">
               <thead className="bg-gray-100 text-gray-700">
@@ -61,106 +99,65 @@ export const InsuranceSecurity = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {arrData.map((item, idx) => {
+                {fields.map((field, index) => {
                   return (
-                    <tr key={idx}>
-                      <td className="p-2">{idx + 1}</td>
+                    <tr key={index}>
+                      <td className="p-2">{index + 1}</td>
                       <td className="p-2">
                         <div className="flex space-x-2 items-center">
                           <div className="flex space-x-2 items-center">
                             <div>Từ</div>
-                            <select
-                              name={`month_from`}
-                              defaultValue={item.month_from}
+                            <TmSelect
+                              control={control}
+                              name={`datas.${index}.month_from`}
                               className="p-2 rounded-lg border"
-                            >
-                              <option value="" disabled>
-                                Chọn tháng
-                              </option>
-                              {months.map((item) => {
-                                return (
-                                  <option value={item.value} key={item.label}>
-                                    {item.label}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            <select
-                              name={`.year_from`}
+                              placeholder="Tháng"
+                              options={months}
+                            />
+
+                            <TmSelect
+                              name={`datas.${index}.year_from`}
+                              control={control}
                               className="p-2 rounded-lg border"
-                              defaultValue={item.year_from}
-                            >
-                              <option value="" disabled>
-                                Chọn năm
-                              </option>
-                              {years.map((item) => {
-                                return (
-                                  <option value={item.value} key={item.label}>
-                                    {item.label}
-                                  </option>
-                                );
-                              })}
-                            </select>
+                              placeholder="Năm"
+                              options={years}
+                            />
                           </div>
                           <div className="flex space-x-2 items-center">
                             <div>đến</div>
-                            <select
-                              name={`month_to`}
-                              defaultValue={item.month_to}
+                            <TmSelect
+                              name={`datas.${index}.month_to`}
+                              control={control}
+                              placeholder="Tháng"
+                              options={months}
                               className="p-2 rounded-lg border"
-                            >
-                              <option value="" disabled>
-                                Chọn tháng
-                              </option>
-                              {months.map((item) => {
-                                return (
-                                  <option value={item.value} key={item.label}>
-                                    {item.label}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                            <select
-                              name={`year_to`}
-                              defaultValue={item.year_to}
+                            />
+
+                            <TmSelect
+                              name={`datas.${index}.year_to`}
+                              control={control}
+                              options={years}
+                              placeholder="Năm"
                               className="p-2 rounded-lg border"
-                            >
-                              <option value="" disabled>
-                                Chọn năm
-                              </option>
-                              {years.map((item) => {
-                                return (
-                                  <option value={item.value} key={item.label}>
-                                    {item.label}
-                                  </option>
-                                );
-                              })}
-                            </select>
+                            />
                           </div>
                         </div>
                       </td>
                       <td className="p-2">
                         <div className="flex space-x-1 items-center justify-end">
-                          {item.status === 0 ? (
-                            <div className="inline-flex items-center border rounded-lg px-2">
-                              <input
-                                type="number"
-                                name="salary"
-                                defaultValue={item.salary}
-                                min={0}
-                                className="p-2 rounded-md w-full focus-visible:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                              />
-                              <div>VNĐ</div>
-                            </div>
+                          {field.status === 0 ? (
+                            <TmNumberFormatInput
+                              name={`datas.${index}.salary`}
+                              control={control}
+                              min={0}
+                              afterIcon={"VND"}
+                            />
                           ) : (
                             <div className="italic">
                               (Giai đoạn hưởng thai sản)
                             </div>
                           )}
-                          <button
-                            type="button"
-                            onClick={() => removeStage(idx)}
-                          >
+                          <button type="button" onClick={() => remove(index)}>
                             <TrashIcon className="w-4" />
                           </button>
                         </div>
