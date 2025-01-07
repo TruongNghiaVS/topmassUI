@@ -81,7 +81,7 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', ${googleId});
+            gtag('config', '${googleId}');
           `}
         </Script>
       </head>
