@@ -58,6 +58,7 @@ export default function HomeOverview() {
       <Modal
         isOpen={isOpenPopup}
         onClose={() => setIsOpenPopup(false)}
+        isBackground={false}
         className="max-h-[90vh]"
       >
         <div className="flex items-center justify-center">
