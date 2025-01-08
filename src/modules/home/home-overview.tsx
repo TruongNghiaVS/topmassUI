@@ -59,11 +59,15 @@ export default function HomeOverview() {
         isOpen={isOpenPopup}
         onClose={() => setIsOpenPopup(false)}
         isBackground={false}
-        className="max-h-[90vh]"
+        className="max-h-[80vh]"
       >
         <div className="flex items-center justify-center">
           <Link href="/digital-cv/">
-            <img src="/imgs/img-popup-homepage.png" alt="" />
+            <img
+              src="/imgs/img-popup-homepage.png"
+              alt="Popup trang chủ"
+              className="w-[550px]"
+            />
           </Link>
         </div>
       </Modal>

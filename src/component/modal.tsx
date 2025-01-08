@@ -43,7 +43,7 @@ const Modal = ({
           <div className="modal-header p-4 pb-2 relative">
             {title && <div className="text-base font-bold">{title}</div>}
             <button className="modal-close" onClick={onClose}>
-              <XMarkIcon className="w-4" />
+              <XMarkIcon className="w-6 p-0.5 rounded bg-white" />
             </button>
           </div>
           <div
