@@ -4,10 +4,12 @@ import { IInsuranceSecurity } from "@/interface/interface";
 import { months } from "@/mockup-data/data";
 import { TrashIcon } from "@heroicons/react/16/solid";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import dayjs from "dayjs";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
+import duration from "dayjs/plugin/duration";
+dayjs.extend(duration);
 
 export const InsuranceSecurity = () => {
   const schema = yup.object().shape({
@@ -49,7 +51,72 @@ export const InsuranceSecurity = () => {
   });
 
   const onSubmit: SubmitHandler<IInsuranceSecurity> = (data) => {
-    console.log(data);
+    if (
+      data.datas.some(
+        (item) =>
+          new Date(item.year_from || 1900, item.month_from || 1, 1) >
+          new Date(item.year_to || 1900, item.month_to || 1, 1)
+      )
+    ) {
+      toast.error("Thời gian từ phải nhỏ hơn hoặc bằng thời gian đến.");
+      return;
+    }
+
+    let year = 1900;
+    let month = 1;
+    if (
+      data.datas.some((item, index) => {
+        if (
+          item.status &&
+          item.status === 1 &&
+          new Date(item.year_from || 1900, item.month_from || 1, 1) <=
+            new Date(
+              data.datas[index - 1].year_to || 1900,
+              data.datas[index - 1].month_to || 1,
+              1
+            )
+        ) {
+          year = data.datas[index - 1].year_to || 1900;
+          month = data.datas[index - 1].month_to || 1;
+          return true;
+        }
+      })
+    ) {
+      toast.error(
+        `Thời gian không hợp lệ, vui lòng chọn thời gian thai sản lớn hơn ${dayjs(
+          new Date(year, month, 1)
+        ).format("YYYY-MM")}`
+      );
+      return;
+    }
+
+    if (
+      data.datas.some(
+        (item) =>
+          item.status &&
+          item.status === 1 &&
+          ((item.year_to || 1900) - (item.year_from || 1900)) * 12 +
+            ((item.month_to || 1) - (item.month_from || 1)) <
+            4
+      )
+    ) {
+      toast.error("Thời gian thai sản phải lớn hơn hoặc bằng 4");
+      return;
+    }
+
+    if (
+      data.datas.some(
+        (item) =>
+          item.status &&
+          item.status === 1 &&
+          ((item.year_to || 1900) - (item.year_from || 1900)) * 12 +
+            ((item.month_to || 1) - (item.month_from || 1)) >
+            6
+      )
+    ) {
+      toast.error("Thời gian thai sản phải nhỏ hơn hoặc bằng 6");
+      return;
+    }
   };
 
   const years = Array.from({ length: 100 }, (_, i) => {
@@ -68,6 +135,10 @@ export const InsuranceSecurity = () => {
       datas[datas.length - 1].status === 1 &&
       value === 1
     ) {
+      toast.error(
+        "Quý khách vui lòng thêm giai đoạn nộp BHXH trước giai đoạn thai sản."
+      );
+    } else if (datas.length === 0 && value === 1) {
       toast.error(
         "Quý khách vui lòng thêm giai đoạn nộp BHXH trước giai đoạn thai sản."
       );
@@ -91,7 +162,7 @@ export const InsuranceSecurity = () => {
             <table className="min-w-full text- border">
               <thead className="bg-gray-100 text-gray-700">
                 <tr>
-                  <th className="p-2 w-4 font-medium">STT</th>
+                  <th className="p-2 w-4 font-medium w-4">STT</th>
                   <th className="p-2  font-medium ">Giai đoạn nộp BHXH</th>
                   <th className="p-2 text-right font-medium text-right">
                     Mức lương đóng BHXH
@@ -102,7 +173,7 @@ export const InsuranceSecurity = () => {
                 {fields.map((field, index) => {
                   return (
                     <tr key={index}>
-                      <td className="p-2">{index + 1}</td>
+                      <td className="p-2 w-4">{index + 1}</td>
                       <td className="p-2">
                         <div className="flex space-x-2 items-center">
                           <div className="flex space-x-2 items-center">
