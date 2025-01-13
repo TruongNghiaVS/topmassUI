@@ -45,36 +45,6 @@ export default function InsuranceOneTimeOverview() {
         {active === 1 && <InsuranceSecurity />}
         {active === 2 && <VoluntarySocialInsurance />}
         {active === 3 && <VoluntaryCompulsoryInsurance />}
-
-        <div className="mt-4 text-default text-2xl">Kết quả</div>
-        <div className="ml-2 font-medium">
-          Tiền BHXH 1 lần được nhận:{" "}
-          <span className="text-[#C10000]">8.089.620 đồng</span>
-        </div>
-        <div className="mt-4 text-default text-2xl">Diễn giải chi tiết</div>
-        <div className="mt-2">1. Thời gian tham gia BHXH: 7 tháng</div>
-        <div className="mt-2">
-          2. Tiền lương đóng BHXH của các giai đoạn tham gia BHXH như sau:
-        </div>
-        <div className="mt-2">
-          - Giai đoạn đóng từ T3/2022 đến T9/2022: Thời gian 7 tháng - Mức tiền
-          lương đóng BHXH: 5.100.000 đồng
-        </div>
-        <div className="mt-2">5.100.000 x 1.03 x 7 = 36.771.000 đồng</div>
-        <div className="mt-2">
-          - Tổng tiền đóng BHXH = 36.771.000 = 36.771.000 đồng
-        </div>
-        <div className="mt-2">
-          Mức bình quân tiền lương đóng BHXH = Tổng tiền / tổng số tháng =
-          5.253.000 đồng
-        </div>
-        <div className="mt-2">
-          3. Mức hưởng BHXH một lần = 22% x Tổng tiền lương đóng BHXH = 22% x
-          36.771.000 = 8.089.620 đồng
-        </div>
-        <div className="mt-2">
-          *Lưu ý: BHXH 1 lần đã được tính hệ số trượt giá
-        </div>
       </div>
       <div className="mt-4 p-4 rounded bg-white">
         <div className="text-default text-2xl">
@@ -89,7 +59,7 @@ export default function InsuranceOneTimeOverview() {
                     <thead>
                       <tr className="divide-x">
                         <th className="p-2 text-center text-xs">Năm</th>
-                        <th className="p-2 text-center text-xs">Trước 1945</th>
+                        <th className="p-2 text-center text-xs">Trước 1995</th>
                         <th className="p-2 text-center text-xs">1995</th>
                         <th className="p-2 text-center text-xs">1996</th>
                         <th className="p-2 text-center text-xs">1997</th>

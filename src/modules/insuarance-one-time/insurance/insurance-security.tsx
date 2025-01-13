@@ -9,7 +9,34 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import duration from "dayjs/plugin/duration";
+import { useState } from "react";
+import {
+  avgCalculateCountSalary,
+  calculateCountSalary,
+  calculateSalary,
+  calculateSumSalary,
+  countAllTotalSalary,
+  getCoefficient,
+  getCountYearToTotalcalcuSalary,
+  getDataBefore2014,
+  getStringCountMonth,
+} from "../coefficient";
+import numeral from "numeral";
 dayjs.extend(duration);
+
+export interface ISalary {
+  start: string;
+  end: string;
+  salary: number;
+  status: number;
+  year: number;
+  countMonth: number;
+}
+
+export interface ISalaryBefore2014 {
+  count: number;
+  items: ISalary[];
+}
 
 export const InsuranceSecurity = () => {
   const schema = yup.object().shape({
@@ -28,6 +55,17 @@ export const InsuranceSecurity = () => {
       .min(1, "Phải có ít nhất đoạn thời gian")
       .required("Phải có ít nhất đoạn thời gian"),
   });
+
+  const [dataInsurance, setDataInsurance] = useState<ISalary[]>([]);
+  const [dataInsuranceBefore2014, setDataInsuranceBefore2014] = useState<
+    ISalaryBefore2014
+  >({
+    count: 0,
+    items: [],
+  });
+  const [dataInsuranceAfter2014, setDataInsuranceAfter2014] = useState<
+    ISalary[]
+  >([]);
 
   const { control, handleSubmit, getValues } = useForm<IInsuranceSecurity>({
     resolver: yupResolver(schema),
@@ -49,6 +87,38 @@ export const InsuranceSecurity = () => {
     control,
     name: "datas",
   });
+
+  const splitDateRangesByYear = (
+    startDate: string,
+    endDate: string,
+    salary: number,
+    status: number
+  ): ISalary[] => {
+    const start = dayjs(startDate);
+    const end = dayjs(endDate);
+    const ranges: ISalary[] = [];
+
+    let currentStart = start;
+
+    while (currentStart.isBefore(end)) {
+      const nextEnd = currentStart.endOf("year").isBefore(end)
+        ? currentStart.endOf("year")
+        : end; // Đảm bảo không vượt quá ngày kết thúc
+      ranges.push({
+        start: currentStart.format("MM/YYYY"),
+        end: nextEnd.format("MM/YYYY"),
+        salary,
+        status,
+        year: currentStart.year(),
+        countMonth: nextEnd.diff(currentStart, "month") + 1,
+      });
+
+      // Chuyển sang đầu năm tiếp theo
+      currentStart = currentStart.add(1, "year").startOf("year");
+    }
+
+    return ranges;
+  };
 
   const onSubmit: SubmitHandler<IInsuranceSecurity> = (data) => {
     if (
@@ -117,6 +187,35 @@ export const InsuranceSecurity = () => {
       toast.error("Thời gian thai sản phải nhỏ hơn hoặc bằng 6");
       return;
     }
+
+    const ranges: ISalary[] = [];
+
+    data.datas.forEach((item, index) => {
+      const range = splitDateRangesByYear(
+        `${item.year_from || 1900}-${item.month_from || 1}-01`,
+        `${item.year_to || 1900}-${item.month_to || 1}-01`,
+        item.status && item.status === 1
+          ? data.datas[index - 1].salary || 0
+          : item.salary || 0,
+        item.status || 0
+      );
+      ranges.push(...range);
+    });
+
+    setDataInsurance(ranges);
+    const resBefore2014 = getDataBefore2014(ranges);
+    if (resBefore2014) {
+      setDataInsuranceBefore2014(resBefore2014);
+    }
+    setDataInsuranceAfter2014(
+      ranges.filter(
+        (item) =>
+          !resBefore2014.items.some(
+            (itemBefore: ISalary) =>
+              itemBefore.start === item.start && itemBefore.end === item.end
+          )
+      )
+    );
   };
 
   const years = Array.from({ length: 100 }, (_, i) => {
@@ -262,6 +361,150 @@ export const InsuranceSecurity = () => {
             </button>
           </div>
         </form>
+      </div>
+      <div className="mt-4 text-default text-2xl">Kết quả</div>
+      <div className="ml-2 font-medium">
+        Tiền BHXH 1 lần được nhận:{" "}
+        <span className="text-[#C10000]">
+          {numeral(
+            countAllTotalSalary(
+              dataInsuranceBefore2014,
+              dataInsuranceAfter2014,
+              dataInsurance
+            )
+          ).format("0,0")}{" "}
+          đồng
+        </span>
+      </div>
+      <div className="mt-4 text-default text-2xl">Diễn giải chi tiết</div>
+      <div className="mt-2">
+        1. Thời gian tham gia BHXH:{" "}
+        {getStringCountMonth(dataInsurance.map((item) => item.countMonth))}
+      </div>
+      <div className="mt-2">
+        2. Tiền lương đóng BHXH của các giai đoạn tham gia BHXH như sau:
+      </div>
+      {dataInsurance.map((item, index) => {
+        return (
+          <div className="ml-6" key={index}>
+            <div className="mt-2">
+              - Giai đoạn đóng từ {item.start} đến {item.end}: Thời gian{" "}
+              {item.countMonth} tháng -{" "}
+              {item.status === 1
+                ? "Thai sản"
+                : `Mức tiền lương đóng BHXH: ${numeral(item.salary).format(
+                    "0,0"
+                  )} đồng`}
+            </div>
+            <div className="mt-2">
+              {numeral(item.salary).format("0,0")} x {getCoefficient(item.year)}{" "}
+              x {item.countMonth} =
+              {numeral(
+                calculateSalary(item.salary, item.countMonth, item.year)
+              ).format("0,0")}{" "}
+              đồng
+            </div>
+          </div>
+        );
+      })}
+      <div className="mt-3">
+        - Tổng tiền đóng BHXH ={" "}
+        {numeral(calculateCountSalary(dataInsurance)).format("0,0")} đồng
+      </div>
+      <div className="mt-2">
+        Mức bình quân tiền lương đóng BHXH = Tổng tiền / tổng số tháng =
+        {numeral(avgCalculateCountSalary(dataInsurance)).format("0,0")} đồng
+      </div>
+      <div className="my-3">3. Mức hưởng BHXH một lần:</div>
+
+      {dataInsuranceBefore2014.count > 0 ? (
+        <div className="ml-4">
+          <div className="mt-2">
+            Mức hưởng BHXH một lần đối với thời gian đóng BHXH trước 2014:
+          </div>
+          <div className="mt-2 ml-4">
+            {numeral(avgCalculateCountSalary(dataInsurance)).format("0,0")} *{" "}
+            {dataInsuranceBefore2014.count} * 1.5 ={" "}
+            {numeral(
+              calculateSumSalary(
+                avgCalculateCountSalary(dataInsurance),
+                1.5,
+                dataInsuranceBefore2014.count
+              )
+            ).format("0,0")}{" "}
+            đồng
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      {dataInsuranceBefore2014.count > 0 ||
+      (dataInsuranceAfter2014.length === 1 &&
+        dataInsuranceAfter2014[0].countMonth === 12) ||
+      dataInsuranceAfter2014.length > 1 ? (
+        <div className="ml-4">
+          <div className="mt-2">
+            Mức hưởng BHXH một lần đối với thời gian đóng BHXH từ 2014 trở đi
+          </div>
+          <div className="mt-2">
+            (Số tháng lẻ đóng trước năm 2014 được chuyển sang giai đoạn từ năm
+            2014 trở đi)
+          </div>
+          <div className="mt-2 ml-4">
+            {numeral(avgCalculateCountSalary(dataInsurance)).format("0,0")} *{" "}
+            {getCountYearToTotalcalcuSalary(dataInsuranceAfter2014)} * 2 ={" "}
+            {numeral(
+              calculateSumSalary(
+                avgCalculateCountSalary(dataInsurance),
+                2,
+                getCountYearToTotalcalcuSalary(dataInsuranceAfter2014)
+              )
+            ).format("0,0")}{" "}
+            đồng
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      {dataInsuranceAfter2014.length === 1 &&
+      dataInsuranceAfter2014[0].countMonth < 12 &&
+      dataInsuranceBefore2014.count === 0 ? (
+        <div className="ml-4">
+          <div className="mt-2">
+            Mức hưởng BHXH một lần đối với thời gian đóng BHXH từ 2014 trở đi
+          </div>
+          <div className="mt-2">
+            (Số tháng lẻ đóng trước năm 2014 được chuyển sang giai đoạn từ năm
+            2014 trở đi)
+          </div>
+          <div className="mt-2 ml-4">
+            {numeral(
+              calculateSalary(
+                dataInsuranceAfter2014[0].salary,
+                dataInsuranceAfter2014[0].countMonth,
+                dataInsuranceAfter2014[0].year
+              )
+            ).format("0,0")}{" "}
+            * 0.22 ={" "}
+            {numeral(
+              calculateSumSalary(
+                calculateSalary(
+                  dataInsuranceAfter2014[0].salary,
+                  dataInsuranceAfter2014[0].countMonth,
+                  dataInsuranceAfter2014[0].year
+                ),
+                0.22,
+                1
+              )
+            ).format("0,0")}{" "}
+            đồng
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      <div className="mt-2 ml-4">
+        *Lưu ý: BHXH 1 lần đã được tính hệ số trượt giá
       </div>
     </div>
   );
