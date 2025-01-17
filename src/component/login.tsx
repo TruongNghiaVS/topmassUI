@@ -45,17 +45,27 @@ export const LoginForm = ({ onClose }: ILoginForm) => {
 
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     setLoading(true);
+    let redirectUrl = "/";
     try {
       const response: any = await axiosInstanceNotToken.post(LOGIN, data);
-      if (response && response.token) {
-        Cookies.set("token", response.token, { expires: 7 });
-        toast.success("Đăng nhập thành công");
+
+      if (response && response.authenLevel === 0) {
+        Cookies.set("email", data.userName, { expires: 7 });
+        toast.warning(
+          "Bạn chưa xác thực email. Vui lòng xác thực email và đăng nhập lại"
+        );
+        redirectUrl = "/xac-thuc-email";
+      } else if (response && response.authenLevel === 1) {
+        if (response.token) {
+          Cookies.set("token", response.token, { expires: 7 });
+          toast.success("Đăng nhập thành công");
+        }
       }
       if (onClose) {
         onClose();
       }
       mutate();
-      router.push("/");
+      router.push(redirectUrl);
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message);
