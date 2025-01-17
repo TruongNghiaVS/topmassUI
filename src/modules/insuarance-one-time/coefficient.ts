@@ -1,5 +1,39 @@
 import dayjs from "dayjs";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+// Extend dayjs with the plugin
+dayjs.extend(isSameOrBefore);
 import { ISalary, ISalaryBefore2014 } from "./insurance/insurance-security";
+
+export const splitDateRangesByYear = (
+  startDate: string,
+  endDate: string,
+  salary: number,
+  status: number
+): ISalary[] => {
+  const start = dayjs(startDate);
+  const end = dayjs(endDate);
+  const ranges: ISalary[] = [];
+  let currentStart = start;
+
+  while (currentStart.isSameOrBefore(end)) {
+    const nextEnd = currentStart.endOf("year").isBefore(end)
+      ? currentStart.endOf("year")
+      : end; // Đảm bảo không vượt quá ngày kết thúc
+    ranges.push({
+      start: currentStart.format("MM/YYYY"),
+      end: nextEnd.format("MM/YYYY"),
+      salary,
+      status,
+      year: currentStart.year(),
+      countMonth: nextEnd.diff(currentStart, "month") + 1,
+    });
+
+    // Chuyển sang đầu năm tiếp theo
+    currentStart = currentStart.add(1, "year").startOf("year");
+  }
+
+  return ranges;
+};
 
 export const getCoefficient = (year: number) => {
   let coefficient = 0;

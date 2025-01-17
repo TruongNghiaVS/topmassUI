@@ -20,6 +20,7 @@ import {
   getCountYearToTotalcalcuSalary,
   getDataBefore2014,
   getStringCountMonth,
+  splitDateRangesByYear,
 } from "../coefficient";
 import numeral from "numeral";
 dayjs.extend(duration);
@@ -87,38 +88,6 @@ export const InsuranceSecurity = () => {
     control,
     name: "datas",
   });
-
-  const splitDateRangesByYear = (
-    startDate: string,
-    endDate: string,
-    salary: number,
-    status: number
-  ): ISalary[] => {
-    const start = dayjs(startDate);
-    const end = dayjs(endDate);
-    const ranges: ISalary[] = [];
-
-    let currentStart = start;
-
-    while (currentStart.isBefore(end)) {
-      const nextEnd = currentStart.endOf("year").isBefore(end)
-        ? currentStart.endOf("year")
-        : end; // Đảm bảo không vượt quá ngày kết thúc
-      ranges.push({
-        start: currentStart.format("MM/YYYY"),
-        end: nextEnd.format("MM/YYYY"),
-        salary,
-        status,
-        year: currentStart.year(),
-        countMonth: nextEnd.diff(currentStart, "month") + 1,
-      });
-
-      // Chuyển sang đầu năm tiếp theo
-      currentStart = currentStart.add(1, "year").startOf("year");
-    }
-
-    return ranges;
-  };
 
   const onSubmit: SubmitHandler<IInsuranceSecurity> = (data) => {
     if (
@@ -189,7 +158,6 @@ export const InsuranceSecurity = () => {
     }
 
     const ranges: ISalary[] = [];
-
     data.datas.forEach((item, index) => {
       const range = splitDateRangesByYear(
         `${item.year_from || 1900}-${item.month_from || 1}-01`,
@@ -199,6 +167,7 @@ export const InsuranceSecurity = () => {
           : item.salary || 0,
         item.status || 0
       );
+      console.log(range);
       ranges.push(...range);
     });
 
@@ -284,7 +253,6 @@ export const InsuranceSecurity = () => {
                               placeholder="Tháng"
                               options={months}
                             />
-
                             <TmSelect
                               name={`datas.${index}.year_from`}
                               control={control}
