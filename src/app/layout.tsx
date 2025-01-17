@@ -14,6 +14,7 @@ import useAuth from "@/component/hook/useAuthToken";
 import { Suspense } from "react";
 import { SWRConfig } from "swr";
 import { ModalLogin } from "@/component/modal-login";
+import Script from "next/script";
 
 dayjs.extend(customParseFormat);
 
@@ -53,9 +54,12 @@ export default function RootLayout({
     "/dang-ky",
     "/dang-nhap",
     "/quen-mat-khau",
+    "/xac-thuc-email",
     "/khoi-tao-mat-khau",
     "/share-link",
   ];
+
+  const googleId = "G-4DWR5PRSL1";
 
   useAuth();
   return (
@@ -66,6 +70,21 @@ export default function RootLayout({
           name="google-site-verification"
           content="FfUAN2J0OdNel1OUtwxakoT5ylsBMqkatd1dVc1azh8"
         />
+        {/* Google tag (gtag.js) */}
+
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleId}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${googleId}');
+          `}
+        </Script>
       </head>
       <body className={`${roboto.variable} font-roboto`}>
         <LoadingProvider>

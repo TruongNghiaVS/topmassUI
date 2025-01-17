@@ -17,7 +17,11 @@ export const New = ({ item, slug }: IBlogData) => {
     <div className="rounded-lg bg-white overflow-hidden ">
       <div className="w-full h-[200px] object-fill">
         <Link href={`/${item.slug}`}>
-          <img src={`${item.coverFullLink}`} alt="" className="w-full h-full" />
+          <img
+            src={`${item.coverFullLink}`}
+            alt={item.title}
+            className="w-full h-full"
+          />
         </Link>
       </div>
       <Link href={`/${item.slug}`}>

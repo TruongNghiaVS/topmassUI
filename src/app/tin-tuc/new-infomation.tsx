@@ -19,7 +19,7 @@ export const NewInfomation = ({ item }: IBlogRelationProps) => {
                 ? item.coverFullLink
                 : "/imgs/img-detail-new.png"
             }  `}
-            alt=""
+            alt={item.title}
             className="w-full h-[200px] object-fill rounded-lg overflow-hidden"
           />
         </Link>
