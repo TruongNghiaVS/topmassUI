@@ -54,6 +54,7 @@ export default function RootLayout({
     "/dang-ky",
     "/dang-nhap",
     "/quen-mat-khau",
+    "/xac-thuc-email",
     "/khoi-tao-mat-khau",
     "/share-link",
   ];
