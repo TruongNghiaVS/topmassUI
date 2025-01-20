@@ -29,7 +29,7 @@ export const InfomationCompany = ({ item }: ICompanyData) => {
         <Link href={`${slugCompany}`}>
           <img
             src={`${item.coverFullLink}`}
-            alt=""
+            alt={item.fullName}
             className="w-full h-full object-cover"
           />
         </Link>
@@ -44,7 +44,7 @@ export const InfomationCompany = ({ item }: ICompanyData) => {
                     ? item.logoFullLink
                     : "/imgs/img-company.png"
                 }
-                alt=""
+                alt={item.fullName}
                 className="w-auto h-auto"
               />
             </Link>

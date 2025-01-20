@@ -566,3 +566,14 @@ export interface IPaging {
   lengthData: number;
   currentPage: number;
 }
+
+export interface IInsuranceSecurity {
+  datas: {
+    month_from?: number;
+    year_from?: number;
+    month_to?: number;
+    year_to?: number;
+    salary?: number;
+    status?: number;
+  }[];
+}

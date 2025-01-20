@@ -212,7 +212,7 @@ export default function ShareLink({ params }: { params: { slug: string } }) {
                   <img
                     src={data?.profileCv.avatarLink}
                     alt=""
-                    className="rounded-full w-48 h-48"
+                    className="rounded-full w-48 h-48 object-cover"
                   />
                 </div>
               </div>

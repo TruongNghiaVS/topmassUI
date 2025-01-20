@@ -15,7 +15,9 @@ export const ImfomationCompany = ({ company }: ICompanyDetailJobProps) => {
       </div>
       <div className="flex items-center mb-4">
         <PeopleFillBootstrapIcon className="w-6 mr-2" />
-        <div className="text-xs font-semibold">Quy mô: {company?.capacity}</div>
+        <div className="text-xs font-semibold">
+          Quy mô: {company?.capacity} nhân viên
+        </div>
       </div>
       <div className="flex items-center mb-8">
         <MapPinIcon className="w-6 mr-2" />

@@ -31,7 +31,7 @@ export default function NewsOverview() {
                                 <Link href={`/${detail.slug}`}>
                                   <img
                                     src={`${detail.coverFullLink}`}
-                                    alt=""
+                                    alt={detail.title}
                                     className="w-full h-full"
                                   />
                                 </Link>
