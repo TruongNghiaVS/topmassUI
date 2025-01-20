@@ -193,6 +193,10 @@ export const getDataBefore2014 = (data: ISalary[]) => {
   return res;
 };
 
+export const getTotalMonth = (data: ISalary[]) => {
+  return data.reduce((total, item) => total + item.countMonth, 0);
+};
+
 export const getStringCountMonth = (months: number[]) => {
   const data = getCountMotnh(months);
   return `${data.integerPart > 0 ? `${data.integerPart} năm ` : ""}${
@@ -241,8 +245,7 @@ export const countAllTotalSalary = (
   let sum = 0;
   if (
     dataBefore2014.count > 0 ||
-    (dataAfter2014.length === 1 && dataAfter2014[0].countMonth === 12) ||
-    dataAfter2014.length > 1
+    (dataAfter2014.length > 0 && getTotalMonth(dataAfter2014) >= 12)
   ) {
     sum =
       calculateSumSalary(
@@ -255,14 +258,73 @@ export const countAllTotalSalary = (
         2,
         getCountYearToTotalcalcuSalary(dataAfter2014)
       );
-  } else if (dataAfter2014.length === 1 && dataAfter2014[0].countMonth < 12) {
-    sum =
-      0.22 *
-      calculateSalary(
-        dataAfter2014[0].salary || 0,
-        dataAfter2014[0].countMonth || 0,
-        dataAfter2014[0].year || 0
-      );
+  } else if (dataAfter2014.length > 0 && getTotalMonth(dataAfter2014) < 12) {
+    sum = 0.22 * calculateCountSalary(dataInsurance);
+  }
+  return sum;
+};
+
+export const getMonthsInsuranceSupport = (data: ISalary[]) => {
+  const data2018 = data.filter(
+    (item) => item.year >= 2018 && item.year <= 2021
+  );
+  const data2022 = data.filter((item) => item.year >= 2022);
+
+  const poorHouseholds2018 = data2018
+    .filter((item) => item.status === 1)
+    .reduce((total, item) => total + item.countMonth, 0);
+  const households2018 = data2018
+    .filter((item) => item.status === 2)
+    .reduce((total, item) => total + item.countMonth, 0);
+  const other2018 = data2018
+    .filter((item) => item.status === 0)
+    .reduce((total, item) => total + item.countMonth, 0);
+
+  const poorHouseholds2022 = data2022
+    .filter((item) => item.status === 1)
+    .reduce((total, item) => total + item.countMonth, 0);
+  const households2022 = data2022
+    .filter((item) => item.status === 2)
+    .reduce((total, item) => total + item.countMonth, 0);
+  const other2022 = data2022
+    .filter((item) => item.status === 0)
+    .reduce((total, item) => total + item.countMonth, 0);
+
+  return {
+    data2018: {
+      poorHouseholds2018,
+      households2018,
+      other2018,
+    },
+    data2022: {
+      poorHouseholds2022,
+      households2022,
+      other2022,
+    },
+  };
+};
+
+interface IInsurance2018 {
+  poorHouseholds2018: number;
+  households2018: number;
+  other2018: number;
+}
+
+export const calculateInsuranceHoldHouse = (
+  poorHouseholds: number,
+  households: number,
+  other: number,
+  salary: number
+) => {
+  let sum = 0;
+  if (poorHouseholds > 0) {
+    sum += 0.22 * 0.3 * salary * poorHouseholds;
+  }
+  if (households > 0) {
+    sum += 0.22 * 0.25 * salary * households;
+  }
+  if (other > 0) {
+    sum += 0.22 * 0.1 * salary * other;
   }
   return sum;
 };

@@ -20,6 +20,7 @@ import {
   getCountYearToTotalcalcuSalary,
   getDataBefore2014,
   getStringCountMonth,
+  getTotalMonth,
   splitDateRangesByYear,
 } from "../coefficient";
 import numeral from "numeral";
@@ -409,7 +410,8 @@ export const InsuranceSecurity = () => {
       {dataInsuranceBefore2014.count > 0 ||
       (dataInsuranceAfter2014.length === 1 &&
         dataInsuranceAfter2014[0].countMonth === 12) ||
-      dataInsuranceAfter2014.length > 1 ? (
+      (dataInsuranceAfter2014.length > 1 &&
+        getTotalMonth(dataInsuranceAfter2014) > 12) ? (
         <div className="ml-4">
           <div className="mt-2">
             Mức hưởng BHXH một lần đối với thời gian đóng BHXH từ 2014 trở đi
@@ -434,9 +436,11 @@ export const InsuranceSecurity = () => {
       ) : (
         ""
       )}
-      {dataInsuranceAfter2014.length === 1 &&
-      dataInsuranceAfter2014[0].countMonth < 12 &&
-      dataInsuranceBefore2014.count === 0 ? (
+      {(dataInsuranceAfter2014.length === 1 &&
+        dataInsuranceAfter2014[0].countMonth < 12 &&
+        dataInsuranceBefore2014.count === 0) ||
+      (dataInsuranceAfter2014.length > 1 &&
+        getTotalMonth(dataInsuranceAfter2014) < 12) ? (
         <div className="ml-4">
           <div className="mt-2">
             Mức hưởng BHXH một lần đối với thời gian đóng BHXH từ 2014 trở đi
@@ -446,24 +450,10 @@ export const InsuranceSecurity = () => {
             2014 trở đi)
           </div>
           <div className="mt-2 ml-4">
+            {numeral(calculateCountSalary(dataInsurance)).format("0,0")} * 0.22
+            ={" "}
             {numeral(
-              calculateSalary(
-                dataInsuranceAfter2014[0].salary,
-                dataInsuranceAfter2014[0].countMonth,
-                dataInsuranceAfter2014[0].year
-              )
-            ).format("0,0")}{" "}
-            * 0.22 ={" "}
-            {numeral(
-              calculateSumSalary(
-                calculateSalary(
-                  dataInsuranceAfter2014[0].salary,
-                  dataInsuranceAfter2014[0].countMonth,
-                  dataInsuranceAfter2014[0].year
-                ),
-                0.22,
-                1
-              )
+              calculateSumSalary(calculateCountSalary(dataInsurance), 0.22, 1)
             ).format("0,0")}{" "}
             đồng
           </div>

@@ -11,18 +11,35 @@ import { ISalary, ISalaryBefore2014 } from "./insurance-security";
 import {
   avgCalculateCountSalary,
   calculateCountSalary,
+  calculateInsuranceHoldHouse,
   calculateSalary,
   calculateSumSalary,
   countAllTotalSalary,
   getCoefficient,
+  getCountMotnh,
   getCountYearToTotalcalcuSalary,
   getDataBefore2014,
+  getMonthsInsuranceSupport,
   getStringCountMonth,
+  getTotalMonth,
   splitDateRangesByYear,
 } from "../coefficient";
 import TmSelect from "@/component/hook-form/select";
 import TmNumberFormatInput from "@/component/hook-form/custom-input-number";
 import numeral from "numeral";
+
+export interface IInsuranceHoldHouse {
+  data2018: {
+    poorHouseholds2018: number;
+    households2018: number;
+    other2018: number;
+  };
+  data2022: {
+    poorHouseholds2022: number;
+    households2022: number;
+    other2022: number;
+  };
+}
 
 export const VoluntarySocialInsurance = () => {
   const schema = yup.object().shape({
@@ -43,6 +60,18 @@ export const VoluntarySocialInsurance = () => {
   });
 
   const [dataInsurance, setDataInsurance] = useState<ISalary[]>([]);
+  const [dataHoldHouse, setDataHoldHouse] = useState<IInsuranceHoldHouse>({
+    data2018: {
+      poorHouseholds2018: 0,
+      households2018: 0,
+      other2018: 0,
+    },
+    data2022: {
+      poorHouseholds2022: 0,
+      households2022: 0,
+      other2022: 0,
+    },
+  });
   const [dataInsuranceBefore2014, setDataInsuranceBefore2014] = useState<
     ISalaryBefore2014
   >({
@@ -83,6 +112,7 @@ export const VoluntarySocialInsurance = () => {
   });
 
   const onSubmit: SubmitHandler<IInsuranceSecurity> = (data) => {
+    console.log(data);
     if (
       data.datas.some(
         (item) =>
@@ -94,43 +124,14 @@ export const VoluntarySocialInsurance = () => {
       return;
     }
 
-    let year = 1900;
-    let month = 1;
-    if (
-      data.datas.some((item, index) => {
-        if (
-          item.status &&
-          item.status === 1 &&
-          new Date(item.year_from || 1900, item.month_from || 1, 1) <=
-            new Date(
-              data.datas[index - 1].year_to || 1900,
-              data.datas[index - 1].month_to || 1,
-              1
-            )
-        ) {
-          year = data.datas[index - 1].year_to || 1900;
-          month = data.datas[index - 1].month_to || 1;
-          return true;
-        }
-      })
-    ) {
-      toast.error(
-        `Thời gian không hợp lệ, vui lòng chọn thời gian thai sản lớn hơn ${dayjs(
-          new Date(year, month, 1)
-        ).format("YYYY-MM")}`
-      );
-      return;
-    }
-
     const ranges: ISalary[] = [];
 
     data.datas.forEach((item, index) => {
+      console.log(item);
       const range = splitDateRangesByYear(
         `${item.year_from || 1900}-${item.month_from || 1}-01`,
         `${item.year_to || 1900}-${item.month_to || 1}-01`,
-        item.status && item.status === 1
-          ? data.datas[index - 1].salary || 0
-          : item.salary || 0,
+        item.salary || 0,
         item.status || 0
       );
       ranges.push(...range);
@@ -150,6 +151,9 @@ export const VoluntarySocialInsurance = () => {
           )
       )
     );
+
+    const resHoldHouse = getMonthsInsuranceSupport(ranges);
+    setDataHoldHouse(resHoldHouse);
   };
 
   const addStage = () => {
@@ -286,7 +290,19 @@ export const VoluntarySocialInsurance = () => {
               dataInsuranceBefore2014,
               dataInsuranceAfter2014,
               dataInsurance
-            )
+            ) -
+              calculateInsuranceHoldHouse(
+                dataHoldHouse.data2022.poorHouseholds2022,
+                dataHoldHouse.data2022.households2022,
+                dataHoldHouse.data2022.other2022,
+                1500000
+              ) -
+              calculateInsuranceHoldHouse(
+                dataHoldHouse.data2018.poorHouseholds2018,
+                dataHoldHouse.data2018.households2018,
+                dataHoldHouse.data2018.other2018,
+                700000
+              )
           ).format("0,0")}{" "}
           đồng
         </span>
@@ -352,7 +368,8 @@ export const VoluntarySocialInsurance = () => {
       {dataInsuranceBefore2014.count > 0 ||
       (dataInsuranceAfter2014.length === 1 &&
         dataInsuranceAfter2014[0].countMonth === 12) ||
-      dataInsuranceAfter2014.length > 1 ? (
+      (dataInsuranceAfter2014.length > 1 &&
+        getTotalMonth(dataInsuranceAfter2014) > 12) ? (
         <div className="ml-4">
           <div className="mt-2">
             Mức hưởng BHXH một lần đối với thời gian đóng BHXH từ 2014 trở đi
@@ -377,9 +394,11 @@ export const VoluntarySocialInsurance = () => {
       ) : (
         ""
       )}
-      {dataInsuranceAfter2014.length === 1 &&
-      dataInsuranceAfter2014[0].countMonth < 12 &&
-      dataInsuranceBefore2014.count === 0 ? (
+      {(dataInsuranceAfter2014.length === 1 &&
+        dataInsuranceAfter2014[0].countMonth < 12 &&
+        dataInsuranceBefore2014.count === 0) ||
+      (dataInsuranceAfter2014.length > 1 &&
+        getTotalMonth(dataInsuranceAfter2014) < 12) ? (
         <div className="ml-4">
           <div className="mt-2">
             Mức hưởng BHXH một lần đối với thời gian đóng BHXH từ 2014 trở đi
@@ -389,24 +408,10 @@ export const VoluntarySocialInsurance = () => {
             2014 trở đi)
           </div>
           <div className="mt-2 ml-4">
+            {numeral(calculateCountSalary(dataInsurance)).format("0,0")} * 0.22
+            ={" "}
             {numeral(
-              calculateSalary(
-                dataInsuranceAfter2014[0].salary,
-                dataInsuranceAfter2014[0].countMonth,
-                dataInsuranceAfter2014[0].year
-              )
-            ).format("0,0")}{" "}
-            * 0.22 ={" "}
-            {numeral(
-              calculateSumSalary(
-                calculateSalary(
-                  dataInsuranceAfter2014[0].salary,
-                  dataInsuranceAfter2014[0].countMonth,
-                  dataInsuranceAfter2014[0].year
-                ),
-                0.22,
-                1
-              )
+              calculateSumSalary(calculateCountSalary(dataInsurance), 0.22, 1)
             ).format("0,0")}{" "}
             đồng
           </div>
@@ -414,6 +419,126 @@ export const VoluntarySocialInsurance = () => {
       ) : (
         ""
       )}
+
+      {dataHoldHouse.data2018.households2018 > 0 ||
+      dataHoldHouse.data2018.poorHouseholds2018 > 0 ||
+      dataHoldHouse.data2018.other2018 > 0 ? (
+        <div>
+          <div className="mt-2">
+            Số tiền Nhà nước hỗ trợ đóng BHXH tự nguyện từ tháng 01/2018 - hết
+            tháng 12/2021
+          </div>
+          <div className="ml-8 my-2">
+            {dataHoldHouse.data2018.poorHouseholds2018 > 0 ? (
+              <div>
+                0.22 x 700,000 (VNĐ) x 30% x
+                {dataHoldHouse.data2018.poorHouseholds2018} tháng{" "}
+              </div>
+            ) : (
+              ""
+            )}
+            {dataHoldHouse.data2018.households2018 > 0 ? (
+              <div>
+                0.22 x 700,000 (VNĐ) x 25% x
+                {dataHoldHouse.data2018.households2018} tháng{" "}
+              </div>
+            ) : (
+              ""
+            )}
+            {dataHoldHouse.data2018.other2018 > 0 ? (
+              <div>
+                0.22 x 700,000 (VNĐ) x 10% x {dataHoldHouse.data2018.other2018}{" "}
+                tháng{" "}
+              </div>
+            ) : (
+              ""
+            )}
+            <div>
+              ={" "}
+              {numeral(
+                calculateInsuranceHoldHouse(
+                  dataHoldHouse.data2018.poorHouseholds2018,
+                  dataHoldHouse.data2018.households2018,
+                  dataHoldHouse.data2018.other2018,
+                  700000
+                )
+              ).format("0,0")}{" "}
+              đồng
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+
+      {dataHoldHouse.data2022.households2022 > 0 ||
+      dataHoldHouse.data2022.poorHouseholds2022 > 0 ||
+      dataHoldHouse.data2022.other2022 > 0 ? (
+        <div>
+          <div className="mt-2">
+            Số tiền Nhà nước hỗ trợ đóng BHXH tự nguyện từ tháng 01/2022 - hết
+            tháng 12/2021
+          </div>
+          <div className="ml-8 my-2">
+            {dataHoldHouse.data2022.poorHouseholds2022 > 0 ? (
+              <div>
+                0.22 x 700,000 (VNĐ) x 30% x
+                {dataHoldHouse.data2022.poorHouseholds2022} tháng{" "}
+              </div>
+            ) : (
+              ""
+            )}
+            {dataHoldHouse.data2022.households2022 > 0 ? (
+              <div>
+                0.22 x 700,000 (VNĐ) x 25% x
+                {dataHoldHouse.data2022.households2022} tháng{" "}
+              </div>
+            ) : (
+              ""
+            )}
+            {dataHoldHouse.data2022.other2022 > 0 ? (
+              <div>
+                0.22 x 700,000 (VNĐ) x 10% x {dataHoldHouse.data2022.other2022}{" "}
+                tháng{" "}
+              </div>
+            ) : (
+              ""
+            )}
+            <div>
+              ={" "}
+              {numeral(
+                calculateInsuranceHoldHouse(
+                  dataHoldHouse.data2022.poorHouseholds2022,
+                  dataHoldHouse.data2022.households2022,
+                  dataHoldHouse.data2022.other2022,
+                  1500000
+                )
+              ).format("0,0")}{" "}
+              đồng
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      <div className="mt-2">
+        Tổng số tiền nhà nước hỗ trợ đóng BHXH ={" "}
+        {numeral(
+          calculateInsuranceHoldHouse(
+            dataHoldHouse.data2022.poorHouseholds2022,
+            dataHoldHouse.data2022.households2022,
+            dataHoldHouse.data2022.other2022,
+            1500000
+          ) +
+            calculateInsuranceHoldHouse(
+              dataHoldHouse.data2018.poorHouseholds2018,
+              dataHoldHouse.data2018.households2018,
+              dataHoldHouse.data2018.other2018,
+              700000
+            )
+        ).format("0,0")}{" "}
+        đồng
+      </div>
       <div className="mt-2 ml-4">
         *Lưu ý: BHXH 1 lần đã được tính hệ số trượt giá
       </div>
