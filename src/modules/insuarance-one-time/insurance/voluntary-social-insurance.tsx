@@ -1,4 +1,4 @@
-import { IInsuarnceVoluntary, IInsuranceSecurity } from "@/interface/interface";
+import { IInsuranceSecurity } from "@/interface/interface";
 import { months } from "@/mockup-data/data";
 import { TrashIcon } from "@heroicons/react/16/solid";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,7 +16,6 @@ import {
   calculateSumSalary,
   countAllTotalSalary,
   getCoefficient,
-  getCountMotnh,
   getCountYearToTotalcalcuSalary,
   getDataBefore2014,
   getMonthsInsuranceSupport,
@@ -52,6 +51,7 @@ export const VoluntarySocialInsurance = () => {
           month_to: yup.number(),
           year_to: yup.number(),
           salary: yup.number(),
+          type: yup.number(),
           status: yup.number(),
         })
       )
@@ -112,7 +112,6 @@ export const VoluntarySocialInsurance = () => {
   });
 
   const onSubmit: SubmitHandler<IInsuranceSecurity> = (data) => {
-    console.log(data);
     if (
       data.datas.some(
         (item) =>
@@ -132,7 +131,8 @@ export const VoluntarySocialInsurance = () => {
         `${item.year_from || 1900}-${item.month_from || 1}-01`,
         `${item.year_to || 1900}-${item.month_to || 1}-01`,
         item.salary || 0,
-        item.status || 0
+        item.status || 0,
+        item.type || 0
       );
       ranges.push(...range);
     });
@@ -244,7 +244,7 @@ export const VoluntarySocialInsurance = () => {
                       <td className="p-2">
                         <div className="flex space-x-1 items-center justify-end">
                           <TmSelect
-                            name={`datas.${index}.status`}
+                            name={`datas.${index}.type`}
                             control={control}
                             className="p-2 rounded-lg border min-w-[150px]"
                             options={[

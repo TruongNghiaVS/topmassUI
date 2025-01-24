@@ -33,6 +33,7 @@ export interface ISalary {
   status: number;
   year: number;
   countMonth: number;
+  type: number;
 }
 
 export interface ISalaryBefore2014 {
@@ -52,6 +53,7 @@ export const InsuranceSecurity = () => {
           year_to: yup.number(),
           salary: yup.number(),
           status: yup.number(),
+          type: yup.number(),
         })
       )
       .min(1, "Phải có ít nhất đoạn thời gian")
@@ -166,9 +168,9 @@ export const InsuranceSecurity = () => {
         item.status && item.status === 1
           ? data.datas[index - 1].salary || 0
           : item.salary || 0,
-        item.status || 0
+        item.status || 0,
+        item.type || 0
       );
-      console.log(range);
       ranges.push(...range);
     });
 

@@ -575,5 +575,6 @@ export interface IInsuranceSecurity {
     year_to?: number;
     salary?: number;
     status?: number;
+    type?: number;
   }[];
 }

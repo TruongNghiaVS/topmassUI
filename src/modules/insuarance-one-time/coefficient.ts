@@ -8,7 +8,8 @@ export const splitDateRangesByYear = (
   startDate: string,
   endDate: string,
   salary: number,
-  status: number
+  status: number,
+  type: number
 ): ISalary[] => {
   const start = dayjs(startDate);
   const end = dayjs(endDate);
@@ -26,6 +27,7 @@ export const splitDateRangesByYear = (
       status,
       year: currentStart.year(),
       countMonth: nextEnd.diff(currentStart, "month") + 1,
+      type,
     });
 
     // Chuyển sang đầu năm tiếp theo
@@ -271,23 +273,23 @@ export const getMonthsInsuranceSupport = (data: ISalary[]) => {
   const data2022 = data.filter((item) => item.year >= 2022);
 
   const poorHouseholds2018 = data2018
-    .filter((item) => item.status === 1)
+    .filter((item) => item.type === 1)
     .reduce((total, item) => total + item.countMonth, 0);
   const households2018 = data2018
-    .filter((item) => item.status === 2)
+    .filter((item) => item.type === 2)
     .reduce((total, item) => total + item.countMonth, 0);
   const other2018 = data2018
-    .filter((item) => item.status === 0)
+    .filter((item) => item.type === 0)
     .reduce((total, item) => total + item.countMonth, 0);
 
   const poorHouseholds2022 = data2022
-    .filter((item) => item.status === 1)
+    .filter((item) => item.type === 1)
     .reduce((total, item) => total + item.countMonth, 0);
   const households2022 = data2022
-    .filter((item) => item.status === 2)
+    .filter((item) => item.type === 2)
     .reduce((total, item) => total + item.countMonth, 0);
   const other2022 = data2022
-    .filter((item) => item.status === 0)
+    .filter((item) => item.type === 0)
     .reduce((total, item) => total + item.countMonth, 0);
 
   return {
