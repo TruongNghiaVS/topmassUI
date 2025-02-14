@@ -238,7 +238,7 @@ export default function ProfileCV() {
               <img
                 src="/imgs/img-header-profile-cv.jpeg"
                 className="w-full rounded-tl-lg rounded-tr-lg"
-                alt=""
+                alt={infoUser?.fullName}
               />
               <div className="relative py-3 pl-[210px]">
                 <div className="absolute top-[-60px] left-[30px] flex items-center min-h-[115px]">

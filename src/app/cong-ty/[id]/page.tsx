@@ -109,7 +109,7 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
           <div className="rounded-xl overflow-hidden">
             <div className="max-h-60 min-h-60 bg-white ">
               <img
-                alt=""
+                alt={companyDetail?.name}
                 src="/imgs/bg-company.png"
                 className="w-full object-cover"
               />
@@ -118,7 +118,7 @@ export default function CompanyDetail({ params }: { params: { id: string } }) {
               <div className="w-[180px] h-[180px] rounded-full bg-white flex items-center justify-center lg:absolute left-10 top-[-90px] mx-auto lg:mt-0 md:mt-[-90px] overflow-hidden">
                 <img
                   src={`${companyDetail?.logoFullLink}`}
-                  alt=""
+                  alt={companyDetail?.name}
                   className="w-auto"
                 />
               </div>
